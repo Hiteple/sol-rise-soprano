@@ -1,4 +1,4 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Link, Scripts, createRootRoute } from '@tanstack/react-router'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { allHomes } from 'content-collections'
@@ -30,6 +30,7 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  notFoundComponent: NotFoundPage,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -51,5 +52,21 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function NotFoundPage() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center px-6">
+      <div className="text-center">
+        <h1 className="font-display text-4xl italic mb-4">Page not found</h1>
+        <p className="font-body mb-6" style={{ color: 'var(--ivory-dim)' }}>
+          The page you are trying to open does not exist.
+        </p>
+        <Link to="/" className="gold-link">
+          Return home
+        </Link>
+      </div>
+    </div>
   )
 }

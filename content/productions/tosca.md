@@ -1,4 +1,5 @@
 ---
+type: "Production"
 title: "Tosca"
 role: "Floria Tosca"
 venue: "Royal Opera House, London"

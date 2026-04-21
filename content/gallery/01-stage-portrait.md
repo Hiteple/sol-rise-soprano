@@ -1,4 +1,5 @@
 ---
+type: "GalleryItem"
 title: "Stage Portrait"
 image: "https://picsum.photos/seed/gallery_stage/800/1100"
 alt: "Isabella Cavalcanti in full stage costume, dramatic lighting"

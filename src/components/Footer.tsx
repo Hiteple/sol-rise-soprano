@@ -21,7 +21,6 @@ export function Footer({
         background: '#080605',
         borderColor: 'rgba(184, 151, 90, 0.2)',
       }}
-      data-sb-object-id="content/home/data.md"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
@@ -93,7 +92,6 @@ export function Footer({
               href={`mailto:${email}`}
               className="flex items-center gap-2 text-sm mb-6 transition-colors hover:text-ivory"
               style={{ color: 'var(--warm-gray)' }}
-              data-sb-field-path="email"
             >
               <Mail size={14} />
               {email}
@@ -117,7 +115,6 @@ export function Footer({
                   e.currentTarget.style.borderColor = 'rgba(184, 151, 90, 0.4)'
                   e.currentTarget.style.color = 'var(--warm-gray)'
                 }}
-                data-sb-field-path="instagramUrl"
               >
                 <Instagram size={15} />
               </a>
@@ -139,7 +136,6 @@ export function Footer({
                   e.currentTarget.style.borderColor = 'rgba(184, 151, 90, 0.4)'
                   e.currentTarget.style.color = 'var(--warm-gray)'
                 }}
-                data-sb-field-path="youtubeUrl"
               >
                 <Youtube size={15} />
               </a>
@@ -161,7 +157,6 @@ export function Footer({
                   e.currentTarget.style.borderColor = 'rgba(184, 151, 90, 0.4)'
                   e.currentTarget.style.color = 'var(--warm-gray)'
                 }}
-                data-sb-field-path="facebookUrl"
               >
                 <Facebook size={15} />
               </a>

@@ -1,4 +1,5 @@
 ---
+type: "GalleryItem"
 title: "Costume Fitting"
 image: "https://picsum.photos/seed/gallery_cost/800/1100"
 alt: "Costume fitting for a new production"

@@ -1,0 +1,20 @@
+node_modules
+
+# Local Netlify folder
+.netlify
+
+# Build output
+dist
+
+# OS / editor
+.DS_Store
+
+# Secrets (keep a committed `.env.example` if you document vars)
+.env
+.env.*
+!.env.example
+
+# Generated artifacts (re-created automatically)
+.content-collections
+.stackbit/cache
+src/routeTree.gen.ts

@@ -1,4 +1,5 @@
 ---
+type: "Education"
 school: School 1
 summary: Degree or Certificate Program
 startDate: 2020-01-01

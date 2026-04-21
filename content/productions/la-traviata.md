@@ -1,4 +1,5 @@
 ---
+type: "Production"
 title: "La Traviata"
 role: "Violetta Valéry"
 venue: "Teatro alla Scala, Milan"

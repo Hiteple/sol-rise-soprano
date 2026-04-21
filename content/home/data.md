@@ -1,25 +1,41 @@
 ---
-heroTitle: "Isabella Cavalcanti"
-heroSubtitle: "Soprano · Stage Artist · Voice of Passion"
-heroTagline: "Where Drama Meets Divinity"
-heroImage: "https://picsum.photos/seed/operahero1/1920/1080"
-heroImageAlt: "Isabella Cavalcanti performing on the grand stage"
-aboutTitle: "A Voice Born for the Stage"
-aboutText: "From the gilded halls of La Scala to the breathtaking stages of Vienna and New York, Isabella Cavalcanti has captivated audiences worldwide with a voice of extraordinary range, warmth, and emotional depth. Trained in the finest conservatories of Europe, her interpretations of the great soprano roles have earned her a place among the luminaries of contemporary opera."
-aboutImage: "https://picsum.photos/seed/operaportr1/800/1060"
-aboutImageAlt: "Isabella Cavalcanti in a formal portrait"
-aboutLinkText: "Discover My Story"
-featureTitle: "Teaching the Next Generation"
-featureText: "Beyond the stage, Isabella is deeply committed to nurturing emerging voices. As a masterclass faculty member and private instructor, she brings the same passion and precision to pedagogy that she brings to performance — shaping the singers of tomorrow with wisdom earned across decades of world-class performance."
-featureImage: "https://picsum.photos/seed/operateach1/800/1060"
-featureImageAlt: "Isabella Cavalcanti conducting a voice masterclass"
-quoteText: "A soprano of rare distinction — her Violetta was the most moving I have witnessed in thirty years of reviewing opera."
-quoteAuthor: "— Giorgio Baretti, La Stampa"
-quoteImage: "https://picsum.photos/seed/operaquote1/1920/900"
-instagramUrl: "https://instagram.com"
-youtubeUrl: "https://youtube.com"
-facebookUrl: "https://facebook.com"
-email: "contact@isabellacavalcanti.com"
+type: HomePage
+heroTitle: Sol Risé
+heroSubtitle: Soprano
+heroTagline: Eyebrow text
+heroImage: https://picsum.photos/seed/operahero1/1920/1080
+heroImageAlt: Sol Rise soprano professional website
+aboutTitle: A Voice Born for the Stage
+aboutText: >-
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+  when an unknown printer took a galley of type and scrambled it to make a type
+  specimen book. It has survived not only five centuries, but also the leap into
+  electronic typesetting, remaining essentially unchanged. It was popularised in
+  the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+  and more recently with desktop publishing software like Aldus PageMaker
+  including versions of Lorem Ipsum.
+aboutImage: https://picsum.photos/seed/operaportr1/800/1060
+aboutImageAlt: image placeholder pending
+aboutLinkText: Link text
+featureTitle: Lorem ipsum dolor
+featureText: >-
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+  when an unknown printer took a galley of type and scrambled it to make a type
+  specimen book. It has survived not only five centuries, but also the leap into
+  electronic typesetting, remaining essentially unchanged. It was popularised in
+  the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+  and more recently with desktop publishing software like Aldus PageMaker
+  including versions of Lorem Ipsum.
+featureImage: https://picsum.photos/seed/operateach1/800/1060
+featureImageAlt: Isabella Cavalcanti conducting a voice masterclass
+quoteText: motivational or recommendation message
+quoteAuthor: reviewer or recommendation by
+quoteImage: https://picsum.photos/seed/operaquote1/1920/900
+instagramUrl: https://instagram.com
+youtubeUrl: https://youtube.com
+facebookUrl: https://facebook.com
+email: solrisesoprano@gmail.com
 ---
-
-Isabella Cavalcanti is widely regarded as one of the most compelling sopranos of her generation. Her voice — rich, luminous, and extraordinarily agile — has graced the world's greatest opera houses for over two decades.
+Summary of page here

@@ -1,4 +1,5 @@
 ---
+type: "GalleryItem"
 title: "Grand Duet"
 image: "https://picsum.photos/seed/gallery_duet/800/1000"
 alt: "Performing a duet with tenor on stage"

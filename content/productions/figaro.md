@@ -1,4 +1,5 @@
 ---
+type: "Production"
 title: "Le Nozze di Figaro"
 role: "Countess Almaviva"
 venue: "Salzburg Festival"

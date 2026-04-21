@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { allHomes } from 'content-collections'
-import { Instagram, Youtube, Facebook, Mail, Send, Check } from 'lucide-react'
+import { Instagram, Youtube, Facebook, Send, Check } from 'lucide-react'
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
