@@ -1,7 +1,7 @@
 ---
 type: HomePage
 heroTitle: Sol Risé
-heroSubtitle: Soprano
+heroSubtitle: Soprano line test
 heroTagline: Eyebrow text
 heroImage: https://picsum.photos/seed/operahero1/1920/1080
 heroImageAlt: Sol Rise soprano professional website
