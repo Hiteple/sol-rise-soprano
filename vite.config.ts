@@ -8,7 +8,10 @@ import contentCollections from '@content-collections/vite'
 
 const config = defineConfig({
   server: {
-    allowedHosts: ['.netlify.app'],
+    allowedHosts: [
+      '.netlify.app',
+      'devserver-preview--opera-singer-portfolio.netlify.app',
+    ],
   },
   plugins: [
     contentCollections(),
