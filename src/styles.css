@@ -1,0 +1,217 @@
+@import "tailwindcss" source("../");
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Nunito+Sans:wght@300;400;600&display=swap');
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --obsidian: #0e0c0b;
+  --obsidian-soft: #1a1613;
+  --ivory: #f5f0e8;
+  --ivory-dim: #cfc8bc;
+  --gold: #b8975a;
+  --gold-light: #d4b47a;
+  --gold-pale: #e8d9bb;
+  --blush: #c4897a;
+  --charcoal: #2e2925;
+  --warm-gray: #7a6e68;
+
+  --background: var(--obsidian);
+  --foreground: var(--ivory);
+  --card: var(--obsidian-soft);
+  --card-foreground: var(--ivory);
+  --popover: var(--obsidian-soft);
+  --popover-foreground: var(--ivory);
+  --primary: var(--gold);
+  --primary-foreground: var(--obsidian);
+  --secondary: var(--charcoal);
+  --secondary-foreground: var(--ivory);
+  --muted: var(--charcoal);
+  --muted-foreground: var(--warm-gray);
+  --accent: var(--gold);
+  --accent-foreground: var(--obsidian);
+  --border: #2e2925;
+  --input: #2e2925;
+  --ring: var(--gold);
+  --radius: 0.25rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    background-color: var(--obsidian);
+    color: var(--ivory);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garant', Georgia, serif;
+  }
+}
+
+.font-display {
+  font-family: 'Cormorant Garant', Georgia, serif;
+}
+
+.font-body {
+  font-family: 'Nunito Sans', system-ui, sans-serif;
+}
+
+/* Gold ornamental divider */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gold);
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* Subtle grain overlay */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* Hero text animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 1s ease forwards;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fadeUp 1s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fadeUp 1s ease 0.45s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fadeUp 1s ease 0.7s forwards;
+  opacity: 0;
+}
+
+/* Gold underline hover effect */
+.gold-link {
+  position: relative;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+}
+.gold-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.gold-link:hover::after {
+  width: 100%;
+}
+
+/* Image hover zoom */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Nav scroll transition */
+.nav-scrolled {
+  background: rgba(14, 12, 11, 0.96) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184, 151, 90, 0.2);
+}
+
+/* Play button circle */
+.play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(245, 240, 232, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 12, 11, 0.4);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+.play-btn:hover {
+  background: rgba(184, 151, 90, 0.8);
+  border-color: var(--gold);
+  transform: scale(1.1);
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
