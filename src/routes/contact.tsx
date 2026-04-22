@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { allContactPages, allHomes } from 'content-collections'
+import { allContactPages } from 'content-collections'
 import { Instagram, Youtube, Facebook, Send, Check } from 'lucide-react'
 
 export const Route = createFileRoute('/contact')({
@@ -8,7 +8,6 @@ export const Route = createFileRoute('/contact')({
 })
 
 function ContactPage() {
-  const home = allHomes[0]
   const page = allContactPages[0]
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -17,19 +16,19 @@ function ContactPage() {
     {
       icon: Instagram,
       label: 'Instagram',
-      url: home?.instagramUrl ?? '#',
+      url: page?.instagramUrl ?? '#',
       handle: page?.instagramHandle ?? '@isabellacavalcanti',
     },
     {
       icon: Youtube,
       label: 'YouTube',
-      url: home?.youtubeUrl ?? '#',
+      url: page?.youtubeUrl ?? '#',
       handle: page?.youtubeHandle ?? 'Isabella Cavalcanti',
     },
     {
       icon: Facebook,
       label: 'Facebook',
-      url: home?.facebookUrl ?? '#',
+      url: page?.facebookUrl ?? '#',
       handle: page?.facebookHandle ?? 'Isabella Cavalcanti Soprano',
     },
   ]
@@ -109,16 +108,14 @@ function ContactPage() {
                 >
                   {page?.directEmailLabel ?? 'Direct Email'}
                 </p>
-                <div data-sb-object-id="content/home/data.md">
-                  <a
-                    href={`mailto:${home?.email ?? 'contact@isabellacavalcanti.com'}`}
-                    className="font-display text-xl italic transition-opacity hover:opacity-70"
-                    style={{ color: 'var(--heading-color)' }}
-                    data-sb-field-path="email"
-                  >
-                    {home?.email ?? 'contact@isabellacavalcanti.com'}
-                  </a>
-                </div>
+                <a
+                  href={`mailto:${page?.email ?? 'contact@isabellacavalcanti.com'}`}
+                  className="font-display text-xl italic transition-opacity hover:opacity-70"
+                  style={{ color: 'var(--heading-color)' }}
+                  data-sb-field-path="email"
+                >
+                  {page?.email ?? 'contact@isabellacavalcanti.com'}
+                </a>
               </div>
 
               <div>

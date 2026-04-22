@@ -18,11 +18,13 @@ function ProductionsPage() {
   )
 
   return (
-    <div style={{ background: 'var(--page-background-color)' }}>
+    <div
+      style={{ background: 'var(--page-background-color)' }}
+      data-sb-object-id="content/productions-landing/page.md"
+    >
       <section
         className="pt-40 pb-16 lg:pt-52 lg:pb-24"
         style={{ background: 'var(--section-background-color)' }}
-        data-sb-object-id="content/productions-landing/page.md"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <p

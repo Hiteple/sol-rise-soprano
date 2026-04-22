@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { allAboutPages, allHomes } from 'content-collections'
+import { allAboutPages } from 'content-collections'
 
 export const Route = createFileRoute('/about')({
   component: AboutPage,
@@ -11,19 +11,28 @@ function netlifyImg(url: string, w: number, h?: number, fit = 'cover') {
   return `/.netlify/images?${params.toString()}`
 }
 
-function aboutTeaserImageFromHome() {
-  const home = allHomes[0]
-  return home?.aboutImage
-}
-
 function AboutPage() {
   const page = allAboutPages[0]
   if (!page) return null
 
   const heroSrc =
     page.heroImage?.trim() ||
-    aboutTeaserImageFromHome() ||
     'https://picsum.photos/seed/aboutpage/800/1000'
+  const statsSurface = page.statsSurface ?? 'soft'
+  const statsIsWine = statsSurface === 'wine'
+  const statsBackground =
+    statsSurface === 'wine'
+      ? 'var(--palette-wine)'
+      : statsSurface === 'bright'
+        ? 'var(--section-surface-bright)'
+        : 'transparent'
+  const statsNumberColor = statsIsWine ? 'var(--media-caption-text-color)' : 'var(--accent-color)'
+  const statsLabelColor = statsIsWine
+    ? 'color-mix(in srgb, var(--media-caption-text-color) 84%, transparent)'
+    : 'var(--subtle-text-color)'
+  const statsDividerColor = statsIsWine
+    ? 'color-mix(in srgb, var(--media-caption-text-color) 28%, transparent)'
+    : 'color-mix(in srgb, var(--accent-color) 20%, transparent)'
 
   return (
     <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id="content/about/page.md">
@@ -105,9 +114,11 @@ function AboutPage() {
       <section
         className="py-20"
         style={{
-          borderTop: '1px solid color-mix(in srgb, var(--accent-color) 20%, transparent)',
-          borderBottom: '1px solid color-mix(in srgb, var(--accent-color) 20%, transparent)',
+          background: statsBackground,
+          borderTop: `1px solid ${statsDividerColor}`,
+          borderBottom: `1px solid ${statsDividerColor}`,
         }}
+        data-sb-field-path="statsSurface"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
@@ -115,13 +126,13 @@ function AboutPage() {
               <div key={`${h.number}-${h.label}`} className="text-center">
                 <div
                   className="font-display text-5xl lg:text-6xl italic mb-2"
-                  style={{ color: 'var(--accent-color)' }}
+                  style={{ color: statsNumberColor }}
                 >
                   {h.number}
                 </div>
                 <div
                   className="font-body text-xs uppercase tracking-widest"
-                  style={{ color: 'var(--subtle-text-color)' }}
+                  style={{ color: statsLabelColor }}
                 >
                   {h.label}
                 </div>
