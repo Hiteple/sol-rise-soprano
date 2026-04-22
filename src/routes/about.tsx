@@ -61,18 +61,18 @@ function AboutPage() {
   const page = allHomes[0]
 
   return (
-    <div style={{ background: 'var(--obsidian)' }}>
+    <div style={{ background: 'var(--page-background-color)' }}>
       {/* ── PAGE HERO ─────────────────────────────────────────────────────── */}
       <section
         className="pt-40 pb-24 lg:pt-52 lg:pb-36"
-        style={{ background: 'var(--obsidian-soft)' }}
+        style={{ background: 'var(--section-background-color)' }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <p
                 className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-6"
-                style={{ color: 'var(--gold)' }}
+                style={{ color: 'var(--accent-color)' }}
               >
                 Biography
               </p>
@@ -80,19 +80,19 @@ function AboutPage() {
                 className="font-display italic leading-none mb-8"
                 style={{
                   fontSize: 'clamp(3rem, 8vw, 6rem)',
-                  color: 'var(--ivory)',
+                  color: 'var(--heading-color)',
                 }}
               >
                 The Voice
                 <br />
-                <span style={{ color: 'var(--gold)' }}>Behind</span>
+                <span style={{ color: 'var(--accent-color)' }}>Behind</span>
                 <br />
                 the Legend
               </h1>
-              <div className="w-16 h-px mb-8" style={{ background: 'var(--gold)' }} />
+              <div className="w-16 h-px mb-8" style={{ background: 'var(--accent-color)' }} />
               <p
                 className="font-body text-lg leading-relaxed"
-                style={{ color: 'var(--ivory-dim)' }}
+                style={{ color: 'var(--muted-text-color)' }}
               >
                 Born in Verona into a family of musicians, Isabella Cavalcanti
                 discovered her voice at age seven. What began as a childhood
@@ -116,17 +116,17 @@ function AboutPage() {
               <div
                 className="absolute bottom-6 left-6 right-6 p-6"
                 style={{
-                  background: 'rgba(14,12,11,0.88)',
-                  backdropFilter: 'blur(8px)',
-                  borderLeft: '3px solid var(--gold)',
+                  background: 'color-mix(in srgb, var(--page-background-color) 88%, transparent)',
+                  backdropFilter: 'blur(10px)',
+                  borderLeft: '3px solid var(--accent-color)',
                 }}
               >
-                <p className="font-display italic text-xl" style={{ color: 'var(--ivory)' }}>
+                <p className="font-display italic text-xl" style={{ color: 'var(--heading-color)' }}>
                   "Singing is not what I do — it is who I am."
                 </p>
                 <p
                   className="font-body text-xs mt-2 uppercase tracking-widest"
-                  style={{ color: 'var(--gold)' }}
+                  style={{ color: 'var(--accent-color)' }}
                 >
                   — Isabella Cavalcanti
                 </p>
@@ -139,7 +139,10 @@ function AboutPage() {
       {/* ── STATS ─────────────────────────────────────────────────────────── */}
       <section
         className="py-20"
-        style={{ borderTop: '1px solid rgba(184, 151, 90, 0.2)', borderBottom: '1px solid rgba(184, 151, 90, 0.2)' }}
+        style={{
+          borderTop: '1px solid color-mix(in srgb, var(--accent-color) 20%, transparent)',
+          borderBottom: '1px solid color-mix(in srgb, var(--accent-color) 20%, transparent)',
+        }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
@@ -147,13 +150,13 @@ function AboutPage() {
               <div key={h.number} className="text-center">
                 <div
                   className="font-display text-5xl lg:text-6xl italic mb-2"
-                  style={{ color: 'var(--gold)' }}
+                  style={{ color: 'var(--accent-color)' }}
                 >
                   {h.number}
                 </div>
                 <div
                   className="font-body text-xs uppercase tracking-widest"
-                  style={{ color: 'var(--warm-gray)' }}
+                  style={{ color: 'var(--subtle-text-color)' }}
                 >
                   {h.label}
                 </div>
@@ -168,13 +171,13 @@ function AboutPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-6"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent-color)' }}
           >
             Full Biography
           </p>
           <div
             className="font-body text-base leading-relaxed space-y-6"
-            style={{ color: 'var(--ivory-dim)' }}
+            style={{ color: 'var(--muted-text-color)' }}
           >
             <p>
               Isabella Cavalcanti is widely regarded as one of the most compelling sopranos of
@@ -208,18 +211,18 @@ function AboutPage() {
       {/* ── TIMELINE ─────────────────────────────────────────────────────── */}
       <section
         className="py-24 lg:py-36"
-        style={{ background: 'var(--obsidian-soft)' }}
+        style={{ background: 'var(--section-background-color)' }}
       >
         <div className="max-w-5xl mx-auto px-6 lg:px-12">
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent-color)' }}
           >
             Career Milestones
           </p>
           <h2
             className="font-display italic text-4xl lg:text-5xl mb-16"
-            style={{ color: 'var(--ivory)' }}
+            style={{ color: 'var(--heading-color)' }}
           >
             A Life in Music
           </h2>
@@ -228,7 +231,9 @@ function AboutPage() {
             {/* Vertical line */}
             <div
               className="absolute left-0 lg:left-1/2 top-0 bottom-0 w-px"
-              style={{ background: 'rgba(184, 151, 90, 0.3)' }}
+              style={{
+                background: 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
+              }}
             />
 
             <div className="space-y-12">
@@ -243,8 +248,8 @@ function AboutPage() {
                   <div
                     className="absolute left-0 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full mt-1 border-2"
                     style={{
-                      background: 'var(--obsidian)',
-                      borderColor: 'var(--gold)',
+                      background: 'var(--page-background-color)',
+                      borderColor: 'var(--accent-color)',
                       zIndex: 1,
                     }}
                   />
@@ -254,19 +259,19 @@ function AboutPage() {
                   >
                     <span
                       className="font-display italic text-2xl"
-                      style={{ color: 'var(--gold)' }}
+                      style={{ color: 'var(--accent-color)' }}
                     >
                       {item.year}
                     </span>
                     <h3
                       className="font-display text-xl mt-1 mb-3"
-                      style={{ color: 'var(--ivory)' }}
+                      style={{ color: 'var(--heading-color)' }}
                     >
                       {item.title}
                     </h3>
                     <p
                       className="font-body text-sm leading-relaxed"
-                      style={{ color: 'var(--ivory-dim)' }}
+                      style={{ color: 'var(--muted-text-color)' }}
                     >
                       {item.description}
                     </p>
@@ -283,7 +288,7 @@ function AboutPage() {
         <div className="max-w-xl mx-auto px-6">
           <h2
             className="font-display italic text-4xl mb-6"
-            style={{ color: 'var(--ivory)' }}
+            style={{ color: 'var(--heading-color)' }}
           >
             Ready to Experience
             <br />
@@ -293,14 +298,17 @@ function AboutPage() {
             <Link
               to="/productions"
               className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
-              style={{ background: 'var(--gold)', color: 'var(--obsidian)' }}
+              style={{ background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }}
             >
               Upcoming Productions
             </Link>
             <Link
               to="/contact"
               className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300"
-              style={{ borderColor: 'rgba(184,151,90,0.5)', color: 'var(--gold)' }}
+              style={{
+                borderColor: 'color-mix(in srgb, var(--accent-color) 45%, transparent)',
+                color: 'var(--accent-color)',
+              }}
             >
               Get in Touch
             </Link>

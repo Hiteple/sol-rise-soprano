@@ -5,36 +5,79 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --obsidian: #0e0c0b;
-  --obsidian-soft: #1a1613;
-  --ivory: #f5f0e8;
-  --ivory-dim: #cfc8bc;
-  --gold: #b8975a;
-  --gold-light: #d4b47a;
-  --gold-pale: #e8d9bb;
-  --blush: #c4897a;
-  --charcoal: #2e2925;
-  --warm-gray: #7a6e68;
+  /* Light theme — semantic color tokens */
 
-  --background: var(--obsidian);
-  --foreground: var(--ivory);
-  --card: var(--obsidian-soft);
-  --card-foreground: var(--ivory);
-  --popover: var(--obsidian-soft);
-  --popover-foreground: var(--ivory);
-  --primary: var(--gold);
-  --primary-foreground: var(--obsidian);
-  --secondary: var(--charcoal);
-  --secondary-foreground: var(--ivory);
-  --muted: var(--charcoal);
-  --muted-foreground: var(--warm-gray);
-  --accent: var(--gold);
-  --accent-foreground: var(--obsidian);
-  --border: #2e2925;
-  --input: #2e2925;
-  --ring: var(--gold);
+  --page-background-color: #faf7f3;
+  --section-background-color: #f3e8e4;
+
+  /* Same hue today; split later if headings should diverge from body copy */
+  --heading-color: #3a3431;
+  --body-color: #3a3431;
+  --muted-text-color: #6f6560;
+  --subtle-text-color: #6d6360;
+
+  --accent-color: #9c6d66;
+  --accent-soft-color: #b88982;
+  --accent-pale-color: #ead8d3;
+  --accent-blush-color: #c9a099;
+
+  --media-caption-text-color: #faf7f3;
+  --media-caption-text-muted-color: rgba(250, 247, 243, 0.78);
+
+  --nav-overlay-text-color: #faf7f3;
+  --nav-overlay-text-muted-color: rgba(250, 247, 243, 0.82);
+
+  --on-accent-text-color: #fdf9f7;
+
+  --pill-track-background-color: #ebe0db;
+
+  --border-color: #e3d5cf;
+  --input-border-color: #dccfc8;
+
+  --background: var(--page-background-color);
+  --foreground: var(--body-color);
+  --card: var(--section-background-color);
+  --card-foreground: var(--body-color);
+  --popover: var(--section-background-color);
+  --popover-foreground: var(--body-color);
+  --primary: var(--accent-color);
+  --primary-foreground: var(--on-accent-text-color);
+  --secondary: var(--pill-track-background-color);
+  --secondary-foreground: var(--body-color);
+  --muted: var(--pill-track-background-color);
+  --muted-foreground: var(--subtle-text-color);
+  --accent: var(--accent-color);
+  --accent-foreground: var(--on-accent-text-color);
+  --border: var(--border-color);
+  --input: var(--input-border-color);
+  --ring: var(--accent-color);
   --radius: 0.25rem;
 }
+
+/*
+ * Dark theme — reference only (unused). If you add `.dark` / `[data-theme=dark]`,
+ * point the semantic tokens above at dark-friendly values (examples below).
+ *
+ * Rough mapping:
+ *   --page-background-color, --section-background-color ← deep browns / blacks
+ *   --heading-color, --body-color, --muted-text-color ← light warm grays
+ *   --accent-color (+ soft / pale) ← gold / candlelight accents
+ *   --pill-track-background-color ← charcoal rails
+ *   --border-color, --input-border-color ← low-contrast borders on dark
+ *   --media-caption-text-color, --nav-overlay-text-color ← near-white for overlays
+ *
+ * Former palette (hex) for comparison:
+ * --obsidian: #0e0c0b;
+ * --obsidian-soft: #1a1613;
+ * --ivory: #f5f0e8;
+ * --ivory-dim: #cfc8bc;
+ * --gold: #b8975a;
+ * --gold-light: #d4b47a;
+ * --gold-pale: #e8d9bb;
+ * --blush: #c4897a;
+ * --charcoal: #2e2925;
+ * --warm-gray: #7a6e68;
+ */
 
 @theme inline {
   --color-background: var(--background);
@@ -67,8 +110,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Nunito Sans', system-ui, sans-serif;
-    background-color: var(--obsidian);
-    color: var(--ivory);
+    background-color: var(--background);
+    color: var(--foreground);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -90,14 +133,19 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--gold);
+  color: var(--accent-color);
 }
 .ornament::before,
 .ornament::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--accent-color),
+    transparent
+  );
 }
 
 /* Subtle grain overlay */
@@ -145,7 +193,7 @@
 /* Gold underline hover effect */
 .gold-link {
   position: relative;
-  color: var(--gold);
+  color: var(--accent-color);
   text-decoration: none;
   letter-spacing: 0.12em;
   font-size: 0.75rem;
@@ -160,11 +208,25 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--gold);
+  background: var(--accent-color);
   transition: width 0.3s ease;
 }
 .gold-link:hover::after {
   width: 100%;
+}
+
+/* Nav over hero: light links on variable photo background */
+.nav-hero .gold-link {
+  color: var(--nav-overlay-text-color);
+}
+.nav-hero .gold-link::after {
+  background: var(--nav-overlay-text-color);
+}
+.nav-hero .gold-link:hover {
+  color: var(--accent-pale-color);
+}
+.nav-hero .gold-link:hover::after {
+  background: var(--accent-pale-color);
 }
 
 /* Image hover zoom */
@@ -180,9 +242,9 @@
 
 /* Nav scroll transition */
 .nav-scrolled {
-  background: rgba(14, 12, 11, 0.96) !important;
+  background: color-mix(in srgb, var(--page-background-color) 92%, transparent) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(184, 151, 90, 0.2);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-color) 18%, transparent);
 }
 
 /* Play button circle */
@@ -190,17 +252,17 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 2px solid rgba(245, 240, 232, 0.9);
+  border: 2px solid color-mix(in srgb, var(--media-caption-text-color) 88%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(14, 12, 11, 0.4);
+  background: color-mix(in srgb, #2a2422 45%, transparent);
   backdrop-filter: blur(4px);
   transition: all 0.3s ease;
 }
 .play-btn:hover {
-  background: rgba(184, 151, 90, 0.8);
-  border-color: var(--gold);
+  background: color-mix(in srgb, var(--accent-color) 85%, transparent);
+  border-color: var(--accent-pale-color);
   transform: scale(1.1);
 }
 
@@ -208,7 +270,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.92);
+  background: color-mix(in srgb, #2c2624 88%, transparent);
   z-index: 1000;
   display: flex;
   align-items: center;

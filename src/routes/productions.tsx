@@ -17,28 +17,28 @@ function ProductionsPage() {
   )
 
   return (
-    <div style={{ background: 'var(--obsidian)' }}>
+    <div style={{ background: 'var(--page-background-color)' }}>
       {/* Page Header */}
       <section
         className="pt-40 pb-16 lg:pt-52 lg:pb-24"
-        style={{ background: 'var(--obsidian-soft)' }}
+        style={{ background: 'var(--section-background-color)' }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent-color)' }}
           >
             Repertoire
           </p>
           <h1
             className="font-display italic leading-none mb-8"
-            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'var(--ivory)' }}
+            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'var(--heading-color)' }}
           >
             Productions
           </h1>
           <p
             className="font-body text-lg max-w-xl"
-            style={{ color: 'var(--ivory-dim)' }}
+            style={{ color: 'var(--muted-text-color)' }}
           >
             A curated selection of performances that have defined a career spanning
             three continents and the world's greatest opera houses.
@@ -74,25 +74,27 @@ function ProductionsPage() {
                   className={`p-10 lg:p-16 flex flex-col justify-center ${
                     idx % 2 === 0 ? 'order-2' : 'order-2 lg:order-1'
                   }`}
-                  style={{ background: 'var(--obsidian-soft)' }}
+                  style={{ background: 'var(--section-background-color)' }}
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <span
                       className="font-display italic text-3xl"
-                      style={{ color: 'var(--gold)' }}
+                      style={{ color: 'var(--accent-color)' }}
                       data-sb-field-path="year"
                     >
                       {production.year}
                     </span>
                     <div
                       className="flex-1 h-px"
-                      style={{ background: 'rgba(184, 151, 90, 0.3)' }}
+                      style={{
+                        background: 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
+                      }}
                     />
                   </div>
 
                   <h2
                     className="font-display italic text-3xl lg:text-4xl mb-3"
-                    style={{ color: 'var(--ivory)' }}
+                    style={{ color: 'var(--heading-color)' }}
                     data-sb-field-path="title"
                   >
                     {production.title}
@@ -100,7 +102,7 @@ function ProductionsPage() {
 
                   <p
                     className="font-body text-sm uppercase tracking-widest mb-2 font-semibold"
-                    style={{ color: 'var(--gold)' }}
+                    style={{ color: 'var(--accent-color)' }}
                     data-sb-field-path="role"
                   >
                     {production.role}
@@ -108,7 +110,7 @@ function ProductionsPage() {
 
                   <p
                     className="font-body text-xs uppercase tracking-widest mb-6"
-                    style={{ color: 'var(--warm-gray)' }}
+                    style={{ color: 'var(--subtle-text-color)' }}
                     data-sb-field-path="venue"
                   >
                     {production.venue}
@@ -116,7 +118,7 @@ function ProductionsPage() {
 
                   <p
                     className="font-body text-sm leading-relaxed mb-8"
-                    style={{ color: 'var(--ivory-dim)' }}
+                    style={{ color: 'var(--muted-text-color)' }}
                     data-sb-field-path="description"
                   >
                     {production.description}
@@ -128,8 +130,8 @@ function ProductionsPage() {
                         key={tag}
                         className="px-3 py-1 font-body text-xs uppercase tracking-widest border"
                         style={{
-                          borderColor: 'rgba(184, 151, 90, 0.3)',
-                          color: 'var(--warm-gray)',
+                          borderColor: 'color-mix(in srgb, var(--accent-color) 26%, transparent)',
+                          color: 'var(--subtle-text-color)',
                         }}
                       >
                         {tag}

@@ -18,8 +18,8 @@ export function Footer({
     <footer
       className="border-t"
       style={{
-        background: '#080605',
-        borderColor: 'rgba(184, 151, 90, 0.2)',
+        background: 'var(--section-background-color)',
+        borderColor: 'color-mix(in srgb, var(--accent-color) 18%, transparent)',
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
@@ -28,17 +28,17 @@ export function Footer({
           <div>
             <div
               className="font-display text-3xl mb-3"
-              style={{ color: 'var(--gold)' }}
+              style={{ color: 'var(--accent-color)' }}
             >
               Isabella
               <br />
-              <span className="italic" style={{ color: 'var(--ivory)' }}>
+              <span className="italic" style={{ color: 'var(--body-color)' }}>
                 Cavalcanti
               </span>
             </div>
             <p
               className="text-sm leading-relaxed mt-4"
-              style={{ color: 'var(--warm-gray)' }}
+              style={{ color: 'var(--subtle-text-color)' }}
             >
               Soprano · Stage Artist
               <br />
@@ -50,7 +50,7 @@ export function Footer({
           <div>
             <h4
               className="text-xs uppercase tracking-widest mb-6 font-body font-semibold"
-              style={{ color: 'var(--gold)' }}
+              style={{ color: 'var(--accent-color)' }}
             >
               Navigate
             </h4>
@@ -66,12 +66,12 @@ export function Footer({
                   key={link.to}
                   to={link.to}
                   className="text-sm transition-colors duration-200 hover:opacity-100 font-body"
-                  style={{ color: 'var(--warm-gray)' }}
+                  style={{ color: 'var(--subtle-text-color)' }}
                   onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = 'var(--ivory)')
+                    (e.currentTarget.style.color = 'var(--body-color)')
                   }
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = 'var(--warm-gray)')
+                    (e.currentTarget.style.color = 'var(--subtle-text-color)')
                   }
                 >
                   {link.label}
@@ -84,14 +84,14 @@ export function Footer({
           <div>
             <h4
               className="text-xs uppercase tracking-widest mb-6 font-body font-semibold"
-              style={{ color: 'var(--gold)' }}
+              style={{ color: 'var(--accent-color)' }}
             >
               Connect
             </h4>
             <a
               href={`mailto:${email}`}
-              className="flex items-center gap-2 text-sm mb-6 transition-colors hover:text-ivory"
-              style={{ color: 'var(--warm-gray)' }}
+              className="flex items-center gap-2 text-sm mb-6 transition-colors hover:opacity-90"
+              style={{ color: 'var(--subtle-text-color)' }}
             >
               <Mail size={14} />
               {email}
@@ -104,16 +104,17 @@ export function Footer({
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
-                  borderColor: 'rgba(184, 151, 90, 0.4)',
-                  color: 'var(--warm-gray)',
+                  borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
+                  color: 'var(--subtle-text-color)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--gold)'
-                  e.currentTarget.style.color = 'var(--gold)'
+                  e.currentTarget.style.borderColor = 'var(--accent-color)'
+                  e.currentTarget.style.color = 'var(--accent-color)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(184, 151, 90, 0.4)'
-                  e.currentTarget.style.color = 'var(--warm-gray)'
+                  e.currentTarget.style.borderColor =
+                    'color-mix(in srgb, var(--accent-color) 32%, transparent)'
+                  e.currentTarget.style.color = 'var(--subtle-text-color)'
                 }}
               >
                 <Instagram size={15} />
@@ -125,16 +126,17 @@ export function Footer({
                 aria-label="YouTube"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
-                  borderColor: 'rgba(184, 151, 90, 0.4)',
-                  color: 'var(--warm-gray)',
+                  borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
+                  color: 'var(--subtle-text-color)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--gold)'
-                  e.currentTarget.style.color = 'var(--gold)'
+                  e.currentTarget.style.borderColor = 'var(--accent-color)'
+                  e.currentTarget.style.color = 'var(--accent-color)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(184, 151, 90, 0.4)'
-                  e.currentTarget.style.color = 'var(--warm-gray)'
+                  e.currentTarget.style.borderColor =
+                    'color-mix(in srgb, var(--accent-color) 32%, transparent)'
+                  e.currentTarget.style.color = 'var(--subtle-text-color)'
                 }}
               >
                 <Youtube size={15} />
@@ -146,16 +148,17 @@ export function Footer({
                 aria-label="Facebook"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
-                  borderColor: 'rgba(184, 151, 90, 0.4)',
-                  color: 'var(--warm-gray)',
+                  borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
+                  color: 'var(--subtle-text-color)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--gold)'
-                  e.currentTarget.style.color = 'var(--gold)'
+                  e.currentTarget.style.borderColor = 'var(--accent-color)'
+                  e.currentTarget.style.color = 'var(--accent-color)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(184, 151, 90, 0.4)'
-                  e.currentTarget.style.color = 'var(--warm-gray)'
+                  e.currentTarget.style.borderColor =
+                    'color-mix(in srgb, var(--accent-color) 32%, transparent)'
+                  e.currentTarget.style.color = 'var(--subtle-text-color)'
                 }}
               >
                 <Facebook size={15} />
@@ -167,12 +170,15 @@ export function Footer({
         {/* Bottom line */}
         <div
           className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4"
-          style={{ borderColor: 'rgba(184, 151, 90, 0.1)' }}
+          style={{ borderColor: 'color-mix(in srgb, var(--accent-color) 12%, transparent)' }}
         >
-          <p className="text-xs" style={{ color: 'var(--warm-gray)' }}>
+          <p className="text-xs" style={{ color: 'var(--subtle-text-color)' }}>
             © {new Date().getFullYear()} Isabella Cavalcanti. All rights reserved.
           </p>
-          <p className="text-xs font-display italic" style={{ color: 'rgba(184, 151, 90, 0.5)' }}>
+          <p
+            className="text-xs font-display italic"
+            style={{ color: 'color-mix(in srgb, var(--accent-color) 48%, transparent)' }}
+          >
             La musica è la lingua dell'anima
           </p>
         </div>

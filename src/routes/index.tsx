@@ -27,7 +27,7 @@ function HomePage() {
     filter === 'all' ? mediaItems : mediaItems.filter((m) => m.type === filter)
 
   return (
-    <div style={{ background: 'var(--obsidian)' }}>
+    <div style={{ background: 'var(--page-background-color)' }}>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         className="relative flex items-end pb-24 lg:pb-32"
@@ -46,7 +46,7 @@ function HomePage() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(to top, rgba(14,12,11,0.97) 0%, rgba(14,12,11,0.55) 40%, rgba(14,12,11,0.25) 100%)',
+                'linear-gradient(to top, color-mix(in srgb, var(--page-background-color) 96%, transparent) 0%, color-mix(in srgb, var(--page-background-color) 58%, transparent) 42%, transparent 100%)',
             }}
           />
         </div>
@@ -55,7 +55,7 @@ function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <p
             className="animate-fade-up text-xs uppercase tracking-[0.35em] mb-6 font-body font-semibold"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent-color)' }}
             data-sb-field-path="heroTagline"
           >
             {page.heroTagline}
@@ -65,7 +65,7 @@ function HomePage() {
             className="animate-fade-up-delay-1 font-display italic leading-none mb-6"
             style={{
               fontSize: 'clamp(4rem, 12vw, 9rem)',
-              color: 'var(--ivory)',
+              color: 'var(--heading-color)',
               letterSpacing: '-0.02em',
             }}
             data-sb-field-path="heroTitle"
@@ -75,7 +75,7 @@ function HomePage() {
 
           <p
             className="animate-fade-up-delay-2 font-body text-base tracking-[0.2em] uppercase mb-12"
-            style={{ color: 'var(--ivory-dim)' }}
+            style={{ color: 'var(--muted-text-color)' }}
             data-sb-field-path="heroSubtitle"
           >
             {page.heroSubtitle}
@@ -86,14 +86,14 @@ function HomePage() {
               to="/productions"
               className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
               style={{
-                background: 'var(--gold)',
-                color: 'var(--obsidian)',
+                background: 'var(--accent-color)',
+                color: 'var(--on-accent-text-color)',
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.background = 'var(--gold-light)')
+                (e.currentTarget.style.background = 'var(--accent-soft-color)')
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.background = 'var(--gold)')
+                (e.currentTarget.style.background = 'var(--accent-color)')
               }
             >
               View Productions
@@ -102,16 +102,17 @@ function HomePage() {
               to="/contact"
               className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300"
               style={{
-                borderColor: 'rgba(245, 240, 232, 0.4)',
-                color: 'var(--ivory)',
+                borderColor: 'color-mix(in srgb, var(--body-color) 28%, transparent)',
+                color: 'var(--body-color)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--gold)'
-                e.currentTarget.style.color = 'var(--gold)'
+                e.currentTarget.style.borderColor = 'var(--accent-color)'
+                e.currentTarget.style.color = 'var(--accent-color)'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(245, 240, 232, 0.4)'
-                e.currentTarget.style.color = 'var(--ivory)'
+                e.currentTarget.style.borderColor =
+                  'color-mix(in srgb, var(--body-color) 28%, transparent)'
+                e.currentTarget.style.color = 'var(--body-color)'
               }}
             >
               Book a Performance
@@ -122,7 +123,7 @@ function HomePage() {
         {/* Scroll indicator */}
         <div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce"
-          style={{ color: 'rgba(184, 151, 90, 0.6)' }}
+          style={{ color: 'color-mix(in srgb, var(--accent-color) 55%, transparent)' }}
         >
           <ChevronDown size={20} />
         </div>
@@ -131,7 +132,7 @@ function HomePage() {
       {/* ── ABOUT TEASER — Image + Text ───────────────────────────────────── */}
       <section
         className="py-24 lg:py-36"
-        style={{ background: 'var(--obsidian-soft)' }}
+        style={{ background: 'var(--section-background-color)' }}
         data-sb-object-id="content/home/data.md"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -140,7 +141,9 @@ function HomePage() {
             <div className="lg:col-span-3 img-zoom relative">
               <div
                 className="absolute -top-6 -left-6 w-32 h-32 border"
-                style={{ borderColor: 'rgba(184, 151, 90, 0.25)' }}
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
+                }}
               />
               <img
                 src={netlifyImg(page.aboutImage, 900, 1100)}
@@ -151,7 +154,9 @@ function HomePage() {
               />
               <div
                 className="absolute -bottom-6 -right-6 w-32 h-32 border"
-                style={{ borderColor: 'rgba(184, 151, 90, 0.25)' }}
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
+                }}
               />
             </div>
 
@@ -159,24 +164,24 @@ function HomePage() {
             <div className="lg:col-span-2">
               <p
                 className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-6"
-                style={{ color: 'var(--gold)' }}
+                style={{ color: 'var(--accent-color)' }}
               >
                 About
               </p>
               <h2
                 className="font-display text-4xl lg:text-5xl italic leading-tight mb-8"
-                style={{ color: 'var(--ivory)' }}
+                style={{ color: 'var(--heading-color)' }}
                 data-sb-field-path="aboutTitle"
               >
                 {page.aboutTitle}
               </h2>
               <div
                 className="w-12 h-px mb-8"
-                style={{ background: 'var(--gold)' }}
+                style={{ background: 'var(--accent-color)' }}
               />
               <p
                 className="font-body text-base leading-relaxed mb-10"
-                style={{ color: 'var(--ivory-dim)' }}
+                style={{ color: 'var(--muted-text-color)' }}
                 data-sb-field-path="aboutText"
               >
                 {page.aboutText}
@@ -194,27 +199,27 @@ function HomePage() {
       </section>
 
       {/* ── MEDIA GRID ───────────────────────────────────────────────────── */}
-      <section className="py-24 lg:py-36" style={{ background: 'var(--obsidian)' }}>
+      <section className="py-24 lg:py-36" style={{ background: 'var(--page-background-color)' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
               <p
                 className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-4"
-                style={{ color: 'var(--gold)' }}
+                style={{ color: 'var(--accent-color)' }}
               >
                 On Stage & On Screen
               </p>
               <h2
                 className="font-display text-4xl lg:text-5xl italic"
-                style={{ color: 'var(--ivory)' }}
+                style={{ color: 'var(--heading-color)' }}
               >
                 Media
               </h2>
             </div>
 
             {/* Filter tabs */}
-            <div className="flex gap-1 p-1" style={{ background: 'var(--charcoal)' }}>
+            <div className="flex gap-1 p-1" style={{ background: 'var(--pill-track-background-color)' }}>
               {(['all', 'video', 'image'] as const).map((f) => (
                 <button
                   key={f}
@@ -222,8 +227,8 @@ function HomePage() {
                   className="px-5 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300"
                   style={
                     filter === f
-                      ? { background: 'var(--gold)', color: 'var(--obsidian)' }
-                      : { color: 'var(--warm-gray)' }
+                      ? { background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }
+                      : { color: 'var(--subtle-text-color)' }
                   }
                 >
                   {f === 'all' ? 'All' : f === 'video' ? 'Videos' : 'Photos'}
@@ -256,15 +261,15 @@ function HomePage() {
                   className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300"
                   style={{
                     background:
-                      'linear-gradient(to top, rgba(14,12,11,0.9) 0%, rgba(14,12,11,0.3) 60%, transparent 100%)',
+                      'linear-gradient(to top, color-mix(in srgb, #2a2422 88%, transparent) 0%, color-mix(in srgb, #2a2422 28%, transparent) 55%, transparent 100%)',
                   }}
                 >
                   {item.type === 'video' && (
                     <div className="play-btn mb-4">
                       <Play
                         size={20}
-                        fill="white"
-                        style={{ color: 'var(--ivory)', marginLeft: 2 }}
+                        fill="currentColor"
+                        style={{ color: 'var(--media-caption-text-color)', marginLeft: 2 }}
                       />
                     </div>
                   )}
@@ -272,14 +277,14 @@ function HomePage() {
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <p
                     className="font-display text-lg italic leading-tight"
-                    style={{ color: 'var(--ivory)' }}
+                    style={{ color: 'var(--media-caption-text-color)' }}
                     data-sb-field-path="title"
                   >
                     {item.title}
                   </p>
                   <p
                     className="font-body text-xs mt-1 line-clamp-1"
-                    style={{ color: 'var(--ivory-dim)' }}
+                    style={{ color: 'var(--media-caption-text-muted-color)' }}
                     data-sb-field-path="description"
                   >
                     {item.description}
@@ -294,7 +299,7 @@ function HomePage() {
       {/* ── FEATURE — Image + Text (reversed) ────────────────────────────── */}
       <section
         className="py-24 lg:py-36"
-        style={{ background: 'var(--obsidian-soft)' }}
+        style={{ background: 'var(--section-background-color)' }}
         data-sb-object-id="content/home/data.md"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -303,24 +308,24 @@ function HomePage() {
             <div className="lg:col-span-2 order-2 lg:order-1">
               <p
                 className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-6"
-                style={{ color: 'var(--gold)' }}
+                style={{ color: 'var(--accent-color)' }}
               >
                 Pedagogy & Teaching
               </p>
               <h2
                 className="font-display text-4xl lg:text-5xl italic leading-tight mb-8"
-                style={{ color: 'var(--ivory)' }}
+                style={{ color: 'var(--heading-color)' }}
                 data-sb-field-path="featureTitle"
               >
                 {page.featureTitle}
               </h2>
               <div
                 className="w-12 h-px mb-8"
-                style={{ background: 'var(--gold)' }}
+                style={{ background: 'var(--accent-color)' }}
               />
               <p
                 className="font-body text-base leading-relaxed mb-10"
-                style={{ color: 'var(--ivory-dim)' }}
+                style={{ color: 'var(--muted-text-color)' }}
                 data-sb-field-path="featureText"
               >
                 {page.featureText}
@@ -334,7 +339,9 @@ function HomePage() {
             <div className="lg:col-span-3 img-zoom order-1 lg:order-2 relative">
               <div
                 className="absolute -top-6 -right-6 w-32 h-32 border"
-                style={{ borderColor: 'rgba(184, 151, 90, 0.25)' }}
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
+                }}
               />
               <img
                 src={netlifyImg(page.featureImage, 900, 1100)}
@@ -345,7 +352,9 @@ function HomePage() {
               />
               <div
                 className="absolute -bottom-6 -left-6 w-32 h-32 border"
-                style={{ borderColor: 'rgba(184, 151, 90, 0.25)' }}
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
+                }}
               />
             </div>
           </div>
@@ -366,26 +375,29 @@ function HomePage() {
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'rgba(14, 12, 11, 0.82)' }}
+            style={{
+              background:
+                'linear-gradient(135deg, color-mix(in srgb, var(--section-background-color) 92%, transparent) 0%, color-mix(in srgb, var(--accent-pale-color) 75%, transparent) 100%)',
+            }}
           />
         </div>
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12">
           <div
             className="font-display text-5xl lg:text-6xl mb-8"
-            style={{ color: 'var(--gold)', opacity: 0.6 }}
+            style={{ color: 'var(--accent-color)', opacity: 0.6 }}
           >
             "
           </div>
           <blockquote
             className="font-display italic text-2xl lg:text-4xl leading-relaxed mb-8"
-            style={{ color: 'var(--ivory)' }}
+            style={{ color: 'var(--heading-color)' }}
             data-sb-field-path="quoteText"
           >
             {page.quoteText}
           </blockquote>
           <cite
             className="font-body text-sm uppercase tracking-widest not-italic"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent-color)' }}
             data-sb-field-path="quoteAuthor"
           >
             {page.quoteAuthor}
@@ -405,7 +417,7 @@ function HomePage() {
           >
             <button
               className="absolute -top-12 right-0 p-2 transition-opacity hover:opacity-70"
-              style={{ color: 'var(--ivory)' }}
+              style={{ color: 'var(--media-caption-text-color)' }}
               onClick={() => setActiveVideo(null)}
             >
               <X size={28} />

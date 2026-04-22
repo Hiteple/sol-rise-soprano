@@ -53,22 +53,22 @@ function ContactPage() {
   }
 
   return (
-    <div style={{ background: 'var(--obsidian)' }}>
+    <div style={{ background: 'var(--page-background-color)' }}>
       {/* Page Header */}
       <section
         className="pt-40 pb-16 lg:pt-52 lg:pb-24"
-        style={{ background: 'var(--obsidian-soft)' }}
+        style={{ background: 'var(--section-background-color)' }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent-color)' }}
           >
             Reach Out
           </p>
           <h1
             className="font-display italic leading-none"
-            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'var(--ivory)' }}
+            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'var(--heading-color)' }}
           >
             Contact
           </h1>
@@ -82,17 +82,17 @@ function ContactPage() {
             <div data-sb-object-id="content/home/data.md">
               <h2
                 className="font-display italic text-3xl lg:text-4xl mb-6"
-                style={{ color: 'var(--ivory)' }}
+                style={{ color: 'var(--heading-color)' }}
               >
                 Let's Begin a Conversation
               </h2>
               <div
                 className="w-12 h-px mb-8"
-                style={{ background: 'var(--gold)' }}
+                style={{ background: 'var(--accent-color)' }}
               />
               <p
                 className="font-body text-base leading-relaxed mb-12"
-                style={{ color: 'var(--ivory-dim)' }}
+                style={{ color: 'var(--muted-text-color)' }}
               >
                 Whether you are a concert promoter, festival organiser, music journalist,
                 or an aspiring singer seeking mentorship — Isabella welcomes all enquiries.
@@ -103,14 +103,14 @@ function ContactPage() {
               <div className="mb-12">
                 <p
                   className="text-xs uppercase tracking-widest font-body font-semibold mb-3"
-                  style={{ color: 'var(--gold)' }}
+                  style={{ color: 'var(--accent-color)' }}
                 >
                   Direct Email
                 </p>
                 <a
                   href={`mailto:${page?.email ?? 'contact@isabellacavalcanti.com'}`}
                   className="font-display text-xl italic transition-opacity hover:opacity-70"
-                  style={{ color: 'var(--ivory)' }}
+                  style={{ color: 'var(--heading-color)' }}
                   data-sb-field-path="email"
                 >
                   {page?.email ?? 'contact@isabellacavalcanti.com'}
@@ -121,7 +121,7 @@ function ContactPage() {
               <div>
                 <p
                   className="text-xs uppercase tracking-widest font-body font-semibold mb-6"
-                  style={{ color: 'var(--gold)' }}
+                  style={{ color: 'var(--accent-color)' }}
                 >
                   Social Channels
                 </p>
@@ -137,8 +137,8 @@ function ContactPage() {
                       <div
                         className="w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:border-opacity-100"
                         style={{
-                          borderColor: 'rgba(184, 151, 90, 0.4)',
-                          color: 'var(--gold)',
+                          borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
+                          color: 'var(--accent-color)',
                         }}
                       >
                         <Icon size={16} />
@@ -146,13 +146,13 @@ function ContactPage() {
                       <div>
                         <p
                           className="font-body text-xs uppercase tracking-widest"
-                          style={{ color: 'var(--warm-gray)' }}
+                          style={{ color: 'var(--subtle-text-color)' }}
                         >
                           {label}
                         </p>
                         <p
                           className="font-body text-sm font-semibold"
-                          style={{ color: 'var(--ivory)' }}
+                          style={{ color: 'var(--body-color)' }}
                         >
                           {handle}
                         </p>
@@ -168,23 +168,25 @@ function ContactPage() {
               {submitted ? (
                 <div
                   className="h-full flex flex-col items-center justify-center text-center p-12 border"
-                  style={{ borderColor: 'rgba(184, 151, 90, 0.3)' }}
+                  style={{
+                    borderColor: 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
+                  }}
                 >
                   <div
                     className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-6"
-                    style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}
+                    style={{ borderColor: 'var(--accent-color)', color: 'var(--accent-color)' }}
                   >
                     <Check size={28} />
                   </div>
                   <h3
                     className="font-display italic text-3xl mb-4"
-                    style={{ color: 'var(--ivory)' }}
+                    style={{ color: 'var(--heading-color)' }}
                   >
                     Message Sent
                   </h3>
                   <p
                     className="font-body text-sm leading-relaxed mb-8"
-                    style={{ color: 'var(--ivory-dim)' }}
+                    style={{ color: 'var(--muted-text-color)' }}
                   >
                     Thank you for reaching out. Isabella or her team will respond
                     within 3–5 business days.
@@ -221,7 +223,7 @@ function ContactPage() {
                       <label
                         htmlFor={field.id}
                         className="block font-body text-xs uppercase tracking-widest font-semibold mb-2"
-                        style={{ color: 'var(--warm-gray)' }}
+                        style={{ color: 'var(--subtle-text-color)' }}
                       >
                         {field.label}
                       </label>
@@ -233,15 +235,15 @@ function ContactPage() {
                         placeholder={field.placeholder}
                         className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border-b bg-transparent"
                         style={{
-                          borderColor: 'rgba(184, 151, 90, 0.3)',
-                          color: 'var(--ivory)',
+                          borderColor: 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
+                          color: 'var(--body-color)',
                         }}
                         onFocus={(e) =>
-                          (e.currentTarget.style.borderColor = 'var(--gold)')
+                          (e.currentTarget.style.borderColor = 'var(--accent-color)')
                         }
                         onBlur={(e) =>
                           (e.currentTarget.style.borderColor =
-                            'rgba(184, 151, 90, 0.3)')
+                            'color-mix(in srgb, var(--accent-color) 24%, transparent)')
                         }
                       />
                     </div>
@@ -251,7 +253,7 @@ function ContactPage() {
                     <label
                       htmlFor="message"
                       className="block font-body text-xs uppercase tracking-widest font-semibold mb-2"
-                      style={{ color: 'var(--warm-gray)' }}
+                      style={{ color: 'var(--subtle-text-color)' }}
                     >
                       Message
                     </label>
@@ -263,15 +265,15 @@ function ContactPage() {
                       placeholder="Please share the details of your enquiry..."
                       className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border resize-none bg-transparent"
                       style={{
-                        borderColor: 'rgba(184, 151, 90, 0.3)',
-                        color: 'var(--ivory)',
+                        borderColor: 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
+                        color: 'var(--body-color)',
                       }}
                       onFocus={(e) =>
-                        (e.currentTarget.style.borderColor = 'var(--gold)')
+                        (e.currentTarget.style.borderColor = 'var(--accent-color)')
                       }
                       onBlur={(e) =>
                         (e.currentTarget.style.borderColor =
-                          'rgba(184, 151, 90, 0.3)')
+                          'color-mix(in srgb, var(--accent-color) 24%, transparent)')
                       }
                     />
                   </div>
@@ -281,8 +283,8 @@ function ContactPage() {
                     disabled={loading}
                     className="w-full flex items-center justify-center gap-3 py-4 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
                     style={{
-                      background: loading ? 'var(--charcoal)' : 'var(--gold)',
-                      color: loading ? 'var(--warm-gray)' : 'var(--obsidian)',
+                      background: loading ? 'var(--pill-track-background-color)' : 'var(--accent-color)',
+                      color: loading ? 'var(--subtle-text-color)' : 'var(--on-accent-text-color)',
                     }}
                   >
                     <Send size={14} />

@@ -29,22 +29,22 @@ function GalleryPage() {
       : items.filter((i) => i.category === activeCategory)
 
   return (
-    <div style={{ background: 'var(--obsidian)' }}>
+    <div style={{ background: 'var(--page-background-color)' }}>
       {/* Page Header */}
       <section
         className="pt-40 pb-16 lg:pt-52 lg:pb-20"
-        style={{ background: 'var(--obsidian-soft)' }}
+        style={{ background: 'var(--section-background-color)' }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent-color)' }}
           >
             Photography
           </p>
           <h1
             className="font-display italic leading-none"
-            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'var(--ivory)' }}
+            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'var(--heading-color)' }}
           >
             Gallery
           </h1>
@@ -52,9 +52,9 @@ function GalleryPage() {
       </section>
 
       {/* Filter */}
-      <section className="py-10" style={{ background: 'var(--obsidian)' }}>
+      <section className="py-10" style={{ background: 'var(--page-background-color)' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex gap-1 p-1 w-fit" style={{ background: 'var(--charcoal)' }}>
+          <div className="flex gap-1 p-1 w-fit" style={{ background: 'var(--pill-track-background-color)' }}>
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -62,8 +62,8 @@ function GalleryPage() {
                 className="px-6 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300"
                 style={
                   activeCategory === cat
-                    ? { background: 'var(--gold)', color: 'var(--obsidian)' }
-                    : { color: 'var(--warm-gray)' }
+                    ? { background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }
+                    : { color: 'var(--subtle-text-color)' }
                 }
               >
                 {cat}
@@ -82,7 +82,7 @@ function GalleryPage() {
               return (
                 <div
                   key={item._meta.path}
-                  className={`img-zoom cursor-pointer relative ${
+                  className={`group img-zoom cursor-pointer relative ${
                     isLarge ? 'md:col-span-2 lg:col-span-2' : ''
                   }`}
                   style={{ aspectRatio: isLarge ? '16/9' : '4/5' }}
@@ -108,13 +108,13 @@ function GalleryPage() {
                     className="absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
                       background:
-                        'linear-gradient(to top, rgba(14,12,11,0.85) 0%, transparent 60%)',
+                        'linear-gradient(to top, color-mix(in srgb, #2a2422 82%, transparent) 0%, transparent 60%)',
                     }}
                   />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <p
                       className="font-display italic text-base"
-                      style={{ color: 'var(--ivory)' }}
+                      style={{ color: 'var(--media-caption-text-color)' }}
                       data-sb-field-path="title"
                     >
                       {item.title}
@@ -122,7 +122,7 @@ function GalleryPage() {
                     {item.category && (
                       <p
                         className="font-body text-xs uppercase tracking-widest mt-1"
-                        style={{ color: 'var(--gold)' }}
+                        style={{ color: 'var(--accent-color)' }}
                       >
                         {item.category}
                       </p>
@@ -133,20 +133,20 @@ function GalleryPage() {
                     className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-5"
                     style={{
                       background:
-                        'linear-gradient(to top, rgba(14,12,11,0.85) 0%, transparent 60%)',
+                        'linear-gradient(to top, color-mix(in srgb, #2a2422 82%, transparent) 0%, transparent 60%)',
                     }}
                   >
                     <div>
                       <p
                         className="font-display italic text-base"
-                        style={{ color: 'var(--ivory)' }}
+                        style={{ color: 'var(--media-caption-text-color)' }}
                       >
                         {item.title}
                       </p>
                       {item.category && (
                         <p
                           className="font-body text-xs uppercase tracking-widest mt-1"
-                          style={{ color: 'var(--gold)' }}
+                          style={{ color: 'var(--accent-color)' }}
                         >
                           {item.category}
                         </p>
@@ -172,7 +172,7 @@ function GalleryPage() {
           >
             <button
               className="absolute -top-12 right-0 p-2 transition-opacity hover:opacity-70"
-              style={{ color: 'var(--ivory)' }}
+              style={{ color: 'var(--media-caption-text-color)' }}
               onClick={() => setLightboxImg(null)}
             >
               <X size={28} />
