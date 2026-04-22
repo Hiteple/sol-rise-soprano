@@ -13,8 +13,12 @@ export const homeHeroSectionSchema = z.object({
   secondaryCtaHref: z.string().optional(),
 })
 
+const sectionSurfaceSchema = z.enum(['soft', 'bright']).optional()
+
 export const homeAboutTeaserSectionSchema = z.object({
   type: z.literal('about_teaser'),
+  /** `soft` = --section-background-color (default). `bright` = near-white for long copy. */
+  surface: sectionSurfaceSchema,
   eyebrow: z.string().optional(),
   aboutTitle: z.string(),
   aboutText: z.string(),
@@ -32,6 +36,7 @@ export const homeMediaGridSectionSchema = z.object({
 
 export const homeFeatureSplitSectionSchema = z.object({
   type: z.literal('feature_split'),
+  surface: sectionSurfaceSchema,
   eyebrow: z.string(),
   featureTitle: z.string(),
   featureText: z.string(),

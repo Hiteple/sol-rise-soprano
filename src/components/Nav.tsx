@@ -15,6 +15,8 @@ export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const onHeroHome = pathname === '/' && !scrolled
+  /** Wine bar everywhere except over the home hero before scroll */
+  const useChrome = scrolled || pathname !== '/'
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
@@ -25,7 +27,7 @@ export function Nav() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'nav-scrolled' : `bg-transparent${onHeroHome ? ' nav-hero' : ''}`
+        useChrome ? 'nav-chrome' : `bg-transparent${onHeroHome ? ' nav-hero' : ''}`
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -35,10 +37,14 @@ export function Nav() {
             <span
               className="font-display text-xl tracking-widest"
               style={{
-                color: onHeroHome ? 'var(--accent-pale-color)' : 'var(--accent-color)',
+                color: useChrome
+                  ? 'var(--chrome-accent)'
+                  : onHeroHome
+                    ? 'var(--accent-pale-color)'
+                    : 'var(--accent-color)',
                 letterSpacing: '0.2em',
                 textShadow: onHeroHome
-                  ? '0 1px 18px rgba(42, 36, 34, 0.45)'
+                  ? '0 1px 18px rgba(16, 43, 31, 0.5)'
                   : undefined,
               }}
             >
@@ -47,8 +53,12 @@ export function Nav() {
             <span
               className="font-display text-xs tracking-[0.35em] uppercase"
               style={{
-                color: onHeroHome ? 'var(--nav-overlay-text-muted-color)' : 'var(--muted-text-color)',
-                textShadow: onHeroHome ? '0 1px 14px rgba(42, 36, 34, 0.4)' : undefined,
+                color: useChrome
+                  ? 'var(--chrome-text-muted)'
+                  : onHeroHome
+                    ? 'var(--nav-overlay-text-muted-color)'
+                    : 'var(--muted-text-color)',
+                textShadow: onHeroHome ? '0 1px 14px rgba(16, 43, 31, 0.45)' : undefined,
               }}
             >
               Soprano
@@ -64,7 +74,11 @@ export function Nav() {
                 className="gold-link"
                 activeProps={{
                   style: {
-                    color: onHeroHome ? 'var(--accent-pale-color)' : 'var(--accent-soft-color)',
+                    color: useChrome
+                      ? 'var(--chrome-text)'
+                      : onHeroHome
+                        ? 'var(--accent-pale-color)'
+                        : 'var(--accent-soft-color)',
                   },
                 }}
               >
@@ -79,9 +93,13 @@ export function Nav() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
             style={{
-              color: onHeroHome ? 'var(--nav-overlay-text-color)' : 'var(--body-color)',
+              color: useChrome
+                ? 'var(--chrome-text)'
+                : onHeroHome
+                  ? 'var(--nav-overlay-text-color)'
+                  : 'var(--body-color)',
               filter: onHeroHome
-                ? 'drop-shadow(0 1px 10px rgba(42,36,34,0.5))'
+                ? 'drop-shadow(0 1px 10px rgba(16,43,31,0.55))'
                 : undefined,
             }}
           >
@@ -95,8 +113,10 @@ export function Nav() {
         <div
           className="md:hidden px-6 pb-8 pt-4 flex flex-col gap-6 border-t"
           style={{
-            background: 'color-mix(in srgb, var(--section-background-color) 97%, white)',
-            borderColor: 'color-mix(in srgb, var(--accent-color) 15%, transparent)',
+            background: useChrome
+              ? 'color-mix(in srgb, var(--chrome-bg) 96%, black)'
+              : 'color-mix(in srgb, var(--section-background-color) 97%, white)',
+            borderColor: useChrome ? 'var(--chrome-border)' : 'color-mix(in srgb, var(--accent-color) 15%, transparent)',
           }}
         >
           {navLinks.map((link) => (
@@ -104,7 +124,7 @@ export function Nav() {
               key={link.to}
               to={link.to}
               className="font-display text-2xl italic"
-              style={{ color: 'var(--body-color)' }}
+              style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
               onClick={() => setMenuOpen(false)}
             >
               {link.label}

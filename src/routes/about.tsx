@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { allAboutPages, allHomeSections } from 'content-collections'
+import { allAboutPages, allHomes } from 'content-collections'
 
 export const Route = createFileRoute('/about')({
   component: AboutPage,
@@ -12,9 +12,8 @@ function netlifyImg(url: string, w: number, h?: number, fit = 'cover') {
 }
 
 function aboutTeaserImageFromHome() {
-  const layout = allHomeSections[0]
-  const block = layout?.sections.find((s) => s.type === 'about_teaser')
-  return block?.type === 'about_teaser' ? block.aboutImage : undefined
+  const home = allHomes[0]
+  return home?.aboutImage
 }
 
 function AboutPage() {

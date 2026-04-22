@@ -115,7 +115,7 @@ function GalleryPage() {
                     className="absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
                       background:
-                        'linear-gradient(to top, color-mix(in srgb, #2a2422 82%, transparent) 0%, transparent 60%)',
+                        'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 78%, transparent) 0%, transparent 60%)',
                     }}
                   />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -139,7 +139,7 @@ function GalleryPage() {
                     className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-5"
                     style={{
                       background:
-                        'linear-gradient(to top, color-mix(in srgb, #2a2422 82%, transparent) 0%, transparent 60%)',
+                        'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 78%, transparent) 0%, transparent 60%)',
                     }}
                   >
                     <div>

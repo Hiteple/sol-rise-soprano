@@ -18,27 +18,26 @@ export function Footer({
     <footer
       className="border-t"
       style={{
-        background: 'var(--section-background-color)',
-        borderColor: 'color-mix(in srgb, var(--accent-color) 18%, transparent)',
+        background: 'var(--chrome-bg)',
+        borderColor: 'var(--chrome-border)',
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-          {/* Brand */}
           <div>
             <div
               className="font-display text-3xl mb-3"
-              style={{ color: 'var(--accent-color)' }}
+              style={{ color: 'var(--chrome-accent)' }}
             >
               Sol Risé
               <br />
-              <span className="italic" style={{ color: 'var(--body-color)' }}>
+              <span className="italic" style={{ color: 'var(--chrome-text)' }}>
                 Soprano
               </span>
             </div>
             <p
               className="text-sm leading-relaxed mt-4"
-              style={{ color: 'var(--subtle-text-color)' }}
+              style={{ color: 'var(--chrome-text-muted)' }}
             >
               Soprano · Stage Artist
               <br />
@@ -46,11 +45,10 @@ export function Footer({
             </p>
           </div>
 
-          {/* Navigation */}
           <div>
             <h4
               className="text-xs uppercase tracking-widest mb-6 font-body font-semibold"
-              style={{ color: 'var(--accent-color)' }}
+              style={{ color: 'var(--chrome-accent)' }}
             >
               Navigate
             </h4>
@@ -65,13 +63,13 @@ export function Footer({
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="text-sm transition-colors duration-200 hover:opacity-100 font-body"
-                  style={{ color: 'var(--subtle-text-color)' }}
+                  className="text-sm transition-colors duration-200 font-body"
+                  style={{ color: 'var(--chrome-text-muted)' }}
                   onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = 'var(--body-color)')
+                    (e.currentTarget.style.color = 'var(--chrome-text)')
                   }
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = 'var(--subtle-text-color)')
+                    (e.currentTarget.style.color = 'var(--chrome-text-muted)')
                   }
                 >
                   {link.label}
@@ -80,18 +78,17 @@ export function Footer({
             </nav>
           </div>
 
-          {/* Contact & Social */}
           <div>
             <h4
               className="text-xs uppercase tracking-widest mb-6 font-body font-semibold"
-              style={{ color: 'var(--accent-color)' }}
+              style={{ color: 'var(--chrome-accent)' }}
             >
               Connect
             </h4>
             <a
               href={`mailto:${email}`}
               className="flex items-center gap-2 text-sm mb-6 transition-colors hover:opacity-90"
-              style={{ color: 'var(--subtle-text-color)' }}
+              style={{ color: 'var(--chrome-text-muted)' }}
             >
               <Mail size={14} />
               {email}
@@ -104,17 +101,16 @@ export function Footer({
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
-                  borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
-                  color: 'var(--subtle-text-color)',
+                  borderColor: 'var(--chrome-border)',
+                  color: 'var(--chrome-text-muted)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--accent-color)'
-                  e.currentTarget.style.color = 'var(--accent-color)'
+                  e.currentTarget.style.borderColor = 'var(--chrome-accent)'
+                  e.currentTarget.style.color = 'var(--chrome-accent)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor =
-                    'color-mix(in srgb, var(--accent-color) 32%, transparent)'
-                  e.currentTarget.style.color = 'var(--subtle-text-color)'
+                  e.currentTarget.style.borderColor = 'var(--chrome-border)'
+                  e.currentTarget.style.color = 'var(--chrome-text-muted)'
                 }}
               >
                 <Instagram size={15} />
@@ -126,17 +122,16 @@ export function Footer({
                 aria-label="YouTube"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
-                  borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
-                  color: 'var(--subtle-text-color)',
+                  borderColor: 'var(--chrome-border)',
+                  color: 'var(--chrome-text-muted)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--accent-color)'
-                  e.currentTarget.style.color = 'var(--accent-color)'
+                  e.currentTarget.style.borderColor = 'var(--chrome-accent)'
+                  e.currentTarget.style.color = 'var(--chrome-accent)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor =
-                    'color-mix(in srgb, var(--accent-color) 32%, transparent)'
-                  e.currentTarget.style.color = 'var(--subtle-text-color)'
+                  e.currentTarget.style.borderColor = 'var(--chrome-border)'
+                  e.currentTarget.style.color = 'var(--chrome-text-muted)'
                 }}
               >
                 <Youtube size={15} />
@@ -148,17 +143,16 @@ export function Footer({
                 aria-label="Facebook"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
-                  borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
-                  color: 'var(--subtle-text-color)',
+                  borderColor: 'var(--chrome-border)',
+                  color: 'var(--chrome-text-muted)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--accent-color)'
-                  e.currentTarget.style.color = 'var(--accent-color)'
+                  e.currentTarget.style.borderColor = 'var(--chrome-accent)'
+                  e.currentTarget.style.color = 'var(--chrome-accent)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor =
-                    'color-mix(in srgb, var(--accent-color) 32%, transparent)'
-                  e.currentTarget.style.color = 'var(--subtle-text-color)'
+                  e.currentTarget.style.borderColor = 'var(--chrome-border)'
+                  e.currentTarget.style.color = 'var(--chrome-text-muted)'
                 }}
               >
                 <Facebook size={15} />
@@ -167,17 +161,16 @@ export function Footer({
           </div>
         </div>
 
-        {/* Bottom line */}
         <div
           className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4"
-          style={{ borderColor: 'color-mix(in srgb, var(--accent-color) 12%, transparent)' }}
+          style={{ borderColor: 'var(--chrome-border)' }}
         >
-          <p className="text-xs" style={{ color: 'var(--subtle-text-color)' }}>
+          <p className="text-xs" style={{ color: 'var(--chrome-text-muted)' }}>
             © {new Date().getFullYear()} Isabella Cavalcanti. All rights reserved.
           </p>
           <p
             className="text-xs font-display italic"
-            style={{ color: 'color-mix(in srgb, var(--accent-color) 48%, transparent)' }}
+            style={{ color: 'color-mix(in srgb, var(--chrome-accent) 85%, var(--chrome-text) 15%)' }}
           >
             La musica è la lingua dell'anima
           </p>

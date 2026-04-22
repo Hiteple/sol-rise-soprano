@@ -1,9 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { allHomes, allHomeSections, allMediaItems } from 'content-collections'
+import { allHomes, allMediaItems } from 'content-collections'
 import { X } from 'lucide-react'
 
-import { HomeSectionRenderer } from '@/sections/HomeSectionRenderer'
+import { AboutTeaserSection } from '@/sections/AboutTeaserSection'
+import { HeroSection } from '@/sections/HeroSection'
+import { MediaGridSection } from '@/sections/MediaGridSection'
+import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
+import { SplitSection } from '@/sections/SplitSection'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -11,27 +15,68 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   const site = allHomes[0]
-  const layout = allHomeSections[0]
   const mediaItems = [...allMediaItems].sort(
     (a, b) => (a.order ?? 0) - (b.order ?? 0),
   )
   const [filter, setFilter] = useState<'all' | 'video' | 'image'>('all')
   const [activeVideo, setActiveVideo] = useState<string | null>(null)
 
-  if (!site || !layout) return null
+  if (!site) return null
 
   return (
-    <div style={{ background: 'var(--page-background-color)' }}>
-      {layout.sections.map((section, index) => (
-        <HomeSectionRenderer
-          key={`${section.type}-${index}`}
-          section={section}
-          mediaItems={mediaItems}
-          filter={filter}
-          setFilter={setFilter}
-          onOpenVideo={setActiveVideo}
-        />
-      ))}
+    <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id="content/home/data.md">
+      <HeroSection
+        section={{
+          heroTitle: site.heroTitle,
+          heroSubtitle: site.heroSubtitle,
+          heroTagline: site.heroTagline,
+          heroImage: site.heroImage,
+          heroImageAlt: site.heroImageAlt,
+          primaryCtaLabel: site.primaryCtaLabel,
+          primaryCtaHref: site.primaryCtaHref,
+          secondaryCtaLabel: site.secondaryCtaLabel,
+          secondaryCtaHref: site.secondaryCtaHref,
+        }}
+      />
+      <AboutTeaserSection
+        section={{
+          surface: site.aboutSurface,
+          eyebrow: site.aboutEyebrow,
+          aboutTitle: site.aboutTitle,
+          aboutText: site.aboutText,
+          aboutImage: site.aboutImage,
+          aboutImageAlt: site.aboutImageAlt,
+          aboutLinkText: site.aboutLinkText,
+          aboutHref: site.aboutHref,
+        }}
+      />
+      <MediaGridSection
+        section={{ eyebrow: site.mediaEyebrow, title: site.mediaTitle }}
+        mediaItems={mediaItems}
+        filter={filter}
+        onFilterChange={setFilter}
+        onOpenVideo={setActiveVideo}
+      />
+      <SplitSection
+        section={{
+          surface: site.featureSurface,
+          eyebrow: site.featureEyebrow,
+          featureTitle: site.featureTitle,
+          featureText: site.featureText,
+          featureImage: site.featureImage,
+          featureImageAlt: site.featureImageAlt,
+          ctaLabel: site.featureCtaLabel,
+          ctaHref: site.featureCtaHref,
+        }}
+      />
+      <QuoteBannerSection
+        section={{
+          quoteText: site.quoteText,
+          quoteAuthor: site.quoteAuthor,
+          quoteImage: site.quoteImage,
+          quoteImageAlt: site.quoteImageAlt,
+        }}
+      />
 
       {activeVideo && (
         <div

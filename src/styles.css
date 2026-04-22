@@ -5,34 +5,54 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Palette (inspo: Rose · Pine · Wine · Pink) */
+  --palette-rose: #bd7880;
+  --palette-pine: #102b1f;
+  --palette-wine: #4d0011;
+  --palette-pink: #ffd9d9;
+
   /* Light theme — semantic color tokens */
+  --page-background-color: var(--palette-pink);
+  --section-background-color: color-mix(in srgb, var(--palette-pink) 72%, white 28%);
+  /** Optional “paper” band for text-heavy blocks (`aboutSurface/featureSurface: bright` in home page data) */
+  --section-surface-bright: color-mix(in srgb, white 96%, var(--palette-pink) 4%);
 
-  --page-background-color: #faf7f3;
-  --section-background-color: #f3e8e4;
+  --heading-color: var(--palette-pine);
+  --body-color: var(--palette-pine);
+  --muted-text-color: color-mix(in srgb, var(--palette-pine) 78%, var(--palette-rose) 22%);
+  --subtle-text-color: color-mix(in srgb, var(--palette-pine) 62%, #5c4c50 38%);
 
-  /* Same hue today; split later if headings should diverge from body copy */
-  --heading-color: #3a3431;
-  --body-color: #3a3431;
-  --muted-text-color: #6f6560;
-  --subtle-text-color: #6d6360;
+  --accent-color: var(--palette-rose);
+  --accent-soft-color: color-mix(in srgb, var(--palette-rose) 78%, white 22%);
+  --accent-pale-color: color-mix(in srgb, var(--palette-pink) 88%, white 12%);
+  --accent-blush-color: color-mix(in srgb, var(--palette-rose) 55%, var(--palette-wine) 45%);
 
-  --accent-color: #9c6d66;
-  --accent-soft-color: #b88982;
-  --accent-pale-color: #ead8d3;
-  --accent-blush-color: #c9a099;
+  --media-caption-text-color: var(--palette-pink);
+  --media-caption-text-muted-color: color-mix(in srgb, var(--palette-pink) 72%, transparent);
 
-  --media-caption-text-color: #faf7f3;
-  --media-caption-text-muted-color: rgba(250, 247, 243, 0.78);
+  /* Hero overlay: soft pink on imagery (reads with wine/pine brand) */
+  --nav-overlay-text-color: var(--palette-pink);
+  --nav-overlay-text-muted-color: color-mix(in srgb, var(--palette-pink) 78%, transparent);
 
-  --nav-overlay-text-color: #faf7f3;
-  --nav-overlay-text-muted-color: rgba(250, 247, 243, 0.82);
+  /* Text on rose CTAs / pills */
+  --on-accent-text-color: var(--palette-pine);
 
-  --on-accent-text-color: #fdf9f7;
+  --pill-track-background-color: color-mix(in srgb, var(--palette-pink) 58%, white 42%);
+  /** Media grid filter: selected pill (rose bg) — pure white label for contrast */
+  --media-filter-tab-active-text-color: #ffffff;
 
-  --pill-track-background-color: #ebe0db;
+  --border-color: color-mix(in srgb, var(--palette-rose) 22%, var(--palette-pink) 78%);
+  --input-border-color: color-mix(in srgb, var(--palette-rose) 32%, var(--palette-pink) 68%);
 
-  --border-color: #e3d5cf;
-  --input-border-color: #dccfc8;
+  /* Wine chrome — header (bar) & footer */
+  --chrome-bg: var(--palette-wine);
+  --chrome-text: var(--palette-pink);
+  --chrome-text-muted: color-mix(in srgb, var(--palette-pink) 72%, transparent);
+  --chrome-accent: var(--palette-rose);
+  --chrome-border: color-mix(in srgb, var(--palette-rose) 35%, transparent);
+
+  /* Fluid heading scale */
+  --h1-fluid-size: clamp(3.25rem, 8vw, 5.25rem); /* max = 84px */
 
   --background: var(--page-background-color);
   --foreground: var(--body-color);
@@ -55,28 +75,11 @@
 }
 
 /*
- * Dark theme — reference only (unused). If you add `.dark` / `[data-theme=dark]`,
- * point the semantic tokens above at dark-friendly values (examples below).
+ * Dark theme — reference only (unused). Re-map semantic tokens if you add `.dark`.
  *
- * Rough mapping:
- *   --page-background-color, --section-background-color ← deep browns / blacks
- *   --heading-color, --body-color, --muted-text-color ← light warm grays
- *   --accent-color (+ soft / pale) ← gold / candlelight accents
- *   --pill-track-background-color ← charcoal rails
- *   --border-color, --input-border-color ← low-contrast borders on dark
- *   --media-caption-text-color, --nav-overlay-text-color ← near-white for overlays
- *
- * Former palette (hex) for comparison:
- * --obsidian: #0e0c0b;
- * --obsidian-soft: #1a1613;
- * --ivory: #f5f0e8;
- * --ivory-dim: #cfc8bc;
- * --gold: #b8975a;
- * --gold-light: #d4b47a;
- * --gold-pale: #e8d9bb;
- * --blush: #c4897a;
- * --charcoal: #2e2925;
- * --warm-gray: #7a6e68;
+ * Current light palette (hex):
+ *   --palette-rose #bd7880  ·  --palette-pine #102b1f
+ *   --palette-wine #4d0011  ·  --palette-pink #ffd9d9
  */
 
 @theme inline {
@@ -215,7 +218,7 @@
   width: 100%;
 }
 
-/* Nav over hero: light links on variable photo background */
+/* Nav over hero: light pink links on variable photo background */
 .nav-hero .gold-link {
   color: var(--nav-overlay-text-color);
 }
@@ -223,10 +226,29 @@
   background: var(--nav-overlay-text-color);
 }
 .nav-hero .gold-link:hover {
-  color: var(--accent-pale-color);
+  color: var(--accent-soft-color);
 }
 .nav-hero .gold-link:hover::after {
-  background: var(--accent-pale-color);
+  background: var(--accent-soft-color);
+}
+
+/* Wine bar — inner pages & home when scrolled */
+.nav-chrome {
+  background: var(--chrome-bg) !important;
+  backdrop-filter: none;
+  border-bottom: 1px solid var(--chrome-border);
+}
+.nav-chrome .gold-link {
+  color: color-mix(in srgb, var(--chrome-text) 92%, white);
+}
+.nav-chrome .gold-link::after {
+  background: var(--chrome-accent);
+}
+.nav-chrome .gold-link:hover {
+  color: var(--chrome-accent);
+}
+.nav-chrome .gold-link:hover::after {
+  background: var(--chrome-accent);
 }
 
 /* Image hover zoom */
@@ -240,13 +262,6 @@
   transform: scale(1.05);
 }
 
-/* Nav scroll transition */
-.nav-scrolled {
-  background: color-mix(in srgb, var(--page-background-color) 92%, transparent) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid color-mix(in srgb, var(--accent-color) 18%, transparent);
-}
-
 /* Play button circle */
 .play-btn {
   width: 56px;
@@ -256,7 +271,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, #2a2422 45%, transparent);
+  background: color-mix(in srgb, var(--palette-pine) 55%, transparent);
   backdrop-filter: blur(4px);
   transition: all 0.3s ease;
 }
@@ -270,7 +285,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: color-mix(in srgb, #2c2624 88%, transparent);
+  background: color-mix(in srgb, var(--palette-wine) 88%, var(--palette-pine) 12%);
   z-index: 1000;
   display: flex;
   align-items: center;

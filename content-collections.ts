@@ -1,7 +1,6 @@
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { z } from 'zod'
 
-import { homeSectionSchema } from './schemas/home-sections'
 import {
   aboutPageSchema,
   contactPageSchema,
@@ -30,21 +29,41 @@ const home = defineCollection({
   include: 'data.md',
   schema: z.object({
     type: z.literal('HomePage'),
+    heroTitle: z.string(),
+    heroSubtitle: z.string(),
+    heroTagline: z.string(),
+    heroImage: z.string(),
+    heroImageAlt: z.string(),
+    primaryCtaLabel: z.string().optional(),
+    primaryCtaHref: z.string().optional(),
+    secondaryCtaLabel: z.string().optional(),
+    secondaryCtaHref: z.string().optional(),
+    aboutSurface: z.enum(['soft', 'bright']).optional(),
+    aboutEyebrow: z.string().optional(),
+    aboutTitle: z.string(),
+    aboutText: z.string(),
+    aboutImage: z.string(),
+    aboutImageAlt: z.string(),
+    aboutLinkText: z.string(),
+    aboutHref: z.string().optional(),
+    mediaEyebrow: z.string(),
+    mediaTitle: z.string(),
+    featureSurface: z.enum(['soft', 'bright']).optional(),
+    featureEyebrow: z.string(),
+    featureTitle: z.string(),
+    featureText: z.string(),
+    featureImage: z.string(),
+    featureImageAlt: z.string(),
+    featureCtaLabel: z.string().optional(),
+    featureCtaHref: z.string().optional(),
+    quoteText: z.string(),
+    quoteAuthor: z.string(),
+    quoteImage: z.string(),
+    quoteImageAlt: z.string().optional(),
     instagramUrl: z.string(),
     youtubeUrl: z.string(),
     facebookUrl: z.string(),
     email: z.string(),
-    content: z.string(),
-  }),
-})
-
-const homeSections = defineCollection({
-  name: 'homeSections',
-  directory: 'content/home',
-  include: 'sections.md',
-  schema: z.object({
-    type: z.literal('HomeSections'),
-    sections: z.array(homeSectionSchema),
     content: z.string(),
   }),
 })
@@ -126,7 +145,6 @@ export default defineConfig({
   collections: [
     education,
     home,
-    homeSections,
     gallery,
     mediaItems,
     productions,
