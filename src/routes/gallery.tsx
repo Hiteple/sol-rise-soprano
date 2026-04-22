@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { allGalleries } from 'content-collections'
+import { allGalleries, allGalleryPages } from 'content-collections'
 import { X } from 'lucide-react'
 
 export const Route = createFileRoute('/gallery')({
@@ -13,11 +13,13 @@ function netlifyImg(url: string, w: number, h?: number, fit = 'cover') {
   return `/.netlify/images?${params.toString()}`
 }
 
-const categories = ['All', 'Performance', 'Behind the Scenes']
-
 function GalleryPage() {
+  const landing = allGalleryPages[0]
+  const categories =
+    landing?.filterCategories?.length ? landing.filterCategories : ['All', 'Performance', 'Behind the Scenes']
+
   const items = [...allGalleries].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-  const [activeCategory, setActiveCategory] = useState('All')
+  const [activeCategory, setActiveCategory] = useState(categories[0] ?? 'All')
   const [lightboxImg, setLightboxImg] = useState<{
     src: string
     alt: string
@@ -30,34 +32,39 @@ function GalleryPage() {
 
   return (
     <div style={{ background: 'var(--page-background-color)' }}>
-      {/* Page Header */}
       <section
         className="pt-40 pb-16 lg:pt-52 lg:pb-20"
         style={{ background: 'var(--section-background-color)' }}
+        data-sb-object-id="content/gallery-landing/page.md"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
             style={{ color: 'var(--accent-color)' }}
+            data-sb-field-path="heroEyebrow"
           >
-            Photography
+            {landing?.heroEyebrow ?? 'Photography'}
           </p>
           <h1
             className="font-display italic leading-none"
             style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'var(--heading-color)' }}
+            data-sb-field-path="heroTitle"
           >
-            Gallery
+            {landing?.heroTitle ?? 'Gallery'}
           </h1>
         </div>
       </section>
 
-      {/* Filter */}
       <section className="py-10" style={{ background: 'var(--page-background-color)' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex gap-1 p-1 w-fit" style={{ background: 'var(--pill-track-background-color)' }}>
-            {categories.map((cat) => (
+          <div
+            className="flex gap-1 p-1 w-fit"
+            style={{ background: 'var(--pill-track-background-color)' }}
+          >
+            {categories.map((cat, i) => (
               <button
-                key={cat}
+                key={`${cat}-${i}`}
+                type="button"
                 onClick={() => setActiveCategory(cat)}
                 className="px-6 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300"
                 style={
@@ -65,6 +72,7 @@ function GalleryPage() {
                     ? { background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }
                     : { color: 'var(--subtle-text-color)' }
                 }
+                data-sb-field-path={`filterCategories.${i}`}
               >
                 {cat}
               </button>
@@ -73,7 +81,6 @@ function GalleryPage() {
         </div>
       </section>
 
-      {/* Masonry-style Grid */}
       <section className="pb-24 lg:pb-36">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -128,7 +135,6 @@ function GalleryPage() {
                       </p>
                     )}
                   </div>
-                  {/* Hover overlay */}
                   <div
                     className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-5"
                     style={{
@@ -160,17 +166,14 @@ function GalleryPage() {
         </div>
       </section>
 
-      {/* Lightbox */}
       {lightboxImg && (
-        <div
-          className="modal-overlay"
-          onClick={() => setLightboxImg(null)}
-        >
+        <div className="modal-overlay" onClick={() => setLightboxImg(null)}>
           <div
             className="relative max-w-5xl w-full mx-4"
             onClick={(e) => e.stopPropagation()}
           >
             <button
+              type="button"
               className="absolute -top-12 right-0 p-2 transition-opacity hover:opacity-70"
               style={{ color: 'var(--media-caption-text-color)' }}
               onClick={() => setLightboxImg(null)}

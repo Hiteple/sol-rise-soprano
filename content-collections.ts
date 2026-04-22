@@ -1,6 +1,14 @@
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { z } from 'zod'
 
+import { homeSectionSchema } from './schemas/home-sections'
+import {
+  aboutPageSchema,
+  contactPageSchema,
+  galleryPageSchema,
+  productionsPageSchema,
+} from './schemas/site-pages'
+
 const education = defineCollection({
   name: 'education',
   directory: 'content/education',
@@ -19,29 +27,24 @@ const education = defineCollection({
 const home = defineCollection({
   name: 'home',
   directory: 'content/home',
-  include: '**/*.md',
+  include: 'data.md',
   schema: z.object({
-    heroTitle: z.string(),
-    heroSubtitle: z.string(),
-    heroTagline: z.string(),
-    heroImage: z.string(),
-    heroImageAlt: z.string(),
-    aboutTitle: z.string(),
-    aboutText: z.string(),
-    aboutImage: z.string(),
-    aboutImageAlt: z.string(),
-    aboutLinkText: z.string(),
-    featureTitle: z.string(),
-    featureText: z.string(),
-    featureImage: z.string(),
-    featureImageAlt: z.string(),
-    quoteText: z.string(),
-    quoteAuthor: z.string(),
-    quoteImage: z.string(),
+    type: z.literal('HomePage'),
     instagramUrl: z.string(),
     youtubeUrl: z.string(),
     facebookUrl: z.string(),
     email: z.string(),
+    content: z.string(),
+  }),
+})
+
+const homeSections = defineCollection({
+  name: 'homeSections',
+  directory: 'content/home',
+  include: 'sections.md',
+  schema: z.object({
+    type: z.literal('HomeSections'),
+    sections: z.array(homeSectionSchema),
     content: z.string(),
   }),
 })
@@ -91,6 +94,45 @@ const productions = defineCollection({
   }),
 })
 
+const aboutPage = defineCollection({
+  name: 'aboutPage',
+  directory: 'content/about',
+  include: 'page.md',
+  schema: aboutPageSchema,
+})
+
+const galleryPage = defineCollection({
+  name: 'galleryPage',
+  directory: 'content/gallery-landing',
+  include: 'page.md',
+  schema: galleryPageSchema,
+})
+
+const contactPage = defineCollection({
+  name: 'contactPage',
+  directory: 'content/contact',
+  include: 'page.md',
+  schema: contactPageSchema,
+})
+
+const productionsPage = defineCollection({
+  name: 'productionsPage',
+  directory: 'content/productions-landing',
+  include: 'page.md',
+  schema: productionsPageSchema,
+})
+
 export default defineConfig({
-  collections: [education, home, gallery, mediaItems, productions],
+  collections: [
+    education,
+    home,
+    homeSections,
+    gallery,
+    mediaItems,
+    productions,
+    aboutPage,
+    galleryPage,
+    contactPage,
+    productionsPage,
+  ],
 })

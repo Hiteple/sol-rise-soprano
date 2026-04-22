@@ -9,10 +9,10 @@ interface FooterProps {
 }
 
 export function Footer({
-  instagramUrl = 'https://instagram.com',
+  instagramUrl = 'https://www.instagram.com/solrisesoprano/',
   youtubeUrl = 'https://youtube.com',
   facebookUrl = 'https://facebook.com',
-  email = 'contact@isabellacavalcanti.com',
+  email = 'solrisesoprano@gmail.com',
 }: FooterProps) {
   return (
     <footer
@@ -30,10 +30,10 @@ export function Footer({
               className="font-display text-3xl mb-3"
               style={{ color: 'var(--accent-color)' }}
             >
-              Isabella
+              Sol Risé
               <br />
               <span className="italic" style={{ color: 'var(--body-color)' }}>
-                Cavalcanti
+                Soprano
               </span>
             </div>
             <p

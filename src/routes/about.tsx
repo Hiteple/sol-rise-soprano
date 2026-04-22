@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { allHomes } from 'content-collections'
+import { allAboutPages, allHomeSections } from 'content-collections'
 
 export const Route = createFileRoute('/about')({
   component: AboutPage,
@@ -11,58 +11,23 @@ function netlifyImg(url: string, w: number, h?: number, fit = 'cover') {
   return `/.netlify/images?${params.toString()}`
 }
 
-const highlights = [
-  { number: '20+', label: 'Years on Stage' },
-  { number: '47', label: 'Leading Roles' },
-  { number: '28', label: 'Opera Houses' },
-  { number: '3', label: 'Continents' },
-]
-
-const timeline = [
-  {
-    year: '2004',
-    title: 'Conservatory Debut',
-    description:
-      'Graduated with distinction from the Conservatorio di Musica di Milano, specialising in bel canto technique.',
-  },
-  {
-    year: '2007',
-    title: 'European Breakthrough',
-    description:
-      'First leading role at the Glyndebourne Festival Opera — Mimì in La Bohème — earning rave reviews from the international press.',
-  },
-  {
-    year: '2011',
-    title: 'Metropolitan Opera Debut',
-    description:
-      'A triumphant debut at the Metropolitan Opera in New York as Tosca, catapulting Isabella to global recognition.',
-  },
-  {
-    year: '2016',
-    title: 'La Scala Residency',
-    description:
-      'Appointed artist-in-residence at Teatro alla Scala — the first soprano in a generation to hold this prestigious honour.',
-  },
-  {
-    year: '2022',
-    title: 'Salzburg Festival',
-    description:
-      'The luminous Countess in Le Nozze di Figaro at the Salzburg Festival, conducted by the Vienna Philharmonic.',
-  },
-  {
-    year: '2024',
-    title: 'Teaching & Legacy',
-    description:
-      'Launched the Cavalcanti Voice Academy, an international programme for the next generation of opera singers.',
-  },
-]
+function aboutTeaserImageFromHome() {
+  const layout = allHomeSections[0]
+  const block = layout?.sections.find((s) => s.type === 'about_teaser')
+  return block?.type === 'about_teaser' ? block.aboutImage : undefined
+}
 
 function AboutPage() {
-  const page = allHomes[0]
+  const page = allAboutPages[0]
+  if (!page) return null
+
+  const heroSrc =
+    page.heroImage?.trim() ||
+    aboutTeaserImageFromHome() ||
+    'https://picsum.photos/seed/aboutpage/800/1000'
 
   return (
-    <div style={{ background: 'var(--page-background-color)' }}>
-      {/* ── PAGE HERO ─────────────────────────────────────────────────────── */}
+    <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id="content/about/page.md">
       <section
         className="pt-40 pb-24 lg:pt-52 lg:pb-36"
         style={{ background: 'var(--section-background-color)' }}
@@ -73,8 +38,9 @@ function AboutPage() {
               <p
                 className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-6"
                 style={{ color: 'var(--accent-color)' }}
+                data-sb-field-path="heroEyebrow"
               >
-                Biography
+                {page.heroEyebrow}
               </p>
               <h1
                 className="font-display italic leading-none mb-8"
@@ -83,35 +49,31 @@ function AboutPage() {
                   color: 'var(--heading-color)',
                 }}
               >
-                The Voice
+                <span data-sb-field-path="heroTitleLine1">{page.heroTitleLine1}</span>
                 <br />
-                <span style={{ color: 'var(--accent-color)' }}>Behind</span>
+                <span style={{ color: 'var(--accent-color)' }} data-sb-field-path="heroTitleAccent">
+                  {page.heroTitleAccent}
+                </span>
                 <br />
-                the Legend
+                <span data-sb-field-path="heroTitleLine2">{page.heroTitleLine2}</span>
               </h1>
               <div className="w-16 h-px mb-8" style={{ background: 'var(--accent-color)' }} />
               <p
                 className="font-body text-lg leading-relaxed"
                 style={{ color: 'var(--muted-text-color)' }}
+                data-sb-field-path="heroIntro"
               >
-                Born in Verona into a family of musicians, Isabella Cavalcanti
-                discovered her voice at age seven. What began as a childhood
-                fascination became a lifelong calling — and an extraordinary career
-                that has taken her to the world's most celebrated stages.
+                {page.heroIntro}
               </p>
             </div>
 
             <div className="relative img-zoom">
               <img
-                src={netlifyImg(
-                  page?.aboutImage ??
-                    'https://picsum.photos/seed/aboutpage/800/1000',
-                  800,
-                  1000,
-                )}
-                alt="Isabella Cavalcanti portrait"
+                src={netlifyImg(heroSrc, 800, 1000)}
+                alt={page.heroImageAlt}
                 className="w-full object-cover"
                 style={{ maxHeight: 680 }}
+                data-sb-field-path="heroImage"
               />
               <div
                 className="absolute bottom-6 left-6 right-6 p-6"
@@ -121,14 +83,19 @@ function AboutPage() {
                   borderLeft: '3px solid var(--accent-color)',
                 }}
               >
-                <p className="font-display italic text-xl" style={{ color: 'var(--heading-color)' }}>
-                  "Singing is not what I do — it is who I am."
+                <p
+                  className="font-display italic text-xl"
+                  style={{ color: 'var(--heading-color)' }}
+                  data-sb-field-path="heroQuote"
+                >
+                  {page.heroQuote}
                 </p>
                 <p
                   className="font-body text-xs mt-2 uppercase tracking-widest"
                   style={{ color: 'var(--accent-color)' }}
+                  data-sb-field-path="heroQuoteAttribution"
                 >
-                  — Isabella Cavalcanti
+                  {page.heroQuoteAttribution}
                 </p>
               </div>
             </div>
@@ -136,7 +103,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* ── STATS ─────────────────────────────────────────────────────────── */}
       <section
         className="py-20"
         style={{
@@ -146,8 +112,8 @@ function AboutPage() {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
-            {highlights.map((h) => (
-              <div key={h.number} className="text-center">
+            {page.highlights.map((h) => (
+              <div key={`${h.number}-${h.label}`} className="text-center">
                 <div
                   className="font-display text-5xl lg:text-6xl italic mb-2"
                   style={{ color: 'var(--accent-color)' }}
@@ -166,49 +132,28 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* ── FULL BIO ──────────────────────────────────────────────────────── */}
       <section className="py-24 lg:py-36">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-6"
             style={{ color: 'var(--accent-color)' }}
+            data-sb-field-path="fullBioEyebrow"
           >
-            Full Biography
+            {page.fullBioEyebrow}
           </p>
           <div
             className="font-body text-base leading-relaxed space-y-6"
             style={{ color: 'var(--muted-text-color)' }}
           >
-            <p>
-              Isabella Cavalcanti is widely regarded as one of the most compelling sopranos of
-              her generation. Born in Verona to a family of musicians — her father a conductor,
-              her mother a concert pianist — she was immersed in the operatic tradition from infancy.
-              By age twelve she had already performed in youth choir productions across northern Italy;
-              by twenty she had enrolled at the Conservatorio di Musica di Milano on a full scholarship.
-            </p>
-            <p>
-              Her technical mastery is matched only by her interpretive depth. Critics have frequently
-              noted the extraordinary emotional intelligence she brings to every role — an ability to
-              inhabit a character so completely that the boundary between singer and story dissolves
-              entirely. Whether portraying the tragic sacrifice of Violetta, the fierce passion of Tosca,
-              or the heartbroken dignity of the Countess, Isabella makes each heroine feel newly discovered.
-            </p>
-            <p>
-              Off stage, Isabella is a committed pedagogue. She has been a faculty member at leading
-              international masterclass programmes, and in 2024 she founded the Cavalcanti Voice Academy —
-              an initiative dedicated to nurturing exceptional emerging singers from underrepresented
-              backgrounds, offering intensive training, mentorship, and performance opportunities.
-            </p>
-            <p>
-              She resides between Milan and Vienna, and is a proud mother of two. In her rare moments
-              of leisure, she tends to an extensive garden, insisting that "growing things quietly is
-              the great counterbalance to the operatic life."
-            </p>
+            {page.fullBioParagraphs.map((para, i) => (
+              <p key={i} data-sb-field-path={`fullBioParagraphs.${i}`}>
+                {para}
+              </p>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── TIMELINE ─────────────────────────────────────────────────────── */}
       <section
         className="py-24 lg:py-36"
         style={{ background: 'var(--section-background-color)' }}
@@ -217,18 +162,19 @@ function AboutPage() {
           <p
             className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
             style={{ color: 'var(--accent-color)' }}
+            data-sb-field-path="timelineSectionEyebrow"
           >
-            Career Milestones
+            {page.timelineSectionEyebrow}
           </p>
           <h2
             className="font-display italic text-4xl lg:text-5xl mb-16"
             style={{ color: 'var(--heading-color)' }}
+            data-sb-field-path="timelineSectionTitle"
           >
-            A Life in Music
+            {page.timelineSectionTitle}
           </h2>
 
           <div className="relative">
-            {/* Vertical line */}
             <div
               className="absolute left-0 lg:left-1/2 top-0 bottom-0 w-px"
               style={{
@@ -237,14 +183,13 @@ function AboutPage() {
             />
 
             <div className="space-y-12">
-              {timeline.map((item, idx) => (
+              {page.timeline.map((item, idx) => (
                 <div
-                  key={item.year}
+                  key={item.year + item.title}
                   className={`relative flex items-start gap-8 lg:gap-16 ${
                     idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
                   }`}
                 >
-                  {/* Dot */}
                   <div
                     className="absolute left-0 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full mt-1 border-2"
                     style={{
@@ -256,6 +201,7 @@ function AboutPage() {
 
                   <div
                     className={`ml-8 lg:ml-0 lg:w-5/12 ${idx % 2 === 0 ? 'lg:text-right' : 'lg:pl-16'}`}
+                    data-sb-field-path={`timeline.${idx}`}
                   >
                     <span
                       className="font-display italic text-2xl"
@@ -283,34 +229,35 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────────── */}
       <section className="py-24 text-center">
         <div className="max-w-xl mx-auto px-6">
           <h2
             className="font-display italic text-4xl mb-6"
             style={{ color: 'var(--heading-color)' }}
           >
-            Ready to Experience
+            <span data-sb-field-path="ctaTitleLine1">{page.ctaTitleLine1}</span>
             <br />
-            the Voice Live?
+            <span data-sb-field-path="ctaTitleLine2">{page.ctaTitleLine2}</span>
           </h2>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              to="/productions"
+              to={page.ctaPrimaryHref}
               className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
               style={{ background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }}
+              data-sb-field-path="ctaPrimaryLabel"
             >
-              Upcoming Productions
+              {page.ctaPrimaryLabel}
             </Link>
             <Link
-              to="/contact"
+              to={page.ctaSecondaryHref}
               className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300"
               style={{
                 borderColor: 'color-mix(in srgb, var(--accent-color) 45%, transparent)',
                 color: 'var(--accent-color)',
               }}
+              data-sb-field-path="ctaSecondaryLabel"
             >
-              Get in Touch
+              {page.ctaSecondaryLabel}
             </Link>
           </div>
         </div>
