@@ -1,3 +1,4 @@
+import { resolveColorScheme, schemeForeground, schemeStatsBackground } from '@/lib/section-color-scheme'
 import type { AboutPage } from '../../schemas/site-pages'
 
 export type StatsRowSectionProps = {
@@ -5,21 +6,13 @@ export type StatsRowSectionProps = {
 }
 
 export function StatsRowSection({ page }: StatsRowSectionProps) {
-  const statsSurface = page.statsSurface ?? 'soft'
+  const statsSurface = resolveColorScheme(page.statsSurface)
   const statsIsWine = statsSurface === 'wine'
-  const statsBackground =
-    statsSurface === 'wine'
-      ? 'var(--palette-wine)'
-      : statsSurface === 'bright'
-        ? 'var(--section-surface-bright)'
-        : 'transparent'
-  const statsNumberColor = statsIsWine ? 'var(--media-caption-text-color)' : 'var(--accent-color)'
-  const statsLabelColor = statsIsWine
-    ? 'color-mix(in srgb, var(--media-caption-text-color) 84%, transparent)'
-    : 'var(--subtle-text-color)'
-  const statsDividerColor = statsIsWine
-    ? 'color-mix(in srgb, var(--media-caption-text-color) 28%, transparent)'
-    : 'color-mix(in srgb, var(--accent-color) 20%, transparent)'
+  const statsBackground = schemeStatsBackground(statsSurface)
+  const fg = schemeForeground(statsSurface)
+  const statsNumberColor = statsIsWine ? fg.heading : 'var(--accent-color)'
+  const statsLabelColor = statsIsWine ? fg.body : 'var(--subtle-text-color)'
+  const statsDividerColor = statsIsWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 20%, transparent)'
 
   return (
     <section

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { X } from 'lucide-react'
 
 import { netlifyImg } from '@/lib/netlify-image'
+import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import type { SectionColorScheme } from '../../schemas/color-scheme'
 
 export type GalleryGridItem = {
   _meta: { path: string }
@@ -14,9 +16,10 @@ export type GalleryGridItem = {
 export type TabItemsSectionProps = {
   categories: string[]
   items: GalleryGridItem[]
+  tabItemsColorScheme?: SectionColorScheme
 }
 
-export function TabItemsSection({ categories, items }: TabItemsSectionProps) {
+export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabItemsSectionProps) {
   const [activeCategory, setActiveCategory] = useState(categories[0] ?? 'All')
   const [lightboxImg, setLightboxImg] = useState<{
     src: string
@@ -28,9 +31,16 @@ export function TabItemsSection({ categories, items }: TabItemsSectionProps) {
       ? items
       : items.filter((i) => i.category === activeCategory)
 
+  const scheme = resolveColorScheme(tabItemsColorScheme)
+  const fg = schemeForeground(scheme)
+
   return (
     <>
-      <section className="py-10" style={{ background: 'var(--page-background-color)' }}>
+      <section
+        className="py-10"
+        style={{ background: schemePageBandBackground(scheme) }}
+        data-sb-field-path="tabItemsColorScheme"
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div
             className="flex gap-1 p-1 w-fit"
@@ -45,7 +55,7 @@ export function TabItemsSection({ categories, items }: TabItemsSectionProps) {
                 style={
                   activeCategory === cat
                     ? { background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }
-                    : { color: 'var(--subtle-text-color)' }
+                    : { color: scheme === 'wine' ? fg.body : 'var(--subtle-text-color)' }
                 }
                 data-sb-field-path={`filterCategories.${i}`}
               >
@@ -56,7 +66,10 @@ export function TabItemsSection({ categories, items }: TabItemsSectionProps) {
         </div>
       </section>
 
-      <section className="pb-24 lg:pb-36">
+      <section
+        className="pb-24 lg:pb-36"
+        style={{ background: schemePageBandBackground(scheme) }}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((item, idx) => {
@@ -104,7 +117,7 @@ export function TabItemsSection({ categories, items }: TabItemsSectionProps) {
                       {item.category && (
                         <p
                           className="font-body text-xs uppercase tracking-widest mt-1"
-                          style={{ color: 'var(--accent-color)' }}
+                          style={{ color: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)' }}
                         >
                           {item.category}
                         </p>

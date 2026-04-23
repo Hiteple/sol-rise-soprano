@@ -1,4 +1,6 @@
 import { netlifyImg } from '@/lib/netlify-image'
+import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
+import type { SectionColorScheme } from '../../schemas/color-scheme'
 
 export type ProductionCard = {
   _meta: { path: string }
@@ -13,11 +15,18 @@ export type ProductionCard = {
 
 export type ImageTextCardsSectionProps = {
   productions: ProductionCard[]
+  listColorScheme?: SectionColorScheme
 }
 
-export function ImageTextCardsSection({ productions }: ImageTextCardsSectionProps) {
+export function ImageTextCardsSection({
+  productions,
+  listColorScheme,
+}: ImageTextCardsSectionProps) {
+  const scheme = resolveColorScheme(listColorScheme)
+  const fg = schemeForeground(scheme)
+
   return (
-    <section className="py-24 lg:py-36">
+    <section className="py-24 lg:py-36" data-sb-field-path="productionsListColorScheme">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="space-y-2">
           {productions.map((production, idx) => (
@@ -42,12 +51,12 @@ export function ImageTextCardsSection({ productions }: ImageTextCardsSectionProp
                 className={`p-10 lg:p-16 flex flex-col justify-center ${
                   idx % 2 === 0 ? 'order-2' : 'order-2 lg:order-1'
                 }`}
-                style={{ background: 'var(--section-background-color)' }}
+                style={{ background: schemeSolidBackground(scheme) }}
               >
                 <div className="flex items-center gap-4 mb-6">
                   <span
                     className="font-display italic text-3xl"
-                    style={{ color: 'var(--accent-color)' }}
+                    style={{ color: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)' }}
                     data-sb-field-path="year"
                   >
                     {production.year}
@@ -55,14 +64,17 @@ export function ImageTextCardsSection({ productions }: ImageTextCardsSectionProp
                   <div
                     className="flex-1 h-px"
                     style={{
-                      background: 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
+                      background:
+                        scheme === 'wine'
+                          ? fg.divider
+                          : 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
                     }}
                   />
                 </div>
 
                 <h2
                   className="font-display italic text-3xl lg:text-4xl mb-3"
-                  style={{ color: 'var(--heading-color)' }}
+                  style={{ color: fg.heading }}
                   data-sb-field-path="title"
                 >
                   {production.title}
@@ -70,7 +82,7 @@ export function ImageTextCardsSection({ productions }: ImageTextCardsSectionProp
 
                 <p
                   className="font-body text-sm uppercase tracking-widest mb-2 font-semibold"
-                  style={{ color: 'var(--accent-color)' }}
+                  style={{ color: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)' }}
                   data-sb-field-path="role"
                 >
                   {production.role}
@@ -78,7 +90,7 @@ export function ImageTextCardsSection({ productions }: ImageTextCardsSectionProp
 
                 <p
                   className="font-body text-xs uppercase tracking-widest mb-6"
-                  style={{ color: 'var(--subtle-text-color)' }}
+                  style={{ color: scheme === 'wine' ? fg.body : 'var(--subtle-text-color)' }}
                   data-sb-field-path="venue"
                 >
                   {production.venue}
@@ -86,7 +98,7 @@ export function ImageTextCardsSection({ productions }: ImageTextCardsSectionProp
 
                 <p
                   className="font-body text-sm leading-relaxed mb-8"
-                  style={{ color: 'var(--muted-text-color)' }}
+                  style={{ color: fg.body }}
                   data-sb-field-path="description"
                 >
                   {production.description}
@@ -98,8 +110,11 @@ export function ImageTextCardsSection({ productions }: ImageTextCardsSectionProp
                       key={tag}
                       className="px-3 py-1 font-body text-xs uppercase tracking-widest border"
                       style={{
-                        borderColor: 'color-mix(in srgb, var(--accent-color) 26%, transparent)',
-                        color: 'var(--subtle-text-color)',
+                        borderColor:
+                          scheme === 'wine'
+                            ? fg.divider
+                            : 'color-mix(in srgb, var(--accent-color) 26%, transparent)',
+                        color: scheme === 'wine' ? fg.body : 'var(--subtle-text-color)',
                       }}
                     >
                       {tag}

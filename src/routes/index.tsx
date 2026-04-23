@@ -35,6 +35,7 @@ function HomePage() {
           primaryCtaHref: site.primaryCtaHref,
           secondaryCtaLabel: site.secondaryCtaLabel,
           secondaryCtaHref: site.secondaryCtaHref,
+          colorScheme: site.heroColorScheme,
         }}
       />
       <ImageTextSection
@@ -51,7 +52,11 @@ function HomePage() {
         }}
       />
       <MediaGridSection
-        section={{ eyebrow: site.mediaEyebrow, title: site.mediaTitle }}
+        section={{
+          eyebrow: site.mediaEyebrow,
+          title: site.mediaTitle,
+          colorScheme: site.mediaGridColorScheme,
+        }}
         mediaItems={mediaItems}
         filter={filter}
         onFilterChange={setFilter}
@@ -76,6 +81,7 @@ function HomePage() {
           quoteAuthor: site.quoteAuthor,
           quoteImage: site.quoteImage,
           quoteImageAlt: site.quoteImageAlt,
+          colorScheme: site.quoteBannerColorScheme,
         }}
       />
 

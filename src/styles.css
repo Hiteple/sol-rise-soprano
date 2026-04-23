@@ -35,7 +35,7 @@
   --nav-overlay-text-muted-color: color-mix(in srgb, var(--palette-pink) 78%, transparent);
 
   /* Text on rose CTAs / pills */
-  --on-accent-text-color: var(--palette-pine);
+  --on-accent-text-color: var(--palette-wine);
 
   --pill-track-background-color: color-mix(in srgb, var(--palette-pink) 58%, white 42%);
   /** Media grid filter: selected pill (rose bg) — pure white label for contrast */

@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
+import { schemeHeroImageOverlay } from '@/lib/section-color-scheme'
 import { netlifyImg } from '@/lib/netlify-image'
 import type { HomeHeroSection } from './types'
 
@@ -18,6 +19,7 @@ export function HeroSection({ section }: HeroSectionProps) {
     <section
       className="relative flex items-end pb-24 lg:pb-32"
       style={{ minHeight: '100svh' }}
+      data-sb-field-path="heroColorScheme"
     >
         <div className="absolute inset-0">
           <img
@@ -29,8 +31,7 @@ export function HeroSection({ section }: HeroSectionProps) {
           <div
             className="absolute inset-0"
             style={{
-              background:
-                'linear-gradient(to top, color-mix(in srgb, var(--page-background-color) 96%, transparent) 0%, color-mix(in srgb, var(--page-background-color) 58%, transparent) 42%, transparent 100%)',
+              background: schemeHeroImageOverlay(section.colorScheme),
             }}
           />
         </div>

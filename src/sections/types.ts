@@ -1,4 +1,6 @@
-export type HomeSurface = 'soft' | 'bright'
+import type { SectionColorScheme } from '../../schemas/color-scheme'
+
+export type HomeSurface = SectionColorScheme
 
 export type HomeHeroSection = {
   heroTitle: string
@@ -10,11 +12,12 @@ export type HomeHeroSection = {
   primaryCtaHref?: string
   secondaryCtaLabel?: string
   secondaryCtaHref?: string
+  colorScheme: SectionColorScheme
 }
 
 /** Shared shape for home “about” and “feature” blocks (see `ImageTextSection`). */
 export type HomeImageTextSection = {
-  surface?: HomeSurface
+  surface: SectionColorScheme
   eyebrow?: string
   title: string
   text: string
@@ -27,6 +30,7 @@ export type HomeImageTextSection = {
 export type HomeMediaSection = {
   eyebrow: string
   title: string
+  colorScheme: SectionColorScheme
 }
 
 export type HomeQuoteSection = {
@@ -34,6 +38,7 @@ export type HomeQuoteSection = {
   quoteAuthor: string
   quoteImage: string
   quoteImageAlt?: string
+  colorScheme: SectionColorScheme
 }
 
 export type MediaItem = {

@@ -1,6 +1,23 @@
 import { defineStackbitConfig } from '@stackbit/types'
 import { GitContentSource } from '@stackbit/cms-git'
 
+function colorSchemeEnumField(name: string, group?: string) {
+  return {
+    name,
+    type: 'enum' as const,
+    label: 'Color Scheme',
+    /** Non-required enums show a “None” option in the visual editor; clearing breaks our Zod pipeline. */
+    required: true,
+    options: [
+      { label: 'Soft', value: 'soft' },
+      { label: 'Bright', value: 'bright' },
+      { label: 'Wine', value: 'wine' },
+    ],
+    default: 'soft',
+    ...(group ? { group } : {}),
+  }
+}
+
 export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
   ssgName: 'custom',
@@ -29,6 +46,7 @@ export default defineStackbitConfig({
             { name: 'quoteBanner', label: 'Quote Banner' },
           ],
           fields: [
+            colorSchemeEnumField('heroColorScheme', 'hero'),
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'hero' },
             { name: 'heroSubtitle', type: 'string', label: 'Subtitle', group: 'hero' },
             { name: 'heroTagline', type: 'string', label: 'Eyebrow', group: 'hero' },
@@ -38,7 +56,7 @@ export default defineStackbitConfig({
             { name: 'primaryCtaHref', type: 'string', label: 'Primary CTA URL', group: 'hero' },
             { name: 'secondaryCtaLabel', type: 'string', label: 'Secondary CTA label', group: 'hero' },
             { name: 'secondaryCtaHref', type: 'string', label: 'Secondary CTA URL', group: 'hero' },
-            { name: 'aboutSurface', type: 'enum', label: 'Surface', options: ['soft', 'bright'], group: 'imageTextAbout' },
+            colorSchemeEnumField('aboutSurface', 'imageTextAbout'),
             { name: 'aboutEyebrow', type: 'string', label: 'Eyebrow', group: 'imageTextAbout' },
             { name: 'aboutTitle', type: 'string', label: 'Title', group: 'imageTextAbout' },
             { name: 'aboutText', type: 'text', label: 'Body', group: 'imageTextAbout' },
@@ -46,9 +64,10 @@ export default defineStackbitConfig({
             { name: 'aboutImageAlt', type: 'string', label: 'Image alt', group: 'imageTextAbout' },
             { name: 'aboutLinkText', type: 'string', label: 'Link text', group: 'imageTextAbout' },
             { name: 'aboutHref', type: 'string', label: 'Link URL', group: 'imageTextAbout' },
+            colorSchemeEnumField('mediaGridColorScheme', 'mediaGrid'),
             { name: 'mediaEyebrow', type: 'string', label: 'Eyebrow', group: 'mediaGrid' },
             { name: 'mediaTitle', type: 'string', label: 'Title', group: 'mediaGrid' },
-            { name: 'featureSurface', type: 'enum', label: 'Surface', options: ['soft', 'bright'], group: 'imageTextFeature' },
+            colorSchemeEnumField('featureSurface', 'imageTextFeature'),
             { name: 'featureEyebrow', type: 'string', label: 'Eyebrow', group: 'imageTextFeature' },
             { name: 'featureTitle', type: 'string', label: 'Title', group: 'imageTextFeature' },
             { name: 'featureText', type: 'text', label: 'Body', group: 'imageTextFeature' },
@@ -56,6 +75,7 @@ export default defineStackbitConfig({
             { name: 'featureImageAlt', type: 'string', label: 'Image alt', group: 'imageTextFeature' },
             { name: 'featureCtaLabel', type: 'string', label: 'CTA label', group: 'imageTextFeature' },
             { name: 'featureCtaHref', type: 'string', label: 'CTA URL', group: 'imageTextFeature' },
+            colorSchemeEnumField('quoteBannerColorScheme', 'quoteBanner'),
             { name: 'quoteText', type: 'text', label: 'Quote', group: 'quoteBanner' },
             { name: 'quoteAuthor', type: 'string', label: 'Author', group: 'quoteBanner' },
             { name: 'quoteImage', type: 'image', label: 'Background image', group: 'quoteBanner' },
@@ -79,6 +99,7 @@ export default defineStackbitConfig({
             { name: 'textButtons', label: 'Text + Buttons' },
           ],
           fields: [
+            colorSchemeEnumField('heroColorScheme', 'imageBigText'),
             { name: 'heroEyebrow', type: 'string', label: 'Eyebrow', group: 'imageBigText' },
             { name: 'heroTitleLine1', type: 'string', label: 'Title line 1', group: 'imageBigText' },
             { name: 'heroTitleAccent', type: 'string', label: 'Accent word', group: 'imageBigText' },
@@ -88,13 +109,16 @@ export default defineStackbitConfig({
             { name: 'heroImageAlt', type: 'string', label: 'Image alt', group: 'imageBigText' },
             { name: 'heroQuote', type: 'text', label: 'Quote', group: 'imageBigText' },
             { name: 'heroQuoteAttribution', type: 'string', label: 'Quote attribution', group: 'imageBigText' },
-            { name: 'statsSurface', type: 'enum', label: 'Surface', options: ['soft', 'bright', 'wine'], group: 'statsRow' },
+            colorSchemeEnumField('statsSurface', 'statsRow'),
             { name: 'highlights', type: 'list', label: 'Highlights', items: { type: 'object', fields: [{ name: 'number', type: 'string', label: 'Number' }, { name: 'label', type: 'string', label: 'Label' }] }, group: 'statsRow' },
+            colorSchemeEnumField('fullBioColorScheme', 'richtextContent'),
             { name: 'fullBioEyebrow', type: 'string', label: 'Eyebrow', group: 'richtextContent' },
             { name: 'fullBioParagraphs', type: 'list', label: 'Paragraphs', items: { type: 'text' }, group: 'richtextContent' },
+            colorSchemeEnumField('timelineColorScheme', 'timeline'),
             { name: 'timelineSectionEyebrow', type: 'string', label: 'Eyebrow', group: 'timeline' },
             { name: 'timelineSectionTitle', type: 'string', label: 'Heading', group: 'timeline' },
             { name: 'timeline', type: 'list', label: 'Milestones', items: { type: 'object', fields: [{ name: 'year', type: 'string', label: 'Year' }, { name: 'title', type: 'string', label: 'Title' }, { name: 'description', type: 'markdown', label: 'Body (Markdown)' }] }, group: 'timeline' },
+            colorSchemeEnumField('ctaColorScheme', 'textButtons'),
             { name: 'ctaTitleLine1', type: 'string', label: 'Title line 1', group: 'textButtons' },
             { name: 'ctaTitleLine2', type: 'string', label: 'Title line 2', group: 'textButtons' },
             { name: 'ctaPrimaryLabel', type: 'string', label: 'Primary button', group: 'textButtons' },
@@ -113,9 +137,11 @@ export default defineStackbitConfig({
             { name: 'imageTextCards', label: 'Image + Text Cards' },
           ],
           fields: [
+            colorSchemeEnumField('pageHeroColorScheme', 'pageHero'),
             { name: 'heroEyebrow', type: 'string', label: 'Eyebrow', group: 'pageHero' },
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'pageHero' },
             { name: 'heroIntro', type: 'text', label: 'Intro', group: 'pageHero' },
+            colorSchemeEnumField('productionsListColorScheme', 'imageTextCards'),
           ],
         },
         {
@@ -128,8 +154,10 @@ export default defineStackbitConfig({
             { name: 'tabItems', label: 'Tab Items' },
           ],
           fields: [
+            colorSchemeEnumField('pageHeroColorScheme', 'pageHero'),
             { name: 'heroEyebrow', type: 'string', label: 'Eyebrow', group: 'pageHero' },
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'pageHero' },
+            colorSchemeEnumField('tabItemsColorScheme', 'tabItems'),
             { name: 'filterCategories', type: 'list', label: 'Categories (first should be “All”)', items: { type: 'string' }, group: 'tabItems' },
           ],
         },
@@ -143,8 +171,10 @@ export default defineStackbitConfig({
             { name: 'contactForm', label: 'Contact Form' },
           ],
           fields: [
+            colorSchemeEnumField('pageHeroColorScheme', 'pageHero'),
             { name: 'heroEyebrow', type: 'string', label: 'Eyebrow', group: 'pageHero' },
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'pageHero' },
+            colorSchemeEnumField('contactFormColorScheme', 'contactForm'),
             { name: 'introHeading', type: 'string', label: 'Heading', group: 'contactForm' },
             { name: 'introBody', type: 'text', label: 'Body', group: 'contactForm' },
             { name: 'directEmailLabel', type: 'string', label: 'Email label', group: 'contactForm' },

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Instagram, Youtube, Facebook, Send, Check } from 'lucide-react'
 
+import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import type { ContactPage } from '../../schemas/site-pages'
 
 export type ContactFormSectionProps = {
@@ -10,6 +11,14 @@ export type ContactFormSectionProps = {
 export function ContactFormSection({ page }: ContactFormSectionProps) {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const scheme = resolveColorScheme(page?.contactFormColorScheme)
+  const fg = schemeForeground(scheme)
+  const isWine = scheme === 'wine'
+  const inputBorderRest = isWine
+    ? fg.divider
+    : 'color-mix(in srgb, var(--accent-color) 24%, transparent)'
+  const inputBorderFocus = isWine ? fg.eyebrow : 'var(--accent-color)'
 
   const socialLinks = [
     {
@@ -52,24 +61,28 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
   }
 
   return (
-    <section className="py-24 lg:py-36">
+    <section
+      className="py-24 lg:py-36"
+      style={{ background: schemePageBandBackground(scheme) }}
+      data-sb-field-path="contactFormColorScheme"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <div>
             <h2
               className="font-display italic text-3xl lg:text-4xl mb-6"
-              style={{ color: 'var(--heading-color)' }}
+              style={{ color: fg.heading }}
               data-sb-field-path="introHeading"
             >
               {page?.introHeading ?? "Let's Begin a Conversation"}
             </h2>
             <div
               className="w-12 h-px mb-8"
-              style={{ background: 'var(--accent-color)' }}
+              style={{ background: fg.divider }}
             />
             <p
               className="font-body text-base leading-relaxed mb-12"
-              style={{ color: 'var(--muted-text-color)' }}
+              style={{ color: fg.body }}
               data-sb-field-path="introBody"
             >
               {page?.introBody ??
@@ -79,7 +92,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
             <div className="mb-12">
               <p
                 className="text-xs uppercase tracking-widest font-body font-semibold mb-3"
-                style={{ color: 'var(--accent-color)' }}
+                style={{ color: fg.heading }}
                 data-sb-field-path="directEmailLabel"
               >
                 {page?.directEmailLabel ?? 'Direct Email'}
@@ -87,7 +100,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
               <a
                 href={`mailto:${page?.email ?? 'contact@isabellacavalcanti.com'}`}
                 className="font-display text-xl italic transition-opacity hover:opacity-70"
-                style={{ color: 'var(--heading-color)' }}
+                style={{ color: fg.heading }}
                 data-sb-field-path="email"
               >
                 {page?.email ?? 'contact@isabellacavalcanti.com'}
@@ -97,7 +110,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
             <div>
               <p
                 className="text-xs uppercase tracking-widest font-body font-semibold mb-6"
-                style={{ color: 'var(--accent-color)' }}
+                style={{ color: fg.heading }}
                 data-sb-field-path="socialChannelsLabel"
               >
                 {page?.socialChannelsLabel ?? 'Social Channels'}
@@ -114,8 +127,8 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     <div
                       className="w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:border-opacity-100"
                       style={{
-                        borderColor: 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
-                        color: 'var(--accent-color)',
+                        borderColor: isWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
+                        color: isWine ? fg.eyebrow : 'var(--accent-color)',
                       }}
                     >
                       <Icon size={16} />
@@ -123,13 +136,13 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     <div>
                       <p
                         className="font-body text-xs uppercase tracking-widest"
-                        style={{ color: 'var(--subtle-text-color)' }}
+                        style={{ color: isWine ? fg.body : 'var(--subtle-text-color)' }}
                       >
                         {label}
                       </p>
                       <p
                         className="font-body text-sm font-semibold"
-                        style={{ color: 'var(--body-color)' }}
+                        style={{ color: isWine ? fg.heading : 'var(--body-color)' }}
                         data-sb-field-path={
                           label === 'Instagram'
                             ? 'instagramHandle'
@@ -152,31 +165,39 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
               <div
                 className="h-full flex flex-col items-center justify-center text-center p-12 border"
                 style={{
-                  borderColor: 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
+                  borderColor: isWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
                 }}
               >
                 <div
                   className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-6"
-                  style={{ borderColor: 'var(--accent-color)', color: 'var(--accent-color)' }}
+                  style={{
+                    borderColor: isWine ? fg.eyebrow : 'var(--accent-color)',
+                    color: isWine ? fg.eyebrow : 'var(--accent-color)',
+                  }}
                 >
                   <Check size={28} />
                 </div>
                 <h3
                   className="font-display italic text-3xl mb-4"
-                  style={{ color: 'var(--heading-color)' }}
+                  style={{ color: fg.heading }}
                   data-sb-field-path="successTitle"
                 >
                   {page?.successTitle ?? 'Message Sent'}
                 </h3>
                 <p
                   className="font-body text-sm leading-relaxed mb-8"
-                  style={{ color: 'var(--muted-text-color)' }}
+                  style={{ color: fg.body }}
                   data-sb-field-path="successMessage"
                 >
                   {page?.successMessage ??
                     'Thank you for reaching out. Isabella or her team will respond within 3–5 business days.'}
                 </p>
-                <button type="button" onClick={() => setSubmitted(false)} className="gold-link">
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="gold-link"
+                  style={isWine ? { color: fg.heading } : undefined}
+                >
                   <span data-sb-field-path="successResetLabel">
                     {page?.successResetLabel ?? 'Send Another Message →'}
                   </span>
@@ -217,7 +238,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     <label
                       htmlFor={field.id}
                       className="block font-body text-xs uppercase tracking-widest font-semibold mb-2"
-                      style={{ color: 'var(--subtle-text-color)' }}
+                      style={{ color: isWine ? fg.body : 'var(--subtle-text-color)' }}
                     >
                       {field.label}
                     </label>
@@ -229,16 +250,15 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                       placeholder={field.placeholder}
                       className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border-b bg-transparent"
                       style={{
-                        borderColor: 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
-                        color: 'var(--body-color)',
+                        borderColor: inputBorderRest,
+                        color: isWine ? fg.heading : 'var(--body-color)',
                       }}
-                      onFocus={(e) =>
-                        (e.currentTarget.style.borderColor = 'var(--accent-color)')
-                      }
-                      onBlur={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'color-mix(in srgb, var(--accent-color) 24%, transparent)')
-                      }
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = inputBorderFocus
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = inputBorderRest
+                      }}
                     />
                   </div>
                 ))}
@@ -247,7 +267,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                   <label
                     htmlFor="message"
                     className="block font-body text-xs uppercase tracking-widest font-semibold mb-2"
-                    style={{ color: 'var(--subtle-text-color)' }}
+                    style={{ color: isWine ? fg.body : 'var(--subtle-text-color)' }}
                   >
                     Message
                   </label>
@@ -259,16 +279,15 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     placeholder="Please share the details of your enquiry..."
                     className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border resize-none bg-transparent"
                     style={{
-                      borderColor: 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
-                      color: 'var(--body-color)',
+                      borderColor: inputBorderRest,
+                      color: isWine ? fg.heading : 'var(--body-color)',
                     }}
-                    onFocus={(e) =>
-                      (e.currentTarget.style.borderColor = 'var(--accent-color)')
-                    }
-                    onBlur={(e) =>
-                      (e.currentTarget.style.borderColor =
-                        'color-mix(in srgb, var(--accent-color) 24%, transparent)')
-                    }
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = inputBorderFocus
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = inputBorderRest
+                    }}
                   />
                 </div>
 

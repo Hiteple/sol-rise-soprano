@@ -1,5 +1,6 @@
 import { marked } from 'marked'
 
+import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import type { AboutPage } from '../../schemas/site-pages'
 
 export type TimelineSectionProps = {
@@ -7,22 +8,26 @@ export type TimelineSectionProps = {
 }
 
 export function TimelineSection({ page }: TimelineSectionProps) {
+  const scheme = resolveColorScheme(page.timelineColorScheme)
+  const fg = schemeForeground(scheme)
+
   return (
     <section
       className="py-24 lg:py-36"
-      style={{ background: 'var(--section-background-color)' }}
+      style={{ background: schemeSolidBackground(scheme) }}
+      data-sb-field-path="timelineColorScheme"
     >
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         <p
           className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
-          style={{ color: 'var(--accent-color)' }}
+          style={{ color: fg.eyebrow }}
           data-sb-field-path="timelineSectionEyebrow"
         >
           {page.timelineSectionEyebrow}
         </p>
         <h2
           className="font-display italic text-4xl lg:text-5xl mb-16"
-          style={{ color: 'var(--heading-color)' }}
+          style={{ color: fg.heading }}
           data-sb-field-path="timelineSectionTitle"
         >
           {page.timelineSectionTitle}
@@ -32,7 +37,10 @@ export function TimelineSection({ page }: TimelineSectionProps) {
           <div
             className="absolute left-0 lg:left-1/2 top-0 bottom-0 w-px"
             style={{
-              background: 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
+              background:
+                scheme === 'wine'
+                  ? fg.divider
+                  : 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
             }}
           />
 
@@ -48,7 +56,7 @@ export function TimelineSection({ page }: TimelineSectionProps) {
                   className="absolute left-0 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full mt-1 border-2"
                   style={{
                     background: 'var(--page-background-color)',
-                    borderColor: 'var(--accent-color)',
+                    borderColor: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)',
                     zIndex: 1,
                   }}
                 />
@@ -59,19 +67,23 @@ export function TimelineSection({ page }: TimelineSectionProps) {
                 >
                   <span
                     className="font-display italic text-2xl"
-                    style={{ color: 'var(--accent-color)' }}
+                    style={{ color: fg.eyebrow }}
                   >
                     {item.year}
                   </span>
                   <h3
                     className="font-display text-xl mt-1 mb-3"
-                    style={{ color: 'var(--heading-color)' }}
+                    style={{ color: fg.heading }}
                   >
                     {item.title}
                   </h3>
                   <div
-                    className="timeline-markdown max-w-none font-body text-sm leading-relaxed [&_a]:text-[color:var(--accent-color)]"
-                    style={{ color: 'var(--muted-text-color)' }}
+                    className={`timeline-markdown max-w-none font-body text-sm leading-relaxed [&_a]:underline ${
+                      scheme === 'wine'
+                        ? '[&_a]:text-[color:var(--media-caption-text-color)]'
+                        : '[&_a]:text-[color:var(--accent-color)]'
+                    }`}
+                    style={{ color: fg.body }}
                     data-sb-field-path={`timeline.${idx}.description`}
                     dangerouslySetInnerHTML={{
                       __html: String(marked(item.description)),

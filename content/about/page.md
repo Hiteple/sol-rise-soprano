@@ -1,19 +1,15 @@
 ---
 type: AboutPage
-heroEyebrow: Biography
-heroTitleLine1: The Voice
-heroTitleAccent: Behind
-heroTitleLine2: the Legend
-heroIntro: >-
-  Born in Verona into a family of musicians, Isabella Cavalcanti discovered her
-  voice at age seven. What began as a childhood fascination became a lifelong
-  calling — and an extraordinary career that has taken her to the world's most
-  celebrated stages.
+heroEyebrow: ''
+heroTitleLine1: An Evolving
+heroTitleAccent: Artistic
+heroTitleLine2: Path
+heroIntro: "Born in Buenos Aires, Argentina, Sol Risé discovered her voice at the age of nine. What began as a childhood fascination evolved into a lifelong calling — shaping an artistic path\_focused on the operatic repertoire."
 heroImage: https://picsum.photos/seed/operaportr1/800/1060
 heroImageAlt: Isabella Cavalcanti portrait
 heroQuote: '"Singing is not what I do — it is who I am."'
 heroQuoteAttribution: — Sol Risé
-statsSurface: bright
+statsSurface: wine
 highlights:
   - number: 20+
     label: Years on Stage
@@ -114,12 +110,16 @@ timeline:
        <li>Chorus member in <em>Il Trovatore</em> with Valkyria Lírica (September)</li>
       </ul></div>
 
-ctaTitleLine1: Ready to Experience
-ctaTitleLine2: the Voice Live?
-ctaPrimaryLabel: Upcoming Productions
-ctaPrimaryHref: /productions
-ctaSecondaryLabel: Get in Touch
-ctaSecondaryHref: /contact
+ctaTitleLine1: Inquiries & Contact
+ctaTitleLine2: ''
+ctaPrimaryLabel: Get in Touch
+ctaPrimaryHref: /contact
+ctaSecondaryLabel: ''
+ctaSecondaryHref: ''
+heroColorScheme: bright
+fullBioColorScheme: bright
+timelineColorScheme: wine
+ctaColorScheme: soft
 ---
 
 About page body (optional). Hero image uses the home `about_teaser` image when `heroImage` is not set here.

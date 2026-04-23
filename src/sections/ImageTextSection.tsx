@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
 import { netlifyImg } from '@/lib/netlify-image'
+import { schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import type { HomeImageTextSection } from './types'
 
 export type ImageTextSectionProps = {
@@ -21,10 +22,10 @@ export function ImageTextSection({ variant, section }: ImageTextSectionProps) {
       ? section.linkText
       : (section.linkText ?? 'Enquire About Lessons →')
 
-  const surfaceBg =
-    section.surface === 'bright'
-      ? 'var(--section-surface-bright)'
-      : 'var(--section-background-color)'
+  const scheme = section.surface
+  const surfaceBg = schemeSolidBackground(scheme)
+  const fg = schemeForeground(scheme)
+  const isWine = scheme === 'wine'
 
   const paths = isAbout
     ? {
@@ -44,40 +45,48 @@ export function ImageTextSection({ variant, section }: ImageTextSectionProps) {
         linkLabel: 'featureCtaLabel',
       }
 
+  const surfaceFieldPath = isAbout ? 'aboutSurface' : 'featureSurface'
+
   return (
     <section
       className="py-24 lg:py-36"
       style={{ background: surfaceBg }}
+      data-sb-field-path={surfaceFieldPath}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-2 order-2 lg:order-1">
             <p
               className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-6"
-              style={{ color: 'var(--accent-color)' }}
+              style={{ color: fg.eyebrow }}
               data-sb-field-path={paths.eyebrow}
             >
               {eyebrow}
             </p>
             <h2
               className="font-display text-4xl lg:text-5xl italic leading-tight mb-8"
-              style={{ color: 'var(--heading-color)' }}
+              style={{ color: fg.heading }}
               data-sb-field-path={paths.title}
             >
               {section.title}
             </h2>
             <div
               className="w-12 h-px mb-8"
-              style={{ background: 'var(--accent-color)' }}
+              style={{ background: fg.divider }}
             />
             <p
               className="font-body text-base leading-relaxed mb-10"
-              style={{ color: 'var(--muted-text-color)' }}
+              style={{ color: fg.body }}
               data-sb-field-path={paths.text}
             >
               {section.text}
             </p>
-            <Link to={linkHref} className="gold-link" data-sb-field-path={paths.linkHref}>
+            <Link
+              to={linkHref}
+              className="gold-link"
+              style={isWine ? { color: fg.heading } : undefined}
+              data-sb-field-path={paths.linkHref}
+            >
               <span data-sb-field-path={paths.linkLabel}>
                 {isAbout ? `${linkLabel} →` : linkLabel}
               </span>
@@ -88,7 +97,9 @@ export function ImageTextSection({ variant, section }: ImageTextSectionProps) {
             <div
               className="absolute -top-6 -right-6 w-32 h-32 border"
               style={{
-                borderColor: 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
+                borderColor: isWine
+                  ? fg.divider
+                  : 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
               }}
             />
             <img
@@ -101,7 +112,9 @@ export function ImageTextSection({ variant, section }: ImageTextSectionProps) {
             <div
               className="absolute -bottom-6 -left-6 w-32 h-32 border"
               style={{
-                borderColor: 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
+                borderColor: isWine
+                  ? fg.divider
+                  : 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
               }}
             />
           </div>

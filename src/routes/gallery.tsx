@@ -21,11 +21,16 @@ function GalleryPage() {
       data-sb-object-id="content/gallery-landing/page.md"
     >
       <PageHeroSection
+        colorScheme={landing?.pageHeroColorScheme}
         heroEyebrow={landing?.heroEyebrow ?? 'Photography'}
         heroTitle={landing?.heroTitle ?? 'Gallery'}
         bottomSpacing="compact"
       />
-      <TabItemsSection categories={categories} items={items} />
+      <TabItemsSection
+        categories={categories}
+        items={items}
+        tabItemsColorScheme={landing?.tabItemsColorScheme}
+      />
     </div>
   )
 }

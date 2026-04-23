@@ -1,6 +1,7 @@
 import { Play } from 'lucide-react'
 
 import { netlifyImg } from '@/lib/netlify-image'
+import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import type { HomeMediaSection, MediaFilter, MediaItem } from './types'
 
 export type MediaGridSectionProps = {
@@ -21,24 +22,28 @@ export function MediaGridSection({
   const filtered =
     filter === 'all' ? mediaItems : mediaItems.filter((m) => m.type === filter)
 
+  const scheme = section.colorScheme
+  const fg = schemeForeground(scheme)
+
   return (
     <section
       className="py-24 lg:py-36"
-      style={{ background: 'var(--page-background-color)' }}
+      style={{ background: schemePageBandBackground(scheme) }}
+      data-sb-field-path="mediaGridColorScheme"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
               <p
                 className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-4"
-                style={{ color: 'var(--accent-color)' }}
+                style={{ color: fg.eyebrow }}
                 data-sb-field-path="mediaEyebrow"
               >
                 {section.eyebrow}
               </p>
               <h2
                 className="font-display text-4xl lg:text-5xl italic"
-                style={{ color: 'var(--heading-color)' }}
+                style={{ color: fg.heading }}
                 data-sb-field-path="mediaTitle"
               >
                 {section.title}

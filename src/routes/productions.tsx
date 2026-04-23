@@ -20,6 +20,7 @@ function ProductionsPage() {
       data-sb-object-id="content/productions-landing/page.md"
     >
       <PageHeroSection
+        colorScheme={landing?.pageHeroColorScheme}
         heroEyebrow={landing?.heroEyebrow ?? 'Repertoire'}
         heroTitle={landing?.heroTitle ?? 'Productions'}
         heroIntro={
@@ -27,7 +28,10 @@ function ProductionsPage() {
           "A curated selection of performances that have defined a career spanning three continents and the world's greatest opera houses."
         }
       />
-      <ImageTextCardsSection productions={productions} />
+      <ImageTextCardsSection
+        productions={productions}
+        listColorScheme={landing?.productionsListColorScheme}
+      />
     </div>
   )
 }

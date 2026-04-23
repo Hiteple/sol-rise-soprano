@@ -1,6 +1,7 @@
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { z } from 'zod'
 
+import { sectionColorSchemeSchema } from './schemas/color-scheme'
 import {
   aboutPageSchema,
   contactPageSchema,
@@ -38,7 +39,8 @@ const home = defineCollection({
     primaryCtaHref: z.string().optional(),
     secondaryCtaLabel: z.string().optional(),
     secondaryCtaHref: z.string().optional(),
-    aboutSurface: z.enum(['soft', 'bright']).optional(),
+    heroColorScheme: sectionColorSchemeSchema.default('soft'),
+    aboutSurface: sectionColorSchemeSchema.default('soft'),
     aboutEyebrow: z.string().optional(),
     aboutTitle: z.string(),
     aboutText: z.string(),
@@ -48,7 +50,8 @@ const home = defineCollection({
     aboutHref: z.string().optional(),
     mediaEyebrow: z.string(),
     mediaTitle: z.string(),
-    featureSurface: z.enum(['soft', 'bright']).optional(),
+    mediaGridColorScheme: sectionColorSchemeSchema.default('soft'),
+    featureSurface: sectionColorSchemeSchema.default('soft'),
     featureEyebrow: z.string(),
     featureTitle: z.string(),
     featureText: z.string(),
@@ -56,6 +59,7 @@ const home = defineCollection({
     featureImageAlt: z.string(),
     featureCtaLabel: z.string().optional(),
     featureCtaHref: z.string().optional(),
+    quoteBannerColorScheme: sectionColorSchemeSchema.default('soft'),
     quoteText: z.string(),
     quoteAuthor: z.string(),
     quoteImage: z.string(),

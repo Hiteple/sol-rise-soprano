@@ -14,6 +14,7 @@ function ContactPage() {
   return (
     <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id="content/contact/page.md">
       <PageHeroSection
+        colorScheme={page?.pageHeroColorScheme}
         heroEyebrow={page?.heroEyebrow ?? 'Reach Out'}
         heroTitle={page?.heroTitle ?? 'Contact'}
       />

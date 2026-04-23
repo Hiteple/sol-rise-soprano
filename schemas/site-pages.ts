@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { sectionColorSchemeSchema } from './color-scheme'
+
 const highlightSchema = z.object({
   number: z.string(),
   label: z.string(),
@@ -26,17 +28,19 @@ export const aboutPageSchema = z.object({
   heroTitleAccent: z.string(),
   heroTitleLine2: z.string(),
   heroIntro: z.string(),
-  /** Optional override; if empty, route falls back to a static placeholder image. */
   heroImage: z.string().optional(),
   heroImageAlt: z.string(),
   heroQuote: z.string(),
   heroQuoteAttribution: z.string(),
-  statsSurface: z.enum(['soft', 'bright', 'wine']).optional(),
+  heroColorScheme: sectionColorSchemeSchema.default('soft'),
+  statsSurface: sectionColorSchemeSchema.default('soft'),
   highlights: z.array(highlightSchema),
   fullBioEyebrow: z.string(),
+  fullBioColorScheme: sectionColorSchemeSchema.default('soft'),
   fullBioParagraphs: z.array(z.string()),
   timelineSectionEyebrow: z.string(),
   timelineSectionTitle: z.string(),
+  timelineColorScheme: sectionColorSchemeSchema.default('soft'),
   timeline: z.array(timelineItemSchema),
   ctaTitleLine1: z.string(),
   ctaTitleLine2: z.string(),
@@ -44,21 +48,26 @@ export const aboutPageSchema = z.object({
   ctaPrimaryHref: z.string(),
   ctaSecondaryLabel: z.string(),
   ctaSecondaryHref: z.string(),
+  ctaColorScheme: sectionColorSchemeSchema.default('soft'),
   content: z.string(),
 })
 
 export const galleryPageSchema = z.object({
   type: z.literal('GalleryPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
   heroEyebrow: z.string(),
   heroTitle: z.string(),
+  tabItemsColorScheme: sectionColorSchemeSchema.default('soft'),
   filterCategories: z.array(z.string()),
   content: z.string(),
 })
 
 export const contactPageSchema = z.object({
   type: z.literal('ContactPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
   heroEyebrow: z.string(),
   heroTitle: z.string(),
+  contactFormColorScheme: sectionColorSchemeSchema.default('soft'),
   introHeading: z.string(),
   introBody: z.string(),
   directEmailLabel: z.string(),
@@ -78,9 +87,11 @@ export const contactPageSchema = z.object({
 
 export const productionsPageSchema = z.object({
   type: z.literal('ProductionsPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
   heroEyebrow: z.string(),
   heroTitle: z.string(),
   heroIntro: z.string(),
+  productionsListColorScheme: sectionColorSchemeSchema.default('soft'),
   content: z.string(),
 })
 
