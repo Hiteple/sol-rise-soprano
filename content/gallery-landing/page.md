@@ -6,6 +6,8 @@ filterCategories:
   - All
   - Performance
   - Behind the Scenes
+pageHeroColorScheme: bright
+tabItemsColorScheme: bright
 ---
 
 Gallery landing copy (optional body for future use).

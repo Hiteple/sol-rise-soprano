@@ -1,85 +1,103 @@
-# Isabella Cavalcanti — Opera Singer Portfolio
+# Sol Risé — Opera Singer Portfolio
 
-A professional portfolio website for internationally acclaimed soprano Isabella Cavalcanti. Built with TanStack Start and deployed on Netlify.
+Professional portfolio site: TanStack Start, React 19, and Netlify. Content is markdown frontmatter validated with **Content Collections** + **Zod**, and edited in production with the **Netlify Visual Editor** (Stackbit config).
 
-## Key Features
+## Routes (public UI)
 
-- **Full-page Hero** — cinematic full-viewport hero with animated typography
-- **Homepage Sections** — image & text pairings, filterable media grid, full-width quote banner
-- **Media Grid** — video and photo browser with playable YouTube embeds via a modal
-- **Gallery** — filterable photo gallery with Netlify Image CDN optimisation and lightbox
-- **Productions** — alternating showcase of opera roles, venues, and years
-- **About** — biography, career stats, and a milestone timeline
-- **Contact** — Netlify Forms-powered contact form with social links
-- **Visual Editor Ready** — every editable element annotated with `data-sb-object-id` / `data-sb-field-path` attributes for Netlify Visual Editor
+| Path | Purpose |
+|------|---------|
+| `/` | Home — hero, image+text blocks, media grid, quote |
+| `/bio` | Long-form biography (richtext) |
+| `/about` | Career page — hero, stats, timeline, CTA |
+| `/productions` | Productions landing + cards from `content/productions/` |
+| `/gallery` | Filterable gallery from `content/gallery/` |
+| `/contact` | Contact hero + Netlify form + socials |
+| `/resume` | Education / CV style page (not linked in main nav by default) |
 
-## Technology Stack
+Navigation labels in the header/footer are **editable** (see below); “Career” points to `/about`, “Bio” to `/bio`.
+
+## Key features
+
+- **Section color schemes** — Per-section `soft` / `bright` / `wine` in Stackbit (labels “Color Scheme”), backed by shared helpers in `src/lib/section-color-scheme.ts`.
+- **Reusable sections** — `src/sections/*` composed from route files under `src/routes/`.
+- **Global chrome** — Header brand + nav links and footer brand + nav + social URLs live on **`content/home/data.md`** (same `HomePage` model as the homepage body). `Nav` / `Footer` use `data-sb-object-id="content/home/data.md"` so the visual editor can bind inline clicks to that document on any page.
+- **Contact** — Netlify Forms (`ContactFormSection`).
+- **Visual editor** — `stackbit.config.ts` + `data-sb-field-path` / `data-sb-object-id` on sections and key layout text.
+
+## Tech stack
 
 | Layer | Technology |
 |-------|------------|
-| Framework | TanStack Start |
-| Frontend | React 19, TanStack Router v1 |
-| Build | Vite 7 |
-| Styling | Tailwind CSS 4, Google Fonts (Cormorant Garant + Nunito Sans) |
-| Content | Content Collections (type-safe markdown frontmatter) |
-| Images | Netlify Image CDN (`/.netlify/images`) |
+| App | TanStack Start, TanStack Router v1 |
+| UI | React 19, Vite 7 |
+| Styles | Tailwind CSS 4, tokens in `src/styles.css` (Cormorant Garant + Nunito Sans) |
+| Content | `@content-collections/*`, schemas in `schemas/` + `content-collections.ts` |
+| Images | Netlify Image CDN (`netlifyImg` helper) |
 | Forms | Netlify Forms |
-| Deployment | Netlify |
-| Visual Editing | Netlify Visual Editor (Stackbit) — `stackbit.config.ts` |
+| Deploy | Netlify (`vite build`, publish `dist/client`) |
+| CMS UI | Netlify Visual Editor — `stackbit.config.ts`, `sudo stackbit dev` locally |
 
-## Project Structure
+## Content layout
 
 ```
 content/
-  home/data.md          # All homepage copy & image URLs (editable in Visual Editor)
-  gallery/*.md          # Gallery photo entries
-  media/*.md            # Media grid items (videos & photos)
-  productions/*.md      # Opera production showcase entries
+  home/data.md              # Homepage sections + global header/footer fields
+  about/page.md             # Career (/about) + biography copy used on /bio (no separate bio file yet)
+  contact/page.md
+  gallery-landing/page.md
+  gallery/*.md
+  media/*.md
+  productions/*.md
+  productions-landing/page.md
+  education/*.md            # Used by /resume
+schemas/
+  site-pages.ts             # About, contact, gallery landing, productions landing
+  color-scheme.ts           # Shared soft | bright | wine enum + Zod preprocess
 src/
-  components/
-    Nav.tsx             # Fixed navigation with scroll detection
-    Footer.tsx          # Footer with social links
-  routes/
-    index.tsx           # Homepage (hero, about teaser, media grid, quote)
-    about.tsx           # Full biography + career timeline
-    gallery.tsx         # Filterable photo gallery with lightbox
-    productions.tsx     # Opera productions showcase
-    contact.tsx         # Contact form + social channels
-stackbit.config.ts      # Netlify Visual Editor configuration
+  components/Nav.tsx, Footer.tsx
+  routes/*.tsx              # File-based routes
+  sections/*.tsx            # Page sections
+  lib/section-color-scheme.ts, nav-links.ts
+stackbit.config.ts          # Field models + HomePage field list (Content tab groups hero/sections; header/footer fields use "Header -" / "Footer -" labels)
 ```
 
-## Running Locally
+**Note:** Biography UI lives at `/bio` but still reads `fullBio*` fields from `content/about/page.md` until a dedicated `BioPage` collection is added.
+
+## Running locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-The dev server starts on `http://localhost:3000`. Use the Netlify CLI for a more complete local environment (Netlify Forms, Image CDN):
+Dev server: `http://localhost:3000`.
+
+Full Netlify parity (forms, image CDN):
 
 ```bash
 netlify dev
 ```
 
-This starts the full Netlify environment on `http://localhost:8888`.
+Typically `http://localhost:8888`.
 
-## Editing Content
+### Visual editor (Stackbit)
 
-All site content lives in markdown files under `content/`. Each file has a YAML frontmatter block with editable fields — images, text, URLs, and metadata.
+```bash
+sudo stackbit dev
+```
 
-**With the Netlify Visual Editor**, click any element on the published site to edit it directly. The `stackbit.config.ts` maps every field to the correct content file and the React components carry `data-sb-field-path` annotations so edits are context-aware.
+Uses `stackbit.config.ts` and the git content source. After changing models/fields, restart Stackbit so the UI picks up config changes.
 
-**Without the Visual Editor**, open any `.md` file in `content/`, edit the frontmatter values, and commit the change to trigger a new deploy.
+## Editing content
 
-## Replacing Placeholder Images
+- **Markdown + frontmatter** under `content/` — types enforced when the Vite/content-collections plugin runs.
+- **Visual Editor** — click annotated regions; header/footer fields appear under the **Content** tab on `HomePage` with labels prefixed `Header -` and `Footer -`.
+- **Nav link list format** — Each line: `Label | /path` (or a bare path; see `src/lib/nav-links.ts`).
 
-All images currently use `picsum.photos` as a placeholder service. To replace them:
+## Images
 
-1. Upload the image to your preferred storage (e.g., Netlify Blobs, Cloudinary, or a CDN).
-2. Copy the public URL.
-3. Open the relevant content file in `content/` and replace the `image:` or `thumbnail:` URL.
-4. The Netlify Image CDN (`/.netlify/images`) will automatically optimise the new image on the next request.
+Replace placeholder URLs in the relevant `content/**/*.md` frontmatter. Images are transformed through the Netlify image pipeline where configured.
 
 ## Deployment
 
-The site deploys automatically from `git push` via Netlify. The build command is `vite build` and the publish directory is `dist/client`.
+Push to Git; Netlify runs `vite build` and publishes `dist/client`.

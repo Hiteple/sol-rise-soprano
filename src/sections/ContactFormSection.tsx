@@ -25,19 +25,19 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
       icon: Instagram,
       label: 'Instagram',
       url: page?.instagramUrl ?? '#',
-      handle: page?.instagramHandle ?? '@isabellacavalcanti',
+      handle: page?.instagramHandle ?? '@solrisesoprano',
     },
     {
       icon: Youtube,
       label: 'YouTube',
       url: page?.youtubeUrl ?? '#',
-      handle: page?.youtubeHandle ?? 'Isabella Cavalcanti',
+      handle: page?.youtubeHandle ?? 'Sol Risé Soprano',
     },
     {
       icon: Facebook,
       label: 'Facebook',
       url: page?.facebookUrl ?? '#',
-      handle: page?.facebookHandle ?? 'Isabella Cavalcanti Soprano',
+      handle: page?.facebookHandle ?? 'Sol Risé Soprano',
     },
   ]
 

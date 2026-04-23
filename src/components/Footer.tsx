@@ -1,19 +1,28 @@
-import { Link } from '@tanstack/react-router'
 import { Instagram, Youtube, Facebook, Mail } from 'lucide-react'
+import { allHomes } from 'content-collections'
 
-interface FooterProps {
-  instagramUrl?: string
-  youtubeUrl?: string
-  facebookUrl?: string
-  email?: string
-}
+import { parseSiteNavLinks } from '@/lib/nav-links'
 
-export function Footer({
-  instagramUrl = 'https://www.instagram.com/solrisesoprano/',
-  youtubeUrl = 'https://youtube.com',
-  facebookUrl = 'https://facebook.com',
-  email = 'solrisesoprano@gmail.com',
-}: FooterProps) {
+const fallbackFooterLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Bio', href: '/bio' },
+  { label: 'Career', href: '/about' },
+  { label: 'Productions', href: '/productions' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+
+export function Footer() {
+  const site = allHomes[0]
+  const footerLinks = parseSiteNavLinks(site?.footerNavLinks, fallbackFooterLinks)
+  const footerBrandLine1 = site?.footerBrandLine1 ?? 'Sol Risé'
+  const footerBrandLine2 = site?.footerBrandLine2 ?? 'Soprano'
+  const footerTagline = site?.footerBrandTagline ?? 'Soprano · Stage Artist\nVoice of Passion'
+  const instagramUrl = site?.instagramUrl ?? 'https://www.instagram.com/solrisesoprano/'
+  const youtubeUrl = site?.youtubeUrl ?? 'https://youtube.com'
+  const facebookUrl = site?.facebookUrl ?? 'https://facebook.com'
+  const email = site?.email ?? 'solrisesoprano@gmail.com'
+
   return (
     <footer
       className="border-t"
@@ -21,6 +30,7 @@ export function Footer({
         background: 'var(--chrome-bg)',
         borderColor: 'var(--chrome-border)',
       }}
+      data-sb-object-id="content/home/data.md"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
@@ -28,20 +38,20 @@ export function Footer({
             <div
               className="font-display text-3xl mb-3"
               style={{ color: 'var(--chrome-accent)' }}
+              data-sb-field-path="footerBrandLine1"
             >
-              Sol Risé
+              {footerBrandLine1}
               <br />
-              <span className="italic" style={{ color: 'var(--chrome-text)' }}>
-                Soprano
+              <span className="italic" style={{ color: 'var(--chrome-text)' }} data-sb-field-path="footerBrandLine2">
+                {footerBrandLine2}
               </span>
             </div>
             <p
               className="text-sm leading-relaxed mt-4"
-              style={{ color: 'var(--chrome-text-muted)' }}
+              style={{ color: 'var(--chrome-text-muted)', whiteSpace: 'pre-line' }}
+              data-sb-field-path="footerBrandTagline"
             >
-              Soprano · Stage Artist
-              <br />
-              Voice of Passion
+              {footerTagline}
             </p>
           </div>
 
@@ -53,17 +63,12 @@ export function Footer({
               Navigate
             </h4>
             <nav className="flex flex-col gap-3">
-              {[
-                { to: '/' as const, label: 'Home' },
-                { to: '/about' as const, label: 'About' },
-                { to: '/productions' as const, label: 'Productions' },
-                { to: '/gallery' as const, label: 'Gallery' },
-                { to: '/contact' as const, label: 'Contact' },
-              ].map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
+              {footerLinks.map((link, idx) => (
+                <a
+                  key={`${link.label}-${link.href}`}
+                  href={link.href}
                   className="text-sm transition-colors duration-200 font-body"
+                  data-sb-field-path={`footerNavLinks.${idx}`}
                   style={{ color: 'var(--chrome-text-muted)' }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.color = 'var(--chrome-text)')
@@ -73,7 +78,7 @@ export function Footer({
                   }
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
             </nav>
           </div>
@@ -89,6 +94,7 @@ export function Footer({
               href={`mailto:${email}`}
               className="flex items-center gap-2 text-sm mb-6 transition-colors hover:opacity-90"
               style={{ color: 'var(--chrome-text-muted)' }}
+              data-sb-field-path="email"
             >
               <Mail size={14} />
               {email}
@@ -112,6 +118,7 @@ export function Footer({
                   e.currentTarget.style.borderColor = 'var(--chrome-border)'
                   e.currentTarget.style.color = 'var(--chrome-text-muted)'
                 }}
+                data-sb-field-path="instagramUrl"
               >
                 <Instagram size={15} />
               </a>
@@ -133,6 +140,7 @@ export function Footer({
                   e.currentTarget.style.borderColor = 'var(--chrome-border)'
                   e.currentTarget.style.color = 'var(--chrome-text-muted)'
                 }}
+                data-sb-field-path="youtubeUrl"
               >
                 <Youtube size={15} />
               </a>
@@ -154,6 +162,7 @@ export function Footer({
                   e.currentTarget.style.borderColor = 'var(--chrome-border)'
                   e.currentTarget.style.color = 'var(--chrome-text-muted)'
                 }}
+                data-sb-field-path="facebookUrl"
               >
                 <Facebook size={15} />
               </a>
@@ -166,7 +175,7 @@ export function Footer({
           style={{ borderColor: 'var(--chrome-border)' }}
         >
           <p className="text-xs" style={{ color: 'var(--chrome-text-muted)' }}>
-            © {new Date().getFullYear()} Isabella Cavalcanti. All rights reserved.
+            © {new Date().getFullYear()} Sol Risé Soprano. All rights reserved.
           </p>
           <p
             className="text-xs font-display italic"

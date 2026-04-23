@@ -14,6 +14,7 @@ export function HeroSection({ section }: HeroSectionProps) {
   const primaryHref = section.primaryCtaHref ?? '/productions'
   const secondaryLabel = section.secondaryCtaLabel ?? 'Book a Performance'
   const secondaryHref = section.secondaryCtaHref ?? '/contact'
+  const isWine = section.colorScheme === 'wine'
 
   return (
     <section
@@ -39,7 +40,7 @@ export function HeroSection({ section }: HeroSectionProps) {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <p
             className="animate-fade-up text-xs uppercase tracking-[0.35em] mb-6 font-body font-semibold"
-            style={{ color: 'var(--accent-color)' }}
+            style={{ color: isWine ? 'var(--media-caption-text-color)' : 'var(--heading-color)' }}
             data-sb-field-path="heroTagline"
           >
             {section.heroTagline}
@@ -49,7 +50,7 @@ export function HeroSection({ section }: HeroSectionProps) {
             className="animate-fade-up-delay-1 font-display italic leading-none mb-6"
             style={{
               fontSize: 'var(--h1-fluid-size)',
-              color: 'var(--heading-color)',
+              color: isWine ? 'var(--media-caption-text-color)' : 'var(--heading-color)',
               letterSpacing: '-0.02em',
             }}
             data-sb-field-path="heroTitle"
@@ -59,7 +60,11 @@ export function HeroSection({ section }: HeroSectionProps) {
 
           <p
             className="animate-fade-up-delay-2 font-body text-base tracking-[0.2em] uppercase mb-12"
-            style={{ color: 'var(--muted-text-color)' }}
+            style={{
+              color: isWine
+                ? 'color-mix(in srgb, var(--media-caption-text-color) 88%, transparent)'
+                : 'var(--muted-text-color)',
+            }}
             data-sb-field-path="heroSubtitle"
           >
             {section.heroSubtitle}
@@ -87,8 +92,10 @@ export function HeroSection({ section }: HeroSectionProps) {
               to={secondaryHref}
               className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300"
               style={{
-                borderColor: 'color-mix(in srgb, var(--body-color) 28%, transparent)',
-                color: 'var(--body-color)',
+                borderColor: isWine
+                  ? 'color-mix(in srgb, var(--media-caption-text-color) 35%, transparent)'
+                  : 'color-mix(in srgb, var(--body-color) 28%, transparent)',
+                color: isWine ? 'var(--media-caption-text-color)' : 'var(--body-color)',
               }}
             data-sb-field-path="secondaryCtaHref"
               onMouseEnter={(e) => {
@@ -97,8 +104,12 @@ export function HeroSection({ section }: HeroSectionProps) {
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor =
-                  'color-mix(in srgb, var(--body-color) 28%, transparent)'
-                e.currentTarget.style.color = 'var(--body-color)'
+                  isWine
+                    ? 'color-mix(in srgb, var(--media-caption-text-color) 35%, transparent)'
+                    : 'color-mix(in srgb, var(--body-color) 28%, transparent)'
+                e.currentTarget.style.color = isWine
+                  ? 'var(--media-caption-text-color)'
+                  : 'var(--body-color)'
               }}
             >
               <span data-sb-field-path="secondaryCtaLabel">{secondaryLabel}</span>
@@ -108,7 +119,11 @@ export function HeroSection({ section }: HeroSectionProps) {
 
         <div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce"
-          style={{ color: 'color-mix(in srgb, var(--accent-color) 55%, transparent)' }}
+          style={{
+            color: isWine
+              ? 'color-mix(in srgb, var(--media-caption-text-color) 58%, transparent)'
+              : 'color-mix(in srgb, var(--accent-color) 55%, transparent)',
+          }}
         >
           <ChevronDown size={20} />
         </div>

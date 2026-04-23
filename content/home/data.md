@@ -1,5 +1,14 @@
 ---
 type: HomePage
+headerBrandLine1: Sol Risé
+headerBrandLine2: Soprano
+headerNavLinks:
+  - Home | /
+  - Bio | /bio
+  - Career | /about
+  - Productions | /productions
+  - Gallery | /gallery
+  - Contact | /contact
 heroTitle: Sol Risé
 heroSubtitle: Soprano line
 heroTagline: Eyebrow text
@@ -46,9 +55,23 @@ quoteText: motivational or recommendation message
 quoteAuthor: reviewer or recommendation by
 quoteImage: https://picsum.photos/seed/operaquote1/1920/900
 quoteImageAlt: Performance backdrop
+footerBrandLine1: Sol Risé
+footerBrandLine2: Soprano
+footerBrandTagline: Opera Singer
+footerNavLinks:
+  - Home | /
+  - Bio | /bio
+  - Career | /about
+  - Productions | /productions
+  - Gallery | /gallery
+  - Contact | /contact
 instagramUrl: https://instagram.com/solrisesoprano/
 youtubeUrl: https://youtube.com
 facebookUrl: https://facebook.com
 email: solrisesoprano@gmail.com
+heroColorScheme: wine
+mediaGridColorScheme: wine
+featureSurface: bright
+quoteBannerColorScheme: wine
 ---
 Single-source homepage content (hero, sections, and footer socials).

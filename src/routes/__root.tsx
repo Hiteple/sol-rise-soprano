@@ -1,7 +1,6 @@
 import { HeadContent, Link, Scripts, createRootRoute } from '@tanstack/react-router'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
-import { allHomes } from 'content-collections'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -9,11 +8,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'Isabella Cavalcanti — Soprano' },
+      { title: 'Sol Risé — Soprano' },
       {
         name: 'description',
         content:
-          'Official website of Isabella Cavalcanti, internationally acclaimed soprano and stage artist.',
+          'Official website of Sol Risé.',
       },
     ],
     links: [
@@ -34,7 +33,6 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const homePage = allHomes[0]
   return (
     <html lang="en">
       <head>
@@ -43,12 +41,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body className="grain">
         <Nav />
         <main>{children}</main>
-        <Footer
-          instagramUrl={homePage?.instagramUrl}
-          youtubeUrl={homePage?.youtubeUrl}
-          facebookUrl={homePage?.facebookUrl}
-          email={homePage?.email}
-        />
+        <Footer />
         <Scripts />
       </body>
     </html>

@@ -11,7 +11,7 @@ export function resolveColorScheme(value: SectionColorScheme | undefined | null 
 export function schemeSolidBackground(scheme: SectionColorScheme): string {
   if (scheme === 'wine') return 'var(--palette-wine)'
   if (scheme === 'bright') return 'var(--section-surface-bright)'
-  return 'var(--section-background-color)'
+  return 'var(--page-background-color)'
 }
 
 /** Stats row: “soft” is a transparent strip over the page. */
@@ -29,14 +29,14 @@ export function schemePageBandBackground(scheme: SectionColorScheme): string {
 }
 
 /** Hero / quote image overlays (bottom weight). */
-export function schemeHeroImageOverlay(scheme: SectionColorScheme): string {
+export function schemeHeroImageOverlay(scheme: SectionColorScheme | 'clear'): string {
   if (scheme === 'wine') {
     return 'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 78%, transparent) 0%, color-mix(in srgb, var(--palette-wine) 28%, transparent) 48%, transparent 100%)'
   }
-  if (scheme === 'bright') {
-    return 'linear-gradient(to top, color-mix(in srgb, var(--page-background-color) 98%, transparent) 0%, color-mix(in srgb, var(--page-background-color) 68%, transparent) 42%, transparent 100%)'
+  if (scheme === 'bright' || scheme === 'clear') {
+    return 'linear-gradient(to top, color-mix(in srgb, var(--page-background-color) 98%, transparent) 0%, color-mix(in srgb, var(--page-background-color) 75%, transparent) 42%, transparent 100%)'
   }
-  return 'linear-gradient(to top, color-mix(in srgb, var(--page-background-color) 96%, transparent) 0%, color-mix(in srgb, var(--page-background-color) 58%, transparent) 42%, transparent 100%)'
+  return 'linear-gradient(to top, color-mix(in srgb, var(--page-background-color) 96%, transparent) 0%, color-mix(in srgb, var(--page-background-color) 75%, transparent) 42%, transparent 100%)'
 }
 
 /** Quote block overlay on top of photography. */

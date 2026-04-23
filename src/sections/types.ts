@@ -1,6 +1,7 @@
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
 export type HomeSurface = SectionColorScheme
+export type HomeHeroColorScheme = 'clear' | 'wine'
 
 export type HomeHeroSection = {
   heroTitle: string
@@ -12,7 +13,7 @@ export type HomeHeroSection = {
   primaryCtaHref?: string
   secondaryCtaLabel?: string
   secondaryCtaHref?: string
-  colorScheme: SectionColorScheme
+  colorScheme: HomeHeroColorScheme
 }
 
 /** Shared shape for home “about” and “feature” blocks (see `ImageTextSection`). */

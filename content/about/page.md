@@ -6,7 +6,7 @@ heroTitleAccent: Artistic
 heroTitleLine2: Path
 heroIntro: "Born in Buenos Aires, Argentina, Sol Risé discovered her voice at the age of nine. What began as a childhood fascination evolved into a lifelong calling — shaping an artistic path\_focused on the operatic repertoire."
 heroImage: https://picsum.photos/seed/operaportr1/800/1060
-heroImageAlt: Isabella Cavalcanti portrait
+heroImageAlt: Sol Risé portrait
 heroQuote: '"Singing is not what I do — it is who I am."'
 heroQuoteAttribution: — Sol Risé
 statsSurface: wine
@@ -118,7 +118,7 @@ ctaSecondaryLabel: ''
 ctaSecondaryHref: ''
 heroColorScheme: bright
 fullBioColorScheme: bright
-timelineColorScheme: wine
+timelineColorScheme: soft
 ctaColorScheme: soft
 ---
 

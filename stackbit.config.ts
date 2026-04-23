@@ -18,6 +18,21 @@ function colorSchemeEnumField(name: string, group?: string) {
   }
 }
 
+function heroColorSchemeField() {
+  return {
+    name: 'heroColorScheme',
+    type: 'enum' as const,
+    label: 'Color Scheme',
+    required: true,
+    options: [
+      { label: 'Clear', value: 'clear' },
+      { label: 'Wine', value: 'wine' },
+    ],
+    default: 'wine',
+    group: 'hero',
+  }
+}
+
 export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
   ssgName: 'custom',
@@ -46,7 +61,15 @@ export default defineStackbitConfig({
             { name: 'quoteBanner', label: 'Quote Banner' },
           ],
           fields: [
-            colorSchemeEnumField('heroColorScheme', 'hero'),
+            { name: 'headerBrandLine1', type: 'string', label: 'Header - Brand line 1' },
+            { name: 'headerBrandLine2', type: 'string', label: 'Header - Brand line 2' },
+            {
+              name: 'headerNavLinks',
+              type: 'list',
+              label: 'Header - Navigation Links',
+              items: { type: 'text' },
+            },
+            heroColorSchemeField(),
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'hero' },
             { name: 'heroSubtitle', type: 'string', label: 'Subtitle', group: 'hero' },
             { name: 'heroTagline', type: 'string', label: 'Eyebrow', group: 'hero' },
@@ -80,10 +103,19 @@ export default defineStackbitConfig({
             { name: 'quoteAuthor', type: 'string', label: 'Author', group: 'quoteBanner' },
             { name: 'quoteImage', type: 'image', label: 'Background image', group: 'quoteBanner' },
             { name: 'quoteImageAlt', type: 'string', label: 'Image alt', group: 'quoteBanner' },
-            { name: 'instagramUrl', type: 'string', label: 'Social - Instagram URL' },
-            { name: 'youtubeUrl', type: 'string', label: 'Social - YouTube URL' },
-            { name: 'facebookUrl', type: 'string', label: 'Social - Facebook URL' },
-            { name: 'email', type: 'string', label: 'Contact Email' },
+            { name: 'footerBrandLine1', type: 'string', label: 'Footer - Brand line 1' },
+            { name: 'footerBrandLine2', type: 'string', label: 'Footer - Brand line 2' },
+            { name: 'footerBrandTagline', type: 'text', label: 'Footer - Tagline' },
+            {
+              name: 'footerNavLinks',
+              type: 'list',
+              label: 'Footer - Navigation Links',
+              items: { type: 'text' },
+            },
+            { name: 'instagramUrl', type: 'string', label: 'Footer - Social - Instagram URL' },
+            { name: 'youtubeUrl', type: 'string', label: 'Footer - Social - YouTube URL' },
+            { name: 'facebookUrl', type: 'string', label: 'Footer - Social - Facebook URL' },
+            { name: 'email', type: 'string', label: 'Footer - Contact Email' },
           ],
         },
         {

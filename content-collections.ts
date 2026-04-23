@@ -9,6 +9,14 @@ import {
   productionsPageSchema,
 } from './schemas/site-pages'
 
+const homeHeroColorSchemeSchema = z.preprocess((val) => {
+  if (val === 'wine') return 'wine'
+  if (val === 'clear' || val === 'bright' || val === 'soft' || val === '' || val === null || val === undefined) {
+    return 'clear'
+  }
+  return 'wine'
+}, z.enum(['clear', 'wine']))
+
 const education = defineCollection({
   name: 'education',
   directory: 'content/education',
@@ -30,6 +38,16 @@ const home = defineCollection({
   include: 'data.md',
   schema: z.object({
     type: z.literal('HomePage'),
+    headerBrandLine1: z.string().default('Sol Risé'),
+    headerBrandLine2: z.string().default('Soprano'),
+    headerNavLinks: z.array(z.string()).default([
+      'Home | /',
+      'Bio | /bio',
+      'Career | /about',
+      'Productions | /productions',
+      'Gallery | /gallery',
+      'Contact | /contact',
+    ]),
     heroTitle: z.string(),
     heroSubtitle: z.string(),
     heroTagline: z.string(),
@@ -39,7 +57,7 @@ const home = defineCollection({
     primaryCtaHref: z.string().optional(),
     secondaryCtaLabel: z.string().optional(),
     secondaryCtaHref: z.string().optional(),
-    heroColorScheme: sectionColorSchemeSchema.default('soft'),
+    heroColorScheme: homeHeroColorSchemeSchema.default('wine'),
     aboutSurface: sectionColorSchemeSchema.default('soft'),
     aboutEyebrow: z.string().optional(),
     aboutTitle: z.string(),
@@ -64,6 +82,17 @@ const home = defineCollection({
     quoteAuthor: z.string(),
     quoteImage: z.string(),
     quoteImageAlt: z.string().optional(),
+    footerBrandLine1: z.string().default('Sol Risé'),
+    footerBrandLine2: z.string().default('Soprano'),
+    footerBrandTagline: z.string().default('Soprano · Stage Artist\nVoice of Passion'),
+    footerNavLinks: z.array(z.string()).default([
+      'Home | /',
+      'Bio | /bio',
+      'Career | /about',
+      'Productions | /productions',
+      'Gallery | /gallery',
+      'Contact | /contact',
+    ]),
     instagramUrl: z.string(),
     youtubeUrl: z.string(),
     facebookUrl: z.string(),
