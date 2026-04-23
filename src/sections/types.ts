@@ -12,31 +12,21 @@ export type HomeHeroSection = {
   secondaryCtaHref?: string
 }
 
-export type HomeAboutSection = {
+/** Shared shape for home “about” and “feature” blocks (see `ImageTextSection`). */
+export type HomeImageTextSection = {
   surface?: HomeSurface
   eyebrow?: string
-  aboutTitle: string
-  aboutText: string
-  aboutImage: string
-  aboutImageAlt: string
-  aboutLinkText: string
-  aboutHref?: string
+  title: string
+  text: string
+  image: string
+  imageAlt: string
+  linkText?: string
+  linkHref?: string
 }
 
 export type HomeMediaSection = {
   eyebrow: string
   title: string
-}
-
-export type HomeFeatureSection = {
-  surface?: HomeSurface
-  eyebrow: string
-  featureTitle: string
-  featureText: string
-  featureImage: string
-  featureImageAlt: string
-  ctaLabel?: string
-  ctaHref?: string
 }
 
 export type HomeQuoteSection = {

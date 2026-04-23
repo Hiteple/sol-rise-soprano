@@ -3,11 +3,10 @@ import { useState } from 'react'
 import { allHomes, allMediaItems } from 'content-collections'
 import { X } from 'lucide-react'
 
-import { AboutTeaserSection } from '@/sections/AboutTeaserSection'
 import { HeroSection } from '@/sections/HeroSection'
+import { ImageTextSection } from '@/sections/ImageTextSection'
 import { MediaGridSection } from '@/sections/MediaGridSection'
 import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
-import { SplitSection } from '@/sections/SplitSection'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -38,16 +37,17 @@ function HomePage() {
           secondaryCtaHref: site.secondaryCtaHref,
         }}
       />
-      <AboutTeaserSection
+      <ImageTextSection
+        variant="about"
         section={{
           surface: site.aboutSurface,
           eyebrow: site.aboutEyebrow,
-          aboutTitle: site.aboutTitle,
-          aboutText: site.aboutText,
-          aboutImage: site.aboutImage,
-          aboutImageAlt: site.aboutImageAlt,
-          aboutLinkText: site.aboutLinkText,
-          aboutHref: site.aboutHref,
+          title: site.aboutTitle,
+          text: site.aboutText,
+          image: site.aboutImage,
+          imageAlt: site.aboutImageAlt,
+          linkText: site.aboutLinkText,
+          linkHref: site.aboutHref,
         }}
       />
       <MediaGridSection
@@ -57,16 +57,17 @@ function HomePage() {
         onFilterChange={setFilter}
         onOpenVideo={setActiveVideo}
       />
-      <SplitSection
+      <ImageTextSection
+        variant="feature"
         section={{
           surface: site.featureSurface,
           eyebrow: site.featureEyebrow,
-          featureTitle: site.featureTitle,
-          featureText: site.featureText,
-          featureImage: site.featureImage,
-          featureImageAlt: site.featureImageAlt,
-          ctaLabel: site.featureCtaLabel,
-          ctaHref: site.featureCtaHref,
+          title: site.featureTitle,
+          text: site.featureText,
+          image: site.featureImage,
+          imageAlt: site.featureImageAlt,
+          linkText: site.featureCtaLabel,
+          linkHref: site.featureCtaHref,
         }}
       />
       <QuoteBannerSection

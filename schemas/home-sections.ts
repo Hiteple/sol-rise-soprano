@@ -15,6 +15,7 @@ export const homeHeroSectionSchema = z.object({
 
 const sectionSurfaceSchema = z.enum(['soft', 'bright']).optional()
 
+/** Renders with `ImageTextSection` (`variant="about"`) — Stackbit tab “Image + Text”. */
 export const homeAboutTeaserSectionSchema = z.object({
   type: z.literal('about_teaser'),
   /** `soft` = --section-background-color (default). `bright` = near-white for long copy. */
@@ -34,6 +35,7 @@ export const homeMediaGridSectionSchema = z.object({
   title: z.string(),
 })
 
+/** Renders with `ImageTextSection` (`variant="feature"`) — Stackbit tab “Image + Text”. */
 export const homeFeatureSplitSectionSchema = z.object({
   type: z.literal('feature_split'),
   surface: sectionSurfaceSchema,

@@ -5,10 +5,18 @@ const highlightSchema = z.object({
   label: z.string(),
 })
 
+/** Markdown body; YAML may still be a legacy string array (joined with blank lines). */
+const timelineDescriptionSchema = z
+  .union([z.string(), z.array(z.string())])
+  .transform((v) => {
+    if (Array.isArray(v)) return v.map((s) => s.trim()).filter((s) => s.length > 0).join('\n\n')
+    return v
+  })
+
 const timelineItemSchema = z.object({
   year: z.string(),
   title: z.string(),
-  description: z.string(),
+  description: timelineDescriptionSchema,
 })
 
 export const aboutPageSchema = z.object({

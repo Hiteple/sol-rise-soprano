@@ -291,3 +291,27 @@
   align-items: center;
   justify-content: center;
 }
+
+/* About timeline: markdown from `marked` (lists, emphasis, links) */
+.timeline-markdown :is(p, ul, ol) {
+  margin: 0.35rem 0;
+}
+.timeline-markdown :is(ul, ol) {
+  padding-left: 1.25rem;
+}
+.timeline-markdown ul {
+  list-style-type: disc;
+}
+.timeline-markdown ol {
+  list-style-type: decimal;
+}
+.timeline-markdown strong {
+  font-weight: 600;
+}
+.timeline-markdown em {
+  font-style: italic;
+}
+.timeline-markdown a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
