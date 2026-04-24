@@ -71,7 +71,7 @@ facebookUrl: https://facebook.com
 email: solrisesoprano@gmail.com
 heroColorScheme: wine
 mediaGridColorScheme: wine
-featureSurface: bright
+featureSurface: wine
 quoteBannerColorScheme: wine
 ---
 Single-source homepage content (hero, sections, and footer socials).
