@@ -69,7 +69,7 @@ instagramUrl: https://instagram.com/solrisesoprano/
 youtubeUrl: https://youtube.com
 facebookUrl: https://facebook.com
 email: solrisesoprano@gmail.com
-heroColorScheme: clear
+heroColorScheme: wine
 mediaGridColorScheme: wine
 featureSurface: soft
 quoteBannerColorScheme: wine
