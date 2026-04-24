@@ -41,14 +41,24 @@ const home = defineCollection({
     type: z.literal('HomePage'),
     headerBrandLine1: z.string().default('Sol Risé'),
     headerBrandLine2: z.string().default('Soprano'),
-    headerNavLinks: z.array(z.string()).default([
-      'Home | /',
-      'Bio | /bio',
-      'Career | /career',
-      'Productions | /productions',
-      'Gallery | /gallery',
-      'Contact | /contact',
-    ]),
+    headerNavLinks: z
+      .array(
+        z.union([
+          z.string(),
+          z.object({
+            label: z.string(),
+            href: z.string(),
+          }),
+        ]),
+      )
+      .default([
+        { label: 'Home', href: '/' },
+        { label: 'Bio', href: '/bio' },
+        { label: 'Career', href: '/career' },
+        { label: 'Productions', href: '/productions' },
+        { label: 'Gallery', href: '/gallery' },
+        { label: 'Contact', href: '/contact' },
+      ]),
     heroTitle: z.string(),
     heroSubtitle: z.string(),
     heroTagline: z.string(),
@@ -87,14 +97,24 @@ const home = defineCollection({
     footerBrandLine1: z.string().default('Sol Risé'),
     footerBrandLine2: z.string().default('Soprano'),
     footerBrandTagline: z.string().default('Soprano · Stage Artist\nVoice of Passion'),
-    footerNavLinks: z.array(z.string()).default([
-      'Home | /',
-      'Bio | /bio',
-      'Career | /career',
-      'Productions | /productions',
-      'Gallery | /gallery',
-      'Contact | /contact',
-    ]),
+    footerNavLinks: z
+      .array(
+        z.union([
+          z.string(),
+          z.object({
+            label: z.string(),
+            href: z.string(),
+          }),
+        ]),
+      )
+      .default([
+        { label: 'Home', href: '/' },
+        { label: 'Bio', href: '/bio' },
+        { label: 'Career', href: '/career' },
+        { label: 'Productions', href: '/productions' },
+        { label: 'Gallery', href: '/gallery' },
+        { label: 'Contact', href: '/contact' },
+      ]),
     instagramUrl: z.string(),
     youtubeUrl: z.string(),
     facebookUrl: z.string(),
@@ -148,9 +168,9 @@ const productions = defineCollection({
   }),
 })
 
-const aboutPage = defineCollection({
-  name: 'aboutPage',
-  directory: 'content/about',
+const careerPage = defineCollection({
+  name: 'careerPage',
+  directory: 'content/career',
   include: 'page.md',
   schema: aboutPageSchema,
 })
@@ -190,7 +210,7 @@ export default defineConfig({
     gallery,
     mediaItems,
     productions,
-    aboutPage,
+    careerPage,
     galleryPage,
     bioPage,
     contactPage,

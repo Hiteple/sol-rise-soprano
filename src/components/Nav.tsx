@@ -84,7 +84,7 @@ export function Nav() {
                 key={`${link.label}-${link.href}`}
                 href={link.href}
                 className="gold-link"
-                data-sb-field-path={`headerNavLinks.${idx}`}
+                data-sb-field-path={`headerNavLinks.${idx}.label`}
                 style={
                   pathname === link.href
                     ? {
@@ -150,7 +150,7 @@ export function Nav() {
               key={`${link.label}-${link.href}-mobile`}
               href={link.href}
               className="font-display text-2xl italic"
-              data-sb-field-path={`headerNavLinks.${idx}`}
+              data-sb-field-path={`headerNavLinks.${idx}.label`}
               style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
               onClick={() => setMenuOpen(false)}
             >

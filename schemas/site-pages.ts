@@ -22,7 +22,7 @@ const timelineItemSchema = z.object({
 })
 
 export const aboutPageSchema = z.object({
-  type: z.literal('AboutPage'),
+  type: z.literal('CareerPage'),
   heroEyebrow: z.string(),
   heroTitleLine1: z.string(),
   heroTitleAccent: z.string(),

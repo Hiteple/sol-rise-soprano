@@ -67,7 +67,13 @@ export default defineStackbitConfig({
               name: 'headerNavLinks',
               type: 'list',
               label: 'Header - Navigation Links',
-              items: { type: 'text' },
+              items: {
+                type: 'object',
+                fields: [
+                  { name: 'label', type: 'string', label: 'Label' },
+                  { name: 'href', type: 'string', label: 'URL' },
+                ],
+              },
             },
             heroColorSchemeField(),
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'hero' },
@@ -120,7 +126,13 @@ export default defineStackbitConfig({
               name: 'footerNavLinks',
               type: 'list',
               label: 'Footer - Navigation Links',
-              items: { type: 'text' },
+              items: {
+                type: 'object',
+                fields: [
+                  { name: 'label', type: 'string', label: 'Label' },
+                  { name: 'href', type: 'string', label: 'URL' },
+                ],
+              },
             },
             { name: 'instagramUrl', type: 'string', label: 'Footer - Social - Instagram URL' },
             { name: 'youtubeUrl', type: 'string', label: 'Footer - Social - YouTube URL' },
@@ -139,14 +151,14 @@ export default defineStackbitConfig({
           fields: [
             colorSchemeEnumField('fullBioColorScheme', 'richtextContent'),
             { name: 'fullBioEyebrow', type: 'string', label: 'Eyebrow', group: 'richtextContent' },
-            { name: 'fullBioParagraphs', type: 'list', label: 'Paragraphs', items: { type: 'text' }, group: 'richtextContent' },
+            { name: 'fullBioParagraphs', type: 'list', label: 'Paragraphs', items: { type: 'markdown' }, group: 'richtextContent' },
           ],
         },
         {
           name: 'CareerPage',
           type: 'page',
           urlPath: '/career',
-          filePath: 'content/about/page.md',
+          filePath: 'content/career/page.md',
           fieldGroups: [
             { name: 'imageBigText', label: 'Image + Big Text' },
             { name: 'statsRow', label: 'Stats Row' },
@@ -169,7 +181,7 @@ export default defineStackbitConfig({
             { name: 'highlights', type: 'list', label: 'Highlights', items: { type: 'object', fields: [{ name: 'number', type: 'string', label: 'Number' }, { name: 'label', type: 'string', label: 'Label' }] }, group: 'statsRow' },
             colorSchemeEnumField('fullBioColorScheme', 'richtextContent'),
             { name: 'fullBioEyebrow', type: 'string', label: 'Eyebrow', group: 'richtextContent' },
-            { name: 'fullBioParagraphs', type: 'list', label: 'Paragraphs', items: { type: 'text' }, group: 'richtextContent' },
+            { name: 'fullBioParagraphs', type: 'list', label: 'Paragraphs', items: { type: 'markdown' }, group: 'richtextContent' },
             colorSchemeEnumField('timelineColorScheme', 'timeline'),
             { name: 'timelineSectionEyebrow', type: 'string', label: 'Eyebrow', group: 'timeline' },
             { name: 'timelineSectionTitle', type: 'string', label: 'Heading', group: 'timeline' },

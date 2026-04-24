@@ -68,7 +68,7 @@ export function Footer() {
                   key={`${link.label}-${link.href}`}
                   href={link.href}
                   className="text-sm transition-colors duration-200 font-body"
-                  data-sb-field-path={`footerNavLinks.${idx}`}
+                  data-sb-field-path={`footerNavLinks.${idx}.label`}
                   style={{ color: 'var(--chrome-text-muted)' }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.color = 'var(--chrome-text)')

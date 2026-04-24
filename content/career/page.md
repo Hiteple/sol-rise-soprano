@@ -1,5 +1,5 @@
 ---
-type: AboutPage
+type: CareerPage
 heroEyebrow: ''
 heroTitleLine1: An Evolving
 heroTitleAccent: Artistic
@@ -122,4 +122,4 @@ timelineColorScheme: soft
 ctaColorScheme: soft
 ---
 
-About page body (optional). Hero image uses the home `about_teaser` image when `heroImage` is not set here.
+Career page body (optional). Hero image uses the home `about_teaser` image when `heroImage` is not set here.

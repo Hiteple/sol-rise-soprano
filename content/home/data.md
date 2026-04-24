@@ -3,12 +3,18 @@ type: HomePage
 headerBrandLine1: Sol Risé
 headerBrandLine2: Soprano
 headerNavLinks:
-  - Home | /
-  - Bio | /bio
-  - Career | /career
-  - Productions | /productions
-  - Gallery | /gallery
-  - Contact | /contact
+  - label: Home
+    href: /
+  - label: Bio
+    href: /bio
+  - label: Career
+    href: /career
+  - label: Productions
+    href: /productions
+  - label: Gallery
+    href: /gallery
+  - label: Contact
+    href: /contact
 heroTitle: Sol Risé
 heroSubtitle: Soprano line
 heroTagline: Eyebrow text
@@ -66,12 +72,18 @@ footerBrandLine1: Sol Risé
 footerBrandLine2: Soprano
 footerBrandTagline: Opera Singer
 footerNavLinks:
-  - Home | /
-  - Bio | /bio
-  - Career | /career
-  - Productions | /productions
-  - Gallery | /gallery
-  - Contact | /contact
+  - label: Home
+    href: /
+  - label: Bio
+    href: /bio
+  - label: Career
+    href: /career
+  - label: Productions
+    href: /productions
+  - label: Gallery
+    href: /gallery
+  - label: Contact
+    href: /contact
 instagramUrl: https://instagram.com/solrisesoprano/
 youtubeUrl: https://youtube.com
 facebookUrl: https://facebook.com

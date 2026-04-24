@@ -312,8 +312,9 @@
 .timeline-markdown ol {
   list-style-type: decimal;
 }
-.timeline-markdown strong {
-  font-weight: 600;
+.timeline-markdown :is(strong, b) {
+  font-weight: 800;
+  color: color-mix(in srgb, currentColor 78%, var(--heading-color) 22%);
 }
 .timeline-markdown em {
   font-style: italic;

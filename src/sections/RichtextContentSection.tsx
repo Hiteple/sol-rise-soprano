@@ -1,3 +1,4 @@
+import { marked } from 'marked'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import type { AboutPage, BioPage } from '../../schemas/site-pages'
 
@@ -24,14 +25,14 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
         >
           {page.fullBioEyebrow}
         </p>
-        <div
-          className="font-body text-base leading-relaxed space-y-6"
-          style={{ color: fg.body }}
-        >
+        <div className="font-body text-base leading-relaxed space-y-6" style={{ color: fg.body }}>
           {page.fullBioParagraphs.map((para, i) => (
-            <p key={i} data-sb-field-path={`fullBioParagraphs.${i}`}>
-              {para}
-            </p>
+            <div
+              key={i}
+              className="timeline-markdown"
+              data-sb-field-path={`fullBioParagraphs.${i}`}
+              dangerouslySetInnerHTML={{ __html: String(marked(para)) }}
+            />
           ))}
         </div>
       </div>

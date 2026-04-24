@@ -61,7 +61,7 @@ src/
 stackbit.config.ts          # Field models + HomePage field list (Content tab groups hero/sections; header/footer fields use "Header -" / "Footer -" labels)
 ```
 
-**Note:** Biography UI lives at `/bio` but still reads `fullBio*` fields from `content/about/page.md` until a dedicated `BioPage` collection is added.
+**Note:** Biography UI now reads from dedicated `content/bio/page.md`. Career page content lives in `content/career/page.md`.
 
 ## Running locally
 

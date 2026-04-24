@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { allAboutPages } from 'content-collections'
+import { allCareerPages } from 'content-collections'
 
 import { ImageBigTextSection } from '@/sections/ImageBigTextSection'
 import { StatsRowSection } from '@/sections/StatsRowSection'
@@ -11,11 +11,11 @@ export const Route = createFileRoute('/career')({
 })
 
 function CareerPage() {
-  const page = allAboutPages[0]
+  const page = allCareerPages[0]
   if (!page) return null
 
   return (
-    <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id="content/about/page.md">
+    <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id="content/career/page.md">
       <ImageBigTextSection page={page} />
       <StatsRowSection page={page} />
       <TimelineSection page={page} />
