@@ -4,7 +4,7 @@ import type { SectionColorScheme } from '../../schemas/color-scheme'
 export type PageHeroSectionProps = {
   heroEyebrow: string
   heroTitle: string
-  heroIntro?: string
+  heroDescription?: string
   colorScheme?: SectionColorScheme
   /** Gallery hero uses slightly tighter bottom padding on large screens */
   bottomSpacing?: 'default' | 'compact'
@@ -13,7 +13,7 @@ export type PageHeroSectionProps = {
 export function PageHeroSection({
   heroEyebrow,
   heroTitle,
-  heroIntro,
+  heroDescription,
   colorScheme,
   bottomSpacing = 'default',
 }: PageHeroSectionProps) {
@@ -37,7 +37,7 @@ export function PageHeroSection({
           {heroEyebrow}
         </p>
         <h1
-          className={`font-display italic leading-none ${heroIntro ? 'mb-8' : ''}`}
+          className={`font-display italic leading-none ${heroDescription ? 'mb-8' : ''}`}
           style={{
             fontSize: 'clamp(3rem, 8vw, 6rem)',
             color: fg.heading,
@@ -46,13 +46,13 @@ export function PageHeroSection({
         >
           {heroTitle}
         </h1>
-        {heroIntro !== undefined && heroIntro !== '' && (
+        {heroDescription !== undefined && heroDescription !== '' && (
           <p
             className="font-body text-lg max-w-xl"
             style={{ color: fg.body }}
-            data-sb-field-path="heroIntro"
+            data-sb-field-path="heroDescription"
           >
-            {heroIntro}
+            {heroDescription}
           </p>
         )}
       </div>

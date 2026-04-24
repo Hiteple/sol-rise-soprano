@@ -19,33 +19,6 @@ highlights:
     label: Opera Houses
   - number: '2'
     label: Continents
-fullBioEyebrow: Biography
-fullBioParagraphs:
-  - >-
-    Isabella Cavalcanti is widely regarded as one of the most compelling
-    sopranos of her generation. Born in Verona to a family of musicians — her
-    father a conductor, her mother a concert pianist — she was immersed in the
-    operatic tradition from infancy. By age twelve she had already performed in
-    youth choir productions across northern Italy; by twenty she had enrolled at
-    the Conservatorio di Musica di Milano on a full scholarship.
-  - >-
-    Her technical mastery is matched only by her interpretive depth. Critics
-    have frequently noted the extraordinary emotional intelligence she brings to
-    every role — an ability to inhabit a character so completely that the
-    boundary between singer and story dissolves entirely. Whether portraying the
-    tragic sacrifice of Violetta, the fierce passion of Tosca, or the
-    heartbroken dignity of the Countess, Isabella makes each heroine feel newly
-    discovered.
-  - >-
-    Off stage, Isabella is a committed pedagogue. She has been a faculty member
-    at leading international masterclass programmes, and in 2024 she founded the
-    Cavalcanti Voice Academy — an initiative dedicated to nurturing exceptional
-    emerging singers from underrepresented backgrounds, offering intensive
-    training, mentorship, and performance opportunities.
-  - >-
-    She resides between Milan and Vienna, and is a proud mother of two. In her
-    rare moments of leisure, she tends to an extensive garden, insisting that
-    "growing things quietly is the great counterbalance to the operatic life."
 timelineSectionEyebrow: Career Milestones
 timelineSectionTitle: A Growing Journey
 timeline:
@@ -116,8 +89,7 @@ ctaPrimaryLabel: Get in Touch
 ctaPrimaryHref: /contact
 ctaSecondaryLabel: ''
 ctaSecondaryHref: ''
-heroColorScheme: bright
-fullBioColorScheme: bright
+heroColorScheme: soft
 timelineColorScheme: soft
 ctaColorScheme: soft
 ---

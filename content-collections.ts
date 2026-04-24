@@ -81,14 +81,21 @@ const home = defineCollection({
     mediaTitle: z.string(),
     mediaItems: z.array(z.string()).max(12).optional(),
     mediaGridColorScheme: sectionColorSchemeSchema.default('soft'),
-    featureSurface: sectionColorSchemeSchema.default('soft'),
-    featureEyebrow: z.string(),
-    featureTitle: z.string(),
-    featureText: z.string(),
-    featureImage: z.string(),
-    featureImageAlt: z.string(),
-    featureCtaLabel: z.string().optional(),
-    featureCtaHref: z.string().optional(),
+    splitGridTitle: z.string().optional(),
+    splitGridDescription: z.string().optional(),
+    splitGridItems: z
+      .array(
+        z.object({
+          title: z.string(),
+          href: z.string(),
+          image: z.string(),
+          decorativeEyebrow: z.string().optional(),
+          subtitle: z.string().optional(),
+        }),
+      )
+      .max(3)
+      .optional(),
+    splitGridColorScheme: sectionColorSchemeSchema.default('soft'),
     quoteBannerColorScheme: sectionColorSchemeSchema.default('soft'),
     quoteText: z.string(),
     quoteAuthor: z.string(),

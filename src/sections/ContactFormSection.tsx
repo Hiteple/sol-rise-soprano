@@ -11,6 +11,9 @@ export type ContactFormSectionProps = {
 export function ContactFormSection({ page }: ContactFormSectionProps) {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const subjectOptions = page?.formSubjectOptions?.length
+    ? page.formSubjectOptions
+    : ['Booking Enquiry', 'Press', 'Teaching']
 
   const scheme = resolveColorScheme(page?.contactFormColorScheme)
   const fg = schemeForeground(scheme)
@@ -62,7 +65,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
 
   return (
     <section
-      className="py-24 lg:py-36"
+      className="section-vertical-padding"
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="contactFormColorScheme"
     >
@@ -227,12 +230,6 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     type: 'email',
                     placeholder: 'you@example.com',
                   },
-                  {
-                    id: 'subject',
-                    label: 'Subject',
-                    type: 'text',
-                    placeholder: 'Booking Enquiry · Press · Teaching',
-                  },
                 ].map((field) => (
                   <div key={field.id}>
                     <label
@@ -262,6 +259,42 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     />
                   </div>
                 ))}
+
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block font-body text-xs uppercase tracking-widest font-semibold mb-2"
+                    style={{ color: isWine ? fg.body : 'var(--subtle-text-color)' }}
+                  >
+                    Subject
+                  </label>
+                  <select
+                    id="subject"
+                    name="subject"
+                    required
+                    defaultValue=""
+                    className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border-b bg-transparent"
+                    style={{
+                      borderColor: inputBorderRest,
+                      color: isWine ? fg.heading : 'var(--body-color)',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = inputBorderFocus
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = inputBorderRest
+                    }}
+                  >
+                    <option value="" disabled>
+                      Select a subject
+                    </option>
+                    {subjectOptions.map((option, idx) => (
+                      <option key={`${option}-${idx}`} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <div>
                   <label

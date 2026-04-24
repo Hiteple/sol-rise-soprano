@@ -9,7 +9,7 @@ export type MediaGridSectionProps = {
   mediaItems: MediaItem[]
   filter: MediaFilter
   onFilterChange: (filter: MediaFilter) => void
-  onOpenVideo: (video: { url: string; title?: string | null }) => void
+  onOpenMedia: (media: { kind: 'video' | 'image'; url: string; title?: string | null }) => void
 }
 
 export function MediaGridSection({
@@ -17,7 +17,7 @@ export function MediaGridSection({
   mediaItems,
   filter,
   onFilterChange,
-  onOpenVideo,
+  onOpenMedia,
 }: MediaGridSectionProps) {
   const filtered =
     filter === 'all' ? mediaItems : mediaItems.filter((m) => m.type === filter)
@@ -27,7 +27,7 @@ export function MediaGridSection({
 
   return (
     <section
-      className="py-24 lg:py-36"
+      className="section-vertical-padding"
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="mediaGridColorScheme"
     >
@@ -84,7 +84,10 @@ export function MediaGridSection({
                 data-sb-object-id={`content/media/${item._meta.path}.md`}
                 onClick={() => {
                   if (item.type === 'video' && item.videoUrl) {
-                    onOpenVideo({ url: item.videoUrl, title: item.title })
+                    onOpenMedia({ kind: 'video', url: item.videoUrl, title: item.title })
+                  }
+                  if (item.type === 'image') {
+                    onOpenMedia({ kind: 'image', url: item.thumbnail, title: item.title })
                   }
                 }}
               >

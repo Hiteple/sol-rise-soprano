@@ -5,53 +5,33 @@ import { schemeForeground, schemeSolidBackground } from '@/lib/section-color-sch
 import type { HomeImageTextSection } from './types'
 
 export type ImageTextSectionProps = {
-  /** Drives Stackbit `data-sb-field-path` prefixes and small copy defaults */
-  variant: 'about' | 'feature'
   section: HomeImageTextSection
 }
 
-export function ImageTextSection({ variant, section }: ImageTextSectionProps) {
-  const isAbout = variant === 'about'
-
-  const eyebrow = isAbout ? (section.eyebrow ?? 'About') : section.eyebrow
-  const linkHref = isAbout
-    ? (section.linkHref ?? '/career')
-    : (section.linkHref ?? '/contact')
-  const linkLabel =
-    isAbout
-      ? section.linkText
-      : (section.linkText ?? 'Enquire About Lessons →')
+export function ImageTextSection({ section }: ImageTextSectionProps) {
+  const eyebrow = section.eyebrow ?? 'About'
+  const linkHref = section.linkHref ?? '/career'
+  const linkLabel = section.linkText
 
   const scheme = section.surface
   const surfaceBg = schemeSolidBackground(scheme)
   const fg = schemeForeground(scheme)
   const isWine = scheme === 'wine'
 
-  const paths = isAbout
-    ? {
-        eyebrow: 'aboutEyebrow',
-        title: 'aboutTitle',
-        text: 'aboutText',
-        image: 'aboutImage#@src',
-        linkHref: 'aboutHref',
-        linkLabel: 'aboutLinkText',
-      }
-    : {
-        eyebrow: 'featureEyebrow',
-        title: 'featureTitle',
-        text: 'featureText',
-        image: 'featureImage#@src',
-        linkHref: 'featureCtaHref',
-        linkLabel: 'featureCtaLabel',
-      }
-
-  const surfaceFieldPath = isAbout ? 'aboutSurface' : 'featureSurface'
+  const paths = {
+    eyebrow: 'aboutEyebrow',
+    title: 'aboutTitle',
+    text: 'aboutText',
+    image: 'aboutImage#@src',
+    linkHref: 'aboutHref',
+    linkLabel: 'aboutLinkText',
+  }
 
   return (
     <section
-      className="py-24 lg:py-36"
+      className="section-vertical-padding"
       style={{ background: surfaceBg }}
-      data-sb-field-path={surfaceFieldPath}
+      data-sb-field-path="aboutSurface"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
@@ -88,34 +68,18 @@ export function ImageTextSection({ variant, section }: ImageTextSectionProps) {
               data-sb-field-path={paths.linkHref}
             >
               <span data-sb-field-path={paths.linkLabel}>
-                {isAbout ? `${linkLabel} →` : linkLabel}
+                {`${linkLabel} →`}
               </span>
             </Link>
           </div>
 
           <div className="lg:col-span-3 img-zoom order-1 lg:order-2 relative">
-            <div
-              className="absolute -top-6 -right-6 w-32 h-32 border"
-              style={{
-                borderColor: isWine
-                  ? fg.divider
-                  : 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
-              }}
-            />
             <img
               src={netlifyImg(section.image, 900, 1100)}
               alt={section.imageAlt}
               className="w-full object-cover"
               style={{ maxHeight: '640px', objectPosition: 'top center' }}
               data-sb-field-path={paths.image}
-            />
-            <div
-              className="absolute -bottom-6 -left-6 w-32 h-32 border"
-              style={{
-                borderColor: isWine
-                  ? fg.divider
-                  : 'color-mix(in srgb, var(--accent-color) 22%, transparent)',
-              }}
             />
           </div>
         </div>

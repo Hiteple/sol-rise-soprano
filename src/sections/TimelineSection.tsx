@@ -13,7 +13,7 @@ export function TimelineSection({ page }: TimelineSectionProps) {
 
   return (
     <section
-      className="py-24 lg:py-36"
+      className="section-vertical-padding"
       style={{ background: schemeSolidBackground(scheme) }}
       data-sb-field-path="timelineColorScheme"
     >

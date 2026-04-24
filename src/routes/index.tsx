@@ -8,6 +8,7 @@ import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
 import { MediaGridSection } from '@/sections/MediaGridSection'
 import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
+import { SplitGridSection } from '@/sections/SplitGridSection'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -28,13 +29,38 @@ function HomePage() {
     selectedMediaItems.length > 0
       ? selectedMediaItems
       : [...allMediaItems].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  const splitGridItems = site?.splitGridItems ?? [
+    {
+      title: 'Book a Performance',
+      href: '/contact',
+      image: 'https://picsum.photos/seed/split-performance/1200/1200',
+      decorativeEyebrow: '',
+      subtitle: '',
+    },
+    {
+      title: 'Artistic Collaborations',
+      href: '/contact',
+      image: 'https://picsum.photos/seed/split-collab/1200/1200',
+      decorativeEyebrow: '',
+      subtitle: '',
+    },
+    {
+      title: 'Masterclasses & Lessons',
+      href: '/contact',
+      image: 'https://picsum.photos/seed/split-lessons/1200/1200',
+      decorativeEyebrow: '',
+      subtitle: '',
+    },
+  ]
   const [filter, setFilter] = useState<'all' | 'video' | 'image'>('all')
-  const [activeVideo, setActiveVideo] = useState<{ url: string; title?: string | null } | null>(
-    null,
-  )
+  const [activeMedia, setActiveMedia] = useState<{
+    kind: 'video' | 'image'
+    url: string
+    title?: string | null
+  } | null>(null)
 
   useEffect(() => {
-    if (!activeVideo) return
+    if (!activeMedia) return
 
     const scrollY = window.scrollY
     const original = {
@@ -56,7 +82,7 @@ function HomePage() {
       document.body.style.width = original.width
       window.scrollTo(0, scrollY)
     }
-  }, [activeVideo])
+  }, [activeMedia])
 
   if (!site) return null
 
@@ -77,7 +103,6 @@ function HomePage() {
         }}
       />
       <ImageTextSection
-        variant="about"
         section={{
           surface: site.aboutSurface,
           eyebrow: site.aboutEyebrow,
@@ -98,20 +123,13 @@ function HomePage() {
         mediaItems={mediaItems}
         filter={filter}
         onFilterChange={setFilter}
-        onOpenVideo={setActiveVideo}
+        onOpenMedia={setActiveMedia}
       />
-      <ImageTextSection
-        variant="feature"
-        section={{
-          surface: site.featureSurface,
-          eyebrow: site.featureEyebrow,
-          title: site.featureTitle,
-          text: site.featureText,
-          image: site.featureImage,
-          imageAlt: site.featureImageAlt,
-          linkText: site.featureCtaLabel,
-          linkHref: site.featureCtaHref,
-        }}
+      <SplitGridSection
+        items={splitGridItems}
+        colorScheme={site.splitGridColorScheme}
+        title={site.splitGridTitle}
+        description={site.splitGridDescription}
       />
       <QuoteBannerSection
         section={{
@@ -123,17 +141,17 @@ function HomePage() {
         }}
       />
 
-      {activeVideo && (
+      {activeMedia && (
         <div
           className="modal-overlay flex-col"
-          onClick={() => setActiveVideo(null)}
+          onClick={() => setActiveMedia(null)}
         >
-          {activeVideo.title?.trim() && (
+          {activeMedia.title?.trim() && (
             <h3
               className="mb-4 px-4 text-center font-display text-2xl italic"
               style={{ color: 'var(--media-caption-text-color)' }}
             >
-              {activeVideo.title.trim()}
+              {activeMedia.title.trim()}
             </h3>
           )}
           <div
@@ -144,19 +162,27 @@ function HomePage() {
               type="button"
               className="absolute -top-12 right-0 p-2 transition-opacity hover:opacity-70"
               style={{ color: 'var(--media-caption-text-color)' }}
-              onClick={() => setActiveVideo(null)}
+              onClick={() => setActiveMedia(null)}
             >
               <X size={28} />
             </button>
-            <div style={{ aspectRatio: '16/9' }}>
-              <iframe
-                src={youtubeIframeSrc(activeVideo.url)}
-                title="Video player"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+            {activeMedia.kind === 'video' ? (
+              <div style={{ aspectRatio: '16/9' }}>
+                <iframe
+                  src={youtubeIframeSrc(activeMedia.url)}
+                  title="Video player"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <img
+                src={activeMedia.url}
+                alt={activeMedia.title ?? 'Media image'}
+                className="h-[82vh] w-full object-cover"
               />
-            </div>
+            )}
           </div>
         </div>
       )}

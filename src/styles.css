@@ -14,7 +14,7 @@
   /* Light theme — semantic color tokens */
   --page-background-color: var(--palette-pink);
   --section-background-color: color-mix(in srgb, var(--palette-pink) 72%, white 28%);
-  /** Optional “paper” band for text-heavy blocks (`aboutSurface/featureSurface: bright` in home page data) */
+  /** Optional “paper” band for text-heavy blocks (`aboutSurface: bright` in home page data) */
   --section-surface-bright: color-mix(in srgb, white 96%, var(--palette-pink) 4%);
 
   --heading-color: var(--palette-pine);
@@ -53,6 +53,8 @@
 
   /* Fluid heading scale */
   --h1-fluid-size: clamp(3.25rem, 8vw, 5.25rem); /* max = 84px */
+  --sections-vertical-padding: 4rem; /* matches py-16 */
+  --sections-vertical-padding-lg: 5rem; /* matches lg:py-20 */
 
   --background: var(--page-background-color);
   --foreground: var(--body-color);
@@ -136,6 +138,16 @@
 
 .font-body {
   font-family: 'Nunito Sans', system-ui, sans-serif;
+}
+
+.section-vertical-padding {
+  padding-block: var(--sections-vertical-padding);
+}
+
+@media (min-width: 1024px) {
+  .section-vertical-padding {
+    padding-block: var(--sections-vertical-padding-lg);
+  }
 }
 
 /* Gold ornamental divider */
@@ -322,4 +334,103 @@
 .timeline-markdown a {
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+/* SplitGrid section */
+.split-grid {
+  width: 100%;
+  display: flex;
+  min-height: 26rem;
+}
+.split-grid-item {
+  position: relative;
+  flex: 1 1 0%;
+  min-height: 26rem;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: flex-grow 0.45s ease;
+}
+.split-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--palette-pine) 72%, transparent) 8%,
+    color-mix(in srgb, var(--palette-wine) 30%, transparent) 48%,
+    transparent 78%
+  );
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+}
+.split-grid-content {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1;
+  color: var(--media-caption-text-color);
+  transition: background 0.22s ease, color 0.22s ease, padding 0.22s ease;
+}
+.split-grid-link {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--media-caption-text-color) 38%, transparent);
+  background: var(--split-grid-eyebrow-bg);
+  color: var(--split-grid-eyebrow-text);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+@media (min-width: 768px) {
+  .split-grid,
+  .split-grid-item {
+    min-height: 600px;
+  }
+  .split-grid-item .split-grid-content {
+    text-shadow: none;
+  }
+  .split-grid:hover .split-grid-item {
+    flex-grow: 0.85;
+  }
+  .split-grid:hover .split-grid-item:hover {
+    flex-grow: 1.8;
+  }
+  .split-grid:hover .split-grid-item:hover .split-grid-overlay {
+    opacity: 0.08;
+  }
+  .split-grid:hover .split-grid-item:hover .split-grid-content {
+    background: var(--split-grid-hover-content-bg);
+    color: var(--split-grid-hover-content-text);
+    padding: 1em;
+  }
+  .split-grid:hover .split-grid-item:hover .split-grid-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 767px) {
+  .split-grid {
+    flex-direction: column;
+    min-height: 0;
+    gap: 1em;
+  }
+  .split-grid-item {
+    min-height: 30rem;
+  }
+  .split-grid-content {
+    color: var(--media-caption-text-color);
+    text-shadow: none;
+    background: var(--split-grid-hover-content-bg);
+    color: var(--split-grid-hover-content-text);
+    padding: 1em;
+  }
+  .split-grid-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

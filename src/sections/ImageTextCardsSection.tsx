@@ -26,7 +26,7 @@ export function ImageTextCardsSection({
   const fg = schemeForeground(scheme)
 
   return (
-    <section className="py-24 lg:py-36" data-sb-field-path="productionsListColorScheme">
+    <section className="section-vertical-padding" data-sb-field-path="productionsListColorScheme">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="space-y-2">
           {productions.map((production, idx) => (

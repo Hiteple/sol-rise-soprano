@@ -15,15 +15,15 @@ headerNavLinks:
     href: /gallery
   - label: Contact
     href: /contact
-heroTitle: Sol Risé
-heroSubtitle: Soprano line
-heroTagline: Eyebrow text
+heroTitle: ''
+heroSubtitle: ''
+heroTagline: ''
 heroImage: /images/carmen-comodoro-rivadavia-optimized.jpg
 heroImageAlt: Sol Rise soprano professional website
-primaryCtaLabel: View Productions
-primaryCtaHref: /productions
-secondaryCtaLabel: Book a Performance
-secondaryCtaHref: /contact
+primaryCtaLabel: ''
+primaryCtaHref: ''
+secondaryCtaLabel: ''
+secondaryCtaHref: ''
 aboutSurface: soft
 aboutEyebrow: About
 aboutTitle: A Voice Born for the Stage
@@ -41,7 +41,7 @@ aboutImageAlt: image placeholder pending
 aboutLinkText: Link text
 aboutHref: /career
 mediaEyebrow: On Stage & On Screen
-mediaTitle: Media
+mediaTitle: Last Events
 mediaItems:
   - content/media/01-la-traviata.md
   - content/media/02-tosca.md
@@ -49,21 +49,25 @@ mediaItems:
   - content/media/04-la-scala-opening.md
   - content/media/05-met-debut.md
   - content/media/06-figaro.md
-featureEyebrow: Pedagogy & Teaching
-featureTitle: Lorem ipsum dolor
-featureText: >-
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-  when an unknown printer took a galley of type and scrambled it to make a type
-  specimen book. It has survived not only five centuries, but also the leap into
-  electronic typesetting, remaining essentially unchanged. It was popularised in
-  the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-  and more recently with desktop publishing software like Aldus PageMaker
-  including versions of Lorem Ipsum.
-featureImage: https://picsum.photos/seed/operateach1/800/1060
-featureImageAlt: Isabella Cavalcanti conducting a voice masterclass
-featureCtaLabel: Enquire About Lessons →
-featureCtaHref: /contact
+splitGridItems:
+  - title: La Traviata Act II
+    href: /contact
+    image: https://picsum.photos/seed/split-performance/1200/1200
+    decorativeEyebrow: May 25th
+    subtitle: London - Placeholder Opera House
+  - title: Tosca — Vissi d'Arte
+    href: /contact
+    image: https://picsum.photos/seed/split-collab/1200/1200
+    decorativeEyebrow: May 25th
+    subtitle: London - Placeholder Opera House
+  - title: Vienna Recital
+    href: /contact
+    image: https://picsum.photos/seed/split-lessons/1200/1200
+    decorativeEyebrow: May 25th
+    subtitle: London - Placeholder Opera House
+splitGridColorScheme: soft
+splitGridTitle: Schedule
+splitGridDescription: Description of the upcoming events
 quoteText: motivational or recommendation message
 quoteAuthor: reviewer or recommendation by
 quoteImage: https://picsum.photos/seed/operaquote1/1920/900
@@ -90,7 +94,6 @@ facebookUrl: https://facebook.com
 email: solrisesoprano@gmail.com
 heroColorScheme: wine
 mediaGridColorScheme: wine
-featureSurface: soft
 quoteBannerColorScheme: wine
 ---
 Single-source homepage content (hero, sections, and footer socials).

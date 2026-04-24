@@ -21,6 +21,21 @@ const timelineItemSchema = z.object({
   description: timelineDescriptionSchema,
 })
 
+const fullBioParagraphSchema = z
+  .union([
+    z.string(),
+    z.object({
+      content: z.string(),
+      addBorderBottom: z.boolean().optional(),
+    }),
+  ])
+  .transform((v) => {
+    if (typeof v === 'string') {
+      return { content: v, addBorderBottom: false }
+    }
+    return { content: v.content, addBorderBottom: v.addBorderBottom ?? false }
+  })
+
 export const aboutPageSchema = z.object({
   type: z.literal('CareerPage'),
   heroEyebrow: z.string(),
@@ -35,9 +50,6 @@ export const aboutPageSchema = z.object({
   heroColorScheme: sectionColorSchemeSchema.default('soft'),
   statsSurface: sectionColorSchemeSchema.default('soft'),
   highlights: z.array(highlightSchema),
-  fullBioEyebrow: z.string(),
-  fullBioColorScheme: sectionColorSchemeSchema.default('soft'),
-  fullBioParagraphs: z.array(z.string()),
   timelineSectionEyebrow: z.string(),
   timelineSectionTitle: z.string(),
   timelineColorScheme: sectionColorSchemeSchema.default('soft'),
@@ -79,6 +91,11 @@ export const contactPageSchema = z.object({
   youtubeHandle: z.string(),
   facebookUrl: z.string(),
   facebookHandle: z.string(),
+  formSubjectOptions: z.array(z.string()).default([
+    'Booking Enquiry',
+    'Press',
+    'Teaching',
+  ]),
   successTitle: z.string(),
   successMessage: z.string(),
   successResetLabel: z.string(),
@@ -90,16 +107,20 @@ export const productionsPageSchema = z.object({
   pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
   heroEyebrow: z.string(),
   heroTitle: z.string(),
-  heroIntro: z.string(),
+  heroDescription: z.string(),
   productionsListColorScheme: sectionColorSchemeSchema.default('soft'),
   content: z.string(),
 })
 
 export const bioPageSchema = z.object({
   type: z.literal('BioPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
+  heroEyebrow: z.string(),
+  heroTitle: z.string(),
+  heroDescription: z.string().optional(),
   fullBioColorScheme: sectionColorSchemeSchema.default('soft'),
   fullBioEyebrow: z.string(),
-  fullBioParagraphs: z.array(z.string()),
+  fullBioParagraphs: z.array(fullBioParagraphSchema),
   content: z.string(),
 })
 

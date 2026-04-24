@@ -35,19 +35,6 @@ export const homeMediaGridSectionSchema = z.object({
   title: z.string(),
 })
 
-/** Renders with `ImageTextSection` (`variant="feature"`) — Stackbit tab “Image + Text”. */
-export const homeFeatureSplitSectionSchema = z.object({
-  type: z.literal('feature_split'),
-  surface: sectionSurfaceSchema,
-  eyebrow: z.string(),
-  featureTitle: z.string(),
-  featureText: z.string(),
-  featureImage: z.string(),
-  featureImageAlt: z.string(),
-  ctaLabel: z.string().optional(),
-  ctaHref: z.string().optional(),
-})
-
 export const homeQuoteBannerSectionSchema = z.object({
   type: z.literal('quote_banner'),
   quoteText: z.string(),
@@ -60,7 +47,6 @@ export const homeSectionSchema = z.discriminatedUnion('type', [
   homeHeroSectionSchema,
   homeAboutTeaserSectionSchema,
   homeMediaGridSectionSchema,
-  homeFeatureSplitSectionSchema,
   homeQuoteBannerSectionSchema,
 ])
 
@@ -68,5 +54,4 @@ export type HomeSection = z.infer<typeof homeSectionSchema>
 export type HomeHeroSection = z.infer<typeof homeHeroSectionSchema>
 export type HomeAboutTeaserSection = z.infer<typeof homeAboutTeaserSectionSchema>
 export type HomeMediaGridSection = z.infer<typeof homeMediaGridSectionSchema>
-export type HomeFeatureSplitSection = z.infer<typeof homeFeatureSplitSectionSchema>
 export type HomeQuoteBannerSection = z.infer<typeof homeQuoteBannerSectionSchema>

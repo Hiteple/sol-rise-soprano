@@ -1,10 +1,9 @@
 import { marked } from 'marked'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
-import type { AboutPage, BioPage } from '../../schemas/site-pages'
+import type { BioPage } from '../../schemas/site-pages'
 
 export type RichtextContentSectionProps = {
-  page: Pick<AboutPage, 'fullBioColorScheme' | 'fullBioEyebrow' | 'fullBioParagraphs'>
-    | Pick<BioPage, 'fullBioColorScheme' | 'fullBioEyebrow' | 'fullBioParagraphs'>
+  page: Pick<BioPage, 'fullBioColorScheme' | 'fullBioEyebrow' | 'fullBioParagraphs'>
 }
 
 export function RichtextContentSection({ page }: RichtextContentSectionProps) {
@@ -13,7 +12,7 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
 
   return (
     <section
-      className="py-24 lg:py-36"
+      className="section-vertical-padding"
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="fullBioColorScheme"
     >
@@ -30,8 +29,16 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
             <div
               key={i}
               className="timeline-markdown"
-              data-sb-field-path={`fullBioParagraphs.${i}`}
-              dangerouslySetInnerHTML={{ __html: String(marked(para)) }}
+              data-sb-field-path={`fullBioParagraphs.${i}.content`}
+              style={
+                para.addBorderBottom
+                  ? {
+                      paddingBottom: '1rem',
+                      borderBottom: `1px solid ${fg.divider}`,
+                    }
+                  : undefined
+              }
+              dangerouslySetInnerHTML={{ __html: String(marked(para.content)) }}
             />
           ))}
         </div>
