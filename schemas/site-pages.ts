@@ -95,7 +95,16 @@ export const productionsPageSchema = z.object({
   content: z.string(),
 })
 
+export const bioPageSchema = z.object({
+  type: z.literal('BioPage'),
+  fullBioColorScheme: sectionColorSchemeSchema.default('soft'),
+  fullBioEyebrow: z.string(),
+  fullBioParagraphs: z.array(z.string()),
+  content: z.string(),
+})
+
 export type AboutPage = z.infer<typeof aboutPageSchema>
 export type GalleryPage = z.infer<typeof galleryPageSchema>
 export type ContactPage = z.infer<typeof contactPageSchema>
 export type ProductionsPage = z.infer<typeof productionsPageSchema>
+export type BioPage = z.infer<typeof bioPageSchema>

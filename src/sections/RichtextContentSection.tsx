@@ -1,8 +1,9 @@
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
-import type { AboutPage } from '../../schemas/site-pages'
+import type { AboutPage, BioPage } from '../../schemas/site-pages'
 
 export type RichtextContentSectionProps = {
-  page: AboutPage
+  page: Pick<AboutPage, 'fullBioColorScheme' | 'fullBioEyebrow' | 'fullBioParagraphs'>
+    | Pick<BioPage, 'fullBioColorScheme' | 'fullBioEyebrow' | 'fullBioParagraphs'>
 }
 
 export function RichtextContentSection({ page }: RichtextContentSectionProps) {

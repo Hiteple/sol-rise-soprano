@@ -90,6 +90,16 @@ export default defineStackbitConfig({
             colorSchemeEnumField('mediaGridColorScheme', 'mediaGrid'),
             { name: 'mediaEyebrow', type: 'string', label: 'Eyebrow', group: 'mediaGrid' },
             { name: 'mediaTitle', type: 'string', label: 'Title', group: 'mediaGrid' },
+            {
+              name: 'mediaItems',
+              type: 'list',
+              label: 'Media Items',
+              group: 'mediaGrid',
+              items: {
+                type: 'reference',
+                models: ['video', 'image'],
+              },
+            },
             colorSchemeEnumField('featureSurface', 'imageTextFeature'),
             { name: 'featureEyebrow', type: 'string', label: 'Eyebrow', group: 'imageTextFeature' },
             { name: 'featureTitle', type: 'string', label: 'Title', group: 'imageTextFeature' },
@@ -119,9 +129,23 @@ export default defineStackbitConfig({
           ],
         },
         {
-          name: 'AboutPage',
+          name: 'BioPage',
           type: 'page',
-          urlPath: '/about',
+          urlPath: '/bio',
+          filePath: 'content/bio/page.md',
+          fieldGroups: [
+            { name: 'richtextContent', label: 'Richtext Content' },
+          ],
+          fields: [
+            colorSchemeEnumField('fullBioColorScheme', 'richtextContent'),
+            { name: 'fullBioEyebrow', type: 'string', label: 'Eyebrow', group: 'richtextContent' },
+            { name: 'fullBioParagraphs', type: 'list', label: 'Paragraphs', items: { type: 'text' }, group: 'richtextContent' },
+          ],
+        },
+        {
+          name: 'CareerPage',
+          type: 'page',
+          urlPath: '/career',
           filePath: 'content/about/page.md',
           fieldGroups: [
             { name: 'imageBigText', label: 'Image + Big Text' },

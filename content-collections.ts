@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { sectionColorSchemeSchema } from './schemas/color-scheme'
 import {
   aboutPageSchema,
+  bioPageSchema,
   contactPageSchema,
   galleryPageSchema,
   productionsPageSchema,
@@ -43,7 +44,7 @@ const home = defineCollection({
     headerNavLinks: z.array(z.string()).default([
       'Home | /',
       'Bio | /bio',
-      'Career | /about',
+      'Career | /career',
       'Productions | /productions',
       'Gallery | /gallery',
       'Contact | /contact',
@@ -68,6 +69,7 @@ const home = defineCollection({
     aboutHref: z.string().optional(),
     mediaEyebrow: z.string(),
     mediaTitle: z.string(),
+    mediaItems: z.array(z.string()).max(12).optional(),
     mediaGridColorScheme: sectionColorSchemeSchema.default('soft'),
     featureSurface: sectionColorSchemeSchema.default('soft'),
     featureEyebrow: z.string(),
@@ -88,7 +90,7 @@ const home = defineCollection({
     footerNavLinks: z.array(z.string()).default([
       'Home | /',
       'Bio | /bio',
-      'Career | /about',
+      'Career | /career',
       'Productions | /productions',
       'Gallery | /gallery',
       'Contact | /contact',
@@ -174,6 +176,13 @@ const productionsPage = defineCollection({
   schema: productionsPageSchema,
 })
 
+const bioPage = defineCollection({
+  name: 'bioPage',
+  directory: 'content/bio',
+  include: 'page.md',
+  schema: bioPageSchema,
+})
+
 export default defineConfig({
   collections: [
     education,
@@ -183,6 +192,7 @@ export default defineConfig({
     productions,
     aboutPage,
     galleryPage,
+    bioPage,
     contactPage,
     productionsPage,
   ],

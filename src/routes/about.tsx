@@ -1,25 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { allAboutPages } from 'content-collections'
-
-import { ImageBigTextSection } from '@/sections/ImageBigTextSection'
-import { StatsRowSection } from '@/sections/StatsRowSection'
-import { TextButtonsSection } from '@/sections/TextButtonsSection'
-import { TimelineSection } from '@/sections/TimelineSection'
+import { Navigate } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/about')({
-  component: AboutPage,
+  component: AboutRedirect,
 })
 
-function AboutPage() {
-  const page = allAboutPages[0]
-  if (!page) return null
-
-  return (
-    <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id="content/about/page.md">
-      <ImageBigTextSection page={page} />
-      <StatsRowSection page={page} />
-      <TimelineSection page={page} />
-      <TextButtonsSection page={page} />
-    </div>
-  )
+function AboutRedirect() {
+  return <Navigate to="/career" replace />
 }

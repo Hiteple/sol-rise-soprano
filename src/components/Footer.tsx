@@ -6,7 +6,7 @@ import { parseSiteNavLinks } from '@/lib/nav-links'
 const fallbackFooterLinks = [
   { label: 'Home', href: '/' },
   { label: 'Bio', href: '/bio' },
-  { label: 'Career', href: '/about' },
+  { label: 'Career', href: '/career' },
   { label: 'Productions', href: '/productions' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },

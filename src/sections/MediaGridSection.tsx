@@ -9,7 +9,7 @@ export type MediaGridSectionProps = {
   mediaItems: MediaItem[]
   filter: MediaFilter
   onFilterChange: (filter: MediaFilter) => void
-  onOpenVideo: (videoUrl: string) => void
+  onOpenVideo: (video: { url: string; title?: string | null }) => void
 }
 
 export function MediaGridSection({
@@ -84,7 +84,7 @@ export function MediaGridSection({
                 data-sb-object-id={`content/media/${item._meta.path}.md`}
                 onClick={() => {
                   if (item.type === 'video' && item.videoUrl) {
-                    onOpenVideo(item.videoUrl)
+                    onOpenVideo({ url: item.videoUrl, title: item.title })
                   }
                 }}
               >

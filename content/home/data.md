@@ -5,7 +5,7 @@ headerBrandLine2: Soprano
 headerNavLinks:
   - Home | /
   - Bio | /bio
-  - Career | /about
+  - Career | /career
   - Productions | /productions
   - Gallery | /gallery
   - Contact | /contact
@@ -18,7 +18,7 @@ primaryCtaLabel: View Productions
 primaryCtaHref: /productions
 secondaryCtaLabel: Book a Performance
 secondaryCtaHref: /contact
-aboutSurface: bright
+aboutSurface: soft
 aboutEyebrow: About
 aboutTitle: A Voice Born for the Stage
 aboutText: >-
@@ -33,9 +33,16 @@ aboutText: >-
 aboutImage: https://picsum.photos/seed/operaportr1/800/1060
 aboutImageAlt: image placeholder pending
 aboutLinkText: Link text
-aboutHref: /about
+aboutHref: /career
 mediaEyebrow: On Stage & On Screen
 mediaTitle: Media
+mediaItems:
+  - content/media/01-la-traviata.md
+  - content/media/02-tosca.md
+  - content/media/03-vienna-recital.md
+  - content/media/04-la-scala-opening.md
+  - content/media/05-met-debut.md
+  - content/media/06-figaro.md
 featureEyebrow: Pedagogy & Teaching
 featureTitle: Lorem ipsum dolor
 featureText: >-
@@ -61,7 +68,7 @@ footerBrandTagline: Opera Singer
 footerNavLinks:
   - Home | /
   - Bio | /bio
-  - Career | /about
+  - Career | /career
   - Productions | /productions
   - Gallery | /gallery
   - Contact | /contact

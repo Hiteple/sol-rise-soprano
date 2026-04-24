@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { allHomes, allMediaItems } from 'content-collections'
 import { X } from 'lucide-react'
 
+import { youtubeIframeSrc } from '@/lib/utils'
 import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
 import { MediaGridSection } from '@/sections/MediaGridSection'
@@ -12,13 +13,50 @@ export const Route = createFileRoute('/')({
   component: HomePage,
 })
 
+function normalizeRef(value: string): string {
+  return value.replace(/^\/+/, '').replace(/^content\/media\//, '').replace(/\.md$/, '')
+}
+
 function HomePage() {
   const site = allHomes[0]
-  const mediaItems = [...allMediaItems].sort(
-    (a, b) => (a.order ?? 0) - (b.order ?? 0),
-  )
+  const mediaByPath = new Map(allMediaItems.map((item) => [item._meta.path, item]))
+  const selectedMediaItems =
+    site?.mediaItems
+      ?.map((ref) => mediaByPath.get(normalizeRef(ref)))
+      .filter((item): item is (typeof allMediaItems)[number] => Boolean(item)) ?? []
+  const mediaItems =
+    selectedMediaItems.length > 0
+      ? selectedMediaItems
+      : [...allMediaItems].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
   const [filter, setFilter] = useState<'all' | 'video' | 'image'>('all')
-  const [activeVideo, setActiveVideo] = useState<string | null>(null)
+  const [activeVideo, setActiveVideo] = useState<{ url: string; title?: string | null } | null>(
+    null,
+  )
+
+  useEffect(() => {
+    if (!activeVideo) return
+
+    const scrollY = window.scrollY
+    const original = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+    }
+
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
+
+    return () => {
+      document.body.style.overflow = original.overflow
+      document.body.style.position = original.position
+      document.body.style.top = original.top
+      document.body.style.width = original.width
+      window.scrollTo(0, scrollY)
+    }
+  }, [activeVideo])
 
   if (!site) return null
 
@@ -87,9 +125,17 @@ function HomePage() {
 
       {activeVideo && (
         <div
-          className="modal-overlay"
+          className="modal-overlay flex-col"
           onClick={() => setActiveVideo(null)}
         >
+          {activeVideo.title?.trim() && (
+            <h3
+              className="mb-4 px-4 text-center font-display text-2xl italic"
+              style={{ color: 'var(--media-caption-text-color)' }}
+            >
+              {activeVideo.title.trim()}
+            </h3>
+          )}
           <div
             className="relative w-full max-w-4xl mx-4"
             onClick={(e) => e.stopPropagation()}
@@ -104,7 +150,7 @@ function HomePage() {
             </button>
             <div style={{ aspectRatio: '16/9' }}>
               <iframe
-                src={`${activeVideo}?autoplay=1`}
+                src={youtubeIframeSrc(activeVideo.url)}
                 title="Video player"
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

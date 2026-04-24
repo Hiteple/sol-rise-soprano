@@ -11,13 +11,13 @@ heroQuote: '"Singing is not what I do — it is who I am."'
 heroQuoteAttribution: — Sol Risé
 statsSurface: wine
 highlights:
-  - number: 20+
+  - number: 10+
     label: Years on Stage
-  - number: '47'
-    label: Leading Roles
-  - number: '28'
+  - number: '5'
+    label: Roles
+  - number: '2'
     label: Opera Houses
-  - number: '3'
+  - number: '2'
     label: Continents
 fullBioEyebrow: Biography
 fullBioParagraphs:

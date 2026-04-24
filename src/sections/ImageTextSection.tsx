@@ -15,7 +15,7 @@ export function ImageTextSection({ variant, section }: ImageTextSectionProps) {
 
   const eyebrow = isAbout ? (section.eyebrow ?? 'About') : section.eyebrow
   const linkHref = isAbout
-    ? (section.linkHref ?? '/about')
+    ? (section.linkHref ?? '/career')
     : (section.linkHref ?? '/contact')
   const linkLabel =
     isAbout

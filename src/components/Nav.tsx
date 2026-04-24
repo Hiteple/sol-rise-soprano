@@ -8,7 +8,7 @@ import { parseSiteNavLinks } from '@/lib/nav-links'
 const fallbackNavLinks = [
   { to: '/' as const, label: 'Home' },
   { to: '/bio' as const, label: 'Bio' },
-  { to: '/about' as const, label: 'Career' },
+  { to: '/career' as const, label: 'Career' },
   { to: '/productions' as const, label: 'Productions' },
   { to: '/gallery' as const, label: 'Gallery' },
   { to: '/contact' as const, label: 'Contact' },
