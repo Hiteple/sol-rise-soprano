@@ -49,7 +49,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
     setLoading(true)
     const form = e.currentTarget
     const formData = new FormData(form)
-    fetch('/contact.html', {
+    fetch('/contact-form.html', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(

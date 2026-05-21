@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react'
 import { allHomes } from 'content-collections'
 
 import { parseSiteNavLinks } from '@/lib/nav-links'
+import { cn } from '@/lib/utils'
 
 const fallbackNavLinks = [
   { to: '/' as const, label: 'Home' },
@@ -118,6 +119,7 @@ export function Nav() {
             className="md:hidden p-2"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
             style={{
               color: useChrome
                 ? 'var(--chrome-text)'
@@ -134,10 +136,19 @@ export function Nav() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
+      {/* Mobile Menu — slides down on open, up on close */}
+      <div
+        className={cn(
+          'md:hidden overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none',
+          menuOpen ? 'max-h-[28rem]' : 'max-h-0',
+        )}
+        aria-hidden={!menuOpen}
+      >
         <div
-          className="md:hidden px-6 pb-8 pt-4 flex flex-col gap-6 border-t"
+          className={cn(
+            'border-t px-6 pb-8 pt-4 flex flex-col gap-6 transition-transform duration-300 ease-out motion-reduce:transition-none',
+            menuOpen ? 'translate-y-0 pointer-events-auto' : '-translate-y-full pointer-events-none',
+          )}
           style={{
             background: useChrome
               ? 'color-mix(in srgb, var(--chrome-bg) 96%, black)'
@@ -153,12 +164,13 @@ export function Nav() {
               data-sb-field-path={`headerNavLinks.${idx}.label`}
               style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
               onClick={() => setMenuOpen(false)}
+              tabIndex={menuOpen ? undefined : -1}
             >
               {link.label}
             </a>
           ))}
         </div>
-      )}
+      </div>
     </nav>
   )
 }

@@ -36,7 +36,7 @@ An interactive resume/portfolio application with an AI-powered assistant. Built 
 │       ├── portfolio-site.md  # Project content.
 │       └── task-manager.md  # Project content.
 ├── public
-│   ├── contact.html  # Static contact form.
+│   ├── contact-form.html  # Netlify Forms detection skeleton (not the /contact page).
 │   ├── favicon.ico
 │   ├── headshot-on-white.jpg
 │   ├── tanstack-circle-logo.png
