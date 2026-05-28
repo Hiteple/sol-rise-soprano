@@ -10,12 +10,10 @@
 [images]
   remote_images = ["https://picsum\\.photos/.*"]
 
-# Temporary maintenance mode:
-# 1) Uncomment the block below to lock the public site.
-# 2) Deploy on Netlify.
-# 3) Re-comment the block and deploy again to reopen the site.
-#
-[[redirects]]
+# Temporary maintenance mode (production only).
+# This redirect is scoped to production so local `npm run dev`
+# can keep showing the full site while the live site is locked.
+[[context.production.redirects]]
   from = "/*"
   to = "/coming-soon.html"
   status = 302
