@@ -69,7 +69,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="contactFormColorScheme"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <div>
             <h2
@@ -166,6 +166,8 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
           <div>
             {submitted ? (
               <div
+                role="status"
+                aria-live="polite"
                 className="h-full flex flex-col items-center justify-center text-center p-12 border"
                 style={{
                   borderColor: isWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
@@ -178,7 +180,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     color: isWine ? fg.eyebrow : 'var(--accent-color)',
                   }}
                 >
-                  <Check size={28} />
+                  <Check size={28} aria-hidden />
                 </div>
                 <h3
                   className="font-display italic text-3xl mb-4"
@@ -327,13 +329,14 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                 <button
                   type="submit"
                   disabled={loading}
+                  aria-busy={loading}
                   className="w-full flex items-center justify-center gap-3 py-4 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
                   style={{
                     background: loading ? 'var(--pill-track-background-color)' : 'var(--accent-color)',
                     color: loading ? 'var(--subtle-text-color)' : 'var(--on-accent-text-color)',
                   }}
                 >
-                  <Send size={14} />
+                  <Send size={14} aria-hidden />
                   {loading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>

@@ -27,7 +27,7 @@ export function ImageTextCardsSection({
 
   return (
     <section className="section-vertical-padding" data-sb-field-path="productionsListColorScheme">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-6 lg:px-12">
         <div className="space-y-2">
           {productions.map((production, idx) => (
             <div

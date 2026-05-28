@@ -52,7 +52,7 @@ export function SplitGridSection({ items, colorScheme, title, description }: Spl
       } as CSSProperties}
     >
       {(hasTitle || hasDescription) && (
-        <div className="max-w-7xl mx-auto w-full px-6 lg:px-12 pb-8">
+        <div className="max-w-site mx-auto w-full px-6 lg:px-12 pb-8">
           {hasTitle && (
             <h2
               className="font-display text-4xl lg:text-5xl italic"
@@ -73,7 +73,7 @@ export function SplitGridSection({ items, colorScheme, title, description }: Spl
           )}
         </div>
       )}
-      <div className="max-w-7xl mx-auto w-full px-6 lg:px-12">
+      <div className="max-w-site mx-auto w-full px-6 lg:px-12">
         <div className="split-grid">
           {visibleItems.map((item) => (
             <Link

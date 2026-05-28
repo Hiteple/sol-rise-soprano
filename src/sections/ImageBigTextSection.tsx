@@ -1,3 +1,4 @@
+import { SKIP_PAST_HERO_ATTR } from '@/lib/skip-to-content'
 import { netlifyImg } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import type { AboutPage } from '../../schemas/site-pages'
@@ -18,9 +19,10 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
     <section
       className="pt-40 pb-24 lg:pt-52 lg:pb-36"
       style={{ background: schemeSolidBackground(scheme) }}
+      {...{ [SKIP_PAST_HERO_ATTR]: '' }}
       data-sb-field-path="heroColorScheme"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <p

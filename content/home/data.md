@@ -68,7 +68,7 @@ splitGridItems:
 splitGridColorScheme: soft
 splitGridTitle: Schedule
 splitGridDescription: Description of the upcoming events
-quoteText: motivational or recommendation message
+quoteText: La musica è la lingua dell'anima
 quoteAuthor: reviewer or recommendation by
 quoteImage: https://picsum.photos/seed/operaquote1/1920/900
 quoteImageAlt: Performance backdrop

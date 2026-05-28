@@ -55,6 +55,8 @@
   --h1-fluid-size: clamp(3.25rem, 8vw, 5.25rem); /* max = 84px */
   --sections-vertical-padding: 4rem; /* matches py-16 */
   --sections-vertical-padding-lg: 5rem; /* matches lg:py-20 */
+  /** Main layout column (Nav, sections, footer). Was Tailwind 7xl (80rem). */
+  --site-container-max: 90rem;
 
   --background: var(--page-background-color);
   --foreground: var(--body-color);
@@ -85,6 +87,7 @@
  */
 
 @theme inline {
+  --max-width-site: var(--site-container-max);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -130,6 +133,73 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garant', Georgia, serif;
   }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#main-content,
+#main-content section {
+  scroll-margin-top: 5rem; /* clear fixed header (h-20) when skipping or using hash */
+}
+
+.skip-link {
+  position: fixed;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 200;
+  padding: 0.5rem 1rem;
+  font-family: 'Nunito Sans', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--on-accent-text-color);
+  background: var(--accent-color);
+  border-radius: var(--radius);
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.skip-link:focus-visible {
+  clip: auto;
+  clip-path: none;
+  width: auto;
+  height: auto;
+  overflow: visible;
 }
 
 .font-display {

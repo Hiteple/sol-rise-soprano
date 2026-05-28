@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
+import { SKIP_PAST_HERO_ATTR } from '@/lib/skip-to-content'
 import { schemeHeroImageOverlay } from '@/lib/section-color-scheme'
 import { netlifyImg } from '@/lib/netlify-image'
 import type { HomeHeroSection } from './types'
@@ -22,6 +23,7 @@ export function HeroSection({ section }: HeroSectionProps) {
     <section
       className="relative flex items-end pb-24 lg:pb-32"
       style={{ minHeight: '100svh' }}
+      {...{ [SKIP_PAST_HERO_ATTR]: '' }}
       data-sb-field-path="heroColorScheme"
     >
         <div className="absolute inset-0">
@@ -39,7 +41,7 @@ export function HeroSection({ section }: HeroSectionProps) {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+        <div className="relative z-10 max-w-site mx-auto px-6 lg:px-12 w-full">
           <p
             className="animate-fade-up text-xs uppercase tracking-[0.35em] mb-6 font-body font-semibold"
             style={{ color: isWine ? 'var(--media-caption-text-color)' : 'var(--heading-color)' }}

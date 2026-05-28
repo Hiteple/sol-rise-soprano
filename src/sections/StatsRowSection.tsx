@@ -24,7 +24,7 @@ export function StatsRowSection({ page }: StatsRowSectionProps) {
       }}
       data-sb-field-path="statsSurface"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
           {page.highlights.map((h) => (
             <div key={`${h.number}-${h.label}`} className="text-center">

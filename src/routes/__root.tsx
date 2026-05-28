@@ -1,6 +1,7 @@
 import { HeadContent, Link, Scripts, createRootRoute } from '@tanstack/react-router'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
+import { SkipLink } from '@/components/SkipLink'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -39,8 +40,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="grain">
+        <SkipLink />
         <Nav />
-        <main>{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <Scripts />
       </body>

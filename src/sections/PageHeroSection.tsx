@@ -1,3 +1,4 @@
+import { SKIP_PAST_HERO_ATTR } from '@/lib/skip-to-content'
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
@@ -26,9 +27,10 @@ export function PageHeroSection({
     <section
       className={`pt-40 ${bottomClass} lg:pt-52`}
       style={{ background: schemeSolidBackground(scheme) }}
+      {...{ [SKIP_PAST_HERO_ATTR]: '' }}
       data-sb-field-path="pageHeroColorScheme"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-6 lg:px-12">
         <p
           className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
           style={{ color: fg.eyebrow }}

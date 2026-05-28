@@ -34,17 +34,29 @@ export function Nav() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [menuOpen])
+
+  const mobileMenuId = 'site-mobile-menu'
+
   return (
     <nav
+      aria-label="Main navigation"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         useChrome ? 'nav-chrome' : `bg-transparent${onHeroHome ? ' nav-hero' : ''}`
       }`}
       data-sb-object-id="content/home/data.md"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo / Name */}
-          <Link to="/" className="flex flex-col leading-none">
+          <Link to="/" className="flex flex-col leading-none" aria-label="Sol Risé Soprano, home">
             <span
               className="font-display text-xl tracking-widest"
               style={{
@@ -85,6 +97,7 @@ export function Nav() {
                 key={`${link.label}-${link.href}`}
                 href={link.href}
                 className="gold-link"
+                aria-current={pathname === link.href ? 'page' : undefined}
                 data-sb-field-path={`headerNavLinks.${idx}.label`}
                 style={
                   pathname === link.href
@@ -118,8 +131,9 @@ export function Nav() {
           <button
             className="md:hidden p-2"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            aria-controls={mobileMenuId}
             style={{
               color: useChrome
                 ? 'var(--chrome-text)'
@@ -131,13 +145,14 @@ export function Nav() {
                 : undefined,
             }}
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={22} aria-hidden /> : <Menu size={22} aria-hidden />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu — slides down on open, up on close */}
       <div
+        id={mobileMenuId}
         className={cn(
           'md:hidden overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none',
           menuOpen ? 'max-h-[28rem]' : 'max-h-0',
@@ -161,6 +176,7 @@ export function Nav() {
               key={`${link.label}-${link.href}-mobile`}
               href={link.href}
               className="font-display text-2xl italic"
+              aria-current={pathname === link.href ? 'page' : undefined}
               data-sb-field-path={`headerNavLinks.${idx}.label`}
               style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
               onClick={() => setMenuOpen(false)}

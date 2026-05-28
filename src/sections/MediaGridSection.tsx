@@ -31,7 +31,7 @@ export function MediaGridSection({
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="mediaGridColorScheme"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
               <p
@@ -53,12 +53,15 @@ export function MediaGridSection({
             <div
               className="flex gap-1 p-1"
               style={{ background: 'var(--pill-track-background-color)' }}
+              role="group"
+              aria-label="Filter media by type"
             >
               {(['all', 'video', 'image'] as const).map((f) => (
                 <button
                   key={f}
                   type="button"
                   onClick={() => onFilterChange(f)}
+                  aria-pressed={filter === f}
                   className="px-5 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300"
                   style={
                     filter === f
@@ -77,11 +80,17 @@ export function MediaGridSection({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((item) => (
-              <div
+              <button
                 key={item._meta.path}
-                className="relative img-zoom cursor-pointer group"
+                type="button"
+                className="relative img-zoom cursor-pointer group block w-full border-0 p-0 text-left"
                 style={{ aspectRatio: '16/10' }}
                 data-sb-object-id={`content/media/${item._meta.path}.md`}
+                aria-label={
+                  item.type === 'video'
+                    ? `Play video: ${item.title}`
+                    : `View image: ${item.title}`
+                }
                 onClick={() => {
                   if (item.type === 'video' && item.videoUrl) {
                     onOpenMedia({ kind: 'video', url: item.videoUrl, title: item.title })
@@ -93,22 +102,25 @@ export function MediaGridSection({
               >
                 <img
                   src={netlifyImg(item.thumbnail, 800, 500)}
-                  alt={item.title}
+                  alt=""
+                  aria-hidden
                   className="w-full h-full object-cover"
                   data-sb-field-path="thumbnail#@src"
                 />
                 <div
-                  className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300"
+                  className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-none"
                   style={{
                     background:
                       'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 88%, transparent) 0%, color-mix(in srgb, var(--palette-pine) 32%, transparent) 55%, transparent 100%)',
                   }}
+                  aria-hidden
                 >
                   {item.type === 'video' && (
                     <div className="play-btn mb-4">
                       <Play
                         size={20}
                         fill="currentColor"
+                        aria-hidden
                         style={{
                           color: 'var(--media-caption-text-color)',
                           marginLeft: 2,
@@ -117,7 +129,7 @@ export function MediaGridSection({
                     </div>
                   )}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none">
                   <p
                     className="font-display text-lg italic leading-tight"
                     style={{ color: 'var(--media-caption-text-color)' }}
@@ -133,7 +145,7 @@ export function MediaGridSection({
                     {item.description}
                   </p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
       </div>

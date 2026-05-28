@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { X } from 'lucide-react'
 
+import { Modal } from '@/components/Modal'
 import { netlifyImg } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -41,16 +41,19 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
         style={{ background: schemePageBandBackground(scheme) }}
         data-sb-field-path="tabItemsColorScheme"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="max-w-site mx-auto px-6 lg:px-12">
           <div
             className="flex gap-1 p-1 w-fit"
             style={{ background: 'var(--pill-track-background-color)' }}
+            role="group"
+            aria-label="Filter gallery by category"
           >
             {categories.map((cat, i) => (
               <button
                 key={`${cat}-${i}`}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
+                aria-pressed={activeCategory === cat}
                 className="px-6 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300"
                 style={
                   activeCategory === cat
@@ -70,18 +73,20 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
         className="pb-24 lg:pb-36"
         style={{ background: schemePageBandBackground(scheme) }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="max-w-site mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((item, idx) => {
               const isLarge = idx % 5 === 0
               return (
-                <div
+                <button
                   key={item._meta.path}
-                  className={`group img-zoom cursor-pointer relative ${
+                  type="button"
+                  className={`group img-zoom cursor-pointer relative block w-full border-0 p-0 text-left ${
                     isLarge ? 'md:col-span-2 lg:col-span-2' : ''
                   }`}
                   style={{ aspectRatio: isLarge ? '16/9' : '4/5' }}
                   data-sb-object-id={`content/gallery/${item._meta.path}.md`}
+                  aria-label={`View larger image: ${item.title}`}
                   onClick={() =>
                     setLightboxImg({
                       src: item.image,
@@ -95,16 +100,18 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
                       isLarge ? 1200 : 600,
                       isLarge ? 675 : 750,
                     )}
-                    alt={item.alt}
+                    alt=""
+                    aria-hidden
                     className="w-full h-full object-cover"
                     data-sb-field-path="image"
                   />
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 flex items-end p-5"
                     style={{
                       background:
                         'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 78%, transparent) 0%, transparent 60%)',
                     }}
+                    aria-hidden
                   >
                     <div>
                       <p
@@ -124,35 +131,27 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
                       )}
                     </div>
                   </div>
-                </div>
+                </button>
               )
             })}
           </div>
         </div>
       </section>
 
-      {lightboxImg && (
-        <div className="modal-overlay" onClick={() => setLightboxImg(null)}>
-          <div
-            className="relative max-w-5xl w-full mx-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="absolute -top-12 right-0 p-2 transition-opacity hover:opacity-70"
-              style={{ color: 'var(--media-caption-text-color)' }}
-              onClick={() => setLightboxImg(null)}
-            >
-              <X size={28} />
-            </button>
-            <img
-              src={netlifyImg(lightboxImg.src, 1400, 900, 'contain')}
-              alt={lightboxImg.alt}
-              className="w-full max-h-screen object-contain"
-            />
-          </div>
-        </div>
-      )}
+      <Modal
+        open={Boolean(lightboxImg)}
+        onClose={() => setLightboxImg(null)}
+        ariaLabel={lightboxImg ? `Image: ${lightboxImg.alt}` : 'Image preview'}
+        panelClassName="max-w-5xl"
+      >
+        {lightboxImg && (
+          <img
+            src={netlifyImg(lightboxImg.src, 1400, 900, 'contain')}
+            alt={lightboxImg.alt}
+            className="w-full max-h-screen object-contain"
+          />
+        )}
+      </Modal>
     </>
   )
 }

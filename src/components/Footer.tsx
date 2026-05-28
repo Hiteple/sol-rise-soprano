@@ -32,7 +32,7 @@ export function Footer() {
       }}
       data-sb-object-id="content/home/data.md"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+      <div className="max-w-site mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           <div>
             <div
@@ -62,7 +62,7 @@ export function Footer() {
             >
               Navigate
             </h4>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-3" aria-label="Footer navigation">
               {footerLinks.map((link, idx) => (
                 <a
                   key={`${link.label}-${link.href}`}

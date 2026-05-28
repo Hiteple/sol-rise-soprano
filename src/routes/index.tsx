@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { allHomes, allMediaItems } from 'content-collections'
-import { X } from 'lucide-react'
 
+import { Modal } from '@/components/Modal'
 import { youtubeIframeSrc } from '@/lib/utils'
 import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
@@ -58,31 +58,6 @@ function HomePage() {
     url: string
     title?: string | null
   } | null>(null)
-
-  useEffect(() => {
-    if (!activeMedia) return
-
-    const scrollY = window.scrollY
-    const original = {
-      overflow: document.body.style.overflow,
-      position: document.body.style.position,
-      top: document.body.style.top,
-      width: document.body.style.width,
-    }
-
-    document.body.style.overflow = 'hidden'
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.width = '100%'
-
-    return () => {
-      document.body.style.overflow = original.overflow
-      document.body.style.position = original.position
-      document.body.style.top = original.top
-      document.body.style.width = original.width
-      window.scrollTo(0, scrollY)
-    }
-  }, [activeMedia])
 
   if (!site) return null
 
@@ -141,51 +116,37 @@ function HomePage() {
         }}
       />
 
-      {activeMedia && (
-        <div
-          className="modal-overlay flex-col"
-          onClick={() => setActiveMedia(null)}
-        >
-          {activeMedia.title?.trim() && (
-            <h3
-              className="mb-4 px-4 text-center font-display text-2xl italic"
-              style={{ color: 'var(--media-caption-text-color)' }}
-            >
-              {activeMedia.title.trim()}
-            </h3>
-          )}
-          <div
-            className="relative w-full max-w-4xl mx-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="absolute -top-12 right-0 p-2 transition-opacity hover:opacity-70"
-              style={{ color: 'var(--media-caption-text-color)' }}
-              onClick={() => setActiveMedia(null)}
-            >
-              <X size={28} />
-            </button>
-            {activeMedia.kind === 'video' ? (
-              <div style={{ aspectRatio: '16/9' }}>
-                <iframe
-                  src={youtubeIframeSrc(activeMedia.url)}
-                  title="Video player"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            ) : (
-              <img
-                src={activeMedia.url}
-                alt={activeMedia.title ?? 'Media image'}
-                className="h-[82vh] w-full object-cover"
-              />
-            )}
+      <Modal
+        open={Boolean(activeMedia)}
+        onClose={() => setActiveMedia(null)}
+        title={activeMedia?.title?.trim() || undefined}
+        ariaLabel={
+          activeMedia?.kind === 'video'
+            ? 'Video player'
+            : activeMedia?.title
+              ? `Image: ${activeMedia.title}`
+              : 'Media image'
+        }
+        className="flex-col"
+      >
+        {activeMedia?.kind === 'video' ? (
+          <div style={{ aspectRatio: '16/9' }}>
+            <iframe
+              src={youtubeIframeSrc(activeMedia.url)}
+              title={activeMedia.title?.trim() ? `${activeMedia.title} video` : 'Video player'}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
-        </div>
-      )}
+        ) : activeMedia ? (
+          <img
+            src={activeMedia.url}
+            alt={activeMedia.title ?? 'Media image'}
+            className="h-[82vh] w-full object-cover"
+          />
+        ) : null}
+      </Modal>
     </div>
   )
 }
