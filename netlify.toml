@@ -10,8 +10,21 @@
 [images]
   remote_images = ["https://picsum\\.photos/.*"]
 
-# Maintenance mode for live site (production deploys only).
-# Generates a Netlify `_redirects` file at build-time in production.
+# ==========================================
+# Maintenance mode toggle (PRODUCTION ONLY)
+# ==========================================
 # Local `npm run dev` is unaffected.
+#
+# IMPORTANT:
+# Change ONLY the `command` line directly below `[context.production]`.
+# Do not change `[build].command` above (that one is global/default).
+#
+# If you want ON (live locked to coming-soon), use:
+#   command = "vite build && printf '/* /coming-soon.html 302!\\n' > dist/client/_redirects"
+#
+# If you want OFF (live site normal), use:
+#   command = "vite build"
+#
+# After changing that one line, run a new Netlify deploy.
 [context.production]
   command = "vite build && printf '/* /coming-soon.html 302!\\n' > dist/client/_redirects"
