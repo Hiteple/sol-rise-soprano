@@ -18,7 +18,7 @@ headerNavLinks:
 heroTitle: ''
 heroSubtitle: ''
 heroTagline: ''
-heroImage: /images/carmen-comodoro-rivadavia-optimized.jpg
+heroImage: /images/IMG_1371.jpg
 heroImageAlt: Sol Rise soprano professional website
 primaryCtaLabel: ''
 primaryCtaHref: ''
@@ -26,19 +26,12 @@ secondaryCtaLabel: ''
 secondaryCtaHref: ''
 aboutSurface: soft
 aboutEyebrow: About
-aboutTitle: A Voice Born for the Stage
+aboutTitle: An Evolving Operatic Journey
 aboutText: >-
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-  when an unknown printer took a galley of type and scrambled it to make a type
-  specimen book. It has survived not only five centuries, but also the leap into
-  electronic typesetting, remaining essentially unchanged. It was popularised in
-  the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-  and more recently with desktop publishing software like Aldus PageMaker
-  including versions of Lorem Ipsum.
-aboutImage: https://picsum.photos/seed/operaportr1/800/1060
+  Sol Risé is an Argentine soprano with a career developed across opera, concert repertoire, and choral performance. Her work includes roles such as Pamina (The Magic Flute), Donna Elvira (Don Giovanni), and appearances in productions of La Traviata, Carmen, and Macbeth. She has performed with established companies and festivals in Argentina and Bolivia, combining stage experience with ongoing vocal and interpretive training. Her artistic path reflects consistency, versatility, and a strong focus on musical expression.
+aboutImage: /images/IMG_9816.jpeg
 aboutImageAlt: image placeholder pending
-aboutLinkText: Link text
+aboutLinkText: View Career Highlights
 aboutHref: /career
 mediaEyebrow: On Stage & On Screen
 mediaTitle: Last Events
@@ -65,7 +58,7 @@ splitGridItems:
     image: https://picsum.photos/seed/split-lessons/1200/1200
     decorativeEyebrow: May 25th
     subtitle: London - Placeholder Opera House
-splitGridColorScheme: soft
+splitGridColorScheme: wine
 splitGridTitle: Schedule
 splitGridDescription: Description of the upcoming events
 quoteText: La musica è la lingua dell'anima
@@ -93,7 +86,7 @@ youtubeUrl: https://youtube.com
 facebookUrl: https://facebook.com
 email: solrisesoprano@gmail.com
 heroColorScheme: wine
-mediaGridColorScheme: wine
+mediaGridColorScheme: soft
 quoteBannerColorScheme: wine
 ---
 Single-source homepage content (hero, sections, and footer socials).

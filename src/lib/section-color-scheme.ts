@@ -56,6 +56,9 @@ export function schemeForeground(scheme: SectionColorScheme): {
   body: string
   eyebrow: string
   divider: string
+  /** `.gold-link` on this section background (meets contrast on soft/bright). */
+  link: string
+  linkHover: string
 } {
   if (scheme === 'wine') {
     return {
@@ -63,6 +66,8 @@ export function schemeForeground(scheme: SectionColorScheme): {
       body: 'color-mix(in srgb, var(--media-caption-text-color) 90%, transparent)',
       eyebrow: 'var(--media-caption-text-color)',
       divider: 'color-mix(in srgb, var(--media-caption-text-color) 45%, transparent)',
+      link: 'var(--media-caption-text-color)',
+      linkHover: 'var(--accent-pale-color)',
     }
   }
   return {
@@ -70,5 +75,25 @@ export function schemeForeground(scheme: SectionColorScheme): {
     body: 'var(--muted-text-color)',
     eyebrow: 'var(--accent-color)',
     divider: 'var(--accent-color)',
+    link: 'var(--heading-color)',
+    linkHover: 'var(--palette-wine)',
+  }
+}
+
+/** Inline vars for `.gold-link` inside a color-scheme section. */
+export function schemeGoldLinkStyle(scheme: SectionColorScheme): {
+  color: string
+  ['--gold-link-color']: string
+  ['--gold-link-underline']: string
+  ['--gold-link-hover-color']: string
+  ['--gold-link-hover-underline']: string
+} {
+  const fg = schemeForeground(scheme)
+  return {
+    color: fg.link,
+    '--gold-link-color': fg.link,
+    '--gold-link-underline': fg.link,
+    '--gold-link-hover-color': fg.linkHover,
+    '--gold-link-hover-underline': fg.linkHover,
   }
 }

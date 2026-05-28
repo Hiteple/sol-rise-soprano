@@ -1,7 +1,12 @@
 import { useState, type FormEvent } from 'react'
 import { Instagram, Youtube, Facebook, Send, Check } from 'lucide-react'
 
-import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import {
+  resolveColorScheme,
+  schemeForeground,
+  schemeGoldLinkStyle,
+  schemePageBandBackground,
+} from '@/lib/section-color-scheme'
 import type { ContactPage } from '../../schemas/site-pages'
 
 export type ContactFormSectionProps = {
@@ -17,6 +22,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
 
   const scheme = resolveColorScheme(page?.contactFormColorScheme)
   const fg = schemeForeground(scheme)
+  const goldLinkStyle = schemeGoldLinkStyle(scheme)
   const isWine = scheme === 'wine'
   const inputBorderRest = isWine
     ? fg.divider
@@ -201,7 +207,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                   type="button"
                   onClick={() => setSubmitted(false)}
                   className="gold-link"
-                  style={isWine ? { color: fg.heading } : undefined}
+                  style={goldLinkStyle}
                 >
                   <span data-sb-field-path="successResetLabel">
                     {page?.successResetLabel ?? 'Send Another Message →'}

@@ -89,6 +89,12 @@ function HomePage() {
           linkHref: site.aboutHref,
         }}
       />
+      <SplitGridSection
+        items={splitGridItems}
+        colorScheme={site.splitGridColorScheme}
+        title={site.splitGridTitle}
+        description={site.splitGridDescription}
+      />
       <MediaGridSection
         section={{
           eyebrow: site.mediaEyebrow,
@@ -99,12 +105,6 @@ function HomePage() {
         filter={filter}
         onFilterChange={setFilter}
         onOpenMedia={setActiveMedia}
-      />
-      <SplitGridSection
-        items={splitGridItems}
-        colorScheme={site.splitGridColorScheme}
-        title={site.splitGridTitle}
-        description={site.splitGridDescription}
       />
       <QuoteBannerSection
         section={{

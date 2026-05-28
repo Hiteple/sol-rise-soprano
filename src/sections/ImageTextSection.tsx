@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
 import { netlifyImg } from '@/lib/netlify-image'
-import { schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
+import { schemeForeground, schemeGoldLinkStyle, schemeSolidBackground } from '@/lib/section-color-scheme'
 import type { HomeImageTextSection } from './types'
 
 export type ImageTextSectionProps = {
@@ -16,7 +16,7 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
   const scheme = section.surface
   const surfaceBg = schemeSolidBackground(scheme)
   const fg = schemeForeground(scheme)
-  const isWine = scheme === 'wine'
+  const linkStyle = schemeGoldLinkStyle(scheme)
 
   const paths = {
     eyebrow: 'aboutEyebrow',
@@ -64,7 +64,7 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
             <Link
               to={linkHref}
               className="gold-link"
-              style={isWine ? { color: fg.heading } : undefined}
+              style={linkStyle}
               data-sb-field-path={paths.linkHref}
             >
               <span data-sb-field-path={paths.linkLabel}>
@@ -78,7 +78,7 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
               src={netlifyImg(section.image, 900, 1100)}
               alt={section.imageAlt}
               className="w-full object-cover"
-              style={{ maxHeight: '640px', objectPosition: 'top center' }}
+              style={{ objectPosition: 'top center' }}
               data-sb-field-path={paths.image}
             />
           </div>

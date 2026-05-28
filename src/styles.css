@@ -282,10 +282,10 @@
   opacity: 0;
 }
 
-/* Gold underline hover effect */
+/* Gold underline hover effect — set --gold-link-* via schemeGoldLinkStyle() on light/wine sections */
 .gold-link {
   position: relative;
-  color: var(--accent-color);
+  color: var(--gold-link-color, var(--accent-color));
   text-decoration: none;
   letter-spacing: 0.12em;
   font-size: 0.75rem;
@@ -300,11 +300,15 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--accent-color);
+  background: var(--gold-link-underline, var(--accent-color));
   transition: width 0.3s ease;
+}
+.gold-link:hover {
+  color: var(--gold-link-hover-color, var(--accent-soft-color));
 }
 .gold-link:hover::after {
   width: 100%;
+  background: var(--gold-link-hover-underline, var(--accent-soft-color));
 }
 
 /* Nav over hero: light pink links on variable photo background */

@@ -2,6 +2,7 @@ import { HeadContent, Link, Scripts, createRootRoute } from '@tanstack/react-rou
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { SkipLink } from '@/components/SkipLink'
+import { schemeGoldLinkStyle } from '@/lib/section-color-scheme'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -60,7 +61,7 @@ function NotFoundPage() {
         <p className="font-body mb-6" style={{ color: 'var(--muted-text-color)' }}>
           The page you are trying to open does not exist.
         </p>
-        <Link to="/" className="gold-link">
+        <Link to="/" className="gold-link" style={schemeGoldLinkStyle('soft')}>
           Return home
         </Link>
       </div>
