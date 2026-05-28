@@ -9,3 +9,14 @@
 
 [images]
   remote_images = ["https://picsum\\.photos/.*"]
+
+# Temporary maintenance mode:
+# 1) Uncomment the block below to lock the public site.
+# 2) Deploy on Netlify.
+# 3) Re-comment the block and deploy again to reopen the site.
+#
+[[redirects]]
+  from = "/*"
+  to = "/coming-soon.html"
+  status = 302
+  force = true

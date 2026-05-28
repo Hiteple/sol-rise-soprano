@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sol Rise Soprano - Coming Soon</title>
+    <style>
+      :root {
+        --bg: #2a0010;
+        --bg-deep: #16000a;
+        --panel: #3a0013;
+        --text: #fff3f6;
+        --muted: #f2cfd8;
+        --accent: #f4c37b;
+        --edge: #ff9cb1;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(circle at top, #6a102d 0%, var(--bg) 42%, var(--bg-deep) 100%);
+        color: var(--text);
+        font-family: "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(640px, 100%);
+        background: color-mix(in srgb, var(--panel) 88%, black 12%);
+        border: 1px solid color-mix(in srgb, var(--edge) 38%, transparent);
+        border-radius: 16px;
+        padding: 40px 28px;
+        text-align: center;
+        box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-family: "Times New Roman", Georgia, serif;
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        font-style: italic;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      p {
+        margin: 0 auto;
+        max-width: 48ch;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 1.02rem;
+      }
+
+      .dot {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card" role="main" aria-labelledby="coming-soon-title">
+      <h1 id="coming-soon-title">Sol Risé Soprano<span class="dot">.</span></h1>
+      <p>
+        The website is temporarily under maintenance while new content is being prepared.<br>Please check back soon!
+      </p>
+    </main>
+  </body>
+</html>
