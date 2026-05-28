@@ -10,11 +10,8 @@
 [images]
   remote_images = ["https://picsum\\.photos/.*"]
 
-# Temporary maintenance mode (production only).
-# This redirect is scoped to production so local `npm run dev`
-# can keep showing the full site while the live site is locked.
-[[context.production.redirects]]
-  from = "/*"
-  to = "/coming-soon.html"
-  status = 302
-  force = true
+# Maintenance mode for live site (production deploys only).
+# Generates a Netlify `_redirects` file at build-time in production.
+# Local `npm run dev` is unaffected.
+[context.production]
+  command = "vite build && printf '/* /coming-soon.html 302!\\n' > dist/client/_redirects"
