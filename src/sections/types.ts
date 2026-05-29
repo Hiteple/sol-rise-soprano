@@ -19,6 +19,7 @@ export type HomeHeroSection = {
 /** Shared shape for home “about” and “feature” blocks (see `ImageTextSection`). */
 export type HomeImageTextSection = {
   surface: SectionColorScheme
+  slideIn?: boolean
   eyebrow?: string
   title: string
   text: string
@@ -32,14 +33,16 @@ export type HomeMediaSection = {
   eyebrow: string
   title: string
   colorScheme: SectionColorScheme
+  slideIn?: boolean
 }
 
 export type HomeQuoteSection = {
   quoteText: string
-  quoteAuthor: string
+  quoteAuthor?: string
   quoteImage: string
   quoteImageAlt?: string
   colorScheme: SectionColorScheme
+  slideIn?: boolean
 }
 
 export type MediaItem = {

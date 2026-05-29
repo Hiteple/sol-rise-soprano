@@ -18,20 +18,30 @@ const fallbackNavLinks = [
 export function Nav() {
   const site = allHomes[0]
   const [scrolled, setScrolled] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const navLinks = parseSiteNavLinks(
     site?.headerNavLinks,
     fallbackNavLinks.map((link) => ({ label: link.label, href: link.to })),
   )
-  const onHeroHome = pathname === '/' && !scrolled
-  /** Wine bar everywhere except over the home hero before scroll */
-  const useChrome = scrolled || pathname !== '/'
+  /** Transparent overlay only applies on the desktop home hero before scroll. */
+  const onHeroHome = isDesktop && pathname === '/' && !scrolled
+  /** Wine bar everywhere except over the desktop home hero before scroll. */
+  const useChrome = !isDesktop || scrolled || pathname !== '/'
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
   }, [])
 
   useEffect(() => {

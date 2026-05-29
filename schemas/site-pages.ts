@@ -48,11 +48,14 @@ export const aboutPageSchema = z.object({
   heroQuote: z.string(),
   heroQuoteAttribution: z.string(),
   heroColorScheme: sectionColorSchemeSchema.default('soft'),
+  heroSlideIn: z.boolean().default(true),
   statsSurface: sectionColorSchemeSchema.default('soft'),
+  statsSlideIn: z.boolean().default(true),
   highlights: z.array(highlightSchema),
   timelineSectionEyebrow: z.string(),
   timelineSectionTitle: z.string(),
   timelineColorScheme: sectionColorSchemeSchema.default('soft'),
+  timelineSlideIn: z.boolean().default(true),
   timeline: z.array(timelineItemSchema),
   ctaTitleLine1: z.string(),
   ctaTitleLine2: z.string(),
@@ -61,6 +64,7 @@ export const aboutPageSchema = z.object({
   ctaSecondaryLabel: z.string(),
   ctaSecondaryHref: z.string(),
   ctaColorScheme: sectionColorSchemeSchema.default('soft'),
+  ctaSlideIn: z.boolean().default(true),
   content: z.string(),
 })
 
@@ -70,6 +74,7 @@ export const galleryPageSchema = z.object({
   heroEyebrow: z.string(),
   heroTitle: z.string(),
   tabItemsColorScheme: sectionColorSchemeSchema.default('soft'),
+  tabItemsSlideIn: z.boolean().default(true),
   filterCategories: z.array(z.string()),
   content: z.string(),
 })
@@ -80,6 +85,7 @@ export const contactPageSchema = z.object({
   heroEyebrow: z.string(),
   heroTitle: z.string(),
   contactFormColorScheme: sectionColorSchemeSchema.default('soft'),
+  contactFormSlideIn: z.boolean().default(true),
   introHeading: z.string(),
   introBody: z.string(),
   directEmailLabel: z.string(),
@@ -109,6 +115,7 @@ export const productionsPageSchema = z.object({
   heroTitle: z.string(),
   heroDescription: z.string(),
   productionsListColorScheme: sectionColorSchemeSchema.default('soft'),
+  productionsListSlideIn: z.boolean().default(true),
   content: z.string(),
 })
 
@@ -119,6 +126,7 @@ export const bioPageSchema = z.object({
   heroTitle: z.string(),
   heroDescription: z.string().optional(),
   fullBioColorScheme: sectionColorSchemeSchema.default('soft'),
+  fullBioSlideIn: z.boolean().default(true),
   fullBioEyebrow: z.string(),
   fullBioParagraphs: z.array(fullBioParagraphSchema),
   fullBioImage: z.string().optional(),

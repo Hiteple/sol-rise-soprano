@@ -1,5 +1,11 @@
 import { useState, type FormEvent } from 'react'
-import { Instagram, Youtube, Facebook, Send, Check } from 'lucide-react'
+import { Send, Check } from 'lucide-react'
+
+import {
+  FacebookIcon,
+  InstagramIcon,
+  YoutubeIcon,
+} from '@/components/brand-icons'
 
 import {
   resolveColorScheme,
@@ -7,6 +13,7 @@ import {
   schemeGoldLinkStyle,
   schemePageBandBackground,
 } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { ContactPage } from '../../schemas/site-pages'
 
 export type ContactFormSectionProps = {
@@ -28,22 +35,24 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
     ? fg.divider
     : 'color-mix(in srgb, var(--accent-color) 24%, transparent)'
   const inputBorderFocus = isWine ? fg.eyebrow : 'var(--accent-color)'
+  const animate = page?.contactFormSlideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   const socialLinks = [
     {
-      icon: Instagram,
+      icon: InstagramIcon,
       label: 'Instagram',
       url: page?.instagramUrl ?? '#',
       handle: page?.instagramHandle ?? '@solrisesoprano',
     },
     {
-      icon: Youtube,
+      icon: YoutubeIcon,
       label: 'YouTube',
       url: page?.youtubeUrl ?? '#',
       handle: page?.youtubeHandle ?? 'Sol Risé Soprano',
     },
     {
-      icon: Facebook,
+      icon: FacebookIcon,
       label: 'Facebook',
       url: page?.facebookUrl ?? '#',
       handle: page?.facebookHandle ?? 'Sol Risé Soprano',
@@ -75,7 +84,10 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="contactFormColorScheme"
     >
-      <div className="max-w-site mx-auto px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <div>
             <h2

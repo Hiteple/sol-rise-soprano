@@ -18,6 +18,16 @@ function colorSchemeEnumField(name: string, group?: string) {
   }
 }
 
+function slideInField(name: string, group?: string) {
+  return {
+    name,
+    type: 'boolean' as const,
+    label: 'Slide In Animation',
+    default: true,
+    ...(group ? { group } : {}),
+  }
+}
+
 function heroColorSchemeField() {
   return {
     name: 'heroColorScheme',
@@ -86,6 +96,7 @@ export default defineStackbitConfig({
             { name: 'secondaryCtaLabel', type: 'string', label: 'Secondary CTA label', group: 'hero' },
             { name: 'secondaryCtaHref', type: 'string', label: 'Secondary CTA URL', group: 'hero' },
             colorSchemeEnumField('aboutSurface', 'imageTextAbout'),
+            slideInField('aboutSlideIn', 'imageTextAbout'),
             { name: 'aboutEyebrow', type: 'string', label: 'Eyebrow', group: 'imageTextAbout' },
             { name: 'aboutTitle', type: 'string', label: 'Title', group: 'imageTextAbout' },
             { name: 'aboutText', type: 'text', label: 'Body', group: 'imageTextAbout' },
@@ -94,6 +105,7 @@ export default defineStackbitConfig({
             { name: 'aboutLinkText', type: 'string', label: 'Link text', group: 'imageTextAbout' },
             { name: 'aboutHref', type: 'string', label: 'Link URL', group: 'imageTextAbout' },
             colorSchemeEnumField('mediaGridColorScheme', 'mediaGrid'),
+            slideInField('mediaGridSlideIn', 'mediaGrid'),
             { name: 'mediaEyebrow', type: 'string', label: 'Eyebrow', group: 'mediaGrid' },
             { name: 'mediaTitle', type: 'string', label: 'Title', group: 'mediaGrid' },
             {
@@ -107,6 +119,7 @@ export default defineStackbitConfig({
               },
             },
             colorSchemeEnumField('splitGridColorScheme', 'splitGrid'),
+            slideInField('splitGridSlideIn', 'splitGrid'),
             { name: 'splitGridTitle', type: 'string', label: 'Title', group: 'splitGrid' },
             { name: 'splitGridDescription', type: 'text', label: 'Description', group: 'splitGrid' },
             {
@@ -126,6 +139,7 @@ export default defineStackbitConfig({
               },
             },
             colorSchemeEnumField('quoteBannerColorScheme', 'quoteBanner'),
+            slideInField('quoteBannerSlideIn', 'quoteBanner'),
             { name: 'quoteText', type: 'text', label: 'Quote', group: 'quoteBanner' },
             { name: 'quoteAuthor', type: 'string', label: 'Author', group: 'quoteBanner' },
             { name: 'quoteImage', type: 'image', label: 'Background image', group: 'quoteBanner' },
@@ -166,6 +180,7 @@ export default defineStackbitConfig({
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'pageHero' },
             { name: 'heroDescription', type: 'text', label: 'Description', group: 'pageHero' },
             colorSchemeEnumField('fullBioColorScheme', 'richtextContent'),
+            slideInField('fullBioSlideIn', 'richtextContent'),
             { name: 'fullBioEyebrow', type: 'string', label: 'Eyebrow', group: 'richtextContent' },
             {
               name: 'fullBioParagraphs',
@@ -208,6 +223,7 @@ export default defineStackbitConfig({
           ],
           fields: [
             colorSchemeEnumField('heroColorScheme', 'imageBigText'),
+            slideInField('heroSlideIn', 'imageBigText'),
             { name: 'heroEyebrow', type: 'string', label: 'Eyebrow', group: 'imageBigText' },
             { name: 'heroTitleLine1', type: 'string', label: 'Title line 1', group: 'imageBigText' },
             { name: 'heroTitleAccent', type: 'string', label: 'Accent word', group: 'imageBigText' },
@@ -218,12 +234,15 @@ export default defineStackbitConfig({
             { name: 'heroQuote', type: 'text', label: 'Quote', group: 'imageBigText' },
             { name: 'heroQuoteAttribution', type: 'string', label: 'Quote attribution', group: 'imageBigText' },
             colorSchemeEnumField('statsSurface', 'statsRow'),
+            slideInField('statsSlideIn', 'statsRow'),
             { name: 'highlights', type: 'list', label: 'Highlights', items: { type: 'object', fields: [{ name: 'number', type: 'string', label: 'Number' }, { name: 'label', type: 'string', label: 'Label' }] }, group: 'statsRow' },
             colorSchemeEnumField('timelineColorScheme', 'timeline'),
+            slideInField('timelineSlideIn', 'timeline'),
             { name: 'timelineSectionEyebrow', type: 'string', label: 'Eyebrow', group: 'timeline' },
             { name: 'timelineSectionTitle', type: 'string', label: 'Heading', group: 'timeline' },
             { name: 'timeline', type: 'list', label: 'Milestones', items: { type: 'object', fields: [{ name: 'year', type: 'string', label: 'Year' }, { name: 'title', type: 'string', label: 'Title' }, { name: 'description', type: 'markdown', label: 'Body (Markdown)' }] }, group: 'timeline' },
             colorSchemeEnumField('ctaColorScheme', 'textButtons'),
+            slideInField('ctaSlideIn', 'textButtons'),
             { name: 'ctaTitleLine1', type: 'string', label: 'Title line 1', group: 'textButtons' },
             { name: 'ctaTitleLine2', type: 'string', label: 'Title line 2', group: 'textButtons' },
             { name: 'ctaPrimaryLabel', type: 'string', label: 'Primary button', group: 'textButtons' },
@@ -247,6 +266,7 @@ export default defineStackbitConfig({
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'pageHero' },
             { name: 'heroDescription', type: 'text', label: 'Description', group: 'pageHero' },
             colorSchemeEnumField('productionsListColorScheme', 'imageTextCards'),
+            slideInField('productionsListSlideIn', 'imageTextCards'),
           ],
         },
         {
@@ -263,6 +283,7 @@ export default defineStackbitConfig({
             { name: 'heroEyebrow', type: 'string', label: 'Eyebrow', group: 'pageHero' },
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'pageHero' },
             colorSchemeEnumField('tabItemsColorScheme', 'tabItems'),
+            slideInField('tabItemsSlideIn', 'tabItems'),
             { name: 'filterCategories', type: 'list', label: 'Categories (first should be “All”)', items: { type: 'string' }, group: 'tabItems' },
           ],
         },
@@ -280,6 +301,7 @@ export default defineStackbitConfig({
             { name: 'heroEyebrow', type: 'string', label: 'Eyebrow', group: 'pageHero' },
             { name: 'heroTitle', type: 'string', label: 'Title', group: 'pageHero' },
             colorSchemeEnumField('contactFormColorScheme', 'contactForm'),
+            slideInField('contactFormSlideIn', 'contactForm'),
             { name: 'introHeading', type: 'string', label: 'Heading', group: 'contactForm' },
             { name: 'introBody', type: 'text', label: 'Body', group: 'contactForm' },
             { name: 'directEmailLabel', type: 'string', label: 'Email label', group: 'contactForm' },

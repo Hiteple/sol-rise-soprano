@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '@/lib/section-color-scheme'
 import type { CSSProperties } from 'react'
 
@@ -14,11 +15,12 @@ export type SplitGridItem = {
 export type SplitGridSectionProps = {
   items: SplitGridItem[]
   colorScheme: SectionColorScheme
+  slideIn?: boolean
   title?: string
   description?: string
 }
 
-export function SplitGridSection({ items, colorScheme, title, description }: SplitGridSectionProps) {
+export function SplitGridSection({ items, colorScheme, slideIn, title, description }: SplitGridSectionProps) {
   const visibleItems = items.slice(0, 3)
   const hasTitle = (title?.trim().length ?? 0) > 0
   const hasDescription = (description?.trim().length ?? 0) > 0
@@ -37,6 +39,8 @@ export function SplitGridSection({ items, colorScheme, title, description }: Spl
       : 'color-mix(in srgb, var(--palette-wine) 58%, transparent)'
   const eyebrowTextColor =
     colorScheme === 'wine' ? 'var(--palette-pine)' : 'var(--media-caption-text-color)'
+  const animate = slideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section
@@ -73,7 +77,10 @@ export function SplitGridSection({ items, colorScheme, title, description }: Spl
           )}
         </div>
       )}
-      <div className="max-w-site mx-auto w-full px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-site mx-auto w-full px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+      >
         <div className="split-grid">
           {visibleItems.map((item) => (
             <Link

@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 
 import { netlifyImg } from '@/lib/netlify-image'
 import { schemeForeground, schemeGoldLinkStyle, schemeSolidBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { HomeImageTextSection } from './types'
 
 export type ImageTextSectionProps = {
@@ -17,6 +18,8 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
   const surfaceBg = schemeSolidBackground(scheme)
   const fg = schemeForeground(scheme)
   const linkStyle = schemeGoldLinkStyle(scheme)
+  const animate = section.slideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   const paths = {
     eyebrow: 'aboutEyebrow',
@@ -34,7 +37,10 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
       data-sb-field-path="aboutSurface"
     >
       <div className="max-w-site mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+        <div
+          ref={ref}
+          className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        >
           <div className="lg:col-span-2 order-2 lg:order-1">
             <p
               className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-6"

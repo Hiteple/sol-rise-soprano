@@ -271,6 +271,27 @@
   animation: fadeUp 1s ease forwards;
 }
 
+/* Scroll reveal: starts shifted down + transparent, settles when `is-visible` is added */
+.reveal {
+  opacity: 0;
+  transform: translateY(64px);
+  transition:
+    opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .animate-fade-up-delay-1 {
   animation: fadeUp 1s ease 0.2s forwards;
   opacity: 0;

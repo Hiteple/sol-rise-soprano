@@ -30,6 +30,7 @@ function GalleryPage() {
         categories={categories}
         items={items}
         tabItemsColorScheme={landing?.tabItemsColorScheme}
+        slideIn={landing?.tabItemsSlideIn}
       />
     </div>
   )

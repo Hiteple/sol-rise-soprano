@@ -1,6 +1,7 @@
 import { marked } from 'marked'
 
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { AboutPage } from '../../schemas/site-pages'
 
 export type TimelineSectionProps = {
@@ -10,6 +11,8 @@ export type TimelineSectionProps = {
 export function TimelineSection({ page }: TimelineSectionProps) {
   const scheme = resolveColorScheme(page.timelineColorScheme)
   const fg = schemeForeground(scheme)
+  const animate = page.timelineSlideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section
@@ -17,7 +20,10 @@ export function TimelineSection({ page }: TimelineSectionProps) {
       style={{ background: schemeSolidBackground(scheme) }}
       data-sb-field-path="timelineColorScheme"
     >
-      <div className="max-w-5xl mx-auto px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-5xl mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+      >
         <p
           className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
           style={{ color: fg.eyebrow }}

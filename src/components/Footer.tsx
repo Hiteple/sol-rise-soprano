@@ -1,4 +1,10 @@
-import { Instagram, Youtube, Facebook, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
+
+import {
+  FacebookIcon,
+  InstagramIcon,
+  YoutubeIcon,
+} from '@/components/brand-icons'
 import { allHomes } from 'content-collections'
 
 import { parseSiteNavLinks } from '@/lib/nav-links'
@@ -120,7 +126,7 @@ export function Footer() {
                 }}
                 data-sb-field-path="instagramUrl"
               >
-                <Instagram size={15} />
+                <InstagramIcon size={15} />
               </a>
               <a
                 href={youtubeUrl}
@@ -142,7 +148,7 @@ export function Footer() {
                 }}
                 data-sb-field-path="youtubeUrl"
               >
-                <Youtube size={15} />
+                <YoutubeIcon size={15} />
               </a>
               <a
                 href={facebookUrl}
@@ -164,7 +170,7 @@ export function Footer() {
                 }}
                 data-sb-field-path="facebookUrl"
               >
-                <Facebook size={15} />
+                <FacebookIcon size={15} />
               </a>
             </div>
           </div>

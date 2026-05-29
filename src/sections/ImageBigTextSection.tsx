@@ -1,6 +1,7 @@
 import { SKIP_PAST_HERO_ATTR } from '@/lib/skip-to-content'
 import { netlifyImg } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { AboutPage } from '../../schemas/site-pages'
 
 export type ImageBigTextSectionProps = {
@@ -14,6 +15,8 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
   const scheme = resolveColorScheme(page.heroColorScheme)
   const fg = schemeForeground(scheme)
   const isWine = scheme === 'wine'
+  const animate = page.heroSlideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section
@@ -22,7 +25,10 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
       {...{ [SKIP_PAST_HERO_ATTR]: '' }}
       data-sb-field-path="heroColorScheme"
     >
-      <div className="max-w-site mx-auto px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <p

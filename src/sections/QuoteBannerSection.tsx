@@ -1,5 +1,6 @@
 import { netlifyImg } from '@/lib/netlify-image'
 import { schemeForeground, schemeQuoteOverlay } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { HomeQuoteSection } from './types'
 
 export type QuoteBannerSectionProps = {
@@ -10,6 +11,8 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
   const quoteAlt = section.quoteImageAlt ?? 'Performance backdrop'
   const scheme = section.colorScheme
   const fg = schemeForeground(scheme)
+  const animate = section.slideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section
@@ -30,7 +33,10 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
             }}
           />
         </div>
-        <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12">
+        <div
+          ref={ref}
+          className={`relative z-10 max-w-3xl mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        >
           <div
             className="font-display text-5xl lg:text-6xl mb-8"
             style={{ color: fg.eyebrow, opacity: scheme === 'wine' ? 0.85 : 0.6 }}
@@ -44,13 +50,15 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
           >
             {section.quoteText}
           </blockquote>
-          <cite
-            className="font-body text-sm uppercase tracking-widest not-italic"
-            style={{ color: fg.eyebrow }}
-            data-sb-field-path="quoteAuthor"
-          >
-            {section.quoteAuthor}
-          </cite>
+          {section.quoteAuthor?.trim() && (
+            <cite
+              className="font-body text-sm uppercase tracking-widest not-italic"
+              style={{ color: fg.eyebrow }}
+              data-sb-field-path="quoteAuthor"
+            >
+              {section.quoteAuthor}
+            </cite>
+          )}
         </div>
     </section>
   )

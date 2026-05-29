@@ -2,6 +2,7 @@ import { Play } from 'lucide-react'
 
 import { netlifyImg } from '@/lib/netlify-image'
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { HomeMediaSection, MediaFilter, MediaItem } from './types'
 
 export type MediaGridSectionProps = {
@@ -24,6 +25,8 @@ export function MediaGridSection({
 
   const scheme = section.colorScheme
   const fg = schemeForeground(scheme)
+  const animate = section.slideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section
@@ -31,7 +34,10 @@ export function MediaGridSection({
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="mediaGridColorScheme"
     >
-      <div className="max-w-site mx-auto px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+      >
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
               <p

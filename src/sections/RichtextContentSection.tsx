@@ -1,6 +1,7 @@
 import { marked } from 'marked'
 import { netlifyImg } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { BioPage } from '../../schemas/site-pages'
 
 export type RichtextContentSectionProps = {
@@ -12,6 +13,7 @@ export type RichtextContentSectionProps = {
     | 'fullBioImage'
     | 'fullBioImageAlt'
     | 'fullBioImagePosition'
+    | 'fullBioSlideIn'
   >
 }
 
@@ -20,6 +22,8 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
   const fg = schemeForeground(scheme)
   const hasImage = Boolean(page.fullBioImage)
   const imageOnLeft = page.fullBioImagePosition === 'left'
+  const animate = page.fullBioSlideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   const eyebrow = (
     <p
@@ -59,7 +63,10 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
       data-sb-field-path="fullBioColorScheme"
     >
       {hasImage ? (
-        <div className="max-w-site mx-auto px-6 lg:px-12">
+        <div
+          ref={ref}
+          className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        >
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
             <div
               className={`lg:col-span-2 img-zoom media-radius ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
@@ -79,7 +86,10 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
           </div>
         </div>
       ) : (
-        <div className="max-w-3xl mx-auto px-6 lg:px-12">
+        <div
+          ref={ref}
+          className={`max-w-3xl mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        >
           {eyebrow}
           {paragraphs}
         </div>

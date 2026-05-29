@@ -60,10 +60,9 @@ splitGridItems:
     subtitle: London - Placeholder Opera House
 splitGridColorScheme: wine
 splitGridTitle: Schedule
-splitGridDescription: Description of the upcoming events
+splitGridDescription: Upcoming performances and recitals
 quoteText: La musica è la lingua dell'anima
-quoteAuthor: reviewer or recommendation by
-quoteImage: https://picsum.photos/seed/operaquote1/1920/900
+quoteImage: /images/carmen/carmen-comodoro-rivadavia-optimized.jpg
 quoteImageAlt: Performance backdrop
 footerBrandLine1: Sol Risé
 footerBrandLine2: Soprano

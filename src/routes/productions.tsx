@@ -31,6 +31,7 @@ function ProductionsPage() {
       <ImageTextCardsSection
         productions={productions}
         listColorScheme={landing?.productionsListColorScheme}
+        slideIn={landing?.productionsListSlideIn}
       />
     </div>
   )

@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { AboutPage } from '../../schemas/site-pages'
 
 export type TextButtonsSectionProps = {
@@ -16,6 +17,8 @@ export function TextButtonsSection({ page }: TextButtonsSectionProps) {
   const secondaryHref = page.ctaSecondaryHref?.trim() ?? ''
   const showPrimary = primaryLabel.length > 0 && primaryHref.length > 0
   const showSecondary = secondaryLabel.length > 0 && secondaryHref.length > 0
+  const animate = page.ctaSlideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section
@@ -23,7 +26,10 @@ export function TextButtonsSection({ page }: TextButtonsSectionProps) {
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="ctaColorScheme"
     >
-      <div className="max-w-xl mx-auto px-6">
+      <div
+        ref={ref}
+        className={`max-w-xl mx-auto px-6 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+      >
         <h2
           className="font-display italic text-4xl mb-6"
           style={{ color: fg.heading }}

@@ -70,6 +70,7 @@ const home = defineCollection({
     secondaryCtaHref: z.string().optional(),
     heroColorScheme: homeHeroColorSchemeSchema.default('wine'),
     aboutSurface: sectionColorSchemeSchema.default('soft'),
+    aboutSlideIn: z.boolean().default(true),
     aboutEyebrow: z.string().optional(),
     aboutTitle: z.string(),
     aboutText: z.string(),
@@ -81,6 +82,7 @@ const home = defineCollection({
     mediaTitle: z.string(),
     mediaItems: z.array(z.string()).max(12).optional(),
     mediaGridColorScheme: sectionColorSchemeSchema.default('soft'),
+    mediaGridSlideIn: z.boolean().default(true),
     splitGridTitle: z.string().optional(),
     splitGridDescription: z.string().optional(),
     splitGridItems: z
@@ -96,9 +98,11 @@ const home = defineCollection({
       .max(3)
       .optional(),
     splitGridColorScheme: sectionColorSchemeSchema.default('soft'),
+    splitGridSlideIn: z.boolean().default(true),
     quoteBannerColorScheme: sectionColorSchemeSchema.default('soft'),
+    quoteBannerSlideIn: z.boolean().default(true),
     quoteText: z.string(),
-    quoteAuthor: z.string(),
+    quoteAuthor: z.string().optional(),
     quoteImage: z.string(),
     quoteImageAlt: z.string().optional(),
     footerBrandLine1: z.string().default('Sol Risé'),

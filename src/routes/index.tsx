@@ -80,6 +80,7 @@ function HomePage() {
       <ImageTextSection
         section={{
           surface: site.aboutSurface,
+          slideIn: site.aboutSlideIn,
           eyebrow: site.aboutEyebrow,
           title: site.aboutTitle,
           text: site.aboutText,
@@ -92,6 +93,7 @@ function HomePage() {
       <SplitGridSection
         items={splitGridItems}
         colorScheme={site.splitGridColorScheme}
+        slideIn={site.splitGridSlideIn}
         title={site.splitGridTitle}
         description={site.splitGridDescription}
       />
@@ -100,6 +102,7 @@ function HomePage() {
           eyebrow: site.mediaEyebrow,
           title: site.mediaTitle,
           colorScheme: site.mediaGridColorScheme,
+          slideIn: site.mediaGridSlideIn,
         }}
         mediaItems={mediaItems}
         filter={filter}
@@ -113,6 +116,7 @@ function HomePage() {
           quoteImage: site.quoteImage,
           quoteImageAlt: site.quoteImageAlt,
           colorScheme: site.quoteBannerColorScheme,
+          slideIn: site.quoteBannerSlideIn,
         }}
       />
 

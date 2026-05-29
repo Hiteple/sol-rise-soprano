@@ -1,5 +1,6 @@
 import { netlifyImg } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
 export type ProductionCard = {
@@ -16,18 +17,25 @@ export type ProductionCard = {
 export type ImageTextCardsSectionProps = {
   productions: ProductionCard[]
   listColorScheme?: SectionColorScheme
+  slideIn?: boolean
 }
 
 export function ImageTextCardsSection({
   productions,
   listColorScheme,
+  slideIn,
 }: ImageTextCardsSectionProps) {
   const scheme = resolveColorScheme(listColorScheme)
   const fg = schemeForeground(scheme)
+  const animate = slideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section className="section-vertical-padding" data-sb-field-path="productionsListColorScheme">
-      <div className="max-w-site mx-auto px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+      >
         <div className="space-y-2">
           {productions.map((production, idx) => (
             <div

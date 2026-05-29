@@ -38,7 +38,7 @@ export const homeMediaGridSectionSchema = z.object({
 export const homeQuoteBannerSectionSchema = z.object({
   type: z.literal('quote_banner'),
   quoteText: z.string(),
-  quoteAuthor: z.string(),
+  quoteAuthor: z.string().optional(),
   quoteImage: z.string(),
   quoteImageAlt: z.string().optional(),
 })

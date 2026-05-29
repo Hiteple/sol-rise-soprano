@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Modal } from '@/components/Modal'
 import { netlifyImg } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
 export type GalleryGridItem = {
@@ -17,9 +18,10 @@ export type TabItemsSectionProps = {
   categories: string[]
   items: GalleryGridItem[]
   tabItemsColorScheme?: SectionColorScheme
+  slideIn?: boolean
 }
 
-export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabItemsSectionProps) {
+export function TabItemsSection({ categories, items, tabItemsColorScheme, slideIn }: TabItemsSectionProps) {
   const [activeCategory, setActiveCategory] = useState(categories[0] ?? 'All')
   const [lightboxImg, setLightboxImg] = useState<{
     src: string
@@ -33,6 +35,8 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
 
   const scheme = resolveColorScheme(tabItemsColorScheme)
   const fg = schemeForeground(scheme)
+  const animate = slideIn !== false
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <>
@@ -73,7 +77,10 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
         className="pb-24 lg:pb-36"
         style={{ background: schemePageBandBackground(scheme) }}
       >
-        <div className="max-w-site mx-auto px-6 lg:px-12">
+        <div
+          ref={ref}
+          className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((item, idx) => {
               const isLarge = idx % 5 === 0
