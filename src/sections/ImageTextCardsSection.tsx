@@ -108,7 +108,7 @@ export function ImageTextCardsSection({
                   {production.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 font-body text-xs uppercase tracking-widest border"
+                      className="px-3 py-1 font-body text-xs uppercase tracking-widest border rounded-[var(--media-radius)]"
                       style={{
                         borderColor:
                           scheme === 'wine'

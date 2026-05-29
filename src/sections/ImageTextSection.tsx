@@ -73,7 +73,7 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
             </Link>
           </div>
 
-          <div className="lg:col-span-3 img-zoom order-1 lg:order-2 relative">
+          <div className="lg:col-span-3 img-zoom media-radius order-1 lg:order-2 relative">
             <img
               src={netlifyImg(section.image, 900, 1100)}
               alt={section.imageAlt}

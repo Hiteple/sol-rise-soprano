@@ -51,7 +51,7 @@ export function MediaGridSection({
             </div>
 
             <div
-              className="flex gap-1 p-1"
+              className="flex gap-1 p-1 rounded-[var(--media-radius)]"
               style={{ background: 'var(--pill-track-background-color)' }}
               role="group"
               aria-label="Filter media by type"
@@ -62,7 +62,7 @@ export function MediaGridSection({
                   type="button"
                   onClick={() => onFilterChange(f)}
                   aria-pressed={filter === f}
-                  className="px-5 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300"
+                  className="px-5 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300 rounded-[var(--media-radius-inner)]"
                   style={
                     filter === f
                       ? {
@@ -83,7 +83,7 @@ export function MediaGridSection({
               <button
                 key={item._meta.path}
                 type="button"
-                className="relative img-zoom cursor-pointer group block w-full border-0 p-0 text-left"
+                className="relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left"
                 style={{ aspectRatio: '16/10' }}
                 data-sb-object-id={`content/media/${item._meta.path}.md`}
                 aria-label={

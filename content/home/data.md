@@ -18,7 +18,7 @@ headerNavLinks:
 heroTitle: ''
 heroSubtitle: ''
 heroTagline: ''
-heroImage: /images/IMG_1371.jpg
+heroImage: /images/don-giovanni/IMG_1371.jpg
 heroImageAlt: Sol Rise soprano professional website
 primaryCtaLabel: ''
 primaryCtaHref: ''
@@ -29,7 +29,7 @@ aboutEyebrow: About
 aboutTitle: An Evolving Operatic Journey
 aboutText: >-
   Sol Risé is an Argentine soprano with a career developed across opera, concert repertoire, and choral performance. Her work includes roles such as Pamina (The Magic Flute), Donna Elvira (Don Giovanni), and appearances in productions of La Traviata, Carmen, and Macbeth. She has performed with established companies and festivals in Argentina and Bolivia, combining stage experience with ongoing vocal and interpretive training. Her artistic path reflects consistency, versatility, and a strong focus on musical expression.
-aboutImage: /images/IMG_9816.jpeg
+aboutImage: /images/plaza-belgica/IMG_9816.jpeg
 aboutImageAlt: image placeholder pending
 aboutLinkText: View Career Highlights
 aboutHref: /career

@@ -79,7 +79,7 @@ export function HeroSection({ section }: HeroSectionProps) {
               {hasPrimaryCta && (
                 <Link
                   to={primaryHref}
-                  className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
+                  className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300 rounded-[var(--media-radius)]"
                   style={{
                     background: 'var(--accent-color)',
                     color: 'var(--on-accent-text-color)',
@@ -98,7 +98,7 @@ export function HeroSection({ section }: HeroSectionProps) {
               {hasSecondaryCta && (
                 <Link
                   to={secondaryHref}
-                  className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300"
+                  className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300 rounded-[var(--media-radius)]"
                   style={{
                     borderColor: isWine
                       ? 'color-mix(in srgb, var(--media-caption-text-color) 35%, transparent)'

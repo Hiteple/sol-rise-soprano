@@ -36,7 +36,7 @@ export function TextButtonsSection({ page }: TextButtonsSectionProps) {
           {showPrimary && (
             <Link
               to={primaryHref}
-              className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
+              className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300 rounded-[var(--media-radius)]"
               style={{ background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }}
               data-sb-field-path="ctaPrimaryLabel"
             >
@@ -46,7 +46,7 @@ export function TextButtonsSection({ page }: TextButtonsSectionProps) {
           {showSecondary && (
             <Link
               to={secondaryHref}
-              className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300"
+              className="px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold border transition-all duration-300 rounded-[var(--media-radius)]"
               style={{
                 borderColor:
                   scheme === 'wine'

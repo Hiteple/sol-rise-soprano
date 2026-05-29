@@ -43,7 +43,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
       >
         <div className="max-w-site mx-auto px-6 lg:px-12">
           <div
-            className="flex gap-1 p-1 w-fit"
+            className="flex gap-1 p-1 w-fit rounded-[var(--media-radius)]"
             style={{ background: 'var(--pill-track-background-color)' }}
             role="group"
             aria-label="Filter gallery by category"
@@ -54,7 +54,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
                 type="button"
                 onClick={() => setActiveCategory(cat)}
                 aria-pressed={activeCategory === cat}
-                className="px-6 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300"
+                className="px-6 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300 rounded-[var(--media-radius-inner)]"
                 style={
                   activeCategory === cat
                     ? { background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }
@@ -81,7 +81,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
                 <button
                   key={item._meta.path}
                   type="button"
-                  className={`group img-zoom cursor-pointer relative block w-full border-0 p-0 text-left ${
+                  className={`group img-zoom media-radius cursor-pointer relative block w-full border-0 p-0 text-left ${
                     isLarge ? 'md:col-span-2 lg:col-span-2' : ''
                   }`}
                   style={{ aspectRatio: isLarge ? '16/9' : '4/5' }}

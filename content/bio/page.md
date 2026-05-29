@@ -59,6 +59,9 @@ fullBioParagraphs:
       operatic phonetics in Italian, German, and French.
     addBorderBottom: false
 fullBioColorScheme: soft
+fullBioImage: '/images/photo-book/SON05945 1.jpg'
+fullBioImageAlt: Sol Risé portrait
+fullBioImagePosition: right
 ---
 
 Biography page body (optional).

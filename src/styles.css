@@ -57,6 +57,10 @@
   --sections-vertical-padding-lg: 5rem; /* matches lg:py-20 */
   /** Main layout column (Nav, sections, footer). Was Tailwind 7xl (80rem). */
   --site-container-max: 90rem;
+  /** Shared corner radius for section media (images/videos). 0 disables it. */
+  --media-radius: 0.875rem; /* 14px */
+  /** Nested radius for controls inside p-1 (4px) pill tracks; keeps corners concentric. */
+  --media-radius-inner: calc(var(--media-radius) - 0.25rem);
 
   --background: var(--page-background-color);
   --foreground: var(--body-color);
@@ -344,6 +348,12 @@
   background: var(--chrome-accent);
 }
 
+/* Shared rounded corners for section media (images/videos) */
+.media-radius {
+  border-radius: var(--media-radius);
+  overflow: hidden;
+}
+
 /* Image hover zoom */
 .img-zoom {
   overflow: hidden;
@@ -423,6 +433,7 @@
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  border-radius: var(--media-radius);
   transition: flex-grow 0.45s ease;
 }
 .split-grid-overlay {
@@ -443,6 +454,7 @@
   right: 1.25rem;
   bottom: 1.25rem;
   z-index: 1;
+  border-radius: var(--media-radius);
   color: var(--media-caption-text-color);
   transition: background 0.22s ease, color 0.22s ease, padding 0.22s ease;
 }
@@ -451,6 +463,7 @@
   width: fit-content;
   margin-bottom: 0.5rem;
   padding: 0.4rem 0.75rem;
+  border-radius: var(--media-radius);
   border: 1px solid color-mix(in srgb, var(--media-caption-text-color) 38%, transparent);
   background: var(--split-grid-eyebrow-bg);
   color: var(--split-grid-eyebrow-text);
@@ -463,6 +476,14 @@
   .split-grid,
   .split-grid-item {
     min-height: 600px;
+  }
+  /* Desktop: panels sit flush, so round the whole strip instead of each panel */
+  .split-grid {
+    border-radius: var(--media-radius);
+    overflow: hidden;
+  }
+  .split-grid-item {
+    border-radius: 0;
   }
   .split-grid-item .split-grid-content {
     text-shadow: none;

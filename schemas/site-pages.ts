@@ -121,6 +121,9 @@ export const bioPageSchema = z.object({
   fullBioColorScheme: sectionColorSchemeSchema.default('soft'),
   fullBioEyebrow: z.string(),
   fullBioParagraphs: z.array(fullBioParagraphSchema),
+  fullBioImage: z.string().optional(),
+  fullBioImageAlt: z.string().optional(),
+  fullBioImagePosition: z.enum(['left', 'right']).default('right'),
   content: z.string(),
 })
 

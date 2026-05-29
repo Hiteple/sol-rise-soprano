@@ -1,14 +1,56 @@
 import { marked } from 'marked'
+import { netlifyImg } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import type { BioPage } from '../../schemas/site-pages'
 
 export type RichtextContentSectionProps = {
-  page: Pick<BioPage, 'fullBioColorScheme' | 'fullBioEyebrow' | 'fullBioParagraphs'>
+  page: Pick<
+    BioPage,
+    | 'fullBioColorScheme'
+    | 'fullBioEyebrow'
+    | 'fullBioParagraphs'
+    | 'fullBioImage'
+    | 'fullBioImageAlt'
+    | 'fullBioImagePosition'
+  >
 }
 
 export function RichtextContentSection({ page }: RichtextContentSectionProps) {
   const scheme = resolveColorScheme(page.fullBioColorScheme)
   const fg = schemeForeground(scheme)
+  const hasImage = Boolean(page.fullBioImage)
+  const imageOnLeft = page.fullBioImagePosition === 'left'
+
+  const eyebrow = (
+    <p
+      className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-6"
+      style={{ color: fg.eyebrow }}
+      data-sb-field-path="fullBioEyebrow"
+    >
+      {page.fullBioEyebrow}
+    </p>
+  )
+
+  const paragraphs = (
+    <div className="font-body text-base leading-relaxed space-y-6" style={{ color: fg.body }}>
+      {page.fullBioParagraphs.map((para, i) => (
+        <div
+          key={i}
+          className="timeline-markdown"
+          data-sb-field-path={`fullBioParagraphs.${i}.content`}
+          style={
+            para.addBorderBottom
+              ? {
+                  paddingBottom: '1rem',
+                  borderBottom: `1px solid ${fg.divider}`,
+                }
+              : undefined
+          }
+          dangerouslySetInnerHTML={{ __html: String(marked(para.content)) }}
+        />
+      ))}
+    </div>
+  )
 
   return (
     <section
@@ -16,33 +58,32 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="fullBioColorScheme"
     >
-      <div className="max-w-3xl mx-auto px-6 lg:px-12">
-        <p
-          className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-6"
-          style={{ color: fg.eyebrow }}
-          data-sb-field-path="fullBioEyebrow"
-        >
-          {page.fullBioEyebrow}
-        </p>
-        <div className="font-body text-base leading-relaxed space-y-6" style={{ color: fg.body }}>
-          {page.fullBioParagraphs.map((para, i) => (
+      {hasImage ? (
+        <div className="max-w-site mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
             <div
-              key={i}
-              className="timeline-markdown"
-              data-sb-field-path={`fullBioParagraphs.${i}.content`}
-              style={
-                para.addBorderBottom
-                  ? {
-                      paddingBottom: '1rem',
-                      borderBottom: `1px solid ${fg.divider}`,
-                    }
-                  : undefined
-              }
-              dangerouslySetInnerHTML={{ __html: String(marked(para.content)) }}
-            />
-          ))}
+              className={`lg:col-span-2 img-zoom media-radius ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
+            >
+              <img
+                src={netlifyImg(page.fullBioImage as string, 900, 1100)}
+                alt={page.fullBioImageAlt ?? ''}
+                className="w-full object-cover"
+                style={{ objectPosition: 'top center' }}
+                data-sb-field-path="fullBioImage#@src"
+              />
+            </div>
+            <div className={`lg:col-span-3 ${imageOnLeft ? 'order-2' : 'order-2 lg:order-1'}`}>
+              {eyebrow}
+              {paragraphs}
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="max-w-3xl mx-auto px-6 lg:px-12">
+          {eyebrow}
+          {paragraphs}
+        </div>
+      )}
     </section>
   )
 }

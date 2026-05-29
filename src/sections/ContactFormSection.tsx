@@ -318,7 +318,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     required
                     rows={6}
                     placeholder="Please share the details of your enquiry..."
-                    className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border resize-none bg-transparent"
+                    className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border resize-none bg-transparent rounded-[var(--media-radius)]"
                     style={{
                       borderColor: inputBorderRest,
                       color: isWine ? fg.heading : 'var(--body-color)',
@@ -336,7 +336,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                   type="submit"
                   disabled={loading}
                   aria-busy={loading}
-                  className="w-full flex items-center justify-center gap-3 py-4 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300"
+                  className="w-full flex items-center justify-center gap-3 py-4 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300 rounded-[var(--media-radius)]"
                   style={{
                     background: loading ? 'var(--pill-track-background-color)' : 'var(--accent-color)',
                     color: loading ? 'var(--subtle-text-color)' : 'var(--on-accent-text-color)',

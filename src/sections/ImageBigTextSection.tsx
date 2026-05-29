@@ -57,7 +57,7 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
             </p>
           </div>
 
-          <div className="relative img-zoom">
+          <div className="relative img-zoom media-radius">
             <img
               src={netlifyImg(heroSrc, 800, 1000)}
               alt={page.heroImageAlt}
@@ -66,7 +66,7 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
               data-sb-field-path="heroImage"
             />
             <div
-              className="absolute bottom-6 left-6 right-6 p-6"
+              className="absolute bottom-6 left-6 right-6 p-6 rounded-[var(--media-radius)]"
               style={{
                 background: isWine
                   ? 'color-mix(in srgb, var(--palette-pine) 55%, transparent)'
