@@ -20,6 +20,8 @@
     "lucide-react": "^0.576.0",
     "marked": "^17.0.1",
     "netlify-cli": "^25.0.1",
+    "photoswipe": "^5.4.4",
+    "photoswipe-dynamic-caption-plugin": "^1.2.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwind-merge": "^3.0.2",

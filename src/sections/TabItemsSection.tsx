@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { SlidingTabGroup } from '@/components/SlidingTabGroup'
 import { TabGridEmptyState } from '@/components/TabGridEmptyState'
+import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { galleryCategoryEmptyCopy } from '@/lib/tab-grid-empty-copy'
@@ -36,6 +37,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
   const fg = schemeForeground(scheme)
   const animate = slideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
+  const { openGallery } = useGalleryPhotoSwipe()
 
   return (
     <>
@@ -78,16 +80,29 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
             />
           ) : (
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-            {filtered.map((item) => {
+            {filtered.map((item, index) => {
               const isFeatured = Boolean(item.featuredImg)
               return (
-                <div
+                <button
                   key={item._meta.path}
-                  className={`group img-zoom media-radius relative block h-full min-h-0 w-full self-stretch overflow-hidden col-span-2 ${
+                  type="button"
+                  className={`group img-zoom media-radius relative block h-full min-h-0 w-full self-stretch overflow-hidden border-0 p-0 text-left cursor-pointer col-span-2 ${
                     isFeatured ? '' : 'lg:col-span-1'
                   }`}
                   {...(isFeatured ? { 'data-featured-img': true } : {})}
                   data-sb-object-id={`content/gallery/${item._meta.path}.md`}
+                  aria-label={`View larger image: ${item.title}`}
+                  onClick={() =>
+                    openGallery(
+                      filtered.map((entry) => ({
+                        image: entry.image,
+                        alt: entry.alt,
+                        title: entry.title,
+                        category: entry.category,
+                      })),
+                      index,
+                    )
+                  }
                 >
                   <img
                     {...netlifyImgSet(
@@ -105,12 +120,13 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
                       isFeatured ? 1200 : 600,
                       isFeatured ? 675 : 750,
                     )}
-                    alt={item.alt}
+                    alt=""
+                    aria-hidden
                     className="absolute inset-0 h-full w-full object-cover"
                     data-sb-field-path="image"
                   />
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 flex items-end p-5"
                     style={{
                       background:
                         'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 78%, transparent) 0%, transparent 60%)',
@@ -135,7 +151,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
                       )}
                     </div>
                   </div>
-                </div>
+                </button>
               )
             })}
           </div>
