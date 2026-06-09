@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router'
+
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { splitGridBadges } from '@/lib/split-grid-badges'
 import { useInView } from '@/lib/use-in-view'
@@ -123,6 +125,21 @@ export function SplitGridSection({ items, colorScheme, slideIn, title, descripti
                 >
                   {panelContent}
                 </div>
+              )
+            }
+
+            const isInternal = href.startsWith('/') && !href.startsWith('//')
+
+            if (isInternal) {
+              return (
+                <Link
+                  key={`${item.title}-${href}`}
+                  to={href}
+                  className="split-grid-item"
+                  style={{ backgroundImage: `url(${item.image})` }}
+                >
+                  {panelContent}
+                </Link>
               )
             }
 

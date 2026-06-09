@@ -14,6 +14,7 @@ const fallbackFooterLinks = [
   { label: 'Home', href: '/' },
   { label: 'Bio', href: '/bio' },
   { label: 'Career', href: '/career' },
+  { label: 'Schedule', href: '/schedule' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ]

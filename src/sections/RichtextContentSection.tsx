@@ -67,19 +67,19 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
           ref={ref}
           className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div
-              className={`lg:col-span-2 img-zoom media-radius ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
+              className={`img-zoom media-radius ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
             >
               <img
                 {...netlifyImgSet(page.fullBioImage as string, 900, 1100)}
                 alt={page.fullBioImageAlt ?? ''}
                 className="w-full object-cover"
-                style={{ objectPosition: 'top center' }}
+                style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
                 data-sb-field-path="fullBioImage#@src"
               />
             </div>
-            <div className={`lg:col-span-3 ${imageOnLeft ? 'order-2' : 'order-2 lg:order-1'}`}>
+            <div className={imageOnLeft ? 'order-2' : 'order-2 lg:order-1'}>
               {eyebrow}
               {paragraphs}
             </div>

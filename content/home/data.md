@@ -9,6 +9,8 @@ headerNavLinks:
     href: /bio
   - label: Career
     href: /career
+  - label: Schedule
+    href: /schedule
   - label: Gallery
     href: /gallery
   - label: Contact
@@ -25,12 +27,24 @@ secondaryCtaHref: ''
 aboutSurface: soft
 aboutEyebrow: About
 aboutTitle: An Evolving Operatic Journey
-aboutText: >-
-  Sol Risé is an Argentine soprano with a career developed across opera, concert repertoire, and choral performance. Her work includes roles such as Pamina (The Magic Flute) and Zerlina (Don Giovanni), as well as choral work in productions of La Traviata, Carmen, and Macbeth. She has performed with established companies and festivals in Argentina and Bolivia, combining stage experience with ongoing vocal and interpretive training. Her artistic path reflects consistency, versatility, and a strong focus on musical expression.
+aboutText: |
+  Sol Risé is an Argentine soprano with a career developed across opera, concert repertoire, and choral performance. Her work includes roles such as Pamina (*The Magic Flute*) and Zerlina (*Don Giovanni*), as well as choral work in productions of *La Traviata*, *Carmen*, and *Macbeth*.
+
+  She has performed with established companies and festivals in Argentina and Bolivia, combining stage experience with ongoing vocal and interpretive training. Her artistic path reflects consistency, versatility, and a strong focus on musical expression.
 aboutImage: /images/plaza-belgica/IMG_9816.jpeg
 aboutImageAlt: image placeholder pending
 aboutLinkText: View Career Highlights
 aboutHref: /career
+organizationsStripEyebrow: Collaborations
+organizationsStripTitle: On These Stages
+organizationsStripDescription: Opera houses and companies where Sol Risé has performed and continues to develop her repertoire.
+organizationsStripLinkText: View all opera houses & companies
+organizationsStripItems:
+  - teatro-colon
+  - teatro-avenida
+  - juventus-lyrica
+  - british-arts-center
+organizationsStripColorScheme: bright
 mediaEyebrow: On Stage & On Screen
 mediaTitle: Last Events
 mediaItems:
@@ -38,21 +52,21 @@ mediaItems:
   - content/media/batti-batti-o-bel-masetto.md
 splitGridItems:
   - title: Madama Butterfly
-    href: https://juventuslyrica.ar/madama-butterfly-2026/
+    href: /schedule/madama-butterfly-2026
     image: images/schedule-images/madama-butterfly.jpg
     badges:
       - June 12th
       - June 13th
     subtitle: Buenos Aires - Teatro Avenida
   - title: Suor Angelica
-    href: /contact
+    href: /schedule/suor-angelica-2026
     image: images/schedule-images/suor-angelica.jpeg
     badges:
       - June 28th
     subtitle: Buenos Aires - La Redonda de Belgrano
 splitGridColorScheme: wine
-splitGridTitle: Schedule
-splitGridDescription: Upcoming performances and recitals
+splitGridTitle: Upcoming Events
+splitGridDescription: Where to see Sol Risé next — dates, venues, and full details for each production.
 quoteText: La musica è la lingua dell'anima
 quoteImage: /images/general/liana-unsplash.webp
 quoteImageAlt: Close-up of sheet music with blurred background
@@ -70,6 +84,8 @@ footerNavLinks:
     href: /bio
   - label: Career
     href: /career
+  - label: Schedule
+    href: /schedule
   - label: Gallery
     href: /gallery
   - label: Contact

@@ -3,6 +3,8 @@ import { Link, useRouterState } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
 import { allHomes } from 'content-collections'
 
+import { CareerNavDropdown } from '@/components/CareerNavDropdown'
+import { isCareerNavHref } from '@/lib/career-nav'
 import { parseSiteNavLinks } from '@/lib/nav-links'
 import { cn } from '@/lib/utils'
 
@@ -10,6 +12,7 @@ const fallbackNavLinks = [
   { to: '/' as const, label: 'Home' },
   { to: '/bio' as const, label: 'Bio' },
   { to: '/career' as const, label: 'Career' },
+  { to: '/schedule' as const, label: 'Schedule' },
   { to: '/gallery' as const, label: 'Gallery' },
   { to: '/contact' as const, label: 'Contact' },
 ]
@@ -101,39 +104,49 @@ export function Nav() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link, idx) => (
-              <a
-                key={`${link.label}-${link.href}`}
-                href={link.href}
-                className="gold-link"
-                aria-current={pathname === link.href ? 'page' : undefined}
-                data-sb-field-path={`headerNavLinks.${idx}.label`}
-                style={
-                  pathname === link.href
-                    ? {
-                        color: useChrome
-                          ? 'var(--chrome-text)'
-                          : onHeroHome
-                            ? 'var(--accent-pale-color)'
-                            : 'var(--accent-soft-color)',
-                      }
-                    : undefined
-                }
-                onClick={() => setMenuOpen(false)}
-                onMouseEnter={(e) => {
-                  if (pathname !== link.href && !useChrome && onHeroHome) {
-                    e.currentTarget.style.color = 'var(--accent-pale-color)'
+            {navLinks.map((link, idx) =>
+              isCareerNavHref(link.href) ? (
+                <CareerNavDropdown
+                  key={`${link.label}-${link.href}`}
+                  variant="desktop"
+                  useChrome={useChrome}
+                  onHeroHome={onHeroHome}
+                  pathname={pathname}
+                />
+              ) : (
+                <a
+                  key={`${link.label}-${link.href}`}
+                  href={link.href}
+                  className="gold-link"
+                  aria-current={pathname === link.href ? 'page' : undefined}
+                  data-sb-field-path={`headerNavLinks.${idx}.label`}
+                  style={
+                    pathname === link.href
+                      ? {
+                          color: useChrome
+                            ? 'var(--chrome-text)'
+                            : onHeroHome
+                              ? 'var(--accent-pale-color)'
+                              : 'var(--accent-soft-color)',
+                        }
+                      : undefined
                   }
-                }}
-                onMouseLeave={(e) => {
-                  if (pathname !== link.href && !useChrome && onHeroHome) {
-                    e.currentTarget.style.color = ''
-                  }
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
+                  onClick={() => setMenuOpen(false)}
+                  onMouseEnter={(e) => {
+                    if (pathname !== link.href && !useChrome && onHeroHome) {
+                      e.currentTarget.style.color = 'var(--accent-pale-color)'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (pathname !== link.href && !useChrome && onHeroHome) {
+                      e.currentTarget.style.color = ''
+                    }
+                  }}
+                >
+                  {link.label}
+                </a>
+              ),
+            )}
           </div>
 
           {/* Mobile Toggle */}
@@ -164,7 +177,7 @@ export function Nav() {
         id={mobileMenuId}
         className={cn(
           'md:hidden overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none',
-          menuOpen ? 'max-h-[28rem]' : 'max-h-0',
+          menuOpen ? 'max-h-[36rem]' : 'max-h-0',
         )}
         aria-hidden={!menuOpen}
       >
@@ -180,20 +193,31 @@ export function Nav() {
             borderColor: useChrome ? 'var(--chrome-border)' : 'color-mix(in srgb, var(--accent-ink-color) 15%, transparent)',
           }}
         >
-          {navLinks.map((link, idx) => (
-            <a
-              key={`${link.label}-${link.href}-mobile`}
-              href={link.href}
-              className="font-display text-2xl italic"
-              aria-current={pathname === link.href ? 'page' : undefined}
-              data-sb-field-path={`headerNavLinks.${idx}.label`}
-              style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
-              onClick={() => setMenuOpen(false)}
-              tabIndex={menuOpen ? undefined : -1}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link, idx) =>
+            isCareerNavHref(link.href) ? (
+              <CareerNavDropdown
+                key={`${link.label}-${link.href}-mobile`}
+                variant="mobile"
+                useChrome={useChrome}
+                onHeroHome={onHeroHome}
+                pathname={pathname}
+                onNavigate={() => setMenuOpen(false)}
+              />
+            ) : (
+              <a
+                key={`${link.label}-${link.href}-mobile`}
+                href={link.href}
+                className="font-display text-2xl italic"
+                aria-current={pathname === link.href ? 'page' : undefined}
+                data-sb-field-path={`headerNavLinks.${idx}.label`}
+                style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
+                onClick={() => setMenuOpen(false)}
+                tabIndex={menuOpen ? undefined : -1}
+              >
+                {link.label}
+              </a>
+            ),
+          )}
         </div>
       </div>
     </nav>

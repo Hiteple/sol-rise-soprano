@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 export type UseInViewOptions = {
   /** Fraction of the element visible before it triggers (0–1). */
   threshold?: number
-  /** Margin around the viewport; negative bottom delays the trigger slightly. */
+  /** Margin around the viewport; positive bottom triggers before the element enters. */
   rootMargin?: string
   /** Reveal only once (default) or re-trigger when scrolling in and out. */
   once?: boolean
@@ -13,7 +13,7 @@ export type UseInViewOptions = {
 export function useInView<T extends HTMLElement = HTMLElement>(
   options: UseInViewOptions = {},
 ) {
-  const { threshold = 0.15, rootMargin = '0px 0px -10% 0px', once = true } = options
+  const { threshold = 0.08, rootMargin = '0px 0px 10% 0px', once = true } = options
   const ref = useRef<T | null>(null)
   const [inView, setInView] = useState(false)
 

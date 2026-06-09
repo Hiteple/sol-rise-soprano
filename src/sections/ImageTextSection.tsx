@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { marked } from 'marked'
 
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { schemeForeground, schemeGoldLinkStyle, schemeSolidBackground } from '@/lib/section-color-scheme'
@@ -20,6 +21,7 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
   const linkStyle = schemeGoldLinkStyle(scheme)
   const animate = section.slideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
+  const textHtml = section.text?.trim() ? marked(section.text.trim()) : ''
 
   const paths = {
     eyebrow: 'aboutEyebrow',
@@ -39,9 +41,9 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
       <div className="max-w-site mx-auto px-4 lg:px-12">
         <div
           ref={ref}
-          className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
         >
-          <div className="lg:col-span-2 order-2 lg:order-1">
+          <div className="order-2 lg:order-1">
             <p
               className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-6"
               style={{ color: fg.eyebrow }}
@@ -60,13 +62,14 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
               className="w-12 h-px mb-8"
               style={{ background: fg.divider }}
             />
-            <p
-              className="font-body text-base leading-relaxed mb-10"
-              style={{ color: fg.body }}
-              data-sb-field-path={paths.text}
-            >
-              {section.text}
-            </p>
+            {textHtml ? (
+              <div
+                className="image-text-markdown font-body text-base leading-relaxed mb-10 space-y-4"
+                style={{ color: fg.body }}
+                data-sb-field-path={paths.text}
+                dangerouslySetInnerHTML={{ __html: textHtml }}
+              />
+            ) : null}
             <Link
               to={linkHref}
               className="gold-link"
@@ -79,12 +82,12 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
             </Link>
           </div>
 
-          <div className="lg:col-span-3 img-zoom media-radius order-1 lg:order-2 relative">
+          <div className="img-zoom media-radius order-1 lg:order-2 relative">
             <img
               {...netlifyImgSet(section.image, 900, 1100)}
               alt={section.imageAlt}
               className="w-full object-cover"
-              style={{ objectPosition: 'top center' }}
+              style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
               data-sb-field-path={paths.image}
             />
           </div>

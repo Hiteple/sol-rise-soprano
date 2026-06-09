@@ -3,13 +3,24 @@ import { z } from 'zod'
 
 import { sectionColorSchemeSchema } from './schemas/color-scheme'
 import { imageCreditFieldsSchema } from './schemas/image-credit'
+import { scheduleEventSchema } from './schemas/schedule-event'
 import {
   aboutPageSchema,
   bioPageSchema,
   contactPageSchema,
   galleryPageSchema,
-  productionsPageSchema,
+  organizationsPageSchema,
+  rolesPageSchema,
+  schedulePageSchema,
 } from './schemas/site-pages'
+
+const roleAppearanceSchema = z.object({
+  year: z.string(),
+  venue: z.string(),
+  organizationSlug: z.string().optional(),
+  city: z.string().optional(),
+  notes: z.string().optional(),
+})
 
 const homeHeroColorSchemeSchema = z.preprocess((val) => {
   if (val === 'wine') return 'wine'
@@ -18,21 +29,6 @@ const homeHeroColorSchemeSchema = z.preprocess((val) => {
   }
   return 'wine'
 }, z.enum(['clear', 'wine']))
-
-const education = defineCollection({
-  name: 'education',
-  directory: 'content/education',
-  include: '**/*.md',
-  schema: z.object({
-    school: z.string(),
-    summary: z.string(),
-    startDate: z.string(),
-    endDate: z.string().optional(),
-    tags: z.array(z.string()),
-    content: z.string(),
-  }),
-})
-
 
 const home = defineCollection({
   name: 'home',
@@ -78,6 +74,13 @@ const home = defineCollection({
     aboutImageAlt: z.string(),
     aboutLinkText: z.string(),
     aboutHref: z.string().optional(),
+    organizationsStripEyebrow: z.string().optional(),
+    organizationsStripTitle: z.string().optional(),
+    organizationsStripDescription: z.string().optional(),
+    organizationsStripLinkText: z.string().optional(),
+    organizationsStripItems: z.array(z.string()).max(8).optional(),
+    organizationsStripColorScheme: sectionColorSchemeSchema.default('bright'),
+    organizationsStripSlideIn: z.boolean().default(true),
     mediaEyebrow: z.string(),
     mediaTitle: z.string(),
     mediaItems: z.array(z.string()).max(12).optional(),
@@ -148,6 +151,10 @@ const gallery = defineCollection({
     category: z.string().optional(),
     order: z.number().optional(),
     featuredImg: z.boolean().default(false),
+    /** Links this image to a role detail page (`content/roles` filename without extension). */
+    roleSlug: z.string().optional(),
+    /** Links this image to a past schedule event when there is no operatic role. */
+    gallerySlug: z.string().optional(),
     content: z.string(),
   }),
 })
@@ -189,20 +196,44 @@ const mediaItems = defineCollection({
     }),
 })
 
-const productions = defineCollection({
-  name: 'productions',
-  directory: 'content/productions',
+const roles = defineCollection({
+  name: 'roles',
+  directory: 'content/roles',
   include: '**/*.md',
   schema: z.object({
-    title: z.string(),
-    role: z.string(),
-    venue: z.string(),
-    year: z.string(),
-    image: z.string(),
-    description: z.string(),
-    tags: z.array(z.string()),
+    characterName: z.string(),
+    operaTitle: z.string(),
+    composer: z.string(),
+    heroImage: z.string(),
+    summary: z.string(),
+    appearances: z.array(roleAppearanceSchema).default([]),
+    tags: z.array(z.string()).default([]),
+    order: z.number().optional(),
     content: z.string(),
   }),
+})
+
+const organizations = defineCollection({
+  name: 'organizations',
+  directory: 'content/organizations',
+  include: '**/*.md',
+  schema: z.object({
+    name: z.string(),
+    city: z.string(),
+    country: z.string().optional(),
+    image: z.string().optional(),
+    summary: z.string(),
+    website: z.string().optional(),
+    order: z.number().optional(),
+    content: z.string(),
+  }),
+})
+
+const scheduleEvents = defineCollection({
+  name: 'scheduleEvents',
+  directory: 'content/schedule',
+  include: '**/*.md',
+  schema: scheduleEventSchema,
 })
 
 const careerPage = defineCollection({
@@ -226,11 +257,25 @@ const contactPage = defineCollection({
   schema: contactPageSchema,
 })
 
-const productionsPage = defineCollection({
-  name: 'productionsPage',
-  directory: 'content/productions-landing',
+const rolesPage = defineCollection({
+  name: 'rolesPage',
+  directory: 'content/roles-landing',
   include: 'page.md',
-  schema: productionsPageSchema,
+  schema: rolesPageSchema,
+})
+
+const organizationsPage = defineCollection({
+  name: 'organizationsPage',
+  directory: 'content/organizations-landing',
+  include: 'page.md',
+  schema: organizationsPageSchema,
+})
+
+const schedulePage = defineCollection({
+  name: 'schedulePage',
+  directory: 'content/schedule-landing',
+  include: 'page.md',
+  schema: schedulePageSchema,
 })
 
 const bioPage = defineCollection({
@@ -242,15 +287,18 @@ const bioPage = defineCollection({
 
 export default defineConfig({
   collections: [
-    education,
     home,
     gallery,
     mediaItems,
-    productions,
+    roles,
+    organizations,
+    scheduleEvents,
     careerPage,
     galleryPage,
     bioPage,
     contactPage,
-    productionsPage,
+    rolesPage,
+    organizationsPage,
+    schedulePage,
   ],
 })

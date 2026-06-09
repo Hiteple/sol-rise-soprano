@@ -114,14 +114,38 @@ export const contactPageSchema = z.object({
   content: z.string(),
 })
 
-export const productionsPageSchema = z.object({
-  type: z.literal('ProductionsPage'),
+export const rolesPageSchema = z.object({
+  type: z.literal('RolesPage'),
   pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
   heroEyebrow: z.string(),
   heroTitle: z.string(),
   heroDescription: z.string(),
-  productionsListColorScheme: sectionColorSchemeSchema.default('soft'),
-  productionsListSlideIn: z.boolean().default(true),
+  rolesListColorScheme: sectionColorSchemeSchema.default('soft'),
+  rolesListSlideIn: z.boolean().default(true),
+  content: z.string(),
+})
+
+export const organizationsPageSchema = z.object({
+  type: z.literal('OrganizationsPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
+  heroEyebrow: z.string(),
+  heroTitle: z.string(),
+  heroDescription: z.string(),
+  organizationsListColorScheme: sectionColorSchemeSchema.default('soft'),
+  organizationsListSlideIn: z.boolean().default(true),
+  content: z.string(),
+})
+
+export const schedulePageSchema = z.object({
+  type: z.literal('SchedulePage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
+  heroEyebrow: z.string(),
+  heroTitle: z.string(),
+  heroDescription: z.string(),
+  upcomingColorScheme: sectionColorSchemeSchema.default('wine'),
+  upcomingSlideIn: z.boolean().default(true),
+  pastColorScheme: sectionColorSchemeSchema.default('soft'),
+  pastSlideIn: z.boolean().default(true),
   content: z.string(),
 })
 
@@ -144,5 +168,7 @@ export const bioPageSchema = z.object({
 export type AboutPage = z.infer<typeof aboutPageSchema>
 export type GalleryPage = z.infer<typeof galleryPageSchema>
 export type ContactPage = z.infer<typeof contactPageSchema>
-export type ProductionsPage = z.infer<typeof productionsPageSchema>
+export type RolesPage = z.infer<typeof rolesPageSchema>
+export type OrganizationsPage = z.infer<typeof organizationsPageSchema>
+export type SchedulePage = z.infer<typeof schedulePageSchema>
 export type BioPage = z.infer<typeof bioPageSchema>
