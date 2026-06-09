@@ -53,8 +53,7 @@ function HomePage() {
     },
   ]
   const [filter, setFilter] = useState<'all' | 'video' | 'image'>('all')
-  const [activeMedia, setActiveMedia] = useState<{
-    kind: 'video' | 'image'
+  const [activeVideo, setActiveVideo] = useState<{
     url: string
     title?: string | null
   } | null>(null)
@@ -107,7 +106,7 @@ function HomePage() {
         mediaItems={mediaItems}
         filter={filter}
         onFilterChange={setFilter}
-        onOpenMedia={setActiveMedia}
+        onOpenVideo={setActiveVideo}
       />
       <QuoteBannerSection
         section={{
@@ -121,35 +120,23 @@ function HomePage() {
       />
 
       <Modal
-        open={Boolean(activeMedia)}
-        onClose={() => setActiveMedia(null)}
-        title={activeMedia?.title?.trim() || undefined}
-        ariaLabel={
-          activeMedia?.kind === 'video'
-            ? 'Video player'
-            : activeMedia?.title
-              ? `Image: ${activeMedia.title}`
-              : 'Media image'
-        }
+        open={Boolean(activeVideo)}
+        onClose={() => setActiveVideo(null)}
+        title={activeVideo?.title?.trim() || undefined}
+        ariaLabel="Video player"
         className="flex-col"
       >
-        {activeMedia?.kind === 'video' ? (
+        {activeVideo && (
           <div style={{ aspectRatio: '16/9' }}>
             <iframe
-              src={youtubeIframeSrc(activeMedia.url)}
-              title={activeMedia.title?.trim() ? `${activeMedia.title} video` : 'Video player'}
+              src={youtubeIframeSrc(activeVideo.url)}
+              title={activeVideo.title?.trim() ? `${activeVideo.title} video` : 'Video player'}
               className="w-full h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
-        ) : activeMedia ? (
-          <img
-            src={activeMedia.url}
-            alt={activeMedia.title ?? 'Media image'}
-            className="h-[82vh] w-full object-cover"
-          />
-        ) : null}
+        )}
       </Modal>
     </div>
   )

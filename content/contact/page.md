@@ -13,10 +13,16 @@ youtubeUrl: https://www.youtube.com/channel/UCgm68FC8sM_2r3cAXBQdbvw
 youtubeHandle: '@solrisesoprano'
 facebookUrl: https://facebook.com/solrisesoprano
 facebookHandle: solrisesoprano
+muvacUrl: https://www.muvac.com/es/profile/florencia-sol-rise-lopez
+muvacHandle: Florencia Sol Risé López
 formSubjectOptions:
-  - Booking Enquiry
-  - Press
-  - Teaching
+  - Artistic Engagements
+  - Voice Lessons
+  - Vocal Coaching & Audition Preparation
+  - Private Events
+  - Press & Media Inquiries
+  - Artistic Collaborations
+  - General Inquiries
 successTitle: Message Sent
 successMessage: Thank you for reaching out.
 successResetLabel: Send Another Message →

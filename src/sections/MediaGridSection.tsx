@@ -1,6 +1,6 @@
 import { Play } from 'lucide-react'
 
-import { netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSet } from '@/lib/netlify-image'
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { HomeMediaSection, MediaFilter, MediaItem } from './types'
@@ -10,7 +10,62 @@ export type MediaGridSectionProps = {
   mediaItems: MediaItem[]
   filter: MediaFilter
   onFilterChange: (filter: MediaFilter) => void
-  onOpenMedia: (media: { kind: 'video' | 'image'; url: string; title?: string | null }) => void
+  onOpenVideo: (media: { url: string; title?: string | null }) => void
+}
+
+const cardClassName =
+  'relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left'
+
+function MediaGridCardContent({ item }: { item: MediaItem }) {
+  return (
+    <>
+      <img
+        {...netlifyImgSet(item.thumbnail, 800, 500)}
+        alt=""
+        aria-hidden
+        className="w-full h-full object-cover"
+        data-sb-field-path="thumbnail#@src"
+      />
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 88%, transparent) 0%, color-mix(in srgb, var(--palette-pine) 32%, transparent) 55%, transparent 100%)',
+        }}
+        aria-hidden
+      >
+        {item.type === 'video' && (
+          <div className="play-btn mb-4">
+            <Play
+              size={20}
+              fill="currentColor"
+              aria-hidden
+              style={{
+                color: 'var(--media-caption-text-color)',
+                marginLeft: 2,
+              }}
+            />
+          </div>
+        )}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none">
+        <p
+          className="font-display text-lg italic leading-tight"
+          style={{ color: 'var(--media-caption-text-color)' }}
+          data-sb-field-path="title"
+        >
+          {item.title}
+        </p>
+        <p
+          className="font-body text-xs mt-1 line-clamp-1"
+          style={{ color: 'var(--media-caption-text-muted-color)' }}
+          data-sb-field-path="description"
+        >
+          {item.description}
+        </p>
+      </div>
+    </>
+  )
 }
 
 export function MediaGridSection({
@@ -18,7 +73,7 @@ export function MediaGridSection({
   mediaItems,
   filter,
   onFilterChange,
-  onOpenMedia,
+  onOpenVideo,
 }: MediaGridSectionProps) {
   const filtered =
     filter === 'all' ? mediaItems : mediaItems.filter((m) => m.type === filter)
@@ -85,74 +140,60 @@ export function MediaGridSection({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((item) => (
-              <button
-                key={item._meta.path}
-                type="button"
-                className="relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left"
-                style={{ aspectRatio: '16/10' }}
-                data-sb-object-id={`content/media/${item._meta.path}.md`}
-                aria-label={
-                  item.type === 'video'
-                    ? `Play video: ${item.title}`
-                    : `View image: ${item.title}`
-                }
-                onClick={() => {
-                  if (item.type === 'video' && item.videoUrl) {
-                    onOpenMedia({ kind: 'video', url: item.videoUrl, title: item.title })
-                  }
-                  if (item.type === 'image') {
-                    onOpenMedia({ kind: 'image', url: item.thumbnail, title: item.title })
-                  }
-                }}
-              >
-                <img
-                  src={netlifyImg(item.thumbnail, 800, 500)}
-                  alt=""
-                  aria-hidden
-                  className="w-full h-full object-cover"
-                  data-sb-field-path="thumbnail#@src"
-                />
-                <div
-                  className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    background:
-                      'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 88%, transparent) 0%, color-mix(in srgb, var(--palette-pine) 32%, transparent) 55%, transparent 100%)',
-                  }}
-                  aria-hidden
-                >
-                  {item.type === 'video' && (
-                    <div className="play-btn mb-4">
-                      <Play
-                        size={20}
-                        fill="currentColor"
-                        aria-hidden
-                        style={{
-                          color: 'var(--media-caption-text-color)',
-                          marginLeft: 2,
-                        }}
-                      />
+            {filtered.map((item) => {
+              const objectId = `content/media/${item._meta.path}.md`
+              const cardStyle = { aspectRatio: '16/10' as const }
+
+              if (item.type === 'image') {
+                const imageHref = item.imageUrl?.trim() ?? ''
+                if (!imageHref) {
+                  return (
+                    <div
+                      key={item._meta.path}
+                      className={`${cardClassName} cursor-default`}
+                      style={cardStyle}
+                      data-sb-object-id={objectId}
+                    >
+                      <MediaGridCardContent item={item} />
                     </div>
-                  )}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none">
-                  <p
-                    className="font-display text-lg italic leading-tight"
-                    style={{ color: 'var(--media-caption-text-color)' }}
-                    data-sb-field-path="title"
+                  )
+                }
+
+                return (
+                  <a
+                    key={item._meta.path}
+                    href={imageHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cardClassName}
+                    style={cardStyle}
+                    data-sb-object-id={objectId}
+                    data-sb-field-path="imageUrl"
+                    aria-label={`Open link: ${item.title}`}
                   >
-                    {item.title}
-                  </p>
-                  <p
-                    className="font-body text-xs mt-1 line-clamp-1"
-                    style={{ color: 'var(--media-caption-text-muted-color)' }}
-                    data-sb-field-path="description"
-                  >
-                    {item.description}
-                  </p>
-                </div>
-              </button>
-            ))}
+                    <MediaGridCardContent item={item} />
+                  </a>
+                )
+              }
+
+              return (
+                <button
+                  key={item._meta.path}
+                  type="button"
+                  className={cardClassName}
+                  style={cardStyle}
+                  data-sb-object-id={objectId}
+                  aria-label={`Play video: ${item.title}`}
+                  onClick={() => {
+                    if (item.videoUrl) {
+                      onOpenVideo({ url: item.videoUrl, title: item.title })
+                    }
+                  }}
+                >
+                  <MediaGridCardContent item={item} />
+                </button>
+              )
+            })}
           </div>
       </div>
     </section>

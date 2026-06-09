@@ -1,5 +1,5 @@
 import { marked } from 'marked'
-import { netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { BioPage } from '../../schemas/site-pages'
@@ -72,7 +72,7 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
               className={`lg:col-span-2 img-zoom media-radius ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
             >
               <img
-                src={netlifyImg(page.fullBioImage as string, 900, 1100)}
+                {...netlifyImgSet(page.fullBioImage as string, 900, 1100)}
                 alt={page.fullBioImageAlt ?? ''}
                 className="w-full object-cover"
                 style={{ objectPosition: 'top center' }}

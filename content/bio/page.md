@@ -40,9 +40,6 @@ fullBioParagraphs:
       and **Michael Fabiano.**
 
 
-      *   Private coaching with répétiteur **Kamal Khan**.
-
-
       *   Scholarship programs with **Juventus Lyrica**.
 
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Modal } from '@/components/Modal'
-import { netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -102,7 +102,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
                   }
                 >
                   <img
-                    src={netlifyImg(
+                    {...netlifyImgSet(
                       item.image,
                       isLarge ? 1200 : 600,
                       isLarge ? 675 : 750,
@@ -153,7 +153,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
       >
         {lightboxImg && (
           <img
-            src={netlifyImg(lightboxImg.src, 1400, 900, 'contain')}
+            {...netlifyImgSet(lightboxImg.src, 1400, 900, 'contain')}
             alt={lightboxImg.alt}
             className="w-full max-h-screen object-contain"
           />

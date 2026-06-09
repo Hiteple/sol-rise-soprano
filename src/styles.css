@@ -467,13 +467,13 @@
     transparent 78%
   );
   opacity: 0.95;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
 }
 .split-grid-content {
   position: absolute;
-  left: 1.25rem;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  left: .5rem;
+  right: .5rem;
+  bottom: .5rem;
   z-index: 1;
   border-radius: var(--media-radius);
   color: var(--media-caption-text-color);
@@ -496,7 +496,7 @@
 @media (min-width: 768px) {
   .split-grid,
   .split-grid-item {
-    min-height: 600px;
+    min-height: 700px;
   }
   /* Desktop: panels sit flush, so round the whole strip instead of each panel */
   .split-grid {
@@ -515,8 +515,11 @@
   .split-grid:hover .split-grid-item:hover {
     flex-grow: 1.8;
   }
+  .split-grid:hover .split-grid-item:not(:hover) .split-grid-overlay {
+    backdrop-filter: brightness(0.5);
+  }
   .split-grid:hover .split-grid-item:hover .split-grid-overlay {
-    opacity: 0.08;
+    opacity: 1;
   }
   .split-grid:hover .split-grid-item:hover .split-grid-content {
     background: var(--split-grid-hover-content-bg);

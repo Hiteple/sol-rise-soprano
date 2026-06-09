@@ -1,4 +1,4 @@
-import { netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSet } from '@/lib/netlify-image'
 import { schemeForeground, schemeQuoteOverlay } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { HomeQuoteSection } from './types'
@@ -21,7 +21,7 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
     >
         <div className="absolute inset-0">
           <img
-            src={netlifyImg(section.quoteImage, 1920, 900)}
+            {...netlifyImgSet(section.quoteImage, 1920, 900)}
             alt={quoteAlt}
             className="w-full h-full object-cover"
             data-sb-field-path="quoteImage#@src"

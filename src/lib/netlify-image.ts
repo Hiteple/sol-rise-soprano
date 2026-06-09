@@ -4,3 +4,16 @@ export function netlifyImg(url: string, w: number, h?: number, fit = 'cover') {
   if (h) params.set('h', String(h))
   return `/.netlify/images?${params.toString()}`
 }
+
+/**
+ * Same as netlifyImg, but also returns a 2x `srcSet` so the image stays crisp
+ * on high-DPI (Retina) displays. Spread the result onto an <img>:
+ *   <img {...netlifyImgSet(url, 900, 1100)} alt="..." />
+ * The browser then picks the 1x source on standard screens (lighter) and the
+ * 2x source on Retina (sharper).
+ */
+export function netlifyImgSet(url: string, w: number, h?: number, fit = 'cover') {
+  const src = netlifyImg(url, w, h, fit)
+  const src2x = netlifyImg(url, w * 2, h ? h * 2 : undefined, fit)
+  return { src, srcSet: `${src} 1x, ${src2x} 2x` }
+}

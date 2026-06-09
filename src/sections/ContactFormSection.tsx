@@ -4,6 +4,7 @@ import { Send, Check } from 'lucide-react'
 import {
   FacebookIcon,
   InstagramIcon,
+  MuvacIcon,
   YoutubeIcon,
 } from '@/components/brand-icons'
 
@@ -25,7 +26,15 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
   const [loading, setLoading] = useState(false)
   const subjectOptions = page?.formSubjectOptions?.length
     ? page.formSubjectOptions
-    : ['Booking Enquiry', 'Press', 'Teaching']
+    : [
+        'Artistic Engagements',
+        'Voice Lessons',
+        'Vocal Coaching & Audition Preparation',
+        'Private Events',
+        'Press & Media Inquiries',
+        'Artistic Collaborations',
+        'General Inquiries',
+      ]
 
   const scheme = resolveColorScheme(page?.contactFormColorScheme)
   const fg = schemeForeground(scheme)
@@ -44,18 +53,28 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
       label: 'Instagram',
       url: page?.instagramUrl ?? '#',
       handle: page?.instagramHandle ?? '@solrisesoprano',
+      handleField: 'instagramHandle' as const,
     },
     {
       icon: YoutubeIcon,
       label: 'YouTube',
       url: page?.youtubeUrl ?? '#',
       handle: page?.youtubeHandle ?? 'Sol Risé Soprano',
+      handleField: 'youtubeHandle' as const,
     },
     {
       icon: FacebookIcon,
       label: 'Facebook',
       url: page?.facebookUrl ?? '#',
       handle: page?.facebookHandle ?? 'Sol Risé Soprano',
+      handleField: 'facebookHandle' as const,
+    },
+    {
+      icon: MuvacIcon,
+      label: 'Muvac',
+      url: page?.muvacUrl ?? '#',
+      handle: page?.muvacHandle ?? 'Florencia Sol Risé López',
+      handleField: 'muvacHandle' as const,
     },
   ]
 
@@ -137,7 +156,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                 {page?.socialChannelsLabel ?? 'Social Channels'}
               </p>
               <div className="space-y-4">
-                {socialLinks.map(({ icon: Icon, label, url, handle }) => (
+                {socialLinks.map(({ icon: Icon, label, url, handle, handleField }) => (
                   <a
                     key={label}
                     href={url}
@@ -164,13 +183,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                       <p
                         className="font-body text-sm font-semibold"
                         style={{ color: isWine ? fg.heading : 'var(--body-color)' }}
-                        data-sb-field-path={
-                          label === 'Instagram'
-                            ? 'instagramHandle'
-                            : label === 'YouTube'
-                              ? 'youtubeHandle'
-                              : 'facebookHandle'
-                        }
+                        data-sb-field-path={handleField}
                       >
                         {handle}
                       </p>

@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router'
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '@/lib/section-color-scheme'
@@ -82,29 +81,52 @@ export function SplitGridSection({ items, colorScheme, slideIn, title, descripti
         className={`max-w-site mx-auto w-full px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <div className="split-grid">
-          {visibleItems.map((item) => (
-            <Link
-              key={`${item.title}-${item.href}`}
-              to={item.href}
-              className="split-grid-item"
-              style={{ backgroundImage: `url(${item.image})` }}
-            >
-              <div className="split-grid-overlay" />
-              <div className="split-grid-content">
-                {(item.decorativeEyebrow?.trim().length ?? 0) > 0 && (
-                  <span className="split-grid-link font-body text-xs uppercase tracking-[0.22em]">
-                    {item.decorativeEyebrow}
-                  </span>
-                )}
-                <h3 className="font-display text-3xl italic">{item.title}</h3>
-                {(item.subtitle?.trim().length ?? 0) > 0 && (
-                  <h4 className="font-display text-xl italic mt-2">
-                    {item.subtitle}
-                  </h4>
-                )}
-              </div>
-            </Link>
-          ))}
+          {visibleItems.map((item) => {
+            const href = item.href?.trim() ?? ''
+            const panelContent = (
+              <>
+                <div className="split-grid-overlay" />
+                <div className="split-grid-content">
+                  {(item.decorativeEyebrow?.trim().length ?? 0) > 0 && (
+                    <span className="split-grid-link font-body text-xs uppercase tracking-[0.22em]">
+                      {item.decorativeEyebrow}
+                    </span>
+                  )}
+                  <h3 className="font-display text-3xl italic">{item.title}</h3>
+                  {(item.subtitle?.trim().length ?? 0) > 0 && (
+                    <h4 className="font-display text-xl italic mt-2">
+                      {item.subtitle}
+                    </h4>
+                  )}
+                </div>
+              </>
+            )
+
+            if (!href) {
+              return (
+                <div
+                  key={`${item.title}-panel`}
+                  className="split-grid-item"
+                  style={{ backgroundImage: `url(${item.image})` }}
+                >
+                  {panelContent}
+                </div>
+              )
+            }
+
+            return (
+              <a
+                key={`${item.title}-${href}`}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="split-grid-item"
+                style={{ backgroundImage: `url(${item.image})` }}
+              >
+                {panelContent}
+              </a>
+            )
+          })}
         </div>
       </div>
     </section>

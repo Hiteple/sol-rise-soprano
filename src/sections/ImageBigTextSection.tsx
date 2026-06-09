@@ -1,5 +1,5 @@
 import { SKIP_PAST_HERO_ATTR } from '@/lib/skip-to-content'
-import { netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { AboutPage } from '../../schemas/site-pages'
@@ -65,7 +65,7 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
 
           <div className="relative img-zoom media-radius">
             <img
-              src={netlifyImg(heroSrc, 800, 1000)}
+              {...netlifyImgSet(heroSrc, 800, 1000)}
               alt={page.heroImageAlt}
               className="w-full object-cover"
               style={{ maxHeight: 680 }}

@@ -50,6 +50,7 @@ export type MediaItem = {
   title: string
   type: 'video' | 'image'
   videoUrl?: string
+  imageUrl?: string
   thumbnail: string
   description: string
 }

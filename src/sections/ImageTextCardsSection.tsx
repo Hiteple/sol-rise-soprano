@@ -1,4 +1,4 @@
-import { netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -48,7 +48,7 @@ export function ImageTextCardsSection({
                 style={{ aspectRatio: '16/10' }}
               >
                 <img
-                  src={netlifyImg(production.image, 900, 562)}
+                  {...netlifyImgSet(production.image, 900, 562)}
                   alt={production.title}
                   className="w-full h-full object-cover"
                   data-sb-field-path="image"

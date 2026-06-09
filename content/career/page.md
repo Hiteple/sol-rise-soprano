@@ -5,7 +5,7 @@ heroTitleLine1: An Evolving
 heroTitleAccent: Artistic
 heroTitleLine2: Path
 heroIntro: "Born in Buenos Aires, Argentina, Sol Risé discovered her voice at the age of nine. What began as a childhood fascination evolved into a lifelong calling — shaping an artistic path\_focused on the operatic repertoire."
-heroImage: https://picsum.photos/seed/operaportr1/800/1060
+heroImage: images/salon-dorado/IMG_5954-processed.webp
 heroImageAlt: Sol Risé portrait
 heroQuote: '"Singing is not what I do — it is who I am."'
 heroQuoteAttribution: — Sol Risé
@@ -17,7 +17,7 @@ highlights:
     label: Roles
   - number: '2'
     label: Opera Houses
-  - number: '2'
+  - number: '1'
     label: Continents
 timelineSectionEyebrow: Career Milestones
 timelineSectionTitle: A Growing Journey
@@ -54,7 +54,7 @@ timeline:
        <li>Additional chorus member at Teatro Argentino de La Plata for <em>Verdi’s Requiem</em> (November)</li>
        <li>Soloist in <em>Mozart's Requiem</em> at the International Festival of Culture in Potosí (Bolivia), with the San Rafael Orchestra (October)</li>
        <li>Performed the role of 'Zerlina' in <em>Don Giovanni</em> at Teatro Avenida with Juventus Lyrica (October)</li>
-       <li>Chorus reinforcement in <em>Joan of Arc</em> at the Stake at Teatro Colón, conducted by Maestro Charles Dutoit (August)</li>
+       <li>Chorus reinforcement in <em>Joan of Arc at the Stake</em> at Teatro Colón, conducted by Maestro Charles Dutoit (August)</li>
        <li>Chorus member in <em>Cavalleria Rusticana</em> and the Festival della Canzonetta Italiana, where she also appeared as a featured soloist performing Italian canzonette with Juventus Lyrica (June)</li>
       </ul></div>
 
@@ -79,8 +79,18 @@ timeline:
       <div style="text-align: left"><ul>
        <li>Soloist in Carl Orff’s <em>Carmina Burana</em> in Potosí and Sucre (Bolivia), as part of the Festival Internacional de la Cultura at Potosí (November and December)</li>
        <li>Performed the role of 'Pamina' in <em>The Magic Flute</em> (a reduced German-language version for children) at the British Arts Centre with Nina Calzulo (October)</li>
-       <li>Chorus member and cover role performer in </em>Macbeth</em> with Juventus Lyrica (September)</li>
+       <li>Chorus member in </em>Macbeth</em> with Juventus Lyrica (September)</li>
        <li>Chorus member in <em>Il Trovatore</em> with Valkyria Lírica (September)</li>
+      </ul></div>
+
+  - year: '2026'
+    title: >-
+      British Art Center, Teatro Colón, Juventus Lyrica
+    description: |+
+      <div style="text-align: left"><ul>
+      <li>'Aunt of Madama Butterfly' and chorus member in <em>Madama Butterfly</em> with Juventus Lyrica</li>
+      <li>Cover for the soprano soloist in <em>Mozart’s Requiem</em> with the Academic Orchestra of the Higher Institute of Art of the Teatro Colón</li>
+      <li>'The Rose' in the opera <em>The Little Prince</em> in the British Art Center</li>
       </ul></div>
 
 ctaTitleLine1: Inquiries & Contact

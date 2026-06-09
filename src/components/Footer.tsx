@@ -3,6 +3,7 @@ import { Mail } from 'lucide-react'
 import {
   FacebookIcon,
   InstagramIcon,
+  MuvacIcon,
   YoutubeIcon,
 } from '@/components/brand-icons'
 import { allHomes } from 'content-collections'
@@ -13,7 +14,6 @@ const fallbackFooterLinks = [
   { label: 'Home', href: '/' },
   { label: 'Bio', href: '/bio' },
   { label: 'Career', href: '/career' },
-  { label: 'Productions', href: '/productions' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ]
@@ -27,6 +27,7 @@ export function Footer() {
   const instagramUrl = site?.instagramUrl ?? 'https://www.instagram.com/solrisesoprano/'
   const youtubeUrl = site?.youtubeUrl ?? 'https://youtube.com'
   const facebookUrl = site?.facebookUrl ?? 'https://facebook.com'
+  const muvacUrl = site?.muvacUrl ?? 'https://www.muvac.com/es/profile/florencia-sol-rise-lopez'
   const email = site?.email ?? 'solrisesoprano@gmail.com'
 
   return (
@@ -171,6 +172,25 @@ export function Footer() {
                 data-sb-field-path="facebookUrl"
               >
                 <FacebookIcon size={15} />
+              </a>
+              <a
+                href={muvacUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Muvac"
+                className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
+                style={{
+                  borderColor: 'var(--chrome-border)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--chrome-accent)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--chrome-border)'
+                }}
+                data-sb-field-path="muvacUrl"
+              >
+                <MuvacIcon size={15} />
               </a>
             </div>
           </div>

@@ -1,6 +1,51 @@
+import {
+  parseStatNumber,
+  useCountUp,
+  usePrefersReducedMotion,
+} from '@/lib/use-count-up'
 import { resolveColorScheme, schemeForeground, schemeStatsBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { AboutPage } from '../../schemas/site-pages'
+
+type AnimatedStatNumberProps = {
+  number: string
+  active: boolean
+  color: string
+  prefersReducedMotion: boolean
+}
+
+function AnimatedStatNumber({
+  number,
+  active,
+  color,
+  prefersReducedMotion,
+}: AnimatedStatNumberProps) {
+  const parsed = parseStatNumber(number)
+  const shouldAnimate = Boolean(parsed) && active && !prefersReducedMotion
+  const count = useCountUp(parsed?.value ?? 0, shouldAnimate, {
+    animate: !prefersReducedMotion,
+    stepMs: 160,
+  })
+
+  if (!parsed) {
+    return (
+      <div className="font-display text-5xl lg:text-6xl italic mb-2" style={{ color }}>
+        {number}
+      </div>
+    )
+  }
+
+  const displayValue = prefersReducedMotion ? parsed.value : count
+  const showSuffix = prefersReducedMotion || count >= parsed.value
+
+  return (
+    <div className="font-display text-5xl lg:text-6xl italic mb-2" style={{ color }}>
+      {parsed.prefix}
+      {displayValue}
+      {showSuffix ? parsed.suffix : ''}
+    </div>
+  )
+}
 
 export type StatsRowSectionProps = {
   page: AboutPage
@@ -16,6 +61,8 @@ export function StatsRowSection({ page }: StatsRowSectionProps) {
   const statsDividerColor = statsIsWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 20%, transparent)'
   const animate = page.statsSlideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
+  const countUpActive = inView
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   return (
     <section
@@ -34,12 +81,12 @@ export function StatsRowSection({ page }: StatsRowSectionProps) {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
           {page.highlights.map((h) => (
             <div key={`${h.number}-${h.label}`} className="text-center">
-              <div
-                className="font-display text-5xl lg:text-6xl italic mb-2"
-                style={{ color: statsNumberColor }}
-              >
-                {h.number}
-              </div>
+              <AnimatedStatNumber
+                number={h.number}
+                active={countUpActive}
+                color={statsNumberColor}
+                prefersReducedMotion={prefersReducedMotion}
+              />
               <div
                 className="font-body text-xs uppercase tracking-widest"
                 style={{ color: statsLabelColor }}

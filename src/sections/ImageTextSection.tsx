@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 
-import { netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSet } from '@/lib/netlify-image'
 import { schemeForeground, schemeGoldLinkStyle, schemeSolidBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { HomeImageTextSection } from './types'
@@ -81,7 +81,7 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
 
           <div className="lg:col-span-3 img-zoom media-radius order-1 lg:order-2 relative">
             <img
-              src={netlifyImg(section.image, 900, 1100)}
+              {...netlifyImgSet(section.image, 900, 1100)}
               alt={section.imageAlt}
               className="w-full object-cover"
               style={{ objectPosition: 'top center' }}
