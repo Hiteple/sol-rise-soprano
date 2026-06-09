@@ -36,7 +36,7 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
       style={{ background: surfaceBg }}
       data-sb-field-path="aboutSurface"
     >
-      <div className="max-w-site mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-4 lg:px-12">
         <div
           ref={ref}
           className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}

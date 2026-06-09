@@ -1,4 +1,5 @@
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { splitGridBadges } from '@/lib/split-grid-badges'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '@/lib/section-color-scheme'
 import type { CSSProperties } from 'react'
@@ -7,6 +8,8 @@ export type SplitGridItem = {
   title: string
   href: string
   image: string
+  badges?: string[]
+  /** @deprecated Use `badges` — kept for existing content. */
   decorativeEyebrow?: string
   subtitle?: string
 }
@@ -55,7 +58,7 @@ export function SplitGridSection({ items, colorScheme, slideIn, title, descripti
       } as CSSProperties}
     >
       {(hasTitle || hasDescription) && (
-        <div className="max-w-site mx-auto w-full px-6 lg:px-12 pb-8">
+        <div className="max-w-site mx-auto w-full px-4 lg:px-12 pb-8">
           {hasTitle && (
             <h2
               className="font-display text-4xl lg:text-5xl italic"
@@ -78,19 +81,28 @@ export function SplitGridSection({ items, colorScheme, slideIn, title, descripti
       )}
       <div
         ref={ref}
-        className={`max-w-site mx-auto w-full px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-site mx-auto w-full px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <div className="split-grid">
           {visibleItems.map((item) => {
             const href = item.href?.trim() ?? ''
+            const badges = splitGridBadges(item)
             const panelContent = (
               <>
                 <div className="split-grid-overlay" />
                 <div className="split-grid-content">
-                  {(item.decorativeEyebrow?.trim().length ?? 0) > 0 && (
-                    <span className="split-grid-link font-body text-xs uppercase tracking-[0.22em]">
-                      {item.decorativeEyebrow}
-                    </span>
+                  {badges.length > 0 && (
+                    <div className="split-grid-badges">
+                      {badges.map((badge, badgeIndex) => (
+                        <span
+                          key={`${item.title}-badge-${badgeIndex}`}
+                          className="split-grid-link font-body text-xs uppercase tracking-[0.22em]"
+                          data-sb-field-path={`badges.${badgeIndex}`}
+                        >
+                          {badge}
+                        </span>
+                      ))}
+                    </div>
                   )}
                   <h3 className="font-display text-3xl italic">{item.title}</h3>
                   {(item.subtitle?.trim().length ?? 0) > 0 && (

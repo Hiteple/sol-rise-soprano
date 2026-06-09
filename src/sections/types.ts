@@ -1,4 +1,5 @@
 import type { SectionColorScheme } from '../../schemas/color-scheme'
+import type { ImageCreditFields } from '../../schemas/image-credit'
 
 export type HomeSurface = SectionColorScheme
 export type HomeHeroColorScheme = 'clear' | 'wine'
@@ -41,6 +42,7 @@ export type HomeQuoteSection = {
   quoteAuthor?: string
   quoteImage: string
   quoteImageAlt?: string
+  quoteImageCredit?: ImageCreditFields
   colorScheme: SectionColorScheme
   slideIn?: boolean
 }
@@ -51,7 +53,7 @@ export type MediaItem = {
   type: 'video' | 'image'
   videoUrl?: string
   imageUrl?: string
-  thumbnail: string
+  thumbnail?: string
   description: string
 }
 

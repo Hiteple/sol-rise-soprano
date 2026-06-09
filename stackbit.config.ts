@@ -132,7 +132,12 @@ export default defineStackbitConfig({
                 fields: [
                   { name: 'href', type: 'string', label: 'URL' },
                   { name: 'image', type: 'image', label: 'Background image' },
-                  { name: 'decorativeEyebrow', type: 'string', label: 'Decorative Eyebrow' },
+                  {
+                    name: 'badges',
+                    type: 'list',
+                    label: 'Labels (max 4)',
+                    items: { type: 'string' },
+                  },
                   { name: 'title', type: 'string', label: 'Title' },
                   { name: 'subtitle', type: 'string', label: 'Subtitle' },
                 ],
@@ -144,6 +149,18 @@ export default defineStackbitConfig({
             { name: 'quoteAuthor', type: 'string', label: 'Author', group: 'quoteBanner' },
             { name: 'quoteImage', type: 'image', label: 'Background image', group: 'quoteBanner' },
             { name: 'quoteImageAlt', type: 'string', label: 'Image alt', group: 'quoteBanner' },
+            {
+              name: 'quoteImageCredit',
+              type: 'object',
+              label: 'Image credit (optional)',
+              group: 'quoteBanner',
+              fields: [
+                { name: 'author', type: 'string', label: 'Photographer name' },
+                { name: 'authorUrl', type: 'string', label: 'Photographer URL' },
+                { name: 'source', type: 'string', label: 'Source label (default: Unsplash)' },
+                { name: 'sourceUrl', type: 'string', label: 'Photo URL on source' },
+              ],
+            },
             { name: 'footerBrandLine1', type: 'string', label: 'Footer - Brand line 1' },
             { name: 'footerBrandLine2', type: 'string', label: 'Footer - Brand line 2' },
             { name: 'footerBrandTagline', type: 'text', label: 'Footer - Tagline' },
@@ -332,6 +349,12 @@ export default defineStackbitConfig({
             { name: 'alt', type: 'string', label: 'Alt Text (accessibility)' },
             { name: 'category', type: 'string', label: 'Category (Performance / Behind the Scenes)' },
             { name: 'order', type: 'number', label: 'Display Order' },
+            {
+              name: 'featuredImg',
+              type: 'boolean',
+              label: 'Featured image (spans 2 columns on desktop)',
+              default: false,
+            },
           ],
         },
         {
@@ -343,7 +366,11 @@ export default defineStackbitConfig({
             { name: 'type', type: 'enum', options: ['video', 'image'], label: 'Type' },
             { name: 'videoUrl', type: 'string', label: 'Video - YouTube URL' },
             { name: 'imageUrl', type: 'string', label: 'Image - Link URL (opens in new tab)' },
-            { name: 'thumbnail', type: 'string', label: 'Thumbnail Image URL' },
+            {
+              name: 'thumbnail',
+              type: 'string',
+              label: 'Thumbnail (optional for YouTube — auto poster from video URL)',
+            },
             { name: 'description', type: 'string', label: 'Short Description' },
             { name: 'order', type: 'number', label: 'Display Order' },
           ],

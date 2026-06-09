@@ -6,7 +6,7 @@ import {
   MuvacIcon,
   YoutubeIcon,
 } from '@/components/brand-icons'
-import { allHomes } from 'content-collections'
+import { allContactPages, allHomes } from 'content-collections'
 
 import { parseSiteNavLinks } from '@/lib/nav-links'
 
@@ -20,13 +20,18 @@ const fallbackFooterLinks = [
 
 export function Footer() {
   const site = allHomes[0]
+  const contact = allContactPages[0]
   const footerLinks = parseSiteNavLinks(site?.footerNavLinks, fallbackFooterLinks)
   const footerBrandLine1 = site?.footerBrandLine1 ?? 'Sol Risé'
   const footerBrandLine2 = site?.footerBrandLine2 ?? 'Soprano'
   const footerTagline = site?.footerBrandTagline ?? 'Soprano · Stage Artist\nVoice of Passion'
   const instagramUrl = site?.instagramUrl ?? 'https://www.instagram.com/solrisesoprano/'
-  const youtubeUrl = site?.youtubeUrl ?? 'https://youtube.com'
-  const facebookUrl = site?.facebookUrl ?? 'https://facebook.com'
+  const youtubeUrl =
+    contact?.youtubeUrl ??
+    site?.youtubeUrl ??
+    'https://www.youtube.com/channel/UCgm68FC8sM_2r3cAXBQdbvw'
+  const facebookUrl =
+    contact?.facebookUrl ?? site?.facebookUrl ?? 'https://facebook.com/solrisesoprano'
   const muvacUrl = site?.muvacUrl ?? 'https://www.muvac.com/es/profile/florencia-sol-rise-lopez'
   const email = site?.email ?? 'solrisesoprano@gmail.com'
 
@@ -39,7 +44,7 @@ export function Footer() {
       }}
       data-sb-object-id="content/home/data.md"
     >
-      <div className="max-w-site mx-auto px-6 lg:px-12 py-16">
+      <div className="max-w-site mx-auto px-4 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           <div>
             <div

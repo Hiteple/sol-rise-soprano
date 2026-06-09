@@ -65,7 +65,7 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
       {hasImage ? (
         <div
           ref={ref}
-          className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+          className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
         >
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
             <div
@@ -88,7 +88,7 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
       ) : (
         <div
           ref={ref}
-          className={`max-w-3xl mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+          className={`max-w-3xl mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
         >
           {eyebrow}
           {paragraphs}

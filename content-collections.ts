@@ -2,6 +2,7 @@ import { defineCollection, defineConfig } from '@content-collections/core'
 import { z } from 'zod'
 
 import { sectionColorSchemeSchema } from './schemas/color-scheme'
+import { imageCreditFieldsSchema } from './schemas/image-credit'
 import {
   aboutPageSchema,
   bioPageSchema,
@@ -90,6 +91,8 @@ const home = defineCollection({
           title: z.string(),
           href: z.string(),
           image: z.string(),
+          badges: z.array(z.string()).max(4).optional(),
+          /** @deprecated Use `badges` — kept for existing content. */
           decorativeEyebrow: z.string().optional(),
           subtitle: z.string().optional(),
         }),
@@ -104,6 +107,7 @@ const home = defineCollection({
     quoteAuthor: z.string().optional(),
     quoteImage: z.string(),
     quoteImageAlt: z.string().optional(),
+    quoteImageCredit: imageCreditFieldsSchema.optional(),
     footerBrandLine1: z.string().default('Sol Risé'),
     footerBrandLine2: z.string().default('Soprano'),
     footerBrandTagline: z.string().default('Soprano · Stage Artist\nVoice of Passion'),
@@ -143,6 +147,7 @@ const gallery = defineCollection({
     alt: z.string(),
     category: z.string().optional(),
     order: z.number().optional(),
+    featuredImg: z.boolean().default(false),
     content: z.string(),
   }),
 })
@@ -151,16 +156,37 @@ const mediaItems = defineCollection({
   name: 'mediaItems',
   directory: 'content/media',
   include: '**/*.md',
-  schema: z.object({
-    title: z.string(),
-    type: z.enum(['video', 'image']),
-    videoUrl: z.string().optional(),
-    imageUrl: z.string().optional(),
-    thumbnail: z.string(),
-    description: z.string(),
-    order: z.number().optional(),
-    content: z.string(),
-  }),
+  schema: z
+    .object({
+      title: z.string(),
+      type: z.enum(['video', 'image']),
+      videoUrl: z.string().optional(),
+      imageUrl: z.string().optional(),
+      /** Optional for YouTube videos — poster is derived from `videoUrl`. Required for `image`. */
+      thumbnail: z.string().optional(),
+      description: z.string(),
+      order: z.number().optional(),
+      content: z.string(),
+    })
+    .superRefine((data, ctx) => {
+      const hasThumbnail = (data.thumbnail?.trim().length ?? 0) > 0
+
+      if (data.type === 'image' && !hasThumbnail) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'thumbnail is required for image media items',
+          path: ['thumbnail'],
+        })
+      }
+
+      if (data.type === 'video' && !hasThumbnail && !(data.videoUrl?.trim().length ?? 0)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'video items need videoUrl (YouTube poster) or thumbnail',
+          path: ['videoUrl'],
+        })
+      }
+    }),
 })
 
 const productions = defineCollection({

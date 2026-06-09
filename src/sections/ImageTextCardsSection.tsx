@@ -34,7 +34,7 @@ export function ImageTextCardsSection({
     <section className="section-vertical-padding" data-sb-field-path="productionsListColorScheme">
       <div
         ref={ref}
-        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <div className="space-y-2">
           {productions.map((production, idx) => (
@@ -64,7 +64,7 @@ export function ImageTextCardsSection({
                 <div className="flex items-center gap-4 mb-6">
                   <span
                     className="font-display italic text-3xl"
-                    style={{ color: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)' }}
+                    style={{ color: fg.eyebrow }}
                     data-sb-field-path="year"
                   >
                     {production.year}
@@ -75,7 +75,7 @@ export function ImageTextCardsSection({
                       background:
                         scheme === 'wine'
                           ? fg.divider
-                          : 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
+                          : 'color-mix(in srgb, var(--accent-ink-color) 28%, transparent)',
                     }}
                   />
                 </div>
@@ -90,7 +90,7 @@ export function ImageTextCardsSection({
 
                 <p
                   className="font-body text-sm uppercase tracking-widest mb-2 font-semibold"
-                  style={{ color: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)' }}
+                  style={{ color: fg.eyebrow }}
                   data-sb-field-path="role"
                 >
                   {production.role}
@@ -121,7 +121,7 @@ export function ImageTextCardsSection({
                         borderColor:
                           scheme === 'wine'
                             ? fg.divider
-                            : 'color-mix(in srgb, var(--accent-color) 26%, transparent)',
+                            : 'color-mix(in srgb, var(--accent-ink-color) 26%, transparent)',
                         color: scheme === 'wine' ? fg.body : 'var(--subtle-text-color)',
                       }}
                     >

@@ -62,7 +62,7 @@ export function Nav() {
       }`}
       data-sb-object-id="content/home/data.md"
     >
-      <div className="max-w-site mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-4 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo / Name */}
           <Link to="/" className="flex flex-col leading-none" aria-label="Sol Risé Soprano, home">
@@ -73,7 +73,7 @@ export function Nav() {
                   ? 'var(--chrome-accent)'
                   : onHeroHome
                     ? 'var(--accent-pale-color)'
-                    : 'var(--accent-color)',
+                    : 'var(--accent-ink-color)',
                 letterSpacing: '0.2em',
                 textShadow: onHeroHome
                   ? '0 1px 18px rgba(16, 43, 31, 0.5)'
@@ -170,14 +170,14 @@ export function Nav() {
       >
         <div
           className={cn(
-            'border-t px-6 pb-8 pt-4 flex flex-col gap-6 transition-transform duration-300 ease-out motion-reduce:transition-none',
+            'border-t px-4 pb-8 pt-4 flex flex-col gap-6 transition-transform duration-300 ease-out motion-reduce:transition-none',
             menuOpen ? 'translate-y-0 pointer-events-auto' : '-translate-y-full pointer-events-none',
           )}
           style={{
             background: useChrome
               ? 'color-mix(in srgb, var(--chrome-bg) 96%, black)'
               : 'color-mix(in srgb, var(--section-background-color) 97%, white)',
-            borderColor: useChrome ? 'var(--chrome-border)' : 'color-mix(in srgb, var(--accent-color) 15%, transparent)',
+            borderColor: useChrome ? 'var(--chrome-border)' : 'color-mix(in srgb, var(--accent-ink-color) 15%, transparent)',
           }}
         >
           {navLinks.map((link, idx) => (

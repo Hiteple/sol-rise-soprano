@@ -30,7 +30,7 @@ export function PageHeroSection({
       {...{ [SKIP_PAST_HERO_ATTR]: '' }}
       data-sb-field-path="pageHeroColorScheme"
     >
-      <div className="max-w-site mx-auto px-6 lg:px-12">
+      <div className="max-w-site mx-auto px-4 lg:px-12">
         <p
           className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
           style={{ color: fg.eyebrow }}

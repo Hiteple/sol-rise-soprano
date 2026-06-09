@@ -22,7 +22,10 @@
   --muted-text-color: color-mix(in srgb, var(--palette-pine) 78%, var(--palette-rose) 22%);
   --subtle-text-color: color-mix(in srgb, var(--palette-pine) 62%, #5c4c50 38%);
 
+  /** Fills: buttons, tab pills, skip link (pair with --on-accent-text-color). */
   --accent-color: var(--palette-rose);
+  /** Text/icons on light surfaces (soft/bright) — rose alone fails contrast on pink. */
+  --accent-ink-color: color-mix(in srgb, var(--palette-wine) 55%, var(--palette-rose) 45%);
   --accent-soft-color: color-mix(in srgb, var(--palette-rose) 78%, white 22%);
   --accent-pale-color: color-mix(in srgb, var(--palette-pink) 88%, white 12%);
   --accent-blush-color: color-mix(in srgb, var(--palette-rose) 55%, var(--palette-wine) 45%);
@@ -38,8 +41,8 @@
   --on-accent-text-color: var(--palette-wine);
 
   --pill-track-background-color: color-mix(in srgb, var(--palette-pink) 58%, white 42%);
-  /** Media grid filter: selected pill (rose bg) — pure white label for contrast */
-  --media-filter-tab-active-text-color: #ffffff;
+  /** Selected tab pill (rose bg) — wine label meets contrast vs --accent-color */
+  --media-filter-tab-active-text-color: var(--on-accent-text-color);
 
   --border-color: color-mix(in srgb, var(--palette-rose) 22%, var(--palette-pink) 78%);
   --input-border-color: color-mix(in srgb, var(--palette-rose) 32%, var(--palette-pink) 68%);
@@ -78,7 +81,7 @@
   --accent-foreground: var(--on-accent-text-color);
   --border: var(--border-color);
   --input: var(--input-border-color);
-  --ring: var(--accent-color);
+  --ring: var(--accent-ink-color);
   --radius: 0.25rem;
 }
 
@@ -144,7 +147,7 @@
   select:focus-visible,
   textarea:focus-visible,
   [role="button"]:focus-visible {
-    outline: 2px solid var(--accent-color);
+    outline: 2px solid var(--accent-ink-color);
     outline-offset: 2px;
   }
 
@@ -224,12 +227,39 @@
   }
 }
 
+/* Quote banner — ornamental divider above the citation */
+.quote-banner-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: min(100%, 16rem);
+  margin-inline: auto;
+  margin-bottom: 2.5rem;
+}
+.quote-banner-ornament::before,
+.quote-banner-ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, currentColor 45%, currentColor 55%, transparent);
+  opacity: 0.85;
+}
+.quote-banner-ornament__glyph {
+  flex-shrink: 0;
+  font-size: 0.5rem;
+  line-height: 1;
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  opacity: 0.95;
+}
+
 /* Gold ornamental divider */
 .ornament {
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--accent-color);
+  color: var(--accent-ink-color);
 }
 .ornament::before,
 .ornament::after {
@@ -239,7 +269,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    var(--accent-color),
+    var(--accent-ink-color),
     transparent
   );
 }
@@ -310,7 +340,7 @@
 /* Gold underline hover effect — set --gold-link-* via schemeGoldLinkStyle() on light/wine sections */
 .gold-link {
   position: relative;
-  color: var(--gold-link-color, var(--accent-color));
+  color: var(--gold-link-color, var(--accent-ink-color));
   text-decoration: none;
   letter-spacing: 0.12em;
   font-size: 0.75rem;
@@ -325,15 +355,15 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--gold-link-underline, var(--accent-color));
+  background: var(--gold-link-underline, var(--accent-ink-color));
   transition: width 0.3s ease;
 }
 .gold-link:hover {
-  color: var(--gold-link-hover-color, var(--accent-soft-color));
+  color: var(--gold-link-hover-color, var(--palette-wine));
 }
 .gold-link:hover::after {
   width: 100%;
-  background: var(--gold-link-hover-underline, var(--accent-soft-color));
+  background: var(--gold-link-hover-underline, var(--palette-wine));
 }
 
 /* Nav over hero: light pink links on variable photo background */
@@ -379,11 +409,25 @@
 .img-zoom {
   overflow: hidden;
 }
-.img-zoom img {
+.img-zoom img:not(.img-zoom-sizer) {
   transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.img-zoom:hover img {
+.img-zoom:hover img:not(.img-zoom-sizer) {
   transform: scale(1.05);
+}
+
+/* Sliding pill tab indicator */
+.sliding-tab-indicator {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  border-radius: var(--media-radius-inner);
+  background: var(--accent-color);
+  pointer-events: none;
+  z-index: 0;
+  transition:
+    left 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    width 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Play button circle */
@@ -414,6 +458,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.modal-overlay.is-open {
+  transform: translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay {
+    transition: none;
+    transform: translateX(0);
+  }
+}
+.modal-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--media-caption-text-color) 35%, transparent);
+  background: color-mix(in srgb, var(--palette-wine) 78%, transparent);
+  color: var(--media-caption-text-color);
+  transition: opacity 0.2s ease;
+}
+.modal-close:hover {
+  opacity: 0.85;
 }
 
 /* About timeline: markdown from `marked` (lists, emphasis, links) */
@@ -439,6 +515,29 @@
 .timeline-markdown a {
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.timeline-closure__scroll {
+  opacity: 0.72;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  animation: timeline-closure-bob 2.4s ease-in-out infinite;
+}
+.timeline-closure__scroll:hover {
+  opacity: 1;
+}
+@keyframes timeline-closure-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .timeline-closure__scroll {
+    animation: none;
+  }
 }
 
 /* SplitGrid section */
@@ -475,14 +574,20 @@
   right: .5rem;
   bottom: .5rem;
   z-index: 1;
+  padding: 1rem;
   border-radius: var(--media-radius);
   color: var(--media-caption-text-color);
   transition: background 0.22s ease, color 0.22s ease, padding 0.22s ease;
 }
+.split-grid-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 .split-grid-link {
   display: inline-flex;
   width: fit-content;
-  margin-bottom: 0.5rem;
   padding: 0.4rem 0.75rem;
   border-radius: var(--media-radius);
   border: 1px solid color-mix(in srgb, var(--media-caption-text-color) 38%, transparent);

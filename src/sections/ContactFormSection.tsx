@@ -42,8 +42,8 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
   const isWine = scheme === 'wine'
   const inputBorderRest = isWine
     ? fg.divider
-    : 'color-mix(in srgb, var(--accent-color) 24%, transparent)'
-  const inputBorderFocus = isWine ? fg.eyebrow : 'var(--accent-color)'
+    : 'color-mix(in srgb, var(--accent-ink-color) 24%, transparent)'
+  const inputBorderFocus = isWine ? fg.eyebrow : 'var(--accent-ink-color)'
   const animate = page?.contactFormSlideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
 
@@ -105,7 +105,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
     >
       <div
         ref={ref}
-        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <div>
@@ -167,8 +167,8 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     <div
                       className="w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:border-opacity-100"
                       style={{
-                        borderColor: isWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 32%, transparent)',
-                        color: isWine ? fg.eyebrow : 'var(--accent-color)',
+                        borderColor: isWine ? fg.divider : 'color-mix(in srgb, var(--accent-ink-color) 32%, transparent)',
+                        color: isWine ? fg.eyebrow : 'var(--accent-ink-color)',
                       }}
                     >
                       <Icon size={16} />
@@ -201,14 +201,14 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                 aria-live="polite"
                 className="h-full flex flex-col items-center justify-center text-center p-12 border"
                 style={{
-                  borderColor: isWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 24%, transparent)',
+                  borderColor: isWine ? fg.divider : 'color-mix(in srgb, var(--accent-ink-color) 24%, transparent)',
                 }}
               >
                 <div
                   className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-6"
                   style={{
-                    borderColor: isWine ? fg.eyebrow : 'var(--accent-color)',
-                    color: isWine ? fg.eyebrow : 'var(--accent-color)',
+                    borderColor: isWine ? fg.eyebrow : 'var(--accent-ink-color)',
+                    color: isWine ? fg.eyebrow : 'var(--accent-ink-color)',
                   }}
                 >
                   <Check size={28} aria-hidden />

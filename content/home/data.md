@@ -34,24 +34,32 @@ aboutHref: /career
 mediaEyebrow: On Stage & On Screen
 mediaTitle: Last Events
 mediaItems:
-  - content/media/01-event-placeholder.md
+  - content/media/tradicion-modernidad-lied.md
+  - content/media/batti-batti-o-bel-masetto.md
 splitGridItems:
   - title: Madama Butterfly
     href: https://juventuslyrica.ar/madama-butterfly-2026/
     image: images/schedule-images/madama-butterfly.jpg
-    decorativeEyebrow: June 12th, 13th
+    badges:
+      - June 12th
+      - June 13th
     subtitle: Buenos Aires - Teatro Avenida
   - title: Suor Angelica
     href: /contact
     image: images/schedule-images/suor-angelica.jpeg
-    decorativeEyebrow: June 28th
+    badges:
+      - June 28th
     subtitle: Buenos Aires - La Redonda de Belgrano
 splitGridColorScheme: wine
 splitGridTitle: Schedule
 splitGridDescription: Upcoming performances and recitals
 quoteText: La musica è la lingua dell'anima
-quoteImage: /images/carmen/carmen-comodoro-rivadavia-optimized.jpg
-quoteImageAlt: Performance backdrop
+quoteImage: /images/general/liana-unsplash.webp
+quoteImageAlt: Close-up of sheet music with blurred background
+quoteImageCredit:
+  author: Liana S
+  authorUrl: https://unsplash.com/es/@cherstve_pechivo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+  sourceUrl: https://unsplash.com/es/fotos/primer-plano-de-partitura-con-fondo-difuminado-BoG8tpchiis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 footerBrandLine1: Sol Risé
 footerBrandLine2: Soprano
 footerBrandTagline: Opera Singer
@@ -67,8 +75,8 @@ footerNavLinks:
   - label: Contact
     href: /contact
 instagramUrl: https://instagram.com/solrisesoprano/
-youtubeUrl: https://youtube.com
-facebookUrl: https://facebook.com
+youtubeUrl: https://www.youtube.com/channel/UCgm68FC8sM_2r3cAXBQdbvw
+facebookUrl: https://facebook.com/solrisesoprano
 muvacUrl: https://www.muvac.com/profile/florencia-sol-rise-lopez
 email: solrisesoprano@gmail.com
 heroColorScheme: wine

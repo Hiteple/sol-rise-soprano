@@ -1,7 +1,11 @@
 import { Play } from 'lucide-react'
 
+import { SlidingTabGroup } from '@/components/SlidingTabGroup'
+import { TabGridEmptyState } from '@/components/TabGridEmptyState'
+import { resolveMediaThumbnail } from '@/lib/media-thumbnail'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { mediaFilterEmptyCopy } from '@/lib/tab-grid-empty-copy'
 import { useInView } from '@/lib/use-in-view'
 import type { HomeMediaSection, MediaFilter, MediaItem } from './types'
 
@@ -17,10 +21,12 @@ const cardClassName =
   'relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left'
 
 function MediaGridCardContent({ item }: { item: MediaItem }) {
+  const thumbnail = resolveMediaThumbnail(item)
+
   return (
     <>
       <img
-        {...netlifyImgSet(item.thumbnail, 800, 500)}
+        {...netlifyImgSet(thumbnail, 800, 500)}
         alt=""
         aria-hidden
         className="w-full h-full object-cover"
@@ -91,7 +97,7 @@ export function MediaGridSection({
     >
       <div
         ref={ref}
-        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
@@ -111,34 +117,25 @@ export function MediaGridSection({
               </h2>
             </div>
 
-            <div
-              className="flex gap-1 p-1 rounded-[var(--media-radius)]"
-              style={{ background: 'var(--pill-track-background-color)' }}
-              role="group"
-              aria-label="Filter media by type"
-            >
-              {(['all', 'video', 'image'] as const).map((f) => (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => onFilterChange(f)}
-                  aria-pressed={filter === f}
-                  className="px-5 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300 rounded-[var(--media-radius-inner)]"
-                  style={
-                    filter === f
-                      ? {
-                          background: 'var(--accent-color)',
-                          color: 'var(--media-filter-tab-active-text-color)',
-                        }
-                      : { color: 'var(--subtle-text-color)' }
-                  }
-                >
-                  {f === 'all' ? 'All' : f === 'video' ? 'Videos' : 'Photos'}
-                </button>
-              ))}
-            </div>
+            <SlidingTabGroup
+              ariaLabel="Filter media by type"
+              value={filter}
+              onChange={onFilterChange}
+              options={[
+                { value: 'all', label: 'All' },
+                { value: 'image', label: 'Explore' },
+                { value: 'video', label: 'Watch' },
+              ]}
+            />
           </div>
 
+          {filtered.length === 0 ? (
+            <TabGridEmptyState
+              {...mediaFilterEmptyCopy(filter)}
+              headingColor={fg.heading}
+              bodyColor={fg.body}
+            />
+          ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((item) => {
               const objectId = `content/media/${item._meta.path}.md`
@@ -195,6 +192,7 @@ export function MediaGridSection({
               )
             })}
           </div>
+          )}
       </div>
     </section>
   )

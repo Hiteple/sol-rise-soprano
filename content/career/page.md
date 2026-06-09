@@ -5,7 +5,7 @@ heroTitleLine1: An Evolving
 heroTitleAccent: Artistic
 heroTitleLine2: Path
 heroIntro: "Born in Buenos Aires, Argentina, Sol Risé discovered her voice at the age of nine. What began as a childhood fascination evolved into a lifelong calling — shaping an artistic path\_focused on the operatic repertoire."
-heroImage: images/salon-dorado/IMG_5954-processed.webp
+heroImage: images/salon-dorado/IMG_5954.webp
 heroImageAlt: Sol Risé portrait
 heroQuote: '"Singing is not what I do — it is who I am."'
 heroQuoteAttribution: — Sol Risé
@@ -83,7 +83,7 @@ timeline:
        <li>Chorus member in <em>Il Trovatore</em> with Valkyria Lírica (September)</li>
       </ul></div>
 
-  - year: '2026'
+  - year: 'Present'
     title: >-
       British Art Center, Teatro Colón, Juventus Lyrica
     description: |+

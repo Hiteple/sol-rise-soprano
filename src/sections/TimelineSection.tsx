@@ -1,4 +1,6 @@
+import { ChevronDown } from 'lucide-react'
 import { marked } from 'marked'
+import { useCallback, useRef } from 'react'
 
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
@@ -13,16 +15,25 @@ export function TimelineSection({ page }: TimelineSectionProps) {
   const fg = schemeForeground(scheme)
   const animate = page.timelineSlideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  const scrollToNextSection = useCallback(() => {
+    const next = sectionRef.current?.nextElementSibling
+    if (next instanceof HTMLElement) {
+      next.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [])
 
   return (
     <section
+      ref={sectionRef}
       className="section-vertical-padding"
       style={{ background: schemeSolidBackground(scheme) }}
       data-sb-field-path="timelineColorScheme"
     >
       <div
         ref={ref}
-        className={`max-w-5xl mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-5xl mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <p
           className="text-xs uppercase tracking-[0.35em] font-body font-semibold mb-4"
@@ -39,18 +50,19 @@ export function TimelineSection({ page }: TimelineSectionProps) {
           {page.timelineSectionTitle}
         </h2>
 
-        <div className="relative">
-          <div
-            className="absolute left-0 lg:left-1/2 top-0 bottom-0 w-px"
-            style={{
-              background:
-                scheme === 'wine'
-                  ? fg.divider
-                  : 'color-mix(in srgb, var(--accent-color) 28%, transparent)',
-            }}
-          />
+        <div>
+          <div className="relative">
+            <div
+              className="absolute left-0 lg:left-1/2 top-0 bottom-0 w-px"
+              style={{
+                background:
+                  scheme === 'wine'
+                    ? fg.divider
+                    : 'color-mix(in srgb, var(--accent-ink-color) 28%, transparent)',
+              }}
+            />
 
-          <div className="space-y-12">
+            <div className="space-y-12">
             {page.timeline.map((item, idx) => (
               <div
                 key={item.year + item.title}
@@ -62,7 +74,7 @@ export function TimelineSection({ page }: TimelineSectionProps) {
                   className="absolute left-0 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full mt-1 border-2"
                   style={{
                     background: 'var(--page-background-color)',
-                    borderColor: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)',
+                    borderColor: fg.eyebrow,
                     zIndex: 1,
                   }}
                 />
@@ -87,7 +99,7 @@ export function TimelineSection({ page }: TimelineSectionProps) {
                     className={`timeline-markdown max-w-none font-body text-sm leading-relaxed [&_a]:underline ${
                       scheme === 'wine'
                         ? '[&_a]:text-[color:var(--media-caption-text-color)]'
-                        : '[&_a]:text-[color:var(--accent-color)]'
+                        : '[&_a]:text-[color:var(--accent-ink-color)]'
                     }`}
                     style={{ color: fg.body }}
                     data-sb-field-path={`timeline.${idx}.description`}
@@ -98,6 +110,32 @@ export function TimelineSection({ page }: TimelineSectionProps) {
                 </div>
               </div>
             ))}
+            </div>
+          </div>
+
+          <div className="timeline-closure mx-auto mt-16 max-w-md w-full text-center">
+            <div
+              className="quote-banner-ornament font-body mb-6"
+              style={{ color: fg.eyebrow }}
+              aria-hidden
+            >
+              <span className="quote-banner-ornament__glyph">✦</span>
+            </div>
+            <p
+              className="font-display text-xl lg:text-2xl italic"
+              style={{ color: fg.heading }}
+            >
+              The journey continues…
+            </p>
+            <button
+              type="button"
+              className="timeline-closure__scroll mt-8 inline-flex border-0 bg-transparent p-0 cursor-pointer"
+              style={{ color: fg.eyebrow }}
+              aria-label="Scroll to the next section"
+              onClick={scrollToNextSection}
+            >
+              <ChevronDown size={22} strokeWidth={1.75} aria-hidden />
+            </button>
           </div>
         </div>
       </div>

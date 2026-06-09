@@ -41,7 +41,7 @@ export function HeroSection({ section }: HeroSectionProps) {
           />
         </div>
 
-        <div className="relative z-10 max-w-site mx-auto px-6 lg:px-12 w-full">
+        <div className="relative z-10 max-w-site mx-auto px-4 lg:px-12 w-full">
           <p
             className="animate-fade-up text-xs uppercase tracking-[0.35em] mb-6 font-body font-semibold"
             style={{ color: isWine ? 'var(--media-caption-text-color)' : 'var(--heading-color)' }}
@@ -107,8 +107,8 @@ export function HeroSection({ section }: HeroSectionProps) {
                   }}
                   data-sb-field-path="secondaryCtaHref"
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--accent-color)'
-                    e.currentTarget.style.color = 'var(--accent-color)'
+                    e.currentTarget.style.borderColor = 'var(--accent-ink-color)'
+                    e.currentTarget.style.color = 'var(--accent-ink-color)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor =
@@ -134,7 +134,7 @@ export function HeroSection({ section }: HeroSectionProps) {
           style={{
             color: isWine
               ? 'color-mix(in srgb, var(--media-caption-text-color) 58%, transparent)'
-              : 'color-mix(in srgb, var(--accent-color) 55%, transparent)',
+              : 'color-mix(in srgb, var(--accent-ink-color) 55%, transparent)',
           }}
           onClick={(e) => {
             const heroSection = e.currentTarget.closest('section')

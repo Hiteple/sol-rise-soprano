@@ -55,7 +55,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function NotFoundPage() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center px-6">
+    <div className="min-h-[60vh] flex items-center justify-center px-4">
       <div className="text-center">
         <h1 className="font-display text-4xl italic mb-4">Page not found</h1>
         <p className="font-body mb-6" style={{ color: 'var(--muted-text-color)' }}>

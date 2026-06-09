@@ -27,7 +27,7 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
     >
       <div
         ref={ref}
-        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -47,7 +47,7 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
             >
               <span data-sb-field-path="heroTitleLine1">{page.heroTitleLine1}</span>
               <br />
-              <span style={{ color: isWine ? fg.eyebrow : 'var(--accent-color)' }} data-sb-field-path="heroTitleAccent">
+              <span style={{ color: fg.eyebrow }} data-sb-field-path="heroTitleAccent">
                 {page.heroTitleAccent}
               </span>
               <br />
@@ -72,13 +72,13 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
               data-sb-field-path="heroImage"
             />
             <div
-              className="absolute bottom-6 left-6 right-6 p-6 rounded-[var(--media-radius)]"
+              className="absolute bottom-3 left-3 right-3 p-4 lg:bottom-6 lg:left-6 lg:right-6 lg:p-6 rounded-[var(--media-radius)]"
               style={{
                 background: isWine
                   ? 'color-mix(in srgb, var(--palette-pine) 55%, transparent)'
                   : 'color-mix(in srgb, var(--page-background-color) 88%, transparent)',
                 backdropFilter: 'blur(10px)',
-                borderLeft: `3px solid ${isWine ? fg.eyebrow : 'var(--accent-color)'}`,
+                borderLeft: `3px solid ${fg.eyebrow}`,
               }}
             >
               <p

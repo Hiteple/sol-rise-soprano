@@ -34,21 +34,21 @@ function HomePage() {
       title: 'Book a Performance',
       href: '/contact',
       image: 'https://picsum.photos/seed/split-performance/1200/1200',
-      decorativeEyebrow: '',
+      badges: [],
       subtitle: '',
     },
     {
       title: 'Artistic Collaborations',
       href: '/contact',
       image: 'https://picsum.photos/seed/split-collab/1200/1200',
-      decorativeEyebrow: '',
+      badges: [],
       subtitle: '',
     },
     {
       title: 'Masterclasses & Lessons',
       href: '/contact',
       image: 'https://picsum.photos/seed/split-lessons/1200/1200',
-      decorativeEyebrow: '',
+      badges: [],
       subtitle: '',
     },
   ]
@@ -114,6 +114,7 @@ function HomePage() {
           quoteAuthor: site.quoteAuthor,
           quoteImage: site.quoteImage,
           quoteImageAlt: site.quoteImageAlt,
+          quoteImageCredit: site.quoteImageCredit,
           colorScheme: site.quoteBannerColorScheme,
           slideIn: site.quoteBannerSlideIn,
         }}

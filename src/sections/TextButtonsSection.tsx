@@ -6,9 +6,10 @@ import type { AboutPage } from '../../schemas/site-pages'
 
 export type TextButtonsSectionProps = {
   page: AboutPage
+  sectionId?: string
 }
 
-export function TextButtonsSection({ page }: TextButtonsSectionProps) {
+export function TextButtonsSection({ page, sectionId }: TextButtonsSectionProps) {
   const scheme = resolveColorScheme(page.ctaColorScheme)
   const fg = schemeForeground(scheme)
   const primaryLabel = page.ctaPrimaryLabel?.trim() ?? ''
@@ -22,13 +23,14 @@ export function TextButtonsSection({ page }: TextButtonsSectionProps) {
 
   return (
     <section
-      className="py-24 text-center"
+      id={sectionId}
+      className="py-24 text-center scroll-mt-24"
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="ctaColorScheme"
     >
       <div
         ref={ref}
-        className={`max-w-xl mx-auto px-6 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-xl mx-auto px-4 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <h2
           className="font-display italic text-4xl mb-6"
@@ -57,8 +59,8 @@ export function TextButtonsSection({ page }: TextButtonsSectionProps) {
                 borderColor:
                   scheme === 'wine'
                     ? fg.divider
-                    : 'color-mix(in srgb, var(--accent-color) 45%, transparent)',
-                color: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)',
+                    : 'color-mix(in srgb, var(--accent-ink-color) 45%, transparent)',
+                color: fg.eyebrow,
               }}
               data-sb-field-path="ctaSecondaryLabel"
             >

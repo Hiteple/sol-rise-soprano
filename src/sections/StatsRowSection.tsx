@@ -56,9 +56,9 @@ export function StatsRowSection({ page }: StatsRowSectionProps) {
   const statsIsWine = statsSurface === 'wine'
   const statsBackground = schemeStatsBackground(statsSurface)
   const fg = schemeForeground(statsSurface)
-  const statsNumberColor = statsIsWine ? fg.heading : 'var(--accent-color)'
+  const statsNumberColor = statsIsWine ? fg.heading : fg.eyebrow
   const statsLabelColor = statsIsWine ? fg.body : 'var(--subtle-text-color)'
-  const statsDividerColor = statsIsWine ? fg.divider : 'color-mix(in srgb, var(--accent-color) 20%, transparent)'
+  const statsDividerColor = statsIsWine ? fg.divider : 'color-mix(in srgb, var(--accent-ink-color) 20%, transparent)'
   const animate = page.statsSlideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
   const countUpActive = inView
@@ -76,7 +76,7 @@ export function StatsRowSection({ page }: StatsRowSectionProps) {
     >
       <div
         ref={ref}
-        className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
           {page.highlights.map((h) => (

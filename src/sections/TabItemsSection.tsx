@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
-import { Modal } from '@/components/Modal'
+import { SlidingTabGroup } from '@/components/SlidingTabGroup'
+import { TabGridEmptyState } from '@/components/TabGridEmptyState'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { galleryCategoryEmptyCopy } from '@/lib/tab-grid-empty-copy'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
@@ -12,6 +14,7 @@ export type GalleryGridItem = {
   image: string
   alt: string
   category?: string
+  featuredImg?: boolean
 }
 
 export type TabItemsSectionProps = {
@@ -23,10 +26,6 @@ export type TabItemsSectionProps = {
 
 export function TabItemsSection({ categories, items, tabItemsColorScheme, slideIn }: TabItemsSectionProps) {
   const [activeCategory, setActiveCategory] = useState(categories[0] ?? 'All')
-  const [lightboxImg, setLightboxImg] = useState<{
-    src: string
-    alt: string
-  } | null>(null)
 
   const filtered =
     activeCategory === 'All'
@@ -45,31 +44,21 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
         style={{ background: schemePageBandBackground(scheme) }}
         data-sb-field-path="tabItemsColorScheme"
       >
-        <div className="max-w-site mx-auto px-6 lg:px-12">
-          <div
-            className="flex gap-1 p-1 w-fit rounded-[var(--media-radius)]"
-            style={{ background: 'var(--pill-track-background-color)' }}
-            role="group"
-            aria-label="Filter gallery by category"
-          >
-            {categories.map((cat, i) => (
-              <button
-                key={`${cat}-${i}`}
-                type="button"
-                onClick={() => setActiveCategory(cat)}
-                aria-pressed={activeCategory === cat}
-                className="px-6 py-2 text-xs uppercase tracking-widest font-body font-semibold transition-all duration-300 rounded-[var(--media-radius-inner)]"
-                style={
-                  activeCategory === cat
-                    ? { background: 'var(--accent-color)', color: 'var(--on-accent-text-color)' }
-                    : { color: scheme === 'wine' ? fg.body : 'var(--subtle-text-color)' }
-                }
-                data-sb-field-path={`filterCategories.${i}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+        <div className="max-w-site mx-auto px-4 lg:px-12">
+          <SlidingTabGroup
+            className="w-fit"
+            tabClassName="px-3 py-1.5 md:px-6 md:py-2"
+            ariaLabel="Filter gallery by category"
+            value={activeCategory}
+            onChange={setActiveCategory}
+            inactiveTextColor={scheme === 'wine' ? fg.body : 'var(--subtle-text-color)'}
+            activeTextColor="var(--on-accent-text-color)"
+            options={categories.map((cat, i) => ({
+              value: cat,
+              label: cat,
+              fieldPath: `filterCategories.${i}`,
+            }))}
+          />
         </div>
       </section>
 
@@ -79,41 +68,49 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
       >
         <div
           ref={ref}
-          className={`max-w-site mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+          className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((item, idx) => {
-              const isLarge = idx % 5 === 0
+          {filtered.length === 0 ? (
+            <TabGridEmptyState
+              {...galleryCategoryEmptyCopy(activeCategory)}
+              headingColor={fg.heading}
+              bodyColor={fg.body}
+            />
+          ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+            {filtered.map((item) => {
+              const isFeatured = Boolean(item.featuredImg)
               return (
-                <button
+                <div
                   key={item._meta.path}
-                  type="button"
-                  className={`group img-zoom media-radius cursor-pointer relative block w-full border-0 p-0 text-left ${
-                    isLarge ? 'md:col-span-2 lg:col-span-2' : ''
+                  className={`group img-zoom media-radius relative block h-full min-h-0 w-full self-stretch overflow-hidden col-span-2 ${
+                    isFeatured ? '' : 'lg:col-span-1'
                   }`}
-                  style={{ aspectRatio: isLarge ? '16/9' : '4/5' }}
+                  {...(isFeatured ? { 'data-featured-img': true } : {})}
                   data-sb-object-id={`content/gallery/${item._meta.path}.md`}
-                  aria-label={`View larger image: ${item.title}`}
-                  onClick={() =>
-                    setLightboxImg({
-                      src: item.image,
-                      alt: item.alt,
-                    })
-                  }
                 >
                   <img
                     {...netlifyImgSet(
                       item.image,
-                      isLarge ? 1200 : 600,
-                      isLarge ? 675 : 750,
+                      isFeatured ? 1200 : 600,
+                      isFeatured ? 675 : 750,
                     )}
                     alt=""
                     aria-hidden
-                    className="w-full h-full object-cover"
+                    className="img-zoom-sizer block w-full h-auto opacity-0"
+                  />
+                  <img
+                    {...netlifyImgSet(
+                      item.image,
+                      isFeatured ? 1200 : 600,
+                      isFeatured ? 675 : 750,
+                    )}
+                    alt={item.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
                     data-sb-field-path="image"
                   />
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 flex items-end p-5"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"
                     style={{
                       background:
                         'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 78%, transparent) 0%, transparent 60%)',
@@ -131,34 +128,20 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
                       {item.category && (
                         <p
                           className="font-body text-xs uppercase tracking-widest mt-1"
-                          style={{ color: scheme === 'wine' ? fg.eyebrow : 'var(--accent-color)' }}
+                          style={{ color: 'var(--media-caption-text-color)' }}
                         >
                           {item.category}
                         </p>
                       )}
                     </div>
                   </div>
-                </button>
+                </div>
               )
             })}
           </div>
+          )}
         </div>
       </section>
-
-      <Modal
-        open={Boolean(lightboxImg)}
-        onClose={() => setLightboxImg(null)}
-        ariaLabel={lightboxImg ? `Image: ${lightboxImg.alt}` : 'Image preview'}
-        panelClassName="max-w-5xl"
-      >
-        {lightboxImg && (
-          <img
-            {...netlifyImgSet(lightboxImg.src, 1400, 900, 'contain')}
-            alt={lightboxImg.alt}
-            className="w-full max-h-screen object-contain"
-          />
-        )}
-      </Modal>
     </>
   )
 }

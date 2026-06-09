@@ -1,6 +1,8 @@
+import { ImageCredit } from '@/components/ImageCredit'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { schemeForeground, schemeQuoteOverlay } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
+import { resolveImageCredit } from '../../schemas/image-credit'
 import type { HomeQuoteSection } from './types'
 
 export type QuoteBannerSectionProps = {
@@ -13,6 +15,7 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
   const fg = schemeForeground(scheme)
   const animate = section.slideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
+  const imageCredit = resolveImageCredit(section.quoteImageCredit)
 
   return (
     <section
@@ -32,20 +35,30 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
               background: schemeQuoteOverlay(scheme),
             }}
           />
+          {imageCredit && (
+            <div className="absolute bottom-3 right-4 z-20 pointer-events-auto">
+              <ImageCredit
+                credit={imageCredit}
+                style={{ color: 'var(--media-caption-text-color)' }}
+                data-sb-field-path="quoteImageCredit"
+              />
+            </div>
+          )}
         </div>
         <div
           ref={ref}
-          className={`relative z-10 max-w-3xl mx-auto px-6 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+          className={`relative z-10 max-w-3xl mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
         >
           <div
-            className="font-display text-5xl lg:text-6xl mb-8"
-            style={{ color: fg.eyebrow, opacity: scheme === 'wine' ? 0.85 : 0.6 }}
+            className="quote-banner-ornament font-body"
+            style={{ color: fg.eyebrow }}
+            aria-hidden
           >
-            "
+            <span className="quote-banner-ornament__glyph">✦</span>
           </div>
           <blockquote
-            className="font-display italic text-2xl lg:text-4xl leading-relaxed mb-8"
-            style={{ color: fg.heading }}
+            className="font-display italic text-2xl lg:text-[2.75rem] leading-relaxed mb-8"
+            style={{ color: fg.heading, fontStyle: 'italic' }}
             data-sb-field-path="quoteText"
           >
             {section.quoteText}

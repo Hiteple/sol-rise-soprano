@@ -73,8 +73,8 @@ export function schemeForeground(scheme: SectionColorScheme): {
   return {
     heading: 'var(--heading-color)',
     body: 'var(--muted-text-color)',
-    eyebrow: 'var(--accent-color)',
-    divider: 'var(--accent-color)',
+    eyebrow: 'var(--accent-ink-color)',
+    divider: 'var(--accent-ink-color)',
     link: 'var(--heading-color)',
     linkHover: 'var(--palette-wine)',
   }
