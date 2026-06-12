@@ -13,9 +13,9 @@ statsSurface: wine
 highlights:
   - number: 6+
     label: Years on Stage
-  - number: '7'
+  - number: '9'
     label: Roles
-  - number: '2'
+  - number: '3'
     label: Opera Houses
   - number: '1'
     label: Continents

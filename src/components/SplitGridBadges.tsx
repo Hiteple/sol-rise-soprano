@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import {
   eventYearFromHref,
   eventYearFromSlug,
+  isScheduleBadgePast,
   isScheduleBadgeToday,
   scheduleBadgeLabel,
 } from '@/lib/schedule-badge-date'
@@ -43,10 +44,11 @@ export function SplitGridBadges({ badges, fieldPathPrefix, eventRef }: SplitGrid
     <div className="split-grid-badges">
       {badges.map((badge, badgeIndex) => {
         const isToday = today ? isScheduleBadgeToday(badge, today, eventYear) : false
+        const isPast = today && !isToday ? isScheduleBadgePast(badge, today, eventYear) : false
         return (
           <span
             key={`${badge}-${badgeIndex}`}
-            className={`split-grid-link font-body text-xs uppercase tracking-[0.22em]${isToday ? ' split-grid-link--today' : ''}`}
+            className={`split-grid-link font-body text-xs uppercase tracking-[0.22em]${isToday ? ' split-grid-link--today' : ''}${isPast ? ' split-grid-link--past' : ''}`}
             {...(fieldPathPrefix
               ? { 'data-sb-field-path': `${fieldPathPrefix}.${badgeIndex}` }
               : {})}

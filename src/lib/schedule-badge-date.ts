@@ -78,6 +78,17 @@ function isSameCalendarDay(a: Date, b: Date): boolean {
   )
 }
 
+function startOfCalendarDay(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+function parseYearOnlyBadge(badge: string): number | null {
+  const trimmed = badge.trim()
+  if (!/^\d{4}$/.test(trimmed)) return null
+  const year = Number.parseInt(trimmed, 10)
+  return Number.isFinite(year) ? year : null
+}
+
 export function isScheduleBadgeToday(
   badge: string,
   now: Date = new Date(),
@@ -94,4 +105,23 @@ export function scheduleBadgeLabel(
   eventYear?: number,
 ): string {
   return isScheduleBadgeToday(badge, now, eventYear) ? 'TODAY' : badge
+}
+
+/** True when the badge date is strictly before today (visitor-local calendar). */
+export function isScheduleBadgePast(
+  badge: string,
+  now: Date = new Date(),
+  eventYear?: number,
+): boolean {
+  const parsed = parseScheduleBadgeDate(badge, now, eventYear)
+  if (parsed) {
+    return parsed < startOfCalendarDay(now)
+  }
+
+  const yearOnly = parseYearOnlyBadge(badge)
+  if (yearOnly !== null) {
+    return yearOnly < now.getFullYear()
+  }
+
+  return false
 }
