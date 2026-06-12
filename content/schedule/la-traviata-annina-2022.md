@@ -1,13 +1,11 @@
 ---
 title: La Traviata
-subtitle: Annina — Compañía Lírica de Verdi
+subtitle: Annina — Buenos Aires
 plot: >-
-  Verdi's tale of Violetta — role of Annina with Compañía Lírica de Verdi in
-  Buenos Aires.
+  Verdi's tale of Violetta — role of Annina in Buenos Aires.
 composer: Giuseppe Verdi
 venue: Buenos Aires
 city: Buenos Aires
-organizationSlug: compania-lirica-de-verdi
 roleSlug: annina-la-traviata
 image: images/general/placeholder-portrait.svg
 imageAlt: La Traviata performance placeholder

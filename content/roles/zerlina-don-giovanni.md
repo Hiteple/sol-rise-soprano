@@ -3,6 +3,8 @@ characterName: Zerlina
 operaTitle: Don Giovanni
 composer: Wolfgang Amadeus Mozart
 heroImage: images/don-giovanni/IMG_1375.webp
+featureImage: images/don-giovanni/IMG_1379.webp
+featureImagePhotography: Liliana Morsia
 summary: >-
   A spirited peasant bride caught between fidelity and seduction — Sol Risé
   debuted this role with Juventus Lyrica at Teatro Avenida in 2023.

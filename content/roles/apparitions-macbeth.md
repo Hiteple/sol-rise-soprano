@@ -3,6 +3,8 @@ characterName: Apparition
 operaTitle: Macbeth
 composer: Giuseppe Verdi
 heroImage: images/general/placeholder-landscape.svg
+featureImage: images/general/placeholder-landscape.svg
+featureImagePhotography: Liliana Morsia
 summary: >-
   Chorus and apparition scenes in Verdi's Shakespearean tragedy — with Juventus
   Lyrica in Buenos Aires.

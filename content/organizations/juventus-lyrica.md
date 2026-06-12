@@ -2,7 +2,7 @@
 name: Juventus Lyrica
 city: Buenos Aires
 country: Argentina
-image: images/schedule-images/madama-butterfly.jpg
+image: images/juventus-lyrica/juventus-lyrica.webp
 summary: >-
   A leading young opera company in Buenos Aires — home to many of Sol Risé's
   staged roles and chorus work at Teatro Avenida.

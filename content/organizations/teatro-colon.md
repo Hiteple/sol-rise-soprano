@@ -2,7 +2,7 @@
 name: Teatro Colón
 city: Buenos Aires
 country: Argentina
-image: images/general/liana-unsplash.webp
+image: images/teatro-colon/theater-colon-01.webp
 summary: >-
   Argentina's historic opera house — chorus reinforcement and cover work in
   major symphonic and operatic productions.

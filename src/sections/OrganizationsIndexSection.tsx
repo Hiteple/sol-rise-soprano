@@ -1,4 +1,5 @@
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { ExternalLink } from '@/components/ExternalLink'
+import { OrganizationImage } from '@/components/OrganizationImage'
 import { resolveColorScheme, schemeForeground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -47,21 +48,13 @@ export function OrganizationsIndexSection({
               data-sb-object-id={`content/organizations/${org._meta.path}.md`}
             >
               <div className="sm:min-h-[180px] bg-[color-mix(in_srgb,var(--palette-wine)_12%,transparent)]">
-                {org.image ? (
-                  <img
-                    {...netlifyImgSet(org.image, 360, 450)}
-                    alt={org.name}
-                    className="w-full h-full object-cover min-h-[180px]"
-                    data-sb-field-path="image"
-                  />
-                ) : (
-                  <div
-                    className="w-full h-full min-h-[180px] flex items-center justify-center font-display text-4xl italic px-4 text-center"
-                    style={{ color: fg.eyebrow }}
-                  >
-                    {org.name.charAt(0)}
-                  </div>
-                )}
+                <OrganizationImage
+                  name={org.name}
+                  image={org.image}
+                  eyebrowColor={fg.eyebrow}
+                  variant="index"
+                  imageFieldPath="image"
+                />
               </div>
 
               <div className="p-8 flex flex-col justify-center">
@@ -88,16 +81,15 @@ export function OrganizationsIndexSection({
                   {org.summary}
                 </p>
                 {org.website && (
-                  <a
+                  <ExternalLink
                     href={org.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    aria-label={`Visit ${org.name} website`}
                     className="font-body text-xs uppercase tracking-[0.28em] self-start border-b pb-1 transition-opacity hover:opacity-75"
                     style={{ color: fg.heading, borderColor: fg.divider }}
                     data-sb-field-path="website"
                   >
                     Visit website
-                  </a>
+                  </ExternalLink>
                 )}
               </div>
             </article>

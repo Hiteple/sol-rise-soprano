@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { ExternalLink } from '@/components/ExternalLink'
+import { OrganizationImage } from '@/components/OrganizationImage'
 import {
   resolveColorScheme,
   schemeForeground,
@@ -92,23 +93,13 @@ export function OrganizationsStripSection({
                   className="aspect-[4/3] overflow-hidden"
                   style={{ background: 'color-mix(in srgb, var(--palette-wine) 10%, transparent)' }}
                 >
-                  {org.image ? (
-                    <img
-                      {...netlifyImgSet(org.image, 480, 360)}
-                      alt=""
-                      aria-hidden
-                      className="w-full h-full object-cover"
-                      data-sb-field-path="image"
-                    />
-                  ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center font-display text-3xl lg:text-4xl italic px-4 text-center"
-                      style={{ color: fg.eyebrow }}
-                      aria-hidden
-                    >
-                      {org.name.charAt(0)}
-                    </div>
-                  )}
+                  <OrganizationImage
+                    name={org.name}
+                    image={org.image}
+                    eyebrowColor={fg.eyebrow}
+                    variant="strip"
+                    imageFieldPath="image"
+                  />
                 </div>
                 <div className="p-4 lg:p-5">
                   <h3
@@ -138,17 +129,16 @@ export function OrganizationsStripSection({
 
             if (org.website) {
               return (
-                <a
+                <ExternalLink
                   key={org._meta.path}
                   href={org.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  aria-label={`Visit ${org.name} website`}
                   className="overflow-hidden rounded-[var(--media-radius)] border transition-opacity hover:opacity-90"
                   style={cardStyle}
                   data-sb-object-id={`content/organizations/${org._meta.path}.md`}
                 >
                   {cardInner}
-                </a>
+                </ExternalLink>
               )
             }
 

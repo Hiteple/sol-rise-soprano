@@ -7,6 +7,7 @@ import {
   MuvacIcon,
   YoutubeIcon,
 } from '@/components/brand-icons'
+import { ExternalLink } from '@/components/ExternalLink'
 
 import {
   resolveColorScheme,
@@ -157,11 +158,10 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
               </p>
               <div className="space-y-4">
                 {socialLinks.map(({ icon: Icon, label, url, handle, handleField }) => (
-                  <a
+                  <ExternalLink
                     key={label}
                     href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    aria-label={`${label}, ${handle}`}
                     className="flex items-center gap-4 group transition-opacity hover:opacity-80"
                   >
                     <div
@@ -188,7 +188,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                         {handle}
                       </p>
                     </div>
-                  </a>
+                  </ExternalLink>
                 ))}
               </div>
             </div>

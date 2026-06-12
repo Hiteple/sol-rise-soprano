@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { RoleCardImage } from '@/components/RoleCardImage'
 import { roleStats } from '@/lib/role-stats'
 import { resolveColorScheme, schemeForeground, schemeGoldLinkStyle } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
@@ -62,12 +62,11 @@ export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesInde
                   params={{ slug }}
                   className="img-zoom block sm:min-h-[180px] bg-[color-mix(in_srgb,var(--palette-wine)_12%,transparent)]"
                 >
-                  <img
-                    {...netlifyImgSet(role.heroImage, 360, 450)}
+                  <RoleCardImage
+                    characterName={role.characterName}
+                    heroImage={role.heroImage}
                     alt={`${role.characterName} in ${role.operaTitle}`}
-                    className="w-full h-full min-h-[180px] object-cover"
-                    style={{ objectPosition: 'top center' }}
-                    data-sb-field-path="heroImage"
+                    eyebrowColor={fg.eyebrow}
                   />
                 </Link>
 

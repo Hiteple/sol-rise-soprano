@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 
+import { ExternalLink } from '@/components/ExternalLink'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { isInternalHref } from '@/lib/internal-href'
 import { netlifyImgSet } from '@/lib/netlify-image'
@@ -98,27 +99,31 @@ function EventDetailImage({
   )
 }
 
-function TicketLink({ href }: { href: string }) {
+function TicketLink({ href, eventTitle }: { href: string; eventTitle: string }) {
   const style = schemeGoldLinkStyle('soft')
 
   if (isInternalHref(href)) {
     return (
-      <Link to={href} className="gold-link font-body text-xs uppercase tracking-[0.28em]" style={style}>
+      <Link
+        to={href}
+        className="gold-link font-body text-xs uppercase tracking-[0.28em]"
+        style={style}
+        aria-label={`Inquire about ${eventTitle}`}
+      >
         Inquire →
       </Link>
     )
   }
 
   return (
-    <a
+    <ExternalLink
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      aria-label={`Get tickets for ${eventTitle}`}
       className="gold-link font-body text-xs uppercase tracking-[0.28em]"
       style={style}
     >
       Get tickets →
-    </a>
+    </ExternalLink>
   )
 }
 
@@ -260,17 +265,16 @@ export function ScheduleEventDetailSection({
               )}
 
               <div className="flex flex-col items-start gap-4">
-                {ticketHref ? <TicketLink href={ticketHref} /> : null}
+                {ticketHref ? <TicketLink href={ticketHref} eventTitle={event.title} /> : null}
                 {externalUrl ? (
-                  <a
+                  <ExternalLink
                     href={externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    aria-label={`View program for ${event.title}`}
                     className="gold-link font-body text-xs uppercase tracking-[0.28em]"
                     style={schemeGoldLinkStyle('soft')}
                   >
                     View program →
-                  </a>
+                  </ExternalLink>
                 ) : null}
                 <Link
                   to="/schedule"

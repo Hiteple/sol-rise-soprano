@@ -208,6 +208,8 @@ const roles = defineCollection({
     operaTitle: z.string(),
     composer: z.string(),
     heroImage: z.string(),
+    featureImage: z.string(),
+    featureImagePhotography: z.string().optional(),
     summary: z.string(),
     appearances: z.array(roleAppearanceSchema).default([]),
     tags: z.array(z.string()).default([]),

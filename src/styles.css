@@ -633,6 +633,18 @@
   color: var(--accent-ink-color);
 }
 
+/* Role detail — feature image photo credit */
+.role-feature-image__credit {
+  padding-top: 3.5rem;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--palette-wine) 58%, transparent) 0%,
+    color-mix(in srgb, var(--palette-wine) 32%, transparent) 28%,
+    color-mix(in srgb, var(--palette-wine) 14%, transparent) 55%,
+    transparent 85%
+  );
+}
+
 /* About timeline: markdown from `marked` (lists, emphasis, links) */
 .timeline-markdown :is(p, ul, ol) {
   margin: 0.35rem 0;
@@ -658,26 +670,126 @@
   text-underline-offset: 2px;
 }
 
-.timeline-closure__scroll {
-  opacity: 0.72;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  animation: timeline-closure-bob 2.4s ease-in-out infinite;
+/* Career timeline — scroll-driven vertical fill */
+.timeline-track__line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
 }
-.timeline-closure__scroll:hover {
-  opacity: 1;
+@media (min-width: 1024px) {
+  .timeline-track__line {
+    left: 50%;
+  }
 }
-@keyframes timeline-closure-bob {
-  0%,
-  100% {
-    transform: translateY(0);
+.timeline-track__line--base {
+  bottom: 0;
+  width: 1px;
+  z-index: 0;
+}
+.timeline-track__line--fill {
+  width: 3px;
+  height: calc(var(--timeline-fill, 0) * 100%);
+  background: var(--accent-ink-color);
+  border-radius: 999px;
+  z-index: 1;
+}
+.timeline-track__dot {
+  position: absolute;
+  left: 0;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  border: 2px solid;
+  background: var(--page-background-color);
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: background 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (min-width: 1024px) {
+  .timeline-track__dot {
+    left: 50%;
   }
-  50% {
-    transform: translateY(5px);
-  }
+}
+.timeline-track__dot--reached {
+  background: var(--timeline-dot-color, var(--accent-ink-color));
+}
+
+.timeline-closure {
+  position: relative;
+  padding: 1.75rem 1.25rem;
+  border-radius: var(--media-radius);
+  transform: translateY(1rem) scale(0.97);
+  transition:
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.85s ease,
+    box-shadow 0.85s ease;
+}
+.timeline-closure__ornament {
+  color: var(--accent-ink-color);
+  transition: color 0.85s ease;
+}
+.timeline-closure__message {
+  font-size: clamp(1.25rem, 3.2vw, 1.65rem);
+  line-height: 1.35;
+  color: var(--heading-color);
+  transition: color 0.85s ease;
+}
+.timeline-closure__cta {
+  background: var(--accent-color);
+  color: var(--on-accent-text-color);
+  transition:
+    background 0.85s ease,
+    color 0.85s ease,
+    transform 0.35s ease;
+}
+.timeline-closure__cta:hover {
+  transform: translateY(-1px);
+}
+.timeline-closure--complete {
+  padding: 2.5rem 2rem;
+  background: var(--palette-wine);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow:
+    0 18px 42px color-mix(in srgb, var(--palette-wine) 38%, transparent),
+    0 4px 14px color-mix(in srgb, var(--palette-wine) 22%, transparent);
+}
+.timeline-closure--complete .timeline-closure__ornament {
+  color: color-mix(in srgb, #fff 72%, var(--palette-pink) 28%);
+}
+.timeline-closure--complete .timeline-closure__ornament::before,
+.timeline-closure--complete .timeline-closure__ornament::after {
+  opacity: 0.7;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, #fff 55%, transparent) 45%,
+    color-mix(in srgb, #fff 55%, transparent) 55%,
+    transparent
+  );
+}
+.timeline-closure--complete .timeline-closure__message {
+  color: #fff;
+}
+.timeline-closure--complete .timeline-closure__cta {
+  background: color-mix(in srgb, #fff 92%, var(--palette-pink) 8%);
+  color: var(--palette-wine);
 }
 @media (prefers-reduced-motion: reduce) {
-  .timeline-closure__scroll {
-    animation: none;
+  .timeline-track__line--fill {
+    height: 100%;
+  }
+  .timeline-track__dot--reached {
+    background: var(--timeline-dot-color, var(--accent-ink-color));
+  }
+  .timeline-closure {
+    transform: none;
+  }
+  .timeline-closure--complete {
+    transform: scale(1.03);
   }
 }
 

@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 
+import { ExternalLink } from '@/components/ExternalLink'
 import { SplitGridBadges } from '@/components/SplitGridBadges'
 import { splitGridBadges } from '@/lib/split-grid-badges'
 import type { RefObject } from 'react'
@@ -82,17 +83,20 @@ export function SplitGrid({
             )
           }
 
+          const externalLabel = item.subtitle?.trim()
+            ? `${item.title}, ${item.subtitle.trim()}`
+            : item.title
+
           return (
-            <a
+            <ExternalLink
               key={`${item.title}-${href}`}
               href={href}
-              target="_blank"
-              rel="noopener noreferrer"
+              aria-label={externalLabel}
               className="split-grid-item"
               style={{ backgroundImage: `url(${item.image})` }}
             >
               {panelContent}
-            </a>
+            </ExternalLink>
           )
         })}
       </div>

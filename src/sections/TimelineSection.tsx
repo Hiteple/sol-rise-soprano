@@ -1,9 +1,11 @@
-import { ChevronDown } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 import { marked } from 'marked'
-import { useCallback, useRef } from 'react'
+import { useRef, type CSSProperties } from 'react'
 
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
+import { useTimelineDotsReached } from '@/lib/use-timeline-dots-reached'
+import { useTimelineFillProgress } from '@/lib/use-timeline-fill-progress'
 import type { AboutPage } from '../../schemas/site-pages'
 
 export type TimelineSectionProps = {
@@ -15,19 +17,17 @@ export function TimelineSection({ page }: TimelineSectionProps) {
   const fg = schemeForeground(scheme)
   const animate = page.timelineSlideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
-  const sectionRef = useRef<HTMLElement>(null)
+  const timelineTrackRef = useRef<HTMLDivElement>(null)
+  const { progress: fillProgress, complete: timelineComplete } =
+    useTimelineFillProgress(timelineTrackRef)
 
-  const scrollToNextSection = useCallback(() => {
-    const next = sectionRef.current?.nextElementSibling
-    if (next instanceof HTMLElement) {
-      next.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }, [])
+  const dotsReached = useTimelineDotsReached(timelineTrackRef, fillProgress)
+  const ctaLabel = page.ctaPrimaryLabel?.trim() || 'Get in Touch'
+  const ctaHref = page.ctaPrimaryHref?.trim() || '/contact'
 
   return (
     <section
-      ref={sectionRef}
-      className="section-vertical-padding"
+      className="section-vertical-padding pb-24 lg:pb-32"
       style={{ background: schemeSolidBackground(scheme) }}
       data-sb-field-path="timelineColorScheme"
     >
@@ -51,91 +51,95 @@ export function TimelineSection({ page }: TimelineSectionProps) {
         </h2>
 
         <div>
-          <div className="relative">
+          <div ref={timelineTrackRef} className="timeline-track relative">
             <div
-              className="absolute left-0 lg:left-1/2 top-0 bottom-0 w-px"
+              className="timeline-track__line timeline-track__line--base"
               style={{
                 background:
                   scheme === 'wine'
                     ? fg.divider
                     : 'color-mix(in srgb, var(--accent-ink-color) 28%, transparent)',
               }}
+              aria-hidden
+            />
+            <div
+              className="timeline-track__line timeline-track__line--fill"
+              style={{ '--timeline-fill': fillProgress } as CSSProperties}
+              aria-hidden
             />
 
             <div className="space-y-12">
-            {page.timeline.map((item, idx) => (
-              <div
-                key={item.year + item.title}
-                className={`relative flex items-start gap-8 lg:gap-16 ${
-                  idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                }`}
-              >
-                <div
-                  className="absolute left-0 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full mt-1 border-2"
-                  style={{
-                    background: 'var(--page-background-color)',
-                    borderColor: fg.eyebrow,
-                    zIndex: 1,
-                  }}
-                />
+              {page.timeline.map((item, idx) => {
+                const dotReached = dotsReached[idx] ?? false
 
-                <div
-                  className={`ml-8 lg:ml-0 lg:w-5/12 ${idx % 2 === 0 ? 'lg:text-right' : 'lg:pl-16'}`}
-                  data-sb-field-path={`timeline.${idx}`}
-                >
-                  <span
-                    className="font-display italic text-2xl"
-                    style={{ color: fg.eyebrow }}
-                  >
-                    {item.year}
-                  </span>
-                  <h3
-                    className="font-display text-xl mt-1 mb-3"
-                    style={{ color: fg.heading }}
-                  >
-                    {item.title}
-                  </h3>
+                return (
                   <div
-                    className={`timeline-markdown max-w-none font-body text-sm leading-relaxed [&_a]:underline ${
-                      scheme === 'wine'
-                        ? '[&_a]:text-[color:var(--media-caption-text-color)]'
-                        : '[&_a]:text-[color:var(--accent-ink-color)]'
+                    key={item.year + item.title}
+                    className={`relative flex items-start gap-8 lg:gap-16 ${
+                      idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
                     }`}
-                    style={{ color: fg.body }}
-                    data-sb-field-path={`timeline.${idx}.description`}
-                    dangerouslySetInnerHTML={{
-                      __html: String(marked(item.description)),
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+                  >
+                    <div
+                      className={`timeline-track__dot mt-1${dotReached ? ' timeline-track__dot--reached' : ''}`}
+                      style={
+                        {
+                          '--timeline-dot-color': fg.eyebrow,
+                          borderColor: fg.eyebrow,
+                        } as CSSProperties
+                      }
+                    />
+
+                    <div
+                      className={`ml-8 lg:ml-0 lg:w-5/12 ${idx % 2 === 0 ? 'lg:text-right' : 'lg:pl-16'}`}
+                      data-sb-field-path={`timeline.${idx}`}
+                    >
+                      <span
+                        className="font-display italic text-2xl"
+                        style={{ color: fg.eyebrow }}
+                      >
+                        {item.year}
+                      </span>
+                      <h3
+                        className="font-display text-xl mt-1 mb-3"
+                        style={{ color: fg.heading }}
+                      >
+                        {item.title}
+                      </h3>
+                      <div
+                        className={`timeline-markdown max-w-none font-body text-sm leading-relaxed [&_a]:underline ${
+                          scheme === 'wine'
+                            ? '[&_a]:text-[color:var(--media-caption-text-color)]'
+                            : '[&_a]:text-[color:var(--accent-ink-color)]'
+                        }`}
+                        style={{ color: fg.body }}
+                        data-sb-field-path={`timeline.${idx}.description`}
+                        dangerouslySetInnerHTML={{
+                          __html: String(marked(item.description)),
+                        }}
+                      />
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
-          <div className="timeline-closure mx-auto mt-16 max-w-md w-full text-center">
-            <div
-              className="quote-banner-ornament font-body mb-6"
-              style={{ color: fg.eyebrow }}
-              aria-hidden
-            >
+          <div
+            className={`timeline-closure mx-auto mt-16 max-w-md w-full text-center${timelineComplete ? ' timeline-closure--complete' : ''}`}
+          >
+            <div className="quote-banner-ornament timeline-closure__ornament font-body mb-6" aria-hidden>
               <span className="quote-banner-ornament__glyph">✦</span>
             </div>
-            <p
-              className="font-display text-xl lg:text-2xl italic"
-              style={{ color: fg.heading }}
-            >
+            <p className="timeline-closure__message font-display italic">
               The journey continues…
             </p>
-            <button
-              type="button"
-              className="timeline-closure__scroll mt-8 inline-flex border-0 bg-transparent p-0 cursor-pointer"
-              style={{ color: fg.eyebrow }}
-              aria-label="Scroll to the next section"
-              onClick={scrollToNextSection}
+            <Link
+              to={ctaHref}
+              className="timeline-closure__cta mt-8 inline-flex px-8 py-3 font-body text-xs uppercase tracking-widest font-semibold transition-all duration-300 rounded-[var(--media-radius)]"
+              data-sb-field-path="ctaPrimaryLabel"
             >
-              <ChevronDown size={22} strokeWidth={1.75} aria-hidden />
-            </button>
+              {ctaLabel}
+            </Link>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { marked } from 'marked'
 
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { netlifyImgSet } from '@/lib/netlify-image'
+import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { roleStats } from '@/lib/role-stats'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
@@ -37,6 +38,8 @@ export function RoleDetailSection({ role, galleryItems, organizations }: RoleDet
   const { ref, inView } = useInView<HTMLDivElement>()
   const { openGallery } = useGalleryPhotoSwipe()
 
+  const featureImageCredit = photographerCreditLabel(role.featureImagePhotography)
+
   const lightboxItems = relatedGallery.map((item) => ({
     image: item.image,
     alt: item.alt,
@@ -70,12 +73,30 @@ export function RoleDetailSection({ role, galleryItems, organizations }: RoleDet
         >
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_280px] gap-12 lg:gap-16">
             <div>
-              <div className="img-zoom media-radius mb-10" style={{ aspectRatio: '16/10' }}>
+              <div
+                className="relative img-zoom media-radius mb-10 overflow-hidden"
+                style={{ aspectRatio: '16/10' }}
+              >
                 <img
-                  {...netlifyImgSet(role.heroImage, 1200, 750)}
+                  {...netlifyImgSet(role.featureImage, 1200, 750)}
                   alt={`${role.characterName} in ${role.operaTitle}`}
                   className="w-full h-full object-cover"
+                  data-sb-field-path="featureImage"
                 />
+                {featureImageCredit && (
+                  <div
+                    className="role-feature-image__credit absolute inset-x-0 bottom-0 px-4 pb-3 pointer-events-none"
+                    aria-hidden
+                  >
+                    <p
+                      className="font-body text-xs uppercase tracking-widest text-right"
+                      style={{ color: 'var(--media-caption-text-color)' }}
+                      data-sb-field-path="featureImagePhotography"
+                    >
+                      {featureImageCredit}
+                    </p>
+                  </div>
+                )}
               </div>
 
               {bodyHtml && (

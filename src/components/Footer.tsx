@@ -6,6 +6,7 @@ import {
   MuvacIcon,
   YoutubeIcon,
 } from '@/components/brand-icons'
+import { ExternalLink } from '@/components/ExternalLink'
 import { allContactPages, allHomes } from 'content-collections'
 
 import { parseSiteNavLinks } from '@/lib/nav-links'
@@ -113,11 +114,9 @@ export function Footer() {
               {email}
             </a>
             <div className="flex gap-4">
-              <a
+              <ExternalLink
                 href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
+                aria-label="Sol Risé on Instagram"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
                   borderColor: 'var(--chrome-border)',
@@ -134,12 +133,10 @@ export function Footer() {
                 data-sb-field-path="instagramUrl"
               >
                 <InstagramIcon size={15} />
-              </a>
-              <a
+              </ExternalLink>
+              <ExternalLink
                 href={youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
+                aria-label="Sol Risé on YouTube"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
                   borderColor: 'var(--chrome-border)',
@@ -156,12 +153,10 @@ export function Footer() {
                 data-sb-field-path="youtubeUrl"
               >
                 <YoutubeIcon size={15} />
-              </a>
-              <a
+              </ExternalLink>
+              <ExternalLink
                 href={facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
+                aria-label="Sol Risé on Facebook"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
                   borderColor: 'var(--chrome-border)',
@@ -178,12 +173,10 @@ export function Footer() {
                 data-sb-field-path="facebookUrl"
               >
                 <FacebookIcon size={15} />
-              </a>
-              <a
+              </ExternalLink>
+              <ExternalLink
                 href={muvacUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Muvac"
+                aria-label="Sol Risé on Muvac"
                 className="w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
                 style={{
                   borderColor: 'var(--chrome-border)',
@@ -197,7 +190,7 @@ export function Footer() {
                 data-sb-field-path="muvacUrl"
               >
                 <MuvacIcon size={15} />
-              </a>
+              </ExternalLink>
             </div>
           </div>
         </div>

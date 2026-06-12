@@ -4,7 +4,7 @@ type: image
 imageUrl: /schedule/tradicion-modernidad-lied
 externalUrl: https://teatrocolon.org.ar/produccion/tradicion-y-modernidad-dellied/
 thumbnail: /images/salon-dorado/tradicion-modernidad-lied.webp
-description: Clásica Joven
+description: Salón Dorado - Teatro Colón
 order: 1
 ---
 

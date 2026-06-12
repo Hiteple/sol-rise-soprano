@@ -5,6 +5,7 @@ country: Argentina
 summary: >-
   A historic Buenos Aires theatre and frequent venue for Juventus Lyrica
   productions.
+website: https://teatroavenida.com/
 order: 2
 ---
 

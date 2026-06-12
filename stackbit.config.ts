@@ -528,8 +528,16 @@ export default defineStackbitConfig({
             { name: 'operaTitle', type: 'string', label: 'Opera' },
             { name: 'composer', type: 'string', label: 'Composer' },
             fieldWithDescription(
-              { name: 'heroImage', type: 'image', label: 'Hero image' },
+              { name: 'heroImage', type: 'image', label: 'Card image' },
+              'Portrait for the roles index card (4:5). Use images/general/placeholder-portrait.svg while preparing.',
+            ),
+            fieldWithDescription(
+              { name: 'featureImage', type: 'image', label: 'Feature image' },
               'Landscape image on the role detail page (16:10). Use images/general/placeholder-landscape.svg while preparing.',
+            ),
+            fieldWithDescription(
+              { name: 'featureImagePhotography', type: 'string', label: 'Feature image photography credit' },
+              'Photo credit on the feature image (e.g. "Jane Doe" or "PH: Jane Doe"). Shown at the bottom of the image on the role detail page.',
             ),
             { name: 'summary', type: 'text', label: 'Summary' },
             contentOrderField(),

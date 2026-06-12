@@ -3,7 +3,6 @@ import { allCareerPages } from 'content-collections'
 
 import { ImageBigTextSection } from '@/sections/ImageBigTextSection'
 import { StatsRowSection } from '@/sections/StatsRowSection'
-import { TextButtonsSection } from '@/sections/TextButtonsSection'
 import { TimelineSection } from '@/sections/TimelineSection'
 
 export const Route = createFileRoute('/career')({
@@ -19,7 +18,6 @@ function CareerPage() {
       <ImageBigTextSection page={page} />
       <StatsRowSection page={page} />
       <TimelineSection page={page} />
-      <TextButtonsSection page={page} />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { Play } from 'lucide-react'
 
+import { ExternalLink } from '@/components/ExternalLink'
 import { SlidingTabGroup } from '@/components/SlidingTabGroup'
 import { isInternalHref } from '@/lib/internal-href'
 import { TabGridEmptyState } from '@/components/TabGridEmptyState'
@@ -58,14 +59,14 @@ function MediaGridCardContent({ item }: { item: MediaItem }) {
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 pointer-events-none">
         <p
-          className="font-display text-sm md:text-base italic leading-tight line-clamp-2 md:line-clamp-none"
+          className="font-display text-base md:text-2xl italic leading-tight line-clamp-2 md:line-clamp-none"
           style={{ color: 'var(--media-caption-text-color)' }}
           data-sb-field-path="title"
         >
           {item.title}
         </p>
         <p
-          className="font-body text-xs md:text-[11px] leading-snug mt-0.5 md:mt-1 line-clamp-1"
+          className="font-display text-xs md:text-lg italic leading-snug mt-0.5 md:mt-1 line-clamp-1 md:line-clamp-2"
           style={{ color: 'var(--media-caption-text-muted-color)' }}
           data-sb-field-path="description"
         >
@@ -172,18 +173,16 @@ export function MediaGridSection({
                 }
 
                 return (
-                  <a
+                  <ExternalLink
                     key={item._meta.path}
                     href={imageHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className={cardClassName}
                     data-sb-object-id={objectId}
                     data-sb-field-path="imageUrl"
-                    aria-label={`Open link: ${item.title}`}
+                    aria-label={`Open external link: ${item.title}`}
                   >
                     <MediaGridCardContent item={item} />
-                  </a>
+                  </ExternalLink>
                 )
               }
 

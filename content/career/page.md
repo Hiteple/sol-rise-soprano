@@ -30,67 +30,65 @@ timeline:
       </ul></div>
 
   - year: '2021'
-    title: ' Orquesta Jóvenes Talentos'
+    title: Orquesta Jóvenes Talentos
     description: |+
       <div style="text-align: left"><ul>
-       <li>Performed the role of 'Mrs. Gobineau' in <em>The Medium</em></li>
+       <li>Performed the role of Mrs. Gobineau in <em>The Medium</em></li>
       </ul></div>
 
   - year: '2022'
-    title: ' Juventus Lyrica, Celebrarte Musica & Compañia Lirica de Verdi'
+    title: Celebrarte Música & Juventus Lyrica
     description: |+
       <div style="text-align: left"><ul>
-       <li>Scholarship soloist at Opera Festival, and chorus member in <em>Carmen</em> with the same company at Teatro Avenida</li>
-       <li>Performed the role 'Contessa di Ceprano' with Celebrarte Música (May)</li>
-       <li>Performed the role of 'Annina' in <em>La Traviata</em> with Compañía Lírica de Verdi (March)</li>
+       <li>Performed the role of Annina in <em>La Traviata</em> in Buenos Aires (March)</li>
+       <li>Performed the role of Contessa di Ceprano with Celebrarte Música (May)</li>
+       <li>Scholarship soloist at the Opera Festival and chorus member in <em>Carmen</em> with Juventus Lyrica at Teatro Avenida</li>
       </ul></div>
 
   - year: '2023'
     title: >-
-      Teatro Argentino de la Plata,  Festival Internacional de la Cultura
-      (Potosí, Bolivia), Juventus Lyrica, Teatro Colón
+      Juventus Lyrica, Teatro Colón, Festival Internacional de la Cultura
+      (Potosí, Bolivia) & Teatro Argentino de La Plata
     description: |+
       <div style="text-align: left"><ul>
-       <li>Additional chorus member at Teatro Argentino de La Plata for <em>Verdi’s Requiem</em> (November)</li>
-       <li>Soloist in <em>Mozart's Requiem</em> at the International Festival of Culture in Potosí (Bolivia), with the San Rafael Orchestra (October)</li>
-       <li>Performed the role of 'Zerlina' in <em>Don Giovanni</em> at Teatro Avenida with Juventus Lyrica (October)</li>
+       <li>Chorus member in <em>Cavalleria Rusticana</em> and the Festival della Canzonetta Italiana, with a featured solo appearance performing Italian canzonette with Juventus Lyrica (June)</li>
        <li>Chorus reinforcement in <em>Joan of Arc at the Stake</em> at Teatro Colón, conducted by Maestro Charles Dutoit (August)</li>
-       <li>Chorus member in <em>Cavalleria Rusticana</em> and the Festival della Canzonetta Italiana, where she also appeared as a featured soloist performing Italian canzonette with Juventus Lyrica (June)</li>
+       <li>Soloist in <em>Mozart's Requiem</em> at the International Festival of Culture in Potosí, Bolivia, with the San Rafael Orchestra (October)</li>
+       <li>Performed the role of Zerlina in <em>Don Giovanni</em> at Teatro Avenida with Juventus Lyrica (October)</li>
+       <li>Additional chorus member at Teatro Argentino de La Plata for <em>Verdi's Requiem</em> (November)</li>
       </ul></div>
 
   - year: '2024'
-    title: ' Teatro Colón, Juventus Lyrica, Celebrarte Musica,  Jovenes Talentos'
-    description: >+
+    title: Celebrarte Música, Jóvenes Talentos, Juventus Lyrica & Teatro Colón
+    description: |+
       <div style="text-align: left"><ul>
-       <li>Chorus reinforcement in <em>Brahms’s Gesang der Parzen (Song of the Fates)</em>, Op. 89, and Nänie, Op. 82, under the direction of Elías Grandy at Teatro Colón (November)</li>
-       <li>Soloist at <em>Juventus Lyrica’s 25th Anniversary Gala</em>, performing ensembles and duets at Teatro Avenida (October)</li>
-       <li>Performed the role of 'First Lady' in Mozart’s <em>The Magic Flute</em> (Spanish adaptation for children) (July),
-      'Sister Genovieffa' in <em>Suor Angelica</em> (May), and chorus
-      reinforcement in <em>Carmen</em> (May) with the Celebrarte Música
-      company</li>
-       <li>Soloist in <em>Mozart’s Requiem</em> and 'First Lady' in Mozart’s <em>The Magic Flute</em> (Spanish adaptation for children) with the Jóvenes Talentos Orchestra (July)</li>
+       <li>Performed the role of Sister Genovieffa in <em>Suor Angelica</em> with Celebrarte Música (May)</li>
+       <li>Chorus reinforcement in <em>Carmen</em> with Celebrarte Música (May)</li>
+       <li>Performed the role of First Lady in Mozart's <em>The Magic Flute</em> (Spanish adaptation for children) with Celebrarte Música (July)</li>
+       <li>Soloist in <em>Mozart's Requiem</em> and First Lady in <em>The Magic Flute</em> (Spanish adaptation for children) with the Jóvenes Talentos Orchestra (July)</li>
+       <li>Soloist at Juventus Lyrica's 25th Anniversary Gala, performing ensembles and duets at Teatro Avenida (October)</li>
+       <li>Chorus reinforcement in <em>Brahms's Gesang der Parzen (Song of the Fates)</em>, Op. 89, and <em>Nänie</em>, Op. 82, under Elías Grandy at Teatro Colón (November)</li>
       </ul></div>
 
   - year: '2025'
     title: >-
-      Festival Internacional de la Cultura (Potosí y Sucre, Bolivia), British
-      Arts Center, Juventus Lyrica, Valkyria Lírica 
+      Juventus Lyrica, Valkyria Lírica, British Arts Centre & Festival
+      Internacional de la Cultura (Potosí y Sucre, Bolivia)
     description: |+
       <div style="text-align: left"><ul>
-       <li>Soloist in Carl Orff’s <em>Carmina Burana</em> in Potosí and Sucre (Bolivia), as part of the Festival Internacional de la Cultura at Potosí (November and December)</li>
-       <li>Performed the role of 'Pamina' in <em>The Magic Flute</em> (a reduced German-language version for children) at the British Arts Centre with Nina Calzulo (October)</li>
-       <li>Chorus member in </em>Macbeth</em> with Juventus Lyrica (September)</li>
+       <li>Chorus member and apparitions in <em>Macbeth</em> with Juventus Lyrica (September)</li>
        <li>Chorus member in <em>Il Trovatore</em> with Valkyria Lírica (September)</li>
+       <li>Performed the role of Pamina in <em>The Magic Flute</em> (reduced German-language version for children) at the British Arts Centre with Nina Caluzo (October)</li>
+       <li>Soloist in Carl Orff's <em>Carmina Burana</em> in Potosí and Sucre, Bolivia, as part of the Festival Internacional de la Cultura (November and December)</li>
       </ul></div>
 
   - year: 'Present'
-    title: >-
-      British Art Center, Teatro Colón, Juventus Lyrica
+    title: Juventus Lyrica, Teatro Colón & British Arts Centre
     description: |+
       <div style="text-align: left"><ul>
-      <li>'Aunt of Madama Butterfly' and chorus member in <em>Madama Butterfly</em> with Juventus Lyrica</li>
-      <li>Cover for the soprano soloist in <em>Mozart’s Requiem</em> with the Academic Orchestra of the Higher Institute of Art of the Teatro Colón</li>
-      <li>'The Rose' in the opera <em>The Little Prince</em> in the British Art Center</li>
+       <li>Performed the role of The Rose in <em>The Little Prince</em> at the British Arts Centre</li>
+       <li>Cover for the soprano soloist in <em>Mozart's Requiem</em> with the Academic Orchestra of the Higher Institute of Art of the Teatro Colón</li>
+       <li>Aunt and chorus member in <em>Madama Butterfly</em> with Juventus Lyrica</li>
       </ul></div>
 
 ctaTitleLine1: Inquiries & Contact

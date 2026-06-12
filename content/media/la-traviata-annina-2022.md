@@ -3,7 +3,7 @@ title: La Traviata
 type: image
 imageUrl: /schedule/la-traviata-annina-2022
 thumbnail: /images/general/placeholder-portrait.svg
-description: Annina — Compañía Lírica de Verdi
+description: Annina — Buenos Aires
 order: 21
 ---
 

@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 
+import { ExternalLink } from '@/components/ExternalLink'
 import type { ImageCredit as ImageCreditData } from '../../schemas/image-credit'
 import { cn } from '@/lib/utils'
 
@@ -26,25 +27,23 @@ export function ImageCredit({
       data-sb-field-path={fieldPath}
     >
       Photo from{' '}
-      <a
+      <ExternalLink
         href={credit.authorUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+        aria-label={`Photo author: ${credit.author}`}
         className="underline underline-offset-2"
         data-sb-field-path={fieldPath ? `${fieldPath}.author` : undefined}
       >
         {credit.author}
-      </a>{' '}
+      </ExternalLink>{' '}
       on{' '}
-      <a
+      <ExternalLink
         href={credit.sourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+        aria-label={`Photo source: ${credit.source}`}
         className="underline underline-offset-2"
         data-sb-field-path={fieldPath ? `${fieldPath}.sourceUrl` : undefined}
       >
         {credit.source}
-      </a>
+      </ExternalLink>
     </p>
   )
 }
