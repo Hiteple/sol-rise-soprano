@@ -4,8 +4,9 @@ heroEyebrow: Photography
 heroTitle: Gallery
 filterCategories:
   - All
-  - Performance
-  - Behind the Scenes
+  - Stage
+  - Backstage
+  - Photobook
 pageHeroColorScheme: bright
 tabItemsColorScheme: bright
 ---

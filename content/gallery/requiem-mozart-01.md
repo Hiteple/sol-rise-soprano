@@ -1,10 +1,10 @@
 ---
 type: "GalleryItem"
-title: "Mozart's Requiem"
+title: "Mozart's Requiem — 2026"
 image: images/requiem-mozart/IMG_6073-processed.webp
-alt: "Cast Portrait 1 - Mozart's Requiem"
-category: "Behind the Scenes"
+alt: "Cast portrait — Mozart's Requiem (cover for solo soprano)"
+category: Backstage
 order: 17
 ---
 
-Cast Portrait 1 - Mozart's Requiem
+Cast portrait from Mozart's Requiem — cover for the solo soprano.

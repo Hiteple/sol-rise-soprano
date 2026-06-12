@@ -30,7 +30,13 @@ export function galleryCategoryEmptyCopy(category: string): {
     return {
       title: 'Gallery coming soon',
       description:
-        'Photography from performances and behind the scenes will be added here shortly!',
+        'Photography from stage and backstage will be added here shortly!',
+    }
+  }
+  if (category === 'Photobook') {
+    return {
+      title: 'Photobook coming soon',
+      description: 'Portrait and editorial photography will be added here soon.',
     }
   }
   return {

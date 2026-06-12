@@ -2,7 +2,7 @@
 title: Cavalleria Rusticana
 image: images/cavaleria-rusticana/cavaleria-rusticana-01.webp
 alt: Sol Risé in Cavalleria Rusticana with Juventus Lyrica
-category: Performance
+category: Stage
 photographer: Liliana Morsia
 gallerySlug: cavalleria-rusticana-festival-2023
 order: 42

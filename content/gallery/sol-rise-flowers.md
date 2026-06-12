@@ -1,9 +1,9 @@
 ---
 type: "GalleryItem"
-title: "Photo Book"
+title: "Photo Book — 2026"
 image: images/general/sol-rise-flowers.webp
 alt: "Sol Risé standing by white flowers"
-category: "Behind the Scenes"
+category: Photobook
 photographer: "Diego Israelit"
 order: 1
 ---

@@ -6,6 +6,7 @@ import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
+import { packGalleryGrid } from '@/lib/gallery-grid-pack'
 import { galleryCategoryEmptyCopy } from '@/lib/tab-grid-empty-copy'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -18,6 +19,9 @@ export type GalleryGridItem = {
   category?: string
   photographer?: string
   featuredImg?: boolean
+  roleSlug?: string
+  gallerySlug?: string
+  order?: number
 }
 
 export type TabItemsSectionProps = {
@@ -34,6 +38,8 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
     activeCategory === 'All'
       ? items
       : items.filter((i) => i.category === activeCategory)
+
+  const gridItems = packGalleryGrid(filtered)
 
   const scheme = resolveColorScheme(tabItemsColorScheme)
   const fg = schemeForeground(scheme)
@@ -74,15 +80,15 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
           ref={ref}
           className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
         >
-          {filtered.length === 0 ? (
+          {gridItems.length === 0 ? (
             <TabGridEmptyState
               {...galleryCategoryEmptyCopy(activeCategory)}
               headingColor={fg.heading}
               bodyColor={fg.body}
             />
           ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-            {filtered.map((item, index) => {
+          <div className="grid grid-cols-2 lg:grid-cols-4 lg:grid-flow-dense gap-4 items-stretch">
+            {gridItems.map((item, index) => {
               const isFeatured = Boolean(item.featuredImg)
               const photographerCredit = photographerCreditLabel(item.photographer)
               return (
@@ -97,7 +103,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
                   aria-label={`View larger image: ${item.title}`}
                   onClick={() =>
                     openGallery(
-                      filtered.map((entry) => ({
+                      gridItems.map((entry) => ({
                         image: entry.image,
                         alt: entry.alt,
                         title: entry.title,

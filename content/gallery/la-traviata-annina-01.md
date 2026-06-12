@@ -2,7 +2,7 @@
 title: La Traviata — Annina
 image: images/la-traviata/la-traviata-annina-01.JPG
 alt: Sol Risé as Annina in La Traviata, Buenos Aires
-category: Performance
+category: Stage
 roleSlug: annina-la-traviata
 order: 46
 ---

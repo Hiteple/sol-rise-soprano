@@ -2,7 +2,7 @@
 title: Macbeth — performance
 image: images/macbeth/macbeth-01.JPEG
 alt: Sol Risé in Macbeth with Juventus Lyrica, Buenos Aires
-category: Performance
+category: Stage
 roleSlug: apparitions-macbeth
 order: 24
 ---
