@@ -2,11 +2,12 @@
 type: "GalleryItem"
 title: "Madama Butterfly"
 image: images/madama-butterfly/IMG_6173.webp
-alt: "Chorus of Madama Butterfly"
+alt: "Chorus Landscape 1 - Madama Butterfly"
 category: "Behind the Scenes"
+photographer: "Liliana Morsia"
 roleSlug: madama-butterfly-aunt
-order: 1
+order: 2
 featuredImg: true
 ---
 
-Chorus of Madama Butterfly
+Chorus Landscape 1 - Madama Butterfly

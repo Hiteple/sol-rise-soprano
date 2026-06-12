@@ -1,12 +1,14 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 import { allGalleries, allOrganizations, allRoles } from 'content-collections'
 
+import { NotFoundSection } from '@/components/NotFoundSection'
+import { filterPublishedContent, isPublishedContent } from '@/lib/content-order'
 import { RoleDetailSection } from '@/sections/RoleDetailSection'
 
 export const Route = createFileRoute('/roles/$slug')({
   loader: ({ params }) => {
     const role = allRoles.find((entry) => entry._meta.path === params.slug)
-    if (!role) throw notFound()
+    if (!role || !isPublishedContent(role.order)) throw notFound()
     return { role }
   },
   component: RoleDetailPage,
@@ -18,21 +20,23 @@ function RoleDetailPage() {
 
   return (
     <div style={{ background: 'var(--page-background-color)' }} data-sb-object-id={`content/roles/${role._meta.path}.md`}>
-      <RoleDetailSection role={role} galleryItems={allGalleries} organizations={allOrganizations} />
+      <RoleDetailSection
+        role={role}
+        galleryItems={filterPublishedContent(allGalleries)}
+        organizations={allOrganizations}
+      />
     </div>
   )
 }
 
 function RoleNotFound() {
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 text-center">
-      <h1 className="font-display text-4xl italic mb-4">Role not found</h1>
-      <p className="font-body text-sm mb-8" style={{ color: 'var(--muted-text-color)' }}>
-        This role page does not exist or has been moved.
-      </p>
-      <Link to="/roles" className="gold-link font-body text-xs uppercase tracking-widest">
-        Back to roles
-      </Link>
-    </div>
+    <NotFoundSection
+      eyebrow="Career · Roles"
+      title="Role not found"
+      description="This role is not in the repertoire listing yet — it may be unpublished or the link may be outdated."
+      backHref="/roles"
+      backLabel="Back to roles"
+    />
   )
 }

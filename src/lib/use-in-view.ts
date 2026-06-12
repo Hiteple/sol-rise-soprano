@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 
 export type UseInViewOptions = {
   /** Fraction of the element visible before it triggers (0–1). */
@@ -9,6 +9,28 @@ export type UseInViewOptions = {
   once?: boolean
 }
 
+function parseMarginBottomPx(rootMargin: string, viewportHeight: number): number {
+  const parts = rootMargin.trim().split(/\s+/)
+  const bottom = parts.length === 1 ? parts[0] : (parts[2] ?? parts[0])
+  if (!bottom) return 0
+  if (bottom.endsWith('%')) return (parseFloat(bottom) / 100) * viewportHeight
+  if (bottom.endsWith('px')) return parseFloat(bottom)
+  return 0
+}
+
+/** Mirrors IntersectionObserver math for a one-off sync check. */
+function isInViewport(el: HTMLElement, threshold: number, rootMargin: string): boolean {
+  const rect = el.getBoundingClientRect()
+  if (rect.height === 0 && rect.width === 0) return false
+
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+  const rootBottom = viewportHeight + parseMarginBottomPx(rootMargin, viewportHeight)
+  const overlap = Math.min(rect.bottom, rootBottom) - Math.max(rect.top, 0)
+  if (overlap <= 0) return false
+
+  return overlap / rect.height >= threshold
+}
+
 /** Tracks whether an element has entered the viewport, for scroll-reveal effects. */
 export function useInView<T extends HTMLElement = HTMLElement>(
   options: UseInViewOptions = {},
@@ -17,11 +39,28 @@ export function useInView<T extends HTMLElement = HTMLElement>(
   const ref = useRef<T | null>(null)
   const [inView, setInView] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current
     if (!el) return
-    if (typeof IntersectionObserver === 'undefined') {
+
+    let visible = false
+
+    let removeSyncListeners: (() => void) | null = null
+
+    const markVisible = () => {
+      if (visible) return
+      visible = true
       setInView(true)
+      removeSyncListeners?.()
+      removeSyncListeners = null
+    }
+
+    const sync = () => {
+      if (isInViewport(el, threshold, rootMargin)) markVisible()
+    }
+
+    if (typeof IntersectionObserver === 'undefined') {
+      markVisible()
       return
     }
 
@@ -29,9 +68,10 @@ export function useInView<T extends HTMLElement = HTMLElement>(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setInView(true)
+            markVisible()
             if (once) observer.unobserve(entry.target)
           } else if (!once) {
+            visible = false
             setInView(false)
           }
         }
@@ -40,7 +80,31 @@ export function useInView<T extends HTMLElement = HTMLElement>(
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+    sync()
+    requestAnimationFrame(() => {
+      sync()
+      requestAnimationFrame(sync)
+    })
+
+    const onSync = () => sync()
+    window.addEventListener('resize', onSync, { passive: true })
+    window.addEventListener('scroll', onSync, { passive: true })
+    removeSyncListeners = () => {
+      window.removeEventListener('resize', onSync)
+      window.removeEventListener('scroll', onSync)
+    }
+
+    const resizeObserver =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => sync())
+        : undefined
+    resizeObserver?.observe(el)
+
+    return () => {
+      observer.disconnect()
+      resizeObserver?.disconnect()
+      removeSyncListeners?.()
+    }
   }, [threshold, rootMargin, once])
 
   return { ref, inView }

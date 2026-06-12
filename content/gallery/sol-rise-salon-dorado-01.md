@@ -4,7 +4,7 @@ title: "In the Salón Dorado - 2016"
 image: images/salon-dorado/IMG_5954.webp
 alt: "Sol Risé in the Salon Dorado of the Teatro Colón - 2016"
 category: "Behind the Scenes"
-order: 3
+order: 10
 ---
 
 Sol Risé in the Salon Dorado of the Teatro Colón - 2016

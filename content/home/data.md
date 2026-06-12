@@ -36,7 +36,7 @@ aboutImageAlt: image placeholder pending
 aboutLinkText: View Career Highlights
 aboutHref: /career
 organizationsStripEyebrow: Collaborations
-organizationsStripTitle: On These Stages
+organizationsStripTitle: Among Distinguished Figures
 organizationsStripDescription: Opera houses and companies where Sol Risé has performed and continues to develop her repertoire.
 organizationsStripLinkText: View all opera houses & companies
 organizationsStripItems:
@@ -47,9 +47,7 @@ organizationsStripItems:
 organizationsStripColorScheme: bright
 mediaEyebrow: On Stage & On Screen
 mediaTitle: Last Events
-mediaItems:
-  - content/media/tradicion-modernidad-lied.md
-  - content/media/batti-batti-o-bel-masetto.md
+featuredEventsLayout: scheduleCards
 splitGridItems:
   - title: Madama Butterfly
     href: /schedule/madama-butterfly-2026

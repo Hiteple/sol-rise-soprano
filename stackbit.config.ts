@@ -1,4 +1,4 @@
-import { defineStackbitConfig } from '@stackbit/types'
+import { defineStackbitConfig, type Field } from '@stackbit/types'
 import { GitContentSource } from '@stackbit/cms-git'
 
 function colorSchemeEnumField(name: string, group?: string) {
@@ -43,6 +43,24 @@ function heroColorSchemeField() {
   }
 }
 
+/** Shared with `src/lib/content-order.ts`: `order: 0` hides the item until you set 1, 2, 3… */
+function contentOrderField() {
+  return {
+    name: 'order',
+    type: 'number' as const,
+    label: 'Display order',
+    description:
+      'Set to 0 to keep this item hidden (draft). Use 1, 2, 3… to publish and control sort order on the site.',
+  }
+}
+
+function fieldWithDescription<const T extends Record<string, unknown>>(
+  field: T,
+  description: string,
+): Field {
+  return { ...field, description } as unknown as Field
+}
+
 export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
   ssgName: 'custom',
@@ -68,7 +86,7 @@ export default defineStackbitConfig({
             { name: 'imageTextAbout', label: 'Image + Text' },
             { name: 'organizationsStrip', label: 'Organizations Strip' },
             { name: 'mediaGrid', label: 'Media Grid' },
-            { name: 'splitGrid', label: 'Split Grid' },
+            { name: 'featuredEvents', label: 'Featured Events' },
             { name: 'quoteBanner', label: 'Quote Banner' },
           ],
           fields: [
@@ -152,15 +170,28 @@ export default defineStackbitConfig({
                 models: ['video', 'image'],
               },
             },
-            colorSchemeEnumField('splitGridColorScheme', 'splitGrid'),
-            slideInField('splitGridSlideIn', 'splitGrid'),
-            { name: 'splitGridTitle', type: 'string', label: 'Title', group: 'splitGrid' },
-            { name: 'splitGridDescription', type: 'text', label: 'Description', group: 'splitGrid' },
+            fieldWithDescription(
+              {
+                name: 'featuredEventsLayout',
+                type: 'enum',
+                label: 'Layout',
+                group: 'featuredEvents',
+                options: [
+                  { label: 'Split grid (large panels)', value: 'splitGrid' },
+                  { label: 'Schedule cards', value: 'scheduleCards' },
+                ],
+              },
+              'splitGrid = 3 large panels (best for 3 items). scheduleCards = cards like /schedule (better for 1–2 items).',
+            ),
+            colorSchemeEnumField('splitGridColorScheme', 'featuredEvents'),
+            slideInField('splitGridSlideIn', 'featuredEvents'),
+            { name: 'splitGridTitle', type: 'string', label: 'Title', group: 'featuredEvents' },
+            { name: 'splitGridDescription', type: 'text', label: 'Description', group: 'featuredEvents' },
             {
               name: 'splitGridItems',
               type: 'list',
               label: 'Items',
-              group: 'splitGrid',
+              group: 'featuredEvents',
               items: {
                 type: 'object',
                 fields: [
@@ -420,24 +451,34 @@ export default defineStackbitConfig({
             { name: 'title', type: 'string', label: 'Title' },
             { name: 'image', type: 'string', label: 'Image URL' },
             { name: 'alt', type: 'string', label: 'Alt Text (accessibility)' },
-            { name: 'category', type: 'string', label: 'Category (Performance / Behind the Scenes)' },
-            { name: 'order', type: 'number', label: 'Display Order' },
+            fieldWithDescription(
+              { name: 'category', type: 'string', label: 'Category' },
+              'Filter tabs on /gallery only (e.g. Performance, Behind the Scenes). Must match gallery landing categories.',
+            ),
             {
-              name: 'featuredImg',
-              type: 'boolean',
-              label: 'Featured image (spans 2 columns on desktop)',
-              default: false,
-            },
-            {
-              name: 'roleSlug',
+              name: 'photographer',
               type: 'string',
-              label: 'Role slug (links photo to /roles/…)',
+              label: 'Photographer credit (optional — leave empty for own photos)',
+              description: 'Name only — the site displays PH: {name} on hover and in the lightbox.',
             },
-            {
-              name: 'gallerySlug',
-              type: 'string',
-              label: 'Gallery slug (links photo to past /schedule/… without a role)',
-            },
+            contentOrderField(),
+            fieldWithDescription(
+              {
+                name: 'featuredImg',
+                type: 'boolean',
+                label: 'Featured image (spans 2 columns on desktop)',
+                default: false,
+              },
+              'Large tile on the gallery grid (desktop).',
+            ),
+            fieldWithDescription(
+              { name: 'roleSlug', type: 'string', label: 'Role slug' },
+              'Filename without .md from content/roles/ — shows this photo on the role detail page. Omit for gallery-only images.',
+            ),
+            fieldWithDescription(
+              { name: 'gallerySlug', type: 'string', label: 'Gallery slug' },
+              'Match gallerySlug on a past schedule event (concerts without an operatic role). Same string on both files.',
+            ),
           ],
         },
         {
@@ -448,14 +489,17 @@ export default defineStackbitConfig({
             { name: 'title', type: 'string', label: 'Title' },
             { name: 'type', type: 'enum', options: ['video', 'image'], label: 'Type' },
             { name: 'videoUrl', type: 'string', label: 'Video - YouTube URL' },
-            { name: 'imageUrl', type: 'string', label: 'Image - Link URL (opens in new tab)' },
+            fieldWithDescription(
+              { name: 'imageUrl', type: 'string', label: 'Image link URL' },
+              'Internal path (e.g. /schedule/my-event) opens in-site. Full https:// URLs open in a new tab.',
+            ),
             {
               name: 'thumbnail',
               type: 'string',
               label: 'Thumbnail (optional for YouTube — auto poster from video URL)',
             },
             { name: 'description', type: 'string', label: 'Short Description' },
-            { name: 'order', type: 'number', label: 'Display Order' },
+            contentOrderField(),
           ],
         },
         {
@@ -466,10 +510,13 @@ export default defineStackbitConfig({
             { name: 'title', type: 'string', label: 'Title' },
             { name: 'type', type: 'enum', options: ['video', 'image'], label: 'Type' },
             { name: 'videoUrl', type: 'string', label: 'Video - YouTube URL' },
-            { name: 'imageUrl', type: 'string', label: 'Image - Link URL (opens in new tab)' },
+            fieldWithDescription(
+              { name: 'imageUrl', type: 'string', label: 'Image link URL' },
+              'Internal path (e.g. /schedule/my-event) opens in-site. Full https:// URLs open in a new tab.',
+            ),
             { name: 'thumbnail', type: 'string', label: 'Thumbnail Image URL' },
             { name: 'description', type: 'string', label: 'Short Description' },
-            { name: 'order', type: 'number', label: 'Display Order' },
+            contentOrderField(),
           ],
         },
         {
@@ -480,25 +527,34 @@ export default defineStackbitConfig({
             { name: 'characterName', type: 'string', label: 'Character' },
             { name: 'operaTitle', type: 'string', label: 'Opera' },
             { name: 'composer', type: 'string', label: 'Composer' },
-            { name: 'heroImage', type: 'image', label: 'Hero image' },
+            fieldWithDescription(
+              { name: 'heroImage', type: 'image', label: 'Hero image' },
+              'Landscape image on the role detail page (16:10). Use images/general/placeholder-landscape.svg while preparing.',
+            ),
             { name: 'summary', type: 'text', label: 'Summary' },
-            { name: 'order', type: 'number', label: 'Display order' },
+            contentOrderField(),
             { name: 'tags', type: 'list', items: { type: 'string' }, label: 'Tags' },
-            {
-              name: 'appearances',
-              type: 'list',
-              label: 'Appearances',
-              items: {
-                type: 'object',
-                fields: [
-                  { name: 'year', type: 'string', label: 'Year' },
-                  { name: 'venue', type: 'string', label: 'Venue' },
-                  { name: 'organizationSlug', type: 'string', label: 'Organization slug' },
-                  { name: 'city', type: 'string', label: 'City' },
-                  { name: 'notes', type: 'string', label: 'Notes' },
-                ],
+            fieldWithDescription(
+              {
+                name: 'appearances',
+                type: 'list',
+                label: 'Appearances',
+                items: {
+                  type: 'object',
+                  fields: [
+                    { name: 'year', type: 'string', label: 'Year' },
+                    { name: 'venue', type: 'string', label: 'Venue' },
+                    fieldWithDescription(
+                      { name: 'organizationSlug', type: 'string', label: 'Organization slug' },
+                      'Slug from content/organizations/ (filename without .md).',
+                    ),
+                    { name: 'city', type: 'string', label: 'City' },
+                    { name: 'notes', type: 'string', label: 'Notes' },
+                  ],
+                },
               },
-            },
+              'Production history shown on the role detail page.',
+            ),
           ],
         },
         {
@@ -512,7 +568,7 @@ export default defineStackbitConfig({
             { name: 'image', type: 'image', label: 'Image' },
             { name: 'summary', type: 'text', label: 'Summary' },
             { name: 'website', type: 'string', label: 'Website URL' },
-            { name: 'order', type: 'number', label: 'Display order' },
+            contentOrderField(),
           ],
         },
         {
@@ -521,22 +577,46 @@ export default defineStackbitConfig({
           folder: 'content/schedule',
           fields: [
             { name: 'title', type: 'string', label: 'Title' },
-            { name: 'subtitle', type: 'string', label: 'Subtitle' },
-            { name: 'plot', type: 'text', label: 'Plot (spoiler-free synopsis)' },
-            { name: 'composer', type: 'string', label: 'Composer' },
+            fieldWithDescription(
+              { name: 'subtitle', type: 'string', label: 'Subtitle' },
+              'Second line on cards and detail (role, venue, or one-liner).',
+            ),
+            fieldWithDescription(
+              { name: 'plot', type: 'text', label: 'Plot / description' },
+              'Opera: short synopsis. Concert: event description. Optional — omit if not needed.',
+            ),
+            fieldWithDescription(
+              { name: 'composer', type: 'string', label: 'Composer' },
+              'Shows as “Music by” on detail. Omit for mixed programs, or use “Various composers”.',
+            ),
             { name: 'venue', type: 'string', label: 'Venue' },
             { name: 'city', type: 'string', label: 'City' },
-            { name: 'image', type: 'image', label: 'Detail image (optional placeholder if empty)' },
+            fieldWithDescription(
+              { name: 'image', type: 'image', label: 'Card & detail image' },
+              'Used on schedule cards and detail hero. 4:5 works well for cards.',
+            ),
             { name: 'imageAlt', type: 'string', label: 'Detail image alt' },
-            { name: 'organizationSlug', type: 'string', label: 'Organization slug' },
-            { name: 'roleSlug', type: 'string', label: 'Role slug (operatic roles)' },
-            {
-              name: 'gallerySlug',
-              type: 'string',
-              label: 'Gallery slug (concerts / no role — match gallery items)',
-            },
+            fieldWithDescription(
+              { name: 'organizationSlug', type: 'string', label: 'Organization slug' },
+              'Slug from content/organizations/ — shows “Presented by” on detail.',
+            ),
+            fieldWithDescription(
+              { name: 'roleSlug', type: 'string', label: 'Role slug' },
+              'Operatic roles only. Links to /roles/… and pulls role-tagged gallery photos (past events).',
+            ),
+            fieldWithDescription(
+              { name: 'gallerySlug', type: 'string', label: 'Gallery slug' },
+              'Concerts / no operatic role. Same string as gallerySlug on photos. Past events only.',
+            ),
             { name: 'ticketHref', type: 'string', label: 'Tickets URL (or /contact)' },
-            { name: 'badges', type: 'list', items: { type: 'string' }, label: 'Performance dates' },
+            fieldWithDescription(
+              { name: 'externalUrl', type: 'string', label: 'External URL (optional)' },
+              'Program page, press, or venue link — opens in a new tab on the event detail page.',
+            ),
+            fieldWithDescription(
+              { name: 'badges', type: 'list', items: { type: 'string' }, label: 'Performance dates' },
+              'Date labels on upcoming cards (e.g. June 12th). Past events use year if badges empty.',
+            ),
             {
               name: 'cast',
               type: 'list',
@@ -561,17 +641,23 @@ export default defineStackbitConfig({
                 { name: 'lighting', type: 'string', label: 'Lighting' },
               ],
             },
-            {
-              name: 'status',
-              type: 'enum',
-              label: 'Status',
-              options: [
-                { label: 'Upcoming', value: 'upcoming' },
-                { label: 'Past', value: 'past' },
-              ],
-            },
-            { name: 'year', type: 'string', label: 'Year (past events)' },
-            { name: 'order', type: 'number', label: 'Display order' },
+            fieldWithDescription(
+              {
+                name: 'status',
+                type: 'enum',
+                label: 'Status',
+                options: [
+                  { label: 'Upcoming', value: 'upcoming' },
+                  { label: 'Past', value: 'past' },
+                ],
+              },
+              'upcoming = Schedule “Upcoming” section. past = “Last Appearances” + photography on detail.',
+            ),
+            fieldWithDescription(
+              { name: 'year', type: 'string', label: 'Year (past events)' },
+              'Shown on past cards when badges are empty (e.g. 2023).',
+            ),
+            contentOrderField(),
           ],
         },
       ],

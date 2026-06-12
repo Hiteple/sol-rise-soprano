@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 import {
   allGalleries,
   allOrganizations,
@@ -7,13 +7,19 @@ import {
   allSchedulePages,
 } from 'content-collections'
 
+import { NotFoundSection } from '@/components/NotFoundSection'
+import {
+  filterPublishedContent,
+  isPublishedContent,
+  publishedContentSorted,
+} from '@/lib/content-order'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { ScheduleEventDetailSection } from '@/sections/ScheduleEventDetailSection'
 
 export const Route = createFileRoute('/schedule/$slug')({
   loader: ({ params }) => {
     const event = allScheduleEvents.find((entry) => entry._meta.path === params.slug)
-    if (!event) throw notFound()
+    if (!event || !isPublishedContent(event.order)) throw notFound()
     return { event }
   },
   component: ScheduleEventDetailPage,
@@ -42,9 +48,9 @@ function ScheduleEventDetailPage() {
       />
       <ScheduleEventDetailSection
         event={event}
-        organizations={allOrganizations}
-        roles={allRoles}
-        galleryItems={allGalleries}
+        organizations={publishedContentSorted(allOrganizations)}
+        roles={publishedContentSorted(allRoles)}
+        galleryItems={filterPublishedContent(allGalleries)}
       />
     </div>
   )
@@ -52,14 +58,12 @@ function ScheduleEventDetailPage() {
 
 function ScheduleEventNotFound() {
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 text-center">
-      <h1 className="font-display text-4xl italic mb-4">Event not found</h1>
-      <p className="font-body text-sm mb-8" style={{ color: 'var(--muted-text-color)' }}>
-        This event page does not exist or has been moved.
-      </p>
-      <Link to="/schedule" className="gold-link font-body text-xs uppercase tracking-widest">
-        Back to schedule
-      </Link>
-    </div>
+    <NotFoundSection
+      eyebrow="Schedule"
+      title="Event not found"
+      description="This performance is not on the calendar — it may be unpublished, past, or the link may have changed."
+      backHref="/schedule"
+      backLabel="Back to schedule"
+    />
   )
 }

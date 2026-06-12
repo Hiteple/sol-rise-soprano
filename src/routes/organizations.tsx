@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { allOrganizations, allOrganizationsPages } from 'content-collections'
 
 import { OrganizationsIndexSection } from '@/sections/OrganizationsIndexSection'
+import { publishedContentSorted } from '@/lib/content-order'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 
 export const Route = createFileRoute('/organizations')({
@@ -10,7 +11,7 @@ export const Route = createFileRoute('/organizations')({
 
 function OrganizationsPage() {
   const landing = allOrganizationsPages[0]
-  const organizations = [...allOrganizations].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  const organizations = publishedContentSorted(allOrganizations)
 
   return (
     <div

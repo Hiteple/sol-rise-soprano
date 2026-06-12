@@ -2,11 +2,11 @@
 characterName: Pamina
 operaTitle: Die Zauberflöte
 composer: Wolfgang Amadeus Mozart
-heroImage: images/schedule-images/madama-butterfly.jpg
+heroImage: images/general/placeholder-portrait.svg
 summary: >-
   Mozart's noble heroine — performed in a reduced German-language production for
   young audiences at the British Arts Centre.
-order: 2
+order: 3
 tags:
   - Mozart
   - Soprano Lead

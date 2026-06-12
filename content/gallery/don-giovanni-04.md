@@ -4,8 +4,9 @@ title: "Don Giovanni - Batti Batti"
 image: images/don-giovanni/IMG_1686.webp
 alt: "Sol Risé performing on Don Giovanni in Teatro Avenida: Batti Batti"
 category: "Performance"
+photographer: "Liliana Morsia"
 roleSlug: zerlina-don-giovanni
-order: 9
+order: 15
 featuredImg: true
 ---
 

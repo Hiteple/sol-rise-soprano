@@ -4,8 +4,9 @@ title: "Don Giovanni - La ci darem la mano"
 image: images/don-giovanni/IMG_1379.webp
 alt: "Sol Risé performing on Don Giovanni in Teatro Avenida: La Ci Darem la Mano"
 category: "Performance"
+photographer: "Liliana Morsia"
 roleSlug: zerlina-don-giovanni
-order: 8
+order: 14
 ---
 
 Sol Risé performing on Don Giovanni in Teatro Avenida: La ci darem la mano

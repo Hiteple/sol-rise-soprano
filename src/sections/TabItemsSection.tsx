@@ -5,6 +5,7 @@ import { TabGridEmptyState } from '@/components/TabGridEmptyState'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { galleryCategoryEmptyCopy } from '@/lib/tab-grid-empty-copy'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -15,6 +16,7 @@ export type GalleryGridItem = {
   image: string
   alt: string
   category?: string
+  photographer?: string
   featuredImg?: boolean
 }
 
@@ -82,6 +84,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
             {filtered.map((item, index) => {
               const isFeatured = Boolean(item.featuredImg)
+              const photographerCredit = photographerCreditLabel(item.photographer)
               return (
                 <button
                   key={item._meta.path}
@@ -98,7 +101,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
                         image: entry.image,
                         alt: entry.alt,
                         title: entry.title,
-                        category: entry.category,
+                        photographer: entry.photographer,
                       })),
                       index,
                     )
@@ -141,12 +144,13 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme, slideI
                       >
                         {item.title}
                       </p>
-                      {item.category && (
+                      {photographerCredit && (
                         <p
                           className="font-body text-xs uppercase tracking-widest mt-1"
                           style={{ color: 'var(--media-caption-text-color)' }}
+                          data-sb-field-path="photographer"
                         >
-                          {item.category}
+                          {photographerCredit}
                         </p>
                       )}
                     </div>

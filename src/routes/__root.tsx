@@ -1,8 +1,8 @@
-import { HeadContent, Link, Scripts, createRootRoute } from '@tanstack/react-router'
-import { Nav } from '@/components/Nav'
+import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { Footer } from '@/components/Footer'
+import { Nav } from '@/components/Nav'
+import { NotFoundSection } from '@/components/NotFoundSection'
 import { SkipLink } from '@/components/SkipLink'
-import { schemeGoldLinkStyle } from '@/lib/section-color-scheme'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -55,16 +55,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function NotFoundPage() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center px-4">
-      <div className="text-center">
-        <h1 className="font-display text-4xl italic mb-4">Page not found</h1>
-        <p className="font-body mb-6" style={{ color: 'var(--muted-text-color)' }}>
-          The page you are trying to open does not exist.
-        </p>
-        <Link to="/" className="gold-link" style={schemeGoldLinkStyle('soft')}>
-          Return home
-        </Link>
-      </div>
-    </div>
+    <NotFoundSection
+      eyebrow="Lost in the wings"
+      title="Page not found"
+      description="The page you are looking for does not exist, may have moved, or is not yet published."
+      backHref="/"
+      backLabel="Return home"
+      homeLabel="Return home"
+    />
   )
 }

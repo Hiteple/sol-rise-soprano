@@ -1,6 +1,8 @@
+import { Link } from '@tanstack/react-router'
 import { Play } from 'lucide-react'
 
 import { SlidingTabGroup } from '@/components/SlidingTabGroup'
+import { isInternalHref } from '@/lib/internal-href'
 import { TabGridEmptyState } from '@/components/TabGridEmptyState'
 import { resolveMediaThumbnail } from '@/lib/media-thumbnail'
 import { netlifyImgSet } from '@/lib/netlify-image'
@@ -18,7 +20,7 @@ export type MediaGridSectionProps = {
 }
 
 const cardClassName =
-  'relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left'
+  'media-event-card relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left'
 
 function MediaGridCardContent({ item }: { item: MediaItem }) {
   const thumbnail = resolveMediaThumbnail(item)
@@ -54,16 +56,16 @@ function MediaGridCardContent({ item }: { item: MediaItem }) {
           </div>
         )}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none">
+      <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 pointer-events-none">
         <p
-          className="font-display text-lg italic leading-tight"
+          className="font-display text-sm md:text-base italic leading-tight line-clamp-2 md:line-clamp-none"
           style={{ color: 'var(--media-caption-text-color)' }}
           data-sb-field-path="title"
         >
           {item.title}
         </p>
         <p
-          className="font-body text-xs mt-1 line-clamp-1"
+          className="font-body text-xs md:text-[11px] leading-snug mt-0.5 md:mt-1 line-clamp-1"
           style={{ color: 'var(--media-caption-text-muted-color)' }}
           data-sb-field-path="description"
         >
@@ -136,10 +138,9 @@ export function MediaGridSection({
               bodyColor={fg.body}
             />
           ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="media-event-grid">
             {filtered.map((item) => {
               const objectId = `content/media/${item._meta.path}.md`
-              const cardStyle = { aspectRatio: '16/10' as const }
 
               if (item.type === 'image') {
                 const imageHref = item.imageUrl?.trim() ?? ''
@@ -148,11 +149,25 @@ export function MediaGridSection({
                     <div
                       key={item._meta.path}
                       className={`${cardClassName} cursor-default`}
-                      style={cardStyle}
                       data-sb-object-id={objectId}
                     >
                       <MediaGridCardContent item={item} />
                     </div>
+                  )
+                }
+
+                if (isInternalHref(imageHref)) {
+                  return (
+                    <Link
+                      key={item._meta.path}
+                      to={imageHref}
+                      className={cardClassName}
+                      data-sb-object-id={objectId}
+                      data-sb-field-path="imageUrl"
+                      aria-label={`View: ${item.title}`}
+                    >
+                      <MediaGridCardContent item={item} />
+                    </Link>
                   )
                 }
 
@@ -163,7 +178,6 @@ export function MediaGridSection({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cardClassName}
-                    style={cardStyle}
                     data-sb-object-id={objectId}
                     data-sb-field-path="imageUrl"
                     aria-label={`Open link: ${item.title}`}
@@ -178,7 +192,6 @@ export function MediaGridSection({
                   key={item._meta.path}
                   type="button"
                   className={cardClassName}
-                  style={cardStyle}
                   data-sb-object-id={objectId}
                   aria-label={`Play video: ${item.title}`}
                   onClick={() => {

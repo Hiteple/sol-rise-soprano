@@ -4,17 +4,18 @@ import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin'
 import type { SlideData } from 'photoswipe'
 
 import { isNetlifyTransformableUrl, netlifyImg } from '@/lib/netlify-image'
+import { photographerCreditLabel } from '@/lib/photographer-credit'
 
 export type GalleryLightboxItem = {
   image: string
   alt: string
   title: string
-  category?: string
+  photographer?: string
 }
 
 type GallerySlideData = SlideData & {
   title: string
-  category?: string
+  photographer?: string
 }
 
 const dimensionCache = new Map<string, { width: number; height: number }>()
@@ -54,10 +55,11 @@ function escapeHtml(text: string): string {
 }
 
 function captionHtml(data: GallerySlideData): string {
-  const category = data.category
-    ? `<p class="gallery-pswp-caption__category">${escapeHtml(data.category)}</p>`
+  const credit = photographerCreditLabel(data.photographer)
+  const photographer = credit
+    ? `<p class="gallery-pswp-caption__photographer">${escapeHtml(credit)}</p>`
     : ''
-  return `<p class="gallery-pswp-caption__title">${escapeHtml(data.title)}</p>${category}`
+  return `<p class="gallery-pswp-caption__title">${escapeHtml(data.title)}</p>${photographer}`
 }
 
 function loadImageDimensions(
@@ -96,7 +98,7 @@ async function toSlideData(item: GalleryLightboxItem): Promise<GallerySlideData>
     height,
     alt: item.alt,
     title: item.title,
-    category: item.category,
+    photographer: item.photographer,
   }
 }
 

@@ -1,3 +1,4 @@
+import { getStatsCountUpDurationMs } from '@/lib/motion-timing'
 import {
   parseStatNumber,
   useCountUp,
@@ -5,6 +6,7 @@ import {
 } from '@/lib/use-count-up'
 import { resolveColorScheme, schemeForeground, schemeStatsBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
+import { useEffect, useState } from 'react'
 import type { AboutPage } from '../../schemas/site-pages'
 
 type AnimatedStatNumberProps = {
@@ -12,6 +14,7 @@ type AnimatedStatNumberProps = {
   active: boolean
   color: string
   prefersReducedMotion: boolean
+  countUpDurationMs: number
 }
 
 function AnimatedStatNumber({
@@ -19,12 +22,13 @@ function AnimatedStatNumber({
   active,
   color,
   prefersReducedMotion,
+  countUpDurationMs,
 }: AnimatedStatNumberProps) {
   const parsed = parseStatNumber(number)
   const shouldAnimate = Boolean(parsed) && active && !prefersReducedMotion
   const count = useCountUp(parsed?.value ?? 0, shouldAnimate, {
     animate: !prefersReducedMotion,
-    stepMs: 160,
+    durationMs: countUpDurationMs,
   })
 
   if (!parsed) {
@@ -63,6 +67,11 @@ export function StatsRowSection({ page }: StatsRowSectionProps) {
   const { ref, inView } = useInView<HTMLDivElement>()
   const countUpActive = inView
   const prefersReducedMotion = usePrefersReducedMotion()
+  const [countUpDurationMs, setCountUpDurationMs] = useState(() => getStatsCountUpDurationMs())
+
+  useEffect(() => {
+    setCountUpDurationMs(getStatsCountUpDurationMs())
+  }, [])
 
   return (
     <section
@@ -86,6 +95,7 @@ export function StatsRowSection({ page }: StatsRowSectionProps) {
                 active={countUpActive}
                 color={statsNumberColor}
                 prefersReducedMotion={prefersReducedMotion}
+                countUpDurationMs={countUpDurationMs}
               />
               <div
                 className="font-body text-xs uppercase tracking-widest"

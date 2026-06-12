@@ -1,20 +1,10 @@
-import { Link } from '@tanstack/react-router'
-
-import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
-import { splitGridBadges } from '@/lib/split-grid-badges'
+import { SplitGrid, type SplitGridItem } from '@/components/SplitGrid'
+import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '@/lib/section-color-scheme'
 import type { CSSProperties } from 'react'
 
-export type SplitGridItem = {
-  title: string
-  href: string
-  image: string
-  badges?: string[]
-  /** @deprecated Use `badges` — kept for existing content. */
-  decorativeEyebrow?: string
-  subtitle?: string
-}
+export type { SplitGridItem } from '@/components/SplitGrid'
 
 export type SplitGridSectionProps = {
   items: SplitGridItem[]
@@ -25,10 +15,10 @@ export type SplitGridSectionProps = {
 }
 
 export function SplitGridSection({ items, colorScheme, slideIn, title, description }: SplitGridSectionProps) {
-  const visibleItems = items.slice(0, 3)
+  const scheme = resolveColorScheme(colorScheme)
+  const fg = schemeForeground(scheme)
   const hasTitle = (title?.trim().length ?? 0) > 0
   const hasDescription = (description?.trim().length ?? 0) > 0
-  const fg = schemeForeground(colorScheme)
   const hoverContentTextColor =
     colorScheme === 'wine' ? 'var(--palette-pink)' : 'var(--palette-pine)'
   const hoverContentBackground =
@@ -81,83 +71,7 @@ export function SplitGridSection({ items, colorScheme, slideIn, title, descripti
           )}
         </div>
       )}
-      <div
-        ref={ref}
-        className={`max-w-site mx-auto w-full px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
-      >
-        <div className="split-grid">
-          {visibleItems.map((item) => {
-            const href = item.href?.trim() ?? ''
-            const badges = splitGridBadges(item)
-            const panelContent = (
-              <>
-                <div className="split-grid-overlay" />
-                <div className="split-grid-content">
-                  {badges.length > 0 && (
-                    <div className="split-grid-badges">
-                      {badges.map((badge, badgeIndex) => (
-                        <span
-                          key={`${item.title}-badge-${badgeIndex}`}
-                          className="split-grid-link font-body text-xs uppercase tracking-[0.22em]"
-                          data-sb-field-path={`badges.${badgeIndex}`}
-                        >
-                          {badge}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  <h3 className="font-display text-3xl italic">{item.title}</h3>
-                  {(item.subtitle?.trim().length ?? 0) > 0 && (
-                    <h4 className="font-display text-xl italic mt-2">
-                      {item.subtitle}
-                    </h4>
-                  )}
-                </div>
-              </>
-            )
-
-            if (!href) {
-              return (
-                <div
-                  key={`${item.title}-panel`}
-                  className="split-grid-item"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                >
-                  {panelContent}
-                </div>
-              )
-            }
-
-            const isInternal = href.startsWith('/') && !href.startsWith('//')
-
-            if (isInternal) {
-              return (
-                <Link
-                  key={`${item.title}-${href}`}
-                  to={href}
-                  className="split-grid-item"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                >
-                  {panelContent}
-                </Link>
-              )
-            }
-
-            return (
-              <a
-                key={`${item.title}-${href}`}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="split-grid-item"
-                style={{ backgroundImage: `url(${item.image})` }}
-              >
-                {panelContent}
-              </a>
-            )
-          })}
-        </div>
-      </div>
+      <SplitGrid items={items} animate={animate} inView={inView} gridRef={ref} />
     </section>
   )
 }

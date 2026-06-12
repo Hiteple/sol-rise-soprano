@@ -20,18 +20,32 @@ export function parseStatNumber(raw: string): ParsedStatNumber | null {
 }
 
 type UseCountUpOptions = {
-  /** Milliseconds between each increment (default 80). */
+  /** Milliseconds between each increment. Ignored when `durationMs` is set. */
   stepMs?: number
+  /** Total animation length — step interval is derived from `target`. */
+  durationMs?: number
   /** When false, jumps straight to the target (e.g. prefers-reduced-motion). */
   animate?: boolean
+}
+
+function resolveStepMs(
+  target: number,
+  { stepMs, durationMs }: Pick<UseCountUpOptions, 'stepMs' | 'durationMs'>,
+): number {
+  if (stepMs != null) return stepMs
+  if (durationMs != null && target > 0) {
+    return Math.max(48, Math.ceil(durationMs / target))
+  }
+  return 80
 }
 
 /** Counts from 0 up to `target` in steps of 1 while `active` is true. */
 export function useCountUp(
   target: number,
   active: boolean,
-  { stepMs = 80, animate = true }: UseCountUpOptions = {},
+  options: UseCountUpOptions = {},
 ) {
+  const { animate = true, stepMs, durationMs } = options
   const [count, setCount] = useState(animate ? 0 : target)
 
   useEffect(() => {
@@ -48,15 +62,16 @@ export function useCountUp(
     setCount(0)
     if (target <= 0) return
 
+    const intervalMs = resolveStepMs(target, { stepMs, durationMs })
     let current = 0
     const id = window.setInterval(() => {
       current += 1
       setCount(current)
       if (current >= target) window.clearInterval(id)
-    }, stepMs)
+    }, intervalMs)
 
     return () => window.clearInterval(id)
-  }, [active, target, stepMs, animate])
+  }, [active, target, stepMs, durationMs, animate])
 
   return count
 }

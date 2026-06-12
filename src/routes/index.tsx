@@ -3,13 +3,14 @@ import { useState } from 'react'
 import { allHomes, allMediaItems, allOrganizations } from 'content-collections'
 
 import { Modal } from '@/components/Modal'
+import { filterPublishedContent, publishedContentSorted } from '@/lib/content-order'
 import { youtubeIframeSrc } from '@/lib/utils'
 import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
 import { MediaGridSection } from '@/sections/MediaGridSection'
 import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
 import { OrganizationsStripSection } from '@/sections/OrganizationsStripSection'
-import { SplitGridSection } from '@/sections/SplitGridSection'
+import { FeaturedEventsSection } from '@/sections/FeaturedEventsSection'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -21,24 +22,22 @@ function normalizeRef(value: string): string {
 
 function HomePage() {
   const site = allHomes[0]
-  const mediaByPath = new Map(allMediaItems.map((item) => [item._meta.path, item]))
+  const publishedMedia = filterPublishedContent(allMediaItems)
+  const mediaByPath = new Map(publishedMedia.map((item) => [item._meta.path, item]))
   const selectedMediaItems =
     site?.mediaItems
       ?.map((ref) => mediaByPath.get(normalizeRef(ref)))
-      .filter((item): item is (typeof allMediaItems)[number] => Boolean(item)) ?? []
+      .filter((item): item is (typeof publishedMedia)[number] => Boolean(item)) ?? []
   const mediaItems =
-    selectedMediaItems.length > 0
-      ? selectedMediaItems
-      : [...allMediaItems].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-  const organizationsBySlug = new Map(allOrganizations.map((org) => [org._meta.path, org]))
+    selectedMediaItems.length > 0 ? selectedMediaItems : publishedContentSorted(allMediaItems)
+  const publishedOrganizations = publishedContentSorted(allOrganizations)
+  const organizationsBySlug = new Map(publishedOrganizations.map((org) => [org._meta.path, org]))
   const featuredOrganizations =
     site.organizationsStripItems
       ?.map((slug) => organizationsBySlug.get(slug.replace(/^content\/organizations\//, '').replace(/\.md$/, '')))
-      .filter((org): org is (typeof allOrganizations)[number] => Boolean(org)) ?? []
+      .filter((org): org is (typeof publishedOrganizations)[number] => Boolean(org)) ?? []
   const organizationsStripItems =
-    featuredOrganizations.length > 0
-      ? featuredOrganizations
-      : [...allOrganizations].sort((a, b) => (a.order ?? 0) - (b.order ?? 0)).slice(0, 4)
+    featuredOrganizations.length > 0 ? featuredOrganizations : publishedOrganizations.slice(0, 4)
   const splitGridItems = site?.splitGridItems ?? [
     {
       title: 'Book a Performance',
@@ -110,8 +109,9 @@ function HomePage() {
           slideIn={site.organizationsStripSlideIn}
         />
       )}
-      <SplitGridSection
+      <FeaturedEventsSection
         items={splitGridItems}
+        layout={site.featuredEventsLayout}
         colorScheme={site.splitGridColorScheme}
         slideIn={site.splitGridSlideIn}
         title={site.splitGridTitle}

@@ -12,7 +12,7 @@ type GalleryItem = {
   title: string
   image: string
   alt: string
-  category?: string
+  photographer?: string
   roleSlug?: string
 }
 
@@ -41,7 +41,7 @@ export function RoleDetailSection({ role, galleryItems, organizations }: RoleDet
     image: item.image,
     alt: item.alt,
     title: item.title,
-    category: item.category,
+    photographer: item.photographer,
   }))
 
   return (

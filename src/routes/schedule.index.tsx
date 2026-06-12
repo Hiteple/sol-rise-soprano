@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { allScheduleEvents, allSchedulePages } from 'content-collections'
 
+import { publishedContentSorted } from '@/lib/content-order'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { SchedulePageSection } from '@/sections/SchedulePageSection'
 
@@ -10,7 +11,7 @@ export const Route = createFileRoute('/schedule/')({
 
 function SchedulePage() {
   const landing = allSchedulePages[0]
-  const events = [...allScheduleEvents].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  const events = publishedContentSorted(allScheduleEvents)
 
   return (
     <div

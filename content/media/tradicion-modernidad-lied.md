@@ -1,8 +1,9 @@
 ---
 title: Tradición y modernidad del Lied
 type: image
-imageUrl: https://teatrocolon.org.ar/produccion/tradicion-y-modernidad-dellied/
-thumbnail: /images/last-events/tradicion-modernidad-lied.webp
+imageUrl: /schedule/tradicion-modernidad-lied
+externalUrl: https://teatrocolon.org.ar/produccion/tradicion-y-modernidad-dellied/
+thumbnail: /images/salon-dorado/tradicion-modernidad-lied.webp
 description: Clásica Joven
 order: 1
 ---

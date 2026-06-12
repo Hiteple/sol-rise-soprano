@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
+import { isInternalHref } from '@/lib/internal-href'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { relatedGalleryForScheduleEvent } from '@/lib/schedule-gallery'
 import {
@@ -19,7 +20,7 @@ type GalleryItem = {
   title: string
   image: string
   alt: string
-  category?: string
+  photographer?: string
   roleSlug?: string
   gallerySlug?: string
 }
@@ -46,6 +47,7 @@ export type ScheduleEventDetailSectionProps = {
     roleSlug?: string
     gallerySlug?: string
     ticketHref?: string
+    externalUrl?: string
     cast?: { character: string; performer: string }[]
     productionCredits?: ScheduleProductionCredits
     plot?: string
@@ -62,10 +64,6 @@ const PRODUCTION_CREDIT_ROWS: { key: keyof ScheduleProductionCredits; label: str
   { key: 'costumes', label: 'Costumes' },
   { key: 'lighting', label: 'Lighting' },
 ]
-
-function isInternalHref(href: string): boolean {
-  return href.startsWith('/') && !href.startsWith('//')
-}
 
 function EventDetailImage({
   title,
@@ -144,6 +142,7 @@ export function ScheduleEventDetailSection({
   const relatedGallery = relatedGalleryForScheduleEvent(event, galleryItems)
   const plot = event.plot?.trim() ?? ''
   const ticketHref = event.ticketHref?.trim() ?? ''
+  const externalUrl = event.externalUrl?.trim() ?? ''
   const credits = event.productionCredits ?? {}
   const creditEntries = PRODUCTION_CREDIT_ROWS.filter((row) => (credits[row.key]?.trim().length ?? 0) > 0)
   const hasCredits = creditEntries.length > 0
@@ -156,7 +155,7 @@ export function ScheduleEventDetailSection({
     image: item.image,
     alt: item.alt,
     title: item.title,
-    category: item.category,
+    photographer: item.photographer,
   }))
 
   const locationParts = [event.venue, event.city ?? org?.city, org?.country].filter(Boolean)
@@ -262,6 +261,17 @@ export function ScheduleEventDetailSection({
 
               <div className="flex flex-col items-start gap-4">
                 {ticketHref ? <TicketLink href={ticketHref} /> : null}
+                {externalUrl ? (
+                  <a
+                    href={externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="gold-link font-body text-xs uppercase tracking-[0.28em]"
+                    style={schemeGoldLinkStyle('soft')}
+                  >
+                    View program →
+                  </a>
+                ) : null}
                 <Link
                   to="/schedule"
                   className="font-body text-xs uppercase tracking-[0.24em] opacity-70 hover:opacity-100 transition-opacity"

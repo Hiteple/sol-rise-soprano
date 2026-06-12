@@ -86,6 +86,7 @@ const home = defineCollection({
     mediaItems: z.array(z.string()).max(12).optional(),
     mediaGridColorScheme: sectionColorSchemeSchema.default('soft'),
     mediaGridSlideIn: z.boolean().default(true),
+    featuredEventsLayout: z.enum(['splitGrid', 'scheduleCards']).default('splitGrid'),
     splitGridTitle: z.string().optional(),
     splitGridDescription: z.string().optional(),
     splitGridItems: z
@@ -149,6 +150,8 @@ const gallery = defineCollection({
     image: z.string(),
     alt: z.string(),
     category: z.string().optional(),
+    /** Photo credit — shown on hover and in the lightbox when set. Omit for own photos. */
+    photographer: z.string().optional(),
     order: z.number().optional(),
     featuredImg: z.boolean().default(false),
     /** Links this image to a role detail page (`content/roles` filename without extension). */

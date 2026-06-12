@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { allGalleries, allGalleryPages } from 'content-collections'
 
+import { publishedContentSorted } from '@/lib/content-order'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { TabItemsSection } from '@/sections/TabItemsSection'
 
@@ -13,7 +14,7 @@ function GalleryPage() {
   const categories =
     landing?.filterCategories?.length ? landing.filterCategories : ['All', 'Performance', 'Behind the Scenes']
 
-  const items = [...allGalleries].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  const items = publishedContentSorted(allGalleries)
 
   return (
     <div

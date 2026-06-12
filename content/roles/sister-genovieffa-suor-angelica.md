@@ -6,14 +6,11 @@ heroImage: images/schedule-images/suor-angelica.jpeg
 summary: >-
   One of the sisters in Puccini's single-act tragedy — performed with Celebrarte
   Música and upcoming at La Redonda de Belgrano.
-order: 5
+order: 1
 tags:
   - Puccini
   - Soprano
 appearances:
-  - year: '2024'
-    venue: Celebrarte Música
-    city: Buenos Aires
   - year: '2026'
     venue: La Redonda de Belgrano
     city: Buenos Aires

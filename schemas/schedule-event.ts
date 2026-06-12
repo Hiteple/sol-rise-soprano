@@ -30,6 +30,8 @@ export const scheduleEventSchema = z.object({
   /** Shared tag for concerts / non-role events. Match `gallerySlug` on gallery items. */
   gallerySlug: z.string().optional(),
   ticketHref: z.string().optional(),
+  /** Optional external link (program page, press, etc.) — opens in a new tab on the detail page. */
+  externalUrl: z.string().optional(),
   badges: z.array(z.string()).max(8).optional(),
   cast: z.array(scheduleCastMemberSchema).optional(),
   productionCredits: scheduleProductionCreditsSchema.optional(),

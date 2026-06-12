@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { allRoles, allRolesPages } from 'content-collections'
 
+import { publishedContentSorted } from '@/lib/content-order'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { RolesIndexSection } from '@/sections/RolesIndexSection'
 
@@ -10,7 +11,7 @@ export const Route = createFileRoute('/roles/')({
 
 function RolesPage() {
   const landing = allRolesPages[0]
-  const roles = [...allRoles].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  const roles = publishedContentSorted(allRoles)
 
   return (
     <div

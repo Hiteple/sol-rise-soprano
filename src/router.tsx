@@ -1,5 +1,7 @@
 import { createRouter } from '@tanstack/react-router'
 
+import { NotFoundSection } from '@/components/NotFoundSection'
+
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
 
@@ -9,7 +11,16 @@ export const getRouter = () => {
     routeTree,
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
-    defaultNotFoundComponent: () => <p>Not Found</p>,
+    defaultNotFoundComponent: () => (
+      <NotFoundSection
+        eyebrow="Lost in the wings"
+        title="Page not found"
+        description="The page you are looking for does not exist, may have moved, or is not yet published."
+        backHref="/"
+        backLabel="Return home"
+        homeLabel="Return home"
+      />
+    ),
   })
 
   return router
