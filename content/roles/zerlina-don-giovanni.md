@@ -2,6 +2,7 @@
 characterName: Zerlina
 operaTitle: Don Giovanni
 composer: Wolfgang Amadeus Mozart
+category: lead
 heroImage: images/don-giovanni/IMG_1375.webp
 featureImage: images/don-giovanni/IMG_1379.webp
 featureImagePhotography: Liliana Morsia

@@ -5,9 +5,11 @@ import type { SlideData } from 'photoswipe'
 
 import { isNetlifyTransformableUrl, netlifyImg } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
+import { youtubeIframeSrc } from '@/lib/utils'
 
 export type GalleryLightboxItem = {
-  image: string
+  image?: string
+  videoUrl?: string
   alt: string
   title: string
   photographer?: string
@@ -16,6 +18,8 @@ export type GalleryLightboxItem = {
 type GallerySlideData = SlideData & {
   title: string
   photographer?: string
+  mediaType?: 'image' | 'video'
+  videoUrl?: string
 }
 
 const dimensionCache = new Map<string, { width: number; height: number }>()
@@ -88,11 +92,58 @@ function loadImageDimensions(
   })
 }
 
+function isVideoSlide(data: GallerySlideData): boolean {
+  return data.mediaType === 'video' && Boolean(data.videoUrl?.trim())
+}
+
+function setZoomButtonVisible(lightbox: PhotoSwipeLightbox, visible: boolean) {
+  const zoomButton = lightbox.pswp?.element?.querySelector('.pswp__button--zoom') as
+    | HTMLElement
+    | null
+    | undefined
+  if (zoomButton) {
+    zoomButton.style.display = visible ? '' : 'none'
+  }
+}
+
+function stopVideoIframes(root: ParentNode | null | undefined) {
+  root?.querySelectorAll('.pswp__video-wrap iframe').forEach((iframe) => {
+    ;(iframe as HTMLIFrameElement).src = ''
+  })
+}
+
 async function toSlideData(item: GalleryLightboxItem): Promise<GallerySlideData> {
-  const src = lightboxImageSrc(item.image)
-  const { width, height } = await loadImageDimensions(resolvePublicPath(item.image))
+  const videoUrl = item.videoUrl?.trim()
+  if (videoUrl) {
+    return {
+      mediaType: 'video',
+      videoUrl,
+      width: 1920,
+      height: 1080,
+      alt: item.alt,
+      title: item.title,
+      photographer: item.photographer,
+    }
+  }
+
+  const image = item.image?.trim()
+  if (!image) {
+    return {
+      mediaType: 'image',
+      src: '',
+      width: 1600,
+      height: 1200,
+      alt: item.alt,
+      title: item.title,
+      photographer: item.photographer,
+    }
+  }
+
+  const src = lightboxImageSrc(image)
+  const { width, height } = await loadImageDimensions(resolvePublicPath(image))
 
   return {
+    mediaType: 'image',
     src,
     width,
     height,
@@ -119,6 +170,37 @@ export function useGalleryPhotoSwipe() {
     new PhotoSwipeDynamicCaption(lightbox, {
       type: 'below',
       captionContent: (slide) => captionHtml(slide.data as GallerySlideData),
+    })
+
+    lightbox.on('contentLoad', (event) => {
+      const data = event.content.data as GallerySlideData
+      if (!isVideoSlide(data)) return
+
+      event.preventDefault()
+
+      const wrap = document.createElement('div')
+      wrap.className = 'pswp__video-wrap'
+
+      const iframe = document.createElement('iframe')
+      iframe.className = 'pswp__video-iframe'
+      iframe.src = youtubeIframeSrc(data.videoUrl!)
+      iframe.title = data.alt || data.title
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+      iframe.allowFullscreen = true
+
+      wrap.appendChild(iframe)
+      event.content.element = wrap
+      event.content.onLoaded()
+    })
+
+    lightbox.on('change', () => {
+      const data = lightbox.pswp?.currSlide?.data as GallerySlideData | undefined
+      setZoomButtonVisible(lightbox, !data || !isVideoSlide(data))
+    })
+
+    lightbox.on('close', () => {
+      stopVideoIframes(lightbox.pswp?.element)
     })
 
     lightbox.init()

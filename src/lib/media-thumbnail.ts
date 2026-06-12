@@ -12,7 +12,7 @@ export function resolveMediaThumbnail(item: MediaThumbnailSource): string {
   if (explicit) return explicit
 
   if (item.type === 'video' && item.videoUrl?.trim()) {
-    return youtubeThumbnailUrl(item.videoUrl, 'hq') ?? ''
+    return youtubeThumbnailUrl(item.videoUrl, 'max') ?? ''
   }
 
   return ''

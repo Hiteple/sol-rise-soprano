@@ -43,6 +43,13 @@ export function eventYearFromHref(href: string): number | undefined {
   return slug ? eventYearFromSlug(slug) : undefined
 }
 
+export function eventYearFromEventRef(eventRef?: string): number | undefined {
+  if (!eventRef?.trim()) return undefined
+  const trimmed = eventRef.trim()
+  if (trimmed.startsWith('/')) return eventYearFromHref(trimmed)
+  return eventYearFromSlug(trimmed)
+}
+
 /**
  * Parses schedule badge labels like `June 12th` or `June 12, 2026`.
  * Year defaults to `eventYear`, then the reference date’s calendar year.

@@ -1,35 +1,24 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { allHomes, allMediaItems, allOrganizations } from 'content-collections'
+import { allHomes, allOrganizations, allScheduleEvents } from 'content-collections'
 
-import { Modal } from '@/components/Modal'
-import { filterPublishedContent, publishedContentSorted } from '@/lib/content-order'
-import { youtubeIframeSrc } from '@/lib/utils'
+import { homeLastEvents } from '@/lib/home-last-events'
+import { publishedContentSorted } from '@/lib/content-order'
 import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
 import { MediaGridSection } from '@/sections/MediaGridSection'
 import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
 import { OrganizationsStripSection } from '@/sections/OrganizationsStripSection'
 import { FeaturedEventsSection } from '@/sections/FeaturedEventsSection'
+import type { MediaFilter } from '@/sections/types'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
 })
 
-function normalizeRef(value: string): string {
-  return value.replace(/^\/+/, '').replace(/^content\/media\//, '').replace(/\.md$/, '')
-}
-
 function HomePage() {
   const site = allHomes[0]
-  const publishedMedia = filterPublishedContent(allMediaItems)
-  const mediaByPath = new Map(publishedMedia.map((item) => [item._meta.path, item]))
-  const selectedMediaItems =
-    site?.mediaItems
-      ?.map((ref) => mediaByPath.get(normalizeRef(ref)))
-      .filter((item): item is (typeof publishedMedia)[number] => Boolean(item)) ?? []
-  const mediaItems =
-    selectedMediaItems.length > 0 ? selectedMediaItems : publishedContentSorted(allMediaItems)
+  const mediaItems = homeLastEvents(allScheduleEvents, site?.lastEventsItems)
   const publishedOrganizations = publishedContentSorted(allOrganizations)
   const organizationsBySlug = new Map(publishedOrganizations.map((org) => [org._meta.path, org]))
   const featuredOrganizations =
@@ -61,11 +50,7 @@ function HomePage() {
       subtitle: '',
     },
   ]
-  const [filter, setFilter] = useState<'all' | 'video' | 'image'>('all')
-  const [activeVideo, setActiveVideo] = useState<{
-    url: string
-    title?: string | null
-  } | null>(null)
+  const [filter, setFilter] = useState<MediaFilter>('all')
 
   if (!site) return null
 
@@ -127,7 +112,6 @@ function HomePage() {
         mediaItems={mediaItems}
         filter={filter}
         onFilterChange={setFilter}
-        onOpenVideo={setActiveVideo}
       />
       <QuoteBannerSection
         section={{
@@ -140,26 +124,6 @@ function HomePage() {
           slideIn: site.quoteBannerSlideIn,
         }}
       />
-
-      <Modal
-        open={Boolean(activeVideo)}
-        onClose={() => setActiveVideo(null)}
-        title={activeVideo?.title?.trim() || undefined}
-        ariaLabel="Video player"
-        className="flex-col"
-      >
-        {activeVideo && (
-          <div style={{ aspectRatio: '16/9' }}>
-            <iframe
-              src={youtubeIframeSrc(activeVideo.url)}
-              title={activeVideo.title?.trim() ? `${activeVideo.title} video` : 'Video player'}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        )}
-      </Modal>
     </div>
   )
 }

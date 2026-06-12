@@ -1,7 +1,7 @@
 ---
 type: RolesPage
-heroEyebrow: Repertoire
-heroTitle: Roles
+heroEyebrow: Career
+heroTitle: Performances
 heroDescription: >-
   Operatic characters Sol Risé has brought to the stage — with performance
   history, venues, and photography from each production.

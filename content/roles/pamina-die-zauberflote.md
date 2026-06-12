@@ -2,6 +2,7 @@
 characterName: Pamina
 operaTitle: Die Zauberflöte
 composer: Wolfgang Amadeus Mozart
+category: lead
 heroImage: images/general/placeholder-portrait.svg
 featureImage: images/general/placeholder-landscape.svg
 summary: >-

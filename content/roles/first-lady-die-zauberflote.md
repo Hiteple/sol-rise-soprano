@@ -2,6 +2,7 @@
 characterName: First Lady
 operaTitle: Die Zauberflöte
 composer: Wolfgang Amadeus Mozart
+category: supporting
 heroImage: images/general/placeholder-landscape.svg
 featureImage: images/general/placeholder-landscape.svg
 summary: >-

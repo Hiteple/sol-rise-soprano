@@ -2,6 +2,7 @@
 characterName: Annina
 operaTitle: La Traviata
 composer: Giuseppe Verdi
+category: supporting
 heroImage: images/general/placeholder-portrait.svg
 featureImage: images/general/placeholder-landscape.svg
 summary: >-

@@ -47,6 +47,30 @@ organizationsStripItems:
 organizationsStripColorScheme: bright
 mediaEyebrow: On Stage & On Screen
 mediaTitle: Last Events
+lastEventsItems:
+  - tradicion-modernidad-lied
+  - carmina-burana-2025
+  - die-zauberflote-pamina-2025
+  - macbeth-2025
+  - il-trovatore-2025
+  - brahms-gesang-der-parzen-2024
+  - juventus-lyrica-25th-gala-2024
+  - die-zauberflote-first-lady-2024-celebrarte
+  - mozart-requiem-2024-jovenes-talentos
+  - die-zauberflote-first-lady-2024-jovenes-talentos
+  - suor-angelica-2024-celebrarte
+  - carmen-2024-celebrarte
+  - verdi-requiem-2023-teatro-argentino
+  - mozart-requiem-2023-potosi
+  - don-giovanni-2023
+  - joan-of-arc-at-the-stake-2023
+  - cavalleria-rusticana-festival-2023
+  - juventus-opera-festival-2022
+  - carmen-2022-juventus-lyrica
+  - rigoletto-contessa-di-ceprano-2022
+  - la-traviata-annina-2022
+  - the-medium-2021
+  - traviata-magic-flute-chorus-2019
 featuredEventsLayout: scheduleCards
 splitGridItems:
   - title: Madama Butterfly

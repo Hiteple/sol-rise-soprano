@@ -3,11 +3,11 @@ import { Link, useRouterState } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
 import { careerNavItems, isCareerPath } from '@/lib/career-nav'
+import { isCareerSubNavActive } from '@/lib/nav-active'
 import { cn } from '@/lib/utils'
 
 type CareerNavDropdownProps = {
   useChrome: boolean
-  onHeroHome: boolean
   pathname: string
   onNavigate?: () => void
   variant: 'desktop' | 'mobile'
@@ -15,7 +15,6 @@ type CareerNavDropdownProps = {
 
 export function CareerNavDropdown({
   useChrome,
-  onHeroHome,
   pathname,
   onNavigate,
   variant,
@@ -35,21 +34,17 @@ export function CareerNavDropdown({
     return () => document.removeEventListener('mousedown', onPointerDown)
   }, [open, variant])
 
-  const linkColor = active
-    ? useChrome
-      ? 'var(--chrome-text)'
-      : onHeroHome
-        ? 'var(--accent-pale-color)'
-        : 'var(--accent-soft-color)'
-    : undefined
-
   if (variant === 'mobile') {
     return (
       <div className={cn('flex flex-col', open && 'gap-3')}>
         <button
           type="button"
-          className="flex items-center justify-between font-display text-2xl italic text-left"
-          style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
+          className="nav-mobile-link flex items-center justify-between font-display text-2xl italic text-left"
+          style={
+            active
+              ? { color: useChrome ? 'var(--chrome-accent)' : 'var(--accent-soft-color)' }
+              : undefined
+          }
           aria-expanded={open}
           aria-controls={menuId}
           onClick={() => setOpen((value) => !value)}
@@ -75,11 +70,15 @@ export function CareerNavDropdown({
           aria-hidden={!open}
         >
           <ul className="flex flex-col gap-4 py-2">
-            {careerNavItems.map((item) => (
+            {careerNavItems.map((item) => {
+              const itemActive = isCareerSubNavActive(item.href, pathname)
+
+              return (
               <li key={item.href}>
                 <Link
                   to={item.href}
                   className="block"
+                  aria-current={itemActive ? 'page' : undefined}
                   onClick={() => {
                     setOpen(false)
                     onNavigate?.()
@@ -89,14 +88,13 @@ export function CareerNavDropdown({
                   <span
                     className="font-display text-xl italic"
                     style={{
-                      color:
-                        pathname === item.href || pathname.startsWith(`${item.href}/`)
-                          ? useChrome
-                            ? 'var(--chrome-accent)'
-                            : 'var(--accent-soft-color)'
-                          : useChrome
-                            ? 'var(--chrome-text)'
-                            : 'var(--body-color)',
+                      color: itemActive
+                        ? useChrome
+                          ? 'var(--chrome-accent)'
+                          : 'var(--accent-soft-color)'
+                        : useChrome
+                          ? 'var(--chrome-text)'
+                          : 'var(--body-color)',
                     }}
                   >
                     {item.label}
@@ -109,7 +107,7 @@ export function CareerNavDropdown({
                   </span>
                 </Link>
               </li>
-            ))}
+            )})}
           </ul>
         </div>
       </div>
@@ -130,7 +128,6 @@ export function CareerNavDropdown({
       <Link
         to="/career"
         className="gold-link inline-flex items-center gap-1.5"
-        style={{ color: linkColor }}
         aria-current={active ? 'page' : undefined}
         aria-haspopup="true"
         aria-expanded={open}
@@ -154,12 +151,16 @@ export function CareerNavDropdown({
       >
         <div id={menuId} className="career-nav-dropdown" role="menu">
           <ul className="p-2">
-            {careerNavItems.map((item) => (
+            {careerNavItems.map((item) => {
+              const itemActive = isCareerSubNavActive(item.href, pathname)
+
+              return (
               <li key={item.href} role="none">
                 <Link
                   to={item.href}
                   role="menuitem"
                   className="career-nav-dropdown__item block rounded-[var(--media-radius)] px-4 py-3 transition-colors"
+                  aria-current={itemActive ? 'page' : undefined}
                   onClick={() => {
                     setOpen(false)
                     onNavigate?.()
@@ -169,7 +170,7 @@ export function CareerNavDropdown({
                   <span className="block font-body text-xs mt-1 leading-snug opacity-80">{item.description}</span>
                 </Link>
               </li>
-            ))}
+            )})}
           </ul>
         </div>
       </div>

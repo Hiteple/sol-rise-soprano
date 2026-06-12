@@ -373,12 +373,16 @@
   background: var(--gold-link-hover-underline, var(--palette-wine));
 }
 
-/* Nav over hero: light pink links on variable photo background */
+/* Nav over home hero (desktop, before scroll) — floating links; typographic halo only (no bar/scrim) */
 .nav-hero .gold-link {
-  color: var(--nav-overlay-text-color);
+  color: var(--accent-pale-color);
+  text-shadow:
+    0 1px 18px color-mix(in srgb, var(--palette-pine) 82%, transparent),
+    0 0 32px color-mix(in srgb, var(--palette-pine) 50%, transparent);
 }
 .nav-hero .gold-link::after {
-  background: var(--nav-overlay-text-color);
+  background: var(--accent-pale-color);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--palette-pine) 45%, transparent);
 }
 .nav-hero .gold-link:hover {
   color: var(--accent-soft-color);
@@ -404,6 +408,42 @@
 }
 .nav-chrome .gold-link:hover::after {
   background: var(--chrome-accent);
+}
+
+/* Active top-level nav — persistent underline (same accent as hover) */
+.gold-link[aria-current='page'] {
+  color: var(--gold-link-hover-color, var(--palette-wine));
+}
+.gold-link[aria-current='page']::after {
+  width: 100%;
+  background: var(--gold-link-hover-underline, var(--palette-wine));
+}
+.nav-hero .gold-link[aria-current='page'] {
+  color: var(--accent-soft-color);
+}
+.nav-hero .gold-link[aria-current='page']::after {
+  background: var(--accent-soft-color);
+}
+.nav-chrome .gold-link[aria-current='page'] {
+  color: var(--chrome-accent);
+}
+.nav-chrome .gold-link[aria-current='page']::after {
+  background: var(--chrome-accent);
+}
+
+/* Mobile nav links */
+.nav-mobile-link {
+  transition: color 0.2s ease;
+  color: var(--body-color);
+}
+.nav-chrome .nav-mobile-link {
+  color: var(--chrome-text);
+}
+.nav-chrome .nav-mobile-link[aria-current='page'] {
+  color: var(--chrome-accent);
+}
+.nav-hero .nav-mobile-link[aria-current='page'] {
+  color: var(--accent-soft-color);
 }
 
 /* Shared rounded corners for section media (images/videos) */
@@ -526,6 +566,24 @@
   background: color-mix(in srgb, var(--palette-wine) 88%, transparent);
 }
 
+/* Fit content to the iframe — not full slide height — so “below” captions sit under the player */
+.pswp__video-wrap {
+  display: block;
+  width: min(calc(100vw - 2rem), 960px);
+  max-width: 100%;
+  background: transparent;
+}
+
+.pswp__video-iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  border-radius: var(--media-radius);
+  background: #000;
+}
+
 .gallery-pswp-caption__title {
   font-family: var(--font-display, 'Cormorant Garamond', serif);
   font-style: italic;
@@ -601,6 +659,14 @@
 .career-nav-dropdown__item:focus-visible {
   background: color-mix(in srgb, var(--chrome-accent) 14%, transparent);
   outline: none;
+}
+
+.career-nav-dropdown__item[aria-current='page'] {
+  background: color-mix(in srgb, var(--chrome-accent) 14%, transparent);
+}
+
+.career-nav-dropdown__item[aria-current='page'] .font-display {
+  color: var(--chrome-accent);
 }
 
 .image-text-markdown :is(p, ul, ol) {
@@ -989,6 +1055,50 @@
   transform: translateY(8px);
   transition: opacity 0.22s ease, transform 0.22s ease;
 }
+.schedule-detail-badge {
+  display: inline-flex;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--media-radius);
+  border: 1px solid color-mix(in srgb, var(--accent-ink-color) 22%, transparent);
+  color: var(--accent-ink-color);
+  background: color-mix(in srgb, var(--section-surface-bright) 88%, transparent);
+}
+.schedule-detail-badge--today {
+  background: var(--palette-pine);
+  color: #fff;
+  border-color: var(--palette-pine);
+}
+.schedule-detail-badge--past {
+  position: relative;
+  overflow: hidden;
+  filter: grayscale(0.55) saturate(0.5);
+  background: color-mix(in srgb, var(--section-surface-bright) 68%, var(--page-background-color));
+  color: color-mix(in srgb, var(--accent-ink-color) 52%, transparent);
+  border-color: color-mix(in srgb, var(--accent-ink-color) 20%, transparent);
+  --past-badge-line: color-mix(in srgb, var(--accent-ink-color) 82%, transparent);
+}
+.schedule-detail-badge--past::before,
+.schedule-detail-badge--past::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    var(--past-badge-angle),
+    transparent 49%,
+    var(--past-badge-line) 49%,
+    var(--past-badge-line) 51%,
+    transparent 51%
+  );
+}
+.schedule-detail-badge--past::before {
+  --past-badge-angle: 45deg;
+}
+.schedule-detail-badge--past::after {
+  --past-badge-angle: 135deg;
+}
+
 .split-grid-link--today {
   background: var(--palette-pine);
   color: #fff;

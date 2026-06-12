@@ -50,11 +50,10 @@ export type HomeQuoteSection = {
 export type MediaItem = {
   _meta: { path: string }
   title: string
-  type: 'video' | 'image'
-  videoUrl?: string
-  imageUrl?: string
+  imageUrl: string
   thumbnail?: string
   description: string
+  roleSlug?: string
 }
 
-export type MediaFilter = 'all' | 'video' | 'image'
+export type MediaFilter = 'all' | 'opera' | 'concert'

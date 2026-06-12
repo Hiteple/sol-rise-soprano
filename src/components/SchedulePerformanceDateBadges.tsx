@@ -6,45 +6,43 @@ import {
 } from '@/lib/schedule-badge-date'
 import { useClientToday } from '@/lib/use-client-today'
 
-export type SplitGridBadgesProps = {
+export type SchedulePerformanceDateBadgesProps = {
   badges: string[]
-  /** Stackbit field path prefix, e.g. `badges` → `badges.0` */
-  fieldPathPrefix?: string
-  /** Schedule slug (`madama-butterfly-2026`) or href (`/schedule/...`) for year inference. */
-  eventRef?: string
-  /** Strike past dates — only for upcoming events with mixed date badges. */
+  eventRef: string
   markPastBadges?: boolean
+  fieldPathPrefix?: string
 }
 
-export function SplitGridBadges({
+export function SchedulePerformanceDateBadges({
   badges,
-  fieldPathPrefix,
   eventRef,
   markPastBadges = false,
-}: SplitGridBadgesProps) {
+  fieldPathPrefix = 'badges',
+}: SchedulePerformanceDateBadgesProps) {
   const today = useClientToday()
   const eventYear = eventYearFromEventRef(eventRef)
 
   if (badges.length === 0) return null
 
   return (
-    <div className="split-grid-badges">
+    <ul className="flex flex-wrap gap-2">
       {badges.map((badge, badgeIndex) => {
         const isToday = today ? isScheduleBadgeToday(badge, today, eventYear) : false
         const isPast =
           markPastBadges && today && !isToday ? isScheduleBadgePast(badge, today, eventYear) : false
+
         return (
-          <span
+          <li
             key={`${badge}-${badgeIndex}`}
-            className={`split-grid-link font-body text-xs uppercase tracking-[0.22em]${isToday ? ' split-grid-link--today' : ''}${isPast ? ' split-grid-link--past' : ''}`}
+            className={`schedule-detail-badge font-body text-xs uppercase tracking-[0.2em]${isToday ? ' schedule-detail-badge--today' : ''}${isPast ? ' schedule-detail-badge--past' : ''}`}
             {...(fieldPathPrefix
               ? { 'data-sb-field-path': `${fieldPathPrefix}.${badgeIndex}` }
               : {})}
           >
             {today ? scheduleBadgeLabel(badge, today, eventYear) : badge}
-          </span>
+          </li>
         )
       })}
-    </div>
+    </ul>
   )
 }

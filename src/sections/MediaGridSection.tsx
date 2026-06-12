@@ -1,5 +1,4 @@
 import { Link } from '@tanstack/react-router'
-import { Play } from 'lucide-react'
 
 import { ExternalLink } from '@/components/ExternalLink'
 import { SlidingTabGroup } from '@/components/SlidingTabGroup'
@@ -17,14 +16,19 @@ export type MediaGridSectionProps = {
   mediaItems: MediaItem[]
   filter: MediaFilter
   onFilterChange: (filter: MediaFilter) => void
-  onOpenVideo: (media: { url: string; title?: string | null }) => void
 }
 
 const cardClassName =
   'media-event-card relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left'
 
+function filterLastEvents(items: MediaItem[], filter: MediaFilter): MediaItem[] {
+  if (filter === 'all') return items
+  if (filter === 'opera') return items.filter((item) => Boolean(item.roleSlug?.trim()))
+  return items.filter((item) => !item.roleSlug?.trim())
+}
+
 function MediaGridCardContent({ item }: { item: MediaItem }) {
-  const thumbnail = resolveMediaThumbnail(item)
+  const thumbnail = resolveMediaThumbnail({ type: 'image', thumbnail: item.thumbnail })
 
   return (
     <>
@@ -33,7 +37,7 @@ function MediaGridCardContent({ item }: { item: MediaItem }) {
         alt=""
         aria-hidden
         className="w-full h-full object-cover"
-        data-sb-field-path="thumbnail#@src"
+        data-sb-field-path="image#@src"
       />
       <div
         className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-none"
@@ -42,21 +46,7 @@ function MediaGridCardContent({ item }: { item: MediaItem }) {
             'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 88%, transparent) 0%, color-mix(in srgb, var(--palette-pine) 32%, transparent) 55%, transparent 100%)',
         }}
         aria-hidden
-      >
-        {item.type === 'video' && (
-          <div className="play-btn mb-4">
-            <Play
-              size={20}
-              fill="currentColor"
-              aria-hidden
-              style={{
-                color: 'var(--media-caption-text-color)',
-                marginLeft: 2,
-              }}
-            />
-          </div>
-        )}
-      </div>
+      />
       <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 pointer-events-none">
         <p
           className="font-display text-base md:text-2xl italic leading-tight line-clamp-2 md:line-clamp-none"
@@ -68,7 +58,7 @@ function MediaGridCardContent({ item }: { item: MediaItem }) {
         <p
           className="font-display text-xs md:text-lg italic leading-snug mt-0.5 md:mt-1 line-clamp-1 md:line-clamp-2"
           style={{ color: 'var(--media-caption-text-muted-color)' }}
-          data-sb-field-path="description"
+          data-sb-field-path="subtitle"
         >
           {item.description}
         </p>
@@ -82,10 +72,8 @@ export function MediaGridSection({
   mediaItems,
   filter,
   onFilterChange,
-  onOpenVideo,
 }: MediaGridSectionProps) {
-  const filtered =
-    filter === 'all' ? mediaItems : mediaItems.filter((m) => m.type === filter)
+  const filtered = filterLastEvents(mediaItems, filter)
 
   const scheme = section.colorScheme
   const fg = schemeForeground(scheme)
@@ -102,109 +90,88 @@ export function MediaGridSection({
         ref={ref}
         className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-            <div>
-              <p
-                className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-4"
-                style={{ color: fg.eyebrow }}
-                data-sb-field-path="mediaEyebrow"
-              >
-                {section.eyebrow}
-              </p>
-              <h2
-                className="font-display text-4xl lg:text-5xl italic"
-                style={{ color: fg.heading }}
-                data-sb-field-path="mediaTitle"
-              >
-                {section.title}
-              </h2>
-            </div>
-
-            <SlidingTabGroup
-              ariaLabel="Filter media by type"
-              value={filter}
-              onChange={onFilterChange}
-              options={[
-                { value: 'all', label: 'All' },
-                { value: 'image', label: 'Explore' },
-                { value: 'video', label: 'Watch' },
-              ]}
-            />
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+          <div>
+            <p
+              className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-4"
+              style={{ color: fg.eyebrow }}
+              data-sb-field-path="mediaEyebrow"
+            >
+              {section.eyebrow}
+            </p>
+            <h2
+              className="font-display text-4xl lg:text-5xl italic"
+              style={{ color: fg.heading }}
+              data-sb-field-path="mediaTitle"
+            >
+              {section.title}
+            </h2>
           </div>
 
-          {filtered.length === 0 ? (
-            <TabGridEmptyState
-              {...mediaFilterEmptyCopy(filter)}
-              headingColor={fg.heading}
-              bodyColor={fg.body}
-            />
-          ) : (
+          <SlidingTabGroup
+            ariaLabel="Filter last events"
+            value={filter}
+            onChange={onFilterChange}
+            options={[
+              { value: 'all', label: 'All' },
+              { value: 'opera', label: 'Opera' },
+              { value: 'concert', label: 'Concerts' },
+            ]}
+          />
+        </div>
+
+        {filtered.length === 0 ? (
+          <TabGridEmptyState
+            {...mediaFilterEmptyCopy(filter)}
+            headingColor={fg.heading}
+            bodyColor={fg.body}
+          />
+        ) : (
           <div className="media-event-grid">
             {filtered.map((item) => {
-              const objectId = `content/media/${item._meta.path}.md`
+              const objectId = `content/schedule/${item._meta.path}.md`
+              const imageHref = item.imageUrl.trim()
 
-              if (item.type === 'image') {
-                const imageHref = item.imageUrl?.trim() ?? ''
-                if (!imageHref) {
-                  return (
-                    <div
-                      key={item._meta.path}
-                      className={`${cardClassName} cursor-default`}
-                      data-sb-object-id={objectId}
-                    >
-                      <MediaGridCardContent item={item} />
-                    </div>
-                  )
-                }
-
-                if (isInternalHref(imageHref)) {
-                  return (
-                    <Link
-                      key={item._meta.path}
-                      to={imageHref}
-                      className={cardClassName}
-                      data-sb-object-id={objectId}
-                      data-sb-field-path="imageUrl"
-                      aria-label={`View: ${item.title}`}
-                    >
-                      <MediaGridCardContent item={item} />
-                    </Link>
-                  )
-                }
-
+              if (!imageHref) {
                 return (
-                  <ExternalLink
+                  <div
                     key={item._meta.path}
-                    href={imageHref}
-                    className={cardClassName}
+                    className={`${cardClassName} cursor-default`}
                     data-sb-object-id={objectId}
-                    data-sb-field-path="imageUrl"
-                    aria-label={`Open external link: ${item.title}`}
                   >
                     <MediaGridCardContent item={item} />
-                  </ExternalLink>
+                  </div>
+                )
+              }
+
+              if (isInternalHref(imageHref)) {
+                return (
+                  <Link
+                    key={item._meta.path}
+                    to={imageHref}
+                    className={cardClassName}
+                    data-sb-object-id={objectId}
+                    aria-label={`View: ${item.title}`}
+                  >
+                    <MediaGridCardContent item={item} />
+                  </Link>
                 )
               }
 
               return (
-                <button
+                <ExternalLink
                   key={item._meta.path}
-                  type="button"
+                  href={imageHref}
                   className={cardClassName}
                   data-sb-object-id={objectId}
-                  aria-label={`Play video: ${item.title}`}
-                  onClick={() => {
-                    if (item.videoUrl) {
-                      onOpenVideo({ url: item.videoUrl, title: item.title })
-                    }
-                  }}
+                  aria-label={`Open external link: ${item.title}`}
                 >
                   <MediaGridCardContent item={item} />
-                </button>
+                </ExternalLink>
               )
             })}
           </div>
-          )}
+        )}
       </div>
     </section>
   )

@@ -2,6 +2,7 @@
 characterName: Contessa di Ceprano
 operaTitle: Rigoletto
 composer: Giuseppe Verdi
+category: supporting
 heroImage: images/general/placeholder-landscape.svg
 featureImage: images/general/placeholder-landscape.svg
 summary: >-

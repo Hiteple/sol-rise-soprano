@@ -2,6 +2,7 @@
 characterName: Mrs. Gobineau
 operaTitle: The Medium
 composer: Gian Carlo Menotti
+category: supporting
 heroImage: images/general/placeholder-landscape.svg
 featureImage: images/general/placeholder-landscape.svg
 summary: >-

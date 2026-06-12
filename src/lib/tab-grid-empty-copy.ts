@@ -4,23 +4,21 @@ export function mediaFilterEmptyCopy(filter: MediaFilter): {
   title: string
   description: string
 } {
-  if (filter === 'video') {
+  if (filter === 'opera') {
     return {
-      title: 'Nothing to watch yet',
-      description:
-        'New performances and recordings will be shared here soon. In the meantime, feel free to explore recent events.',
+      title: 'No operatic events yet',
+      description: 'Past stage roles and opera productions will appear here as they are added.',
     }
   }
-  if (filter === 'image') {
+  if (filter === 'concert') {
     return {
-      title: 'Nothing to explore yet',
-      description:
-        'Past events with links to reviews, programs, and coverage will appear here as they become available.',
+      title: 'No concerts yet',
+      description: 'Past concerts, galas, and concert repertoire will appear here as they are added.',
     }
   }
   return {
     title: 'Nothing to show yet',
-    description: 'Media from recent events will be added here soon!',
+    description: 'Past performances will be added here soon.',
   }
 }
 

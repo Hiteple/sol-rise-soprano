@@ -2,6 +2,7 @@
 characterName: Sister Genovieffa
 operaTitle: Suor Angelica
 composer: Giacomo Puccini
+category: supporting
 heroImage: images/schedule-images/suor-angelica.jpeg
 featureImage: images/general/placeholder-landscape.svg
 summary: >-

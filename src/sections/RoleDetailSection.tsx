@@ -1,11 +1,17 @@
 import { marked } from 'marked'
 
+import { PhotographyVideoTile } from '@/components/PhotographyVideoTile'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { roleStats } from '@/lib/role-stats'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
+import {
+  rolePhotographyLightboxItems,
+  scheduleVideosForRole,
+} from '@/lib/schedule-photography'
+import type { ScheduleEvent } from '@/components/ScheduleEventGrid'
 import type { RolesIndexSectionProps } from '@/sections/RolesIndexSection'
 
 type GalleryItem = {
@@ -26,26 +32,37 @@ export type RoleDetailSectionProps = {
   role: RolesIndexSectionProps['roles'][number] & { content: string }
   galleryItems: GalleryItem[]
   organizations: OrganizationItem[]
+  scheduleEvents: ScheduleEvent[]
 }
 
-export function RoleDetailSection({ role, galleryItems, organizations }: RoleDetailSectionProps) {
+export function RoleDetailSection({
+  role,
+  galleryItems,
+  organizations,
+  scheduleEvents,
+}: RoleDetailSectionProps) {
   const scheme = resolveColorScheme('soft')
   const fg = schemeForeground(scheme)
   const stats = roleStats(role.appearances)
   const orgBySlug = new Map(organizations.map((org) => [org._meta.path, org]))
   const relatedGallery = galleryItems.filter((item) => item.roleSlug === role._meta.path)
+  const roleVideos = scheduleVideosForRole(role._meta.path, scheduleEvents)
+  const showPhotography = roleVideos.length > 0 || relatedGallery.length > 0
   const bodyHtml = role.content?.trim() ? marked(role.content) : ''
   const { ref, inView } = useInView<HTMLDivElement>()
   const { openGallery } = useGalleryPhotoSwipe()
 
   const featureImageCredit = photographerCreditLabel(role.featureImagePhotography)
 
-  const lightboxItems = relatedGallery.map((item) => ({
-    image: item.image,
-    alt: item.alt,
-    title: item.title,
-    photographer: item.photographer,
-  }))
+  const lightboxItems = rolePhotographyLightboxItems(
+    roleVideos,
+    relatedGallery.map((item) => ({
+      image: item.image,
+      alt: item.alt,
+      title: item.title,
+      photographer: item.photographer,
+    })),
+  )
 
   return (
     <>
@@ -153,7 +170,7 @@ export function RoleDetailSection({ role, galleryItems, organizations }: RoleDet
                 color: 'var(--media-caption-text-color)',
               }}
             >
-              <h2 className="font-body text-xs uppercase tracking-[0.32em] mb-5 font-semibold">Role information</h2>
+              <h2 className="font-body text-xs uppercase tracking-[0.32em] mb-5 font-semibold">Performance Information</h2>
               <dl className="space-y-4 font-body text-sm">
                 <div>
                   <dt className="uppercase tracking-widest text-xs opacity-75">Composer</dt>
@@ -183,12 +200,23 @@ export function RoleDetailSection({ role, galleryItems, organizations }: RoleDet
             </aside>
           </div>
 
-          {relatedGallery.length > 0 && (
+          {showPhotography && (
             <div className="mt-16">
               <h2 className="font-display text-2xl italic mb-6" style={{ color: fg.heading }}>
-                Photography
+                Media
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {roleVideos.map((video, index) => (
+                  <PhotographyVideoTile
+                    key={video.scheduleSlug ?? `${video.videoUrl}-${index}`}
+                    video={video}
+                    stackbitObjectId={
+                      video.scheduleSlug ? `content/schedule/${video.scheduleSlug}.md` : undefined
+                    }
+                    videoFieldPath="videoUrl"
+                    onClick={() => openGallery(lightboxItems, index)}
+                  />
+                ))}
                 {relatedGallery.map((item, index) => (
                   <button
                     key={item._meta.path}
@@ -196,7 +224,7 @@ export function RoleDetailSection({ role, galleryItems, organizations }: RoleDet
                     className="img-zoom block media-radius border-0 p-0 text-left cursor-pointer w-full"
                     style={{ aspectRatio: '4/5' }}
                     aria-label={`View larger image: ${item.title}`}
-                    onClick={() => openGallery(lightboxItems, index)}
+                    onClick={() => openGallery(lightboxItems, roleVideos.length + index)}
                   >
                     <img
                       {...netlifyImgSet(item.image, 480, 600)}

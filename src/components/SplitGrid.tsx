@@ -47,7 +47,12 @@ export function SplitGrid({
             <>
               <div className="split-grid-overlay" />
               <div className="split-grid-content">
-                <SplitGridBadges badges={badges} fieldPathPrefix="badges" eventRef={href} />
+                <SplitGridBadges
+                  badges={badges}
+                  fieldPathPrefix="badges"
+                  eventRef={href}
+                  markPastBadges
+                />
                 <h3 className="font-display text-3xl italic">{item.title}</h3>
                 {(item.subtitle?.trim().length ?? 0) > 0 && (
                   <h4 className="font-display text-xl italic mt-2">{item.subtitle}</h4>

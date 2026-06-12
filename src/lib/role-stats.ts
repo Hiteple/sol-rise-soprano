@@ -6,6 +6,13 @@ export type RoleAppearance = {
   notes?: string
 }
 
+export function roleLatestYear(appearances: RoleAppearance[]): number | null {
+  const years = appearances
+    .map((item) => Number.parseInt(item.year, 10))
+    .filter((year) => Number.isFinite(year))
+  return years.length > 0 ? Math.max(...years) : null
+}
+
 export function roleStats(appearances: RoleAppearance[]) {
   const years = appearances
     .map((item) => Number.parseInt(item.year, 10))

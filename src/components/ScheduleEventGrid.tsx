@@ -13,6 +13,7 @@ export type ScheduleEvent = {
   composer?: string
   venue?: string
   city?: string
+  videoUrl?: string
   image?: string
   organizationSlug?: string
   roleSlug?: string
@@ -88,7 +89,11 @@ export function ScheduleEventCard({
     <>
       <div className="split-grid-overlay" />
       <div className="split-grid-content">
-        <SplitGridBadges badges={badges} eventRef={item._meta.path} />
+        <SplitGridBadges
+          badges={badges}
+          eventRef={item._meta.path}
+          markPastBadges={item.status === 'upcoming'}
+        />
         <h3
           className={`font-display italic leading-tight ${
             compact ? 'text-base md:text-2xl line-clamp-3 md:line-clamp-none' : 'text-3xl'

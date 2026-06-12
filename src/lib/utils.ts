@@ -30,18 +30,34 @@ export function youtubeVideoId(videoUrl: string): string | null {
   return null
 }
 
+const YOUTUBE_THUMBNAIL_FILES = {
+  max: 'maxresdefault.jpg',
+  sd: 'sddefault.jpg',
+  hq: 'hqdefault.jpg',
+} as const
+
 /**
- * Public poster frame served by YouTube (no API key).
- * `hq` ≈ 480×360; `max` is higher-res when the uploader provided one.
+ * Public poster frames served by YouTube (no API key), highest quality first.
+ * `maxresdefault` is 1280×720 when available; not every upload has it.
  */
+export function youtubeThumbnailCandidates(videoUrl: string): string[] {
+  const id = youtubeVideoId(videoUrl)
+  if (!id) return []
+  return [
+    `https://img.youtube.com/vi/${id}/${YOUTUBE_THUMBNAIL_FILES.max}`,
+    `https://img.youtube.com/vi/${id}/${YOUTUBE_THUMBNAIL_FILES.sd}`,
+    `https://img.youtube.com/vi/${id}/${YOUTUBE_THUMBNAIL_FILES.hq}`,
+  ]
+}
+
+/** Single YouTube poster URL. Prefer `youtubeThumbnailCandidates` when you can fall back on 404. */
 export function youtubeThumbnailUrl(
   videoUrl: string,
-  quality: 'hq' | 'max' = 'hq',
+  quality: 'hq' | 'sd' | 'max' = 'max',
 ): string | null {
   const id = youtubeVideoId(videoUrl)
   if (!id) return null
-  const file = quality === 'max' ? 'maxresdefault.jpg' : 'hqdefault.jpg'
-  return `https://img.youtube.com/vi/${id}/${file}`
+  return `https://img.youtube.com/vi/${id}/${YOUTUBE_THUMBNAIL_FILES[quality]}`
 }
 
 /** YouTube's /watch page cannot be iframed (X-Frame-Options). Use /embed/… for iframe src. */

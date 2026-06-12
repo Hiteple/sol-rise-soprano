@@ -11,7 +11,7 @@ export const careerNavItems: CareerNavItem[] = [
     href: '/career',
   },
   {
-    label: 'Roles',
+    label: 'Performances',
     description: 'Operatic roles and repertoire',
     href: '/roles',
   },

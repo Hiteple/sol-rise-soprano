@@ -160,16 +160,16 @@ export default defineStackbitConfig({
             slideInField('mediaGridSlideIn', 'mediaGrid'),
             { name: 'mediaEyebrow', type: 'string', label: 'Eyebrow', group: 'mediaGrid' },
             { name: 'mediaTitle', type: 'string', label: 'Title', group: 'mediaGrid' },
-            {
-              name: 'mediaItems',
-              type: 'list',
-              label: 'Media Items',
-              group: 'mediaGrid',
-              items: {
-                type: 'reference',
-                models: ['video', 'image'],
+            fieldWithDescription(
+              {
+                name: 'lastEventsItems',
+                type: 'list',
+                label: 'Last Events (schedule slugs)',
+                group: 'mediaGrid',
+                items: { type: 'string' },
               },
-            },
+              'Order of past schedule events on the home grid. Slug = filename without .md from content/schedule/. Leave empty to show all published past events by order.',
+            ),
             fieldWithDescription(
               {
                 name: 'featuredEventsLayout',
@@ -482,44 +482,6 @@ export default defineStackbitConfig({
           ],
         },
         {
-          name: 'video',
-          type: 'data',
-          folder: 'content/media',
-          fields: [
-            { name: 'title', type: 'string', label: 'Title' },
-            { name: 'type', type: 'enum', options: ['video', 'image'], label: 'Type' },
-            { name: 'videoUrl', type: 'string', label: 'Video - YouTube URL' },
-            fieldWithDescription(
-              { name: 'imageUrl', type: 'string', label: 'Image link URL' },
-              'Internal path (e.g. /schedule/my-event) opens in-site. Full https:// URLs open in a new tab.',
-            ),
-            {
-              name: 'thumbnail',
-              type: 'string',
-              label: 'Thumbnail (optional for YouTube — auto poster from video URL)',
-            },
-            { name: 'description', type: 'string', label: 'Short Description' },
-            contentOrderField(),
-          ],
-        },
-        {
-          name: 'image',
-          type: 'data',
-          folder: 'content/media',
-          fields: [
-            { name: 'title', type: 'string', label: 'Title' },
-            { name: 'type', type: 'enum', options: ['video', 'image'], label: 'Type' },
-            { name: 'videoUrl', type: 'string', label: 'Video - YouTube URL' },
-            fieldWithDescription(
-              { name: 'imageUrl', type: 'string', label: 'Image link URL' },
-              'Internal path (e.g. /schedule/my-event) opens in-site. Full https:// URLs open in a new tab.',
-            ),
-            { name: 'thumbnail', type: 'string', label: 'Thumbnail Image URL' },
-            { name: 'description', type: 'string', label: 'Short Description' },
-            contentOrderField(),
-          ],
-        },
-        {
           name: 'Role',
           type: 'data',
           folder: 'content/roles',
@@ -527,6 +489,19 @@ export default defineStackbitConfig({
             { name: 'characterName', type: 'string', label: 'Character' },
             { name: 'operaTitle', type: 'string', label: 'Opera' },
             { name: 'composer', type: 'string', label: 'Composer' },
+            fieldWithDescription(
+              {
+                name: 'category',
+                type: 'enum',
+                label: 'Category',
+                options: [
+                  { label: 'Lead', value: 'lead' },
+                  { label: 'Supporting', value: 'supporting' },
+                  { label: 'Ensemble', value: 'ensemble' },
+                ],
+              },
+              'Lead, supporting, or ensemble — shown as a badge on the performances index.',
+            ),
             fieldWithDescription(
               { name: 'heroImage', type: 'image', label: 'Card image' },
               'Portrait for the roles index card (4:5). Use images/general/placeholder-portrait.svg while preparing.',
@@ -600,8 +575,12 @@ export default defineStackbitConfig({
             { name: 'venue', type: 'string', label: 'Venue' },
             { name: 'city', type: 'string', label: 'City' },
             fieldWithDescription(
+              { name: 'videoUrl', type: 'string', label: 'YouTube URL (optional)' },
+              'When set on a past event, shows as the first Photography tile and opens in the lightbox video player.',
+            ),
+            fieldWithDescription(
               { name: 'image', type: 'image', label: 'Card & detail image' },
-              'Used on schedule cards and detail hero. 4:5 works well for cards.',
+              'Used on schedule cards, detail hero, and home Last Events. 4:5 works well for cards.',
             ),
             { name: 'imageAlt', type: 'string', label: 'Detail image alt' },
             fieldWithDescription(

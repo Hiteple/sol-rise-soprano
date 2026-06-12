@@ -2,6 +2,7 @@
 characterName: Sister Lay-Sister
 operaTitle: Suor Angelica
 composer: Giacomo Puccini
+category: ensemble
 heroImage: images/general/placeholder-landscape.svg
 featureImage: images/general/placeholder-landscape.svg
 summary: >-

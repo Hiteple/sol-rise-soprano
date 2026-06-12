@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 import { sectionColorSchemeSchema } from './schemas/color-scheme'
 import { imageCreditFieldsSchema } from './schemas/image-credit'
+import { roleCategorySchema } from './schemas/role-category'
 import { scheduleEventSchema } from './schemas/schedule-event'
 import {
   aboutPageSchema,
@@ -83,7 +84,7 @@ const home = defineCollection({
     organizationsStripSlideIn: z.boolean().default(true),
     mediaEyebrow: z.string(),
     mediaTitle: z.string(),
-    mediaItems: z.array(z.string()).max(12).optional(),
+    lastEventsItems: z.array(z.string()).max(24).optional(),
     mediaGridColorScheme: sectionColorSchemeSchema.default('soft'),
     mediaGridSlideIn: z.boolean().default(true),
     featuredEventsLayout: z.enum(['splitGrid', 'scheduleCards']).default('splitGrid'),
@@ -162,43 +163,6 @@ const gallery = defineCollection({
   }),
 })
 
-const mediaItems = defineCollection({
-  name: 'mediaItems',
-  directory: 'content/media',
-  include: '**/*.md',
-  schema: z
-    .object({
-      title: z.string(),
-      type: z.enum(['video', 'image']),
-      videoUrl: z.string().optional(),
-      imageUrl: z.string().optional(),
-      /** Optional for YouTube videos — poster is derived from `videoUrl`. Required for `image`. */
-      thumbnail: z.string().optional(),
-      description: z.string(),
-      order: z.number().optional(),
-      content: z.string(),
-    })
-    .superRefine((data, ctx) => {
-      const hasThumbnail = (data.thumbnail?.trim().length ?? 0) > 0
-
-      if (data.type === 'image' && !hasThumbnail) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'thumbnail is required for image media items',
-          path: ['thumbnail'],
-        })
-      }
-
-      if (data.type === 'video' && !hasThumbnail && !(data.videoUrl?.trim().length ?? 0)) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'video items need videoUrl (YouTube poster) or thumbnail',
-          path: ['videoUrl'],
-        })
-      }
-    }),
-})
-
 const roles = defineCollection({
   name: 'roles',
   directory: 'content/roles',
@@ -207,6 +171,7 @@ const roles = defineCollection({
     characterName: z.string(),
     operaTitle: z.string(),
     composer: z.string(),
+    category: roleCategorySchema,
     heroImage: z.string(),
     featureImage: z.string(),
     featureImagePhotography: z.string().optional(),
@@ -294,7 +259,6 @@ export default defineConfig({
   collections: [
     home,
     gallery,
-    mediaItems,
     roles,
     organizations,
     scheduleEvents,

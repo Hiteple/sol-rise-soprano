@@ -5,6 +5,7 @@ import { allHomes } from 'content-collections'
 
 import { CareerNavDropdown } from '@/components/CareerNavDropdown'
 import { isCareerNavHref } from '@/lib/career-nav'
+import { isNavLinkActive } from '@/lib/nav-active'
 import { parseSiteNavLinks } from '@/lib/nav-links'
 import { cn } from '@/lib/utils'
 
@@ -104,13 +105,14 @@ export function Nav() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link, idx) =>
-              isCareerNavHref(link.href) ? (
+            {navLinks.map((link, idx) => {
+              const active = isNavLinkActive(link.href, pathname)
+
+              return isCareerNavHref(link.href) ? (
                 <CareerNavDropdown
                   key={`${link.label}-${link.href}`}
                   variant="desktop"
                   useChrome={useChrome}
-                  onHeroHome={onHeroHome}
                   pathname={pathname}
                 />
               ) : (
@@ -118,35 +120,14 @@ export function Nav() {
                   key={`${link.label}-${link.href}`}
                   href={link.href}
                   className="gold-link"
-                  aria-current={pathname === link.href ? 'page' : undefined}
+                  aria-current={active ? 'page' : undefined}
                   data-sb-field-path={`headerNavLinks.${idx}.label`}
-                  style={
-                    pathname === link.href
-                      ? {
-                          color: useChrome
-                            ? 'var(--chrome-text)'
-                            : onHeroHome
-                              ? 'var(--accent-pale-color)'
-                              : 'var(--accent-soft-color)',
-                        }
-                      : undefined
-                  }
                   onClick={() => setMenuOpen(false)}
-                  onMouseEnter={(e) => {
-                    if (pathname !== link.href && !useChrome && onHeroHome) {
-                      e.currentTarget.style.color = 'var(--accent-pale-color)'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (pathname !== link.href && !useChrome && onHeroHome) {
-                      e.currentTarget.style.color = ''
-                    }
-                  }}
                 >
                   {link.label}
                 </a>
-              ),
-            )}
+              )
+            })}
           </div>
 
           {/* Mobile Toggle */}
@@ -193,13 +174,14 @@ export function Nav() {
             borderColor: useChrome ? 'var(--chrome-border)' : 'color-mix(in srgb, var(--accent-ink-color) 15%, transparent)',
           }}
         >
-          {navLinks.map((link, idx) =>
-            isCareerNavHref(link.href) ? (
+          {navLinks.map((link, idx) => {
+            const active = isNavLinkActive(link.href, pathname)
+
+            return isCareerNavHref(link.href) ? (
               <CareerNavDropdown
                 key={`${link.label}-${link.href}-mobile`}
                 variant="mobile"
                 useChrome={useChrome}
-                onHeroHome={onHeroHome}
                 pathname={pathname}
                 onNavigate={() => setMenuOpen(false)}
               />
@@ -207,17 +189,16 @@ export function Nav() {
               <a
                 key={`${link.label}-${link.href}-mobile`}
                 href={link.href}
-                className="font-display text-2xl italic"
-                aria-current={pathname === link.href ? 'page' : undefined}
+                className="nav-mobile-link font-display text-2xl italic"
+                aria-current={active ? 'page' : undefined}
                 data-sb-field-path={`headerNavLinks.${idx}.label`}
-                style={{ color: useChrome ? 'var(--chrome-text)' : 'var(--body-color)' }}
                 onClick={() => setMenuOpen(false)}
                 tabIndex={menuOpen ? undefined : -1}
               >
                 {link.label}
               </a>
-            ),
-          )}
+            )
+          })}
         </div>
       </div>
     </nav>

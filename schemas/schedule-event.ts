@@ -22,6 +22,8 @@ export const scheduleEventSchema = z.object({
   composer: z.string().optional(),
   venue: z.string().optional(),
   city: z.string().optional(),
+  /** YouTube URL — first item in Photography (past events); opens in the lightbox carousel. */
+  videoUrl: z.string().optional(),
   image: z.string().optional(),
   imageAlt: z.string().optional(),
   organizationSlug: z.string().optional(),

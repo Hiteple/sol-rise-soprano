@@ -2,6 +2,7 @@
 characterName: Aunt of Cio-Cio-San
 operaTitle: Madama Butterfly
 composer: Giacomo Puccini
+category: ensemble
 heroImage: images/madama-butterfly/33-processed.webp
 featureImage: images/madama-butterfly/32-processed.webp
 featureImagePhotography: Liliana Morsia

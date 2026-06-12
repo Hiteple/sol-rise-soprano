@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { allGalleries, allOrganizations, allRoles } from 'content-collections'
+import { allGalleries, allOrganizations, allRoles, allScheduleEvents } from 'content-collections'
 
 import { NotFoundSection } from '@/components/NotFoundSection'
 import { filterPublishedContent, isPublishedContent } from '@/lib/content-order'
@@ -24,6 +24,7 @@ function RoleDetailPage() {
         role={role}
         galleryItems={filterPublishedContent(allGalleries)}
         organizations={allOrganizations}
+        scheduleEvents={allScheduleEvents}
       />
     </div>
   )
@@ -32,7 +33,7 @@ function RoleDetailPage() {
 function RoleNotFound() {
   return (
     <NotFoundSection
-      eyebrow="Career · Roles"
+      eyebrow="Career · Performances"
       title="Role not found"
       description="This role is not in the repertoire listing yet — it may be unpublished or the link may be outdated."
       backHref="/roles"

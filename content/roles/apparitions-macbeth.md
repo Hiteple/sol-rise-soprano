@@ -2,6 +2,7 @@
 characterName: Apparition
 operaTitle: Macbeth
 composer: Giuseppe Verdi
+category: ensemble
 heroImage: images/general/placeholder-landscape.svg
 featureImage: images/general/placeholder-landscape.svg
 featureImagePhotography: Liliana Morsia

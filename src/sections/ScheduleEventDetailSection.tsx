@@ -1,10 +1,13 @@
 import { Link } from '@tanstack/react-router'
 
 import { ExternalLink } from '@/components/ExternalLink'
+import { PhotographyVideoTile } from '@/components/PhotographyVideoTile'
+import { SchedulePerformanceDateBadges } from '@/components/SchedulePerformanceDateBadges'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { isInternalHref } from '@/lib/internal-href'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { relatedGalleryForScheduleEvent } from '@/lib/schedule-gallery'
+import { schedulePhotographyLightboxItems } from '@/lib/schedule-photography'
 import {
   resolveColorScheme,
   schemeForeground,
@@ -145,6 +148,10 @@ export function ScheduleEventDetailSection({
     : undefined
   const role = event.roleSlug ? roles.find((entry) => entry._meta.path === event.roleSlug) : undefined
   const relatedGallery = relatedGalleryForScheduleEvent(event, galleryItems)
+  const videoUrl = event.videoUrl?.trim() ?? ''
+  const hasVideo = Boolean(videoUrl)
+  const showPhotography =
+    event.status === 'past' && (hasVideo || relatedGallery.length > 0)
   const plot = event.plot?.trim() ?? ''
   const ticketHref = event.ticketHref?.trim() ?? ''
   const externalUrl = event.externalUrl?.trim() ?? ''
@@ -156,12 +163,15 @@ export function ScheduleEventDetailSection({
   const { ref: bodyRef, inView: bodyInView } = useInView<HTMLDivElement>()
   const { openGallery } = useGalleryPhotoSwipe()
 
-  const lightboxItems = relatedGallery.map((item) => ({
-    image: item.image,
-    alt: item.alt,
-    title: item.title,
-    photographer: item.photographer,
-  }))
+  const lightboxItems = schedulePhotographyLightboxItems(
+    { title: event.title, videoUrl, image: event.image },
+    relatedGallery.map((item) => ({
+      image: item.image,
+      alt: item.alt,
+      title: item.title,
+      photographer: item.photographer,
+    })),
+  )
 
   const locationParts = [event.venue, event.city ?? org?.city, org?.country].filter(Boolean)
 
@@ -247,20 +257,11 @@ export function ScheduleEventDetailSection({
                   <p className="font-body text-xs uppercase tracking-[0.28em] mb-3" style={{ color: workFg.eyebrow }}>
                     Performance dates
                   </p>
-                  <ul className="flex flex-wrap gap-2">
-                    {event.badges!.map((badge) => (
-                      <li
-                        key={badge}
-                        className="px-3 py-1.5 font-body text-xs uppercase tracking-[0.2em] rounded-[var(--media-radius)] border"
-                        style={{
-                          borderColor: workFg.divider,
-                          color: workFg.heading,
-                        }}
-                      >
-                        {badge}
-                      </li>
-                    ))}
-                  </ul>
+                  <SchedulePerformanceDateBadges
+                    badges={event.badges!}
+                    eventRef={event._meta.path}
+                    markPastBadges={event.status === 'upcoming'}
+                  />
                 </div>
               )}
 
@@ -327,7 +328,7 @@ export function ScheduleEventDetailSection({
       )}
 
       {/* Cast; gallery only for past events (photos from this run / role) */}
-      {((event.cast?.length ?? 0) > 0 || relatedGallery.length > 0) && (
+      {((event.cast?.length ?? 0) > 0 || showPhotography) && (
       <section className="section-vertical-padding" style={{ background: 'var(--page-background-color)' }}>
         <div
           ref={bodyRef}
@@ -359,12 +360,19 @@ export function ScheduleEventDetailSection({
             </div>
           )}
 
-          {relatedGallery.length > 0 && (
+          {showPhotography && (
             <div>
               <h2 className="font-display text-2xl lg:text-3xl italic mb-6" style={{ color: bodyFg.heading }}>
-                Photography
+                Media
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {hasVideo && (
+                  <PhotographyVideoTile
+                    video={{ title: event.title, videoUrl, image: event.image }}
+                    videoFieldPath="videoUrl"
+                    onClick={() => openGallery(lightboxItems, 0)}
+                  />
+                )}
                 {relatedGallery.map((item, index) => (
                   <button
                     key={item._meta.path}
@@ -372,7 +380,7 @@ export function ScheduleEventDetailSection({
                     className="img-zoom block media-radius border-0 p-0 text-left cursor-pointer w-full"
                     style={{ aspectRatio: '4/5' }}
                     aria-label={`View larger image: ${item.title}`}
-                    onClick={() => openGallery(lightboxItems, index)}
+                    onClick={() => openGallery(lightboxItems, hasVideo ? index + 1 : index)}
                   >
                     <img
                       {...netlifyImgSet(item.image, 480, 600)}

@@ -7,6 +7,7 @@ venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
 roleSlug: zerlina-don-giovanni
+videoUrl: https://www.youtube.com/watch?v=RGP5-P5cfpg
 image: images/don-giovanni/IMG_1371.jpg
 status: past
 year: '2023'
