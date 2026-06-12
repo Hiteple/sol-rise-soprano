@@ -1,5 +1,6 @@
 import { marked } from 'marked'
 import { netlifyImgSet } from '@/lib/netlify-image'
+import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { BioPage } from '../../schemas/site-pages'
@@ -12,6 +13,7 @@ export type RichtextContentSectionProps = {
     | 'fullBioParagraphs'
     | 'fullBioImage'
     | 'fullBioImageAlt'
+    | 'fullBioImagePhotography'
     | 'fullBioImagePosition'
     | 'fullBioSlideIn'
   >
@@ -23,6 +25,7 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
   const hasImage = Boolean(page.fullBioImage)
   const imageOnLeft = page.fullBioImagePosition === 'left'
   const animate = page.fullBioSlideIn !== false
+  const imageCredit = photographerCreditLabel(page.fullBioImagePhotography)
   const { ref, inView } = useInView<HTMLDivElement>()
 
   const eyebrow = (
@@ -69,7 +72,7 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div
-              className={`img-zoom media-radius ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
+              className={`relative img-zoom media-radius overflow-hidden ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
             >
               <img
                 {...netlifyImgSet(page.fullBioImage as string, 900, 1100)}
@@ -78,6 +81,20 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
                 style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
                 data-sb-field-path="fullBioImage#@src"
               />
+              {imageCredit && (
+                <div
+                  className="role-feature-image__credit absolute inset-x-0 bottom-0 px-4 pb-3 pointer-events-none"
+                  aria-hidden
+                >
+                  <p
+                    className="font-body text-xs uppercase tracking-widest text-right"
+                    style={{ color: 'var(--media-caption-text-color)' }}
+                    data-sb-field-path="fullBioImagePhotography"
+                  >
+                    {imageCredit}
+                  </p>
+                </div>
+              )}
             </div>
             <div className={imageOnLeft ? 'order-2' : 'order-2 lg:order-1'}>
               {eyebrow}

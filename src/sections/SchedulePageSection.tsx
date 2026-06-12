@@ -1,11 +1,18 @@
+import { useState } from 'react'
+
 import {
   ScheduleEventCard,
   ScheduleEventGrid,
   scheduleCardScheme,
   type ScheduleEvent,
 } from '@/components/ScheduleEventGrid'
+import { SlidingTabGroup } from '@/components/SlidingTabGroup'
+import { TabGridEmptyState } from '@/components/TabGridEmptyState'
+import { filterScheduleEventsByMedia, sortPastScheduleEvents } from '@/lib/schedule-event-filter'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
+import { mediaFilterEmptyCopy } from '@/lib/tab-grid-empty-copy'
 import { useInView } from '@/lib/use-in-view'
+import type { MediaFilter } from '@/sections/types'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
 export type { ScheduleEvent } from '@/components/ScheduleEventGrid'
@@ -25,10 +32,11 @@ export function SchedulePageSection({
   upcomingSlideIn,
   pastSlideIn,
 }: SchedulePageSectionProps) {
+  const [pastFilter, setPastFilter] = useState<MediaFilter>('all')
+
   const upcoming = events.filter((event) => event.status === 'upcoming')
-  const past = events
-    .filter((event) => event.status === 'past')
-    .sort((a, b) => Number(b.year ?? 0) - Number(a.year ?? 0))
+  const past = sortPastScheduleEvents(events.filter((event) => event.status === 'past'))
+  const filteredPast = filterScheduleEventsByMedia(past, pastFilter)
 
   const upcomingScheme = resolveColorScheme(upcomingColorScheme)
   const pastScheme = resolveColorScheme(pastColorScheme)
@@ -65,29 +73,49 @@ export function SchedulePageSection({
 
       {past.length > 0 && (
         <section
-          className="section-vertical-padding"
+          id="last-appearances"
+          className="section-vertical-padding scroll-mt-24"
           data-sb-field-path="pastColorScheme"
           style={{ background: schemePageBandBackground(pastScheme) }}
         >
           <div className="max-w-site mx-auto w-full px-4 lg:px-12">
-            {/* Observe the heading only — the full grid is too tall for IO threshold on mobile */}
-            <div ref={pastRef}>
-              <h2 className="font-display text-4xl lg:text-5xl italic pb-8" style={{ color: pastFg.heading }}>
+            <div
+              ref={pastRef}
+              className={`flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8${animatePast ? ` reveal${pastInView ? ' is-visible' : ''}` : ''}`}
+            >
+              <h2 className="font-display text-4xl lg:text-5xl italic" style={{ color: pastFg.heading }}>
                 Last Appearances
               </h2>
+              <SlidingTabGroup
+                ariaLabel="Filter past appearances"
+                value={pastFilter}
+                onChange={setPastFilter}
+                options={[
+                  { value: 'all', label: 'All' },
+                  { value: 'opera', label: 'Opera' },
+                  { value: 'concert', label: 'Concerts' },
+                ]}
+              />
             </div>
-            <div
-              className={`schedule-event-grid${animatePast ? ` reveal${pastInView ? ' is-visible' : ''}` : ''}`}
-            >
-              {past.map((item) => (
-                <ScheduleEventCard
-                  key={item._meta.path}
-                  item={item}
-                  cardScheme={scheduleCardScheme(pastColorScheme)}
-                  compact
-                />
-              ))}
-            </div>
+
+            {filteredPast.length === 0 ? (
+              <TabGridEmptyState
+                {...mediaFilterEmptyCopy(pastFilter)}
+                headingColor={pastFg.heading}
+                bodyColor={pastFg.body}
+              />
+            ) : (
+              <div className={`schedule-event-grid${animatePast ? ` reveal${pastInView ? ' is-visible' : ''}` : ''}`}>
+                {filteredPast.map((item) => (
+                  <ScheduleEventCard
+                    key={item._meta.path}
+                    item={item}
+                    cardScheme={scheduleCardScheme(pastColorScheme)}
+                    compact
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}

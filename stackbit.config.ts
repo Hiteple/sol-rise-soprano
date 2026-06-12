@@ -281,6 +281,12 @@ export default defineStackbitConfig({
             { name: 'fullBioImage', type: 'image', label: 'Side image (optional; leave empty for centered text)', group: 'richtextContent' },
             { name: 'fullBioImageAlt', type: 'string', label: 'Side image alt', group: 'richtextContent' },
             {
+              name: 'fullBioImagePhotography',
+              type: 'string',
+              label: 'Side image photography credit',
+              group: 'richtextContent',
+            },
+            {
               name: 'fullBioImagePosition',
               type: 'enum',
               label: 'Side image position',

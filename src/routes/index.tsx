@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
 import { allHomes, allOrganizations, allScheduleEvents } from 'content-collections'
 
 import { homeLastEvents } from '@/lib/home-last-events'
@@ -10,15 +9,13 @@ import { MediaGridSection } from '@/sections/MediaGridSection'
 import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
 import { OrganizationsStripSection } from '@/sections/OrganizationsStripSection'
 import { FeaturedEventsSection } from '@/sections/FeaturedEventsSection'
-import type { MediaFilter } from '@/sections/types'
-
 export const Route = createFileRoute('/')({
   component: HomePage,
 })
 
 function HomePage() {
   const site = allHomes[0]
-  const lastEvents = homeLastEvents(allScheduleEvents, site?.lastEventsItems)
+  const lastEvents = homeLastEvents(allScheduleEvents)
   const publishedOrganizations = publishedContentSorted(allOrganizations)
   const organizationsBySlug = new Map(publishedOrganizations.map((org) => [org._meta.path, org]))
   const featuredOrganizations =
@@ -50,8 +47,6 @@ function HomePage() {
       subtitle: '',
     },
   ]
-  const [filter, setFilter] = useState<MediaFilter>('all')
-
   if (!site) return null
 
   return (
@@ -110,8 +105,7 @@ function HomePage() {
           slideIn: site.mediaGridSlideIn,
         }}
         events={lastEvents}
-        filter={filter}
-        onFilterChange={setFilter}
+        linkText={site.mediaLinkText}
       />
       <QuoteBannerSection
         section={{

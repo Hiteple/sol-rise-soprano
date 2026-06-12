@@ -161,6 +161,8 @@ export const bioPageSchema = z.object({
   fullBioParagraphs: z.array(fullBioParagraphSchema),
   fullBioImage: z.string().optional(),
   fullBioImageAlt: z.string().optional(),
+  /** Photo credit — shown on the portrait when set (e.g. Diego Israelit). */
+  fullBioImagePhotography: z.string().optional(),
   fullBioImagePosition: z.enum(['left', 'right']).default('right'),
   content: z.string(),
 })

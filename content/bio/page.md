@@ -58,6 +58,7 @@ fullBioParagraphs:
 fullBioColorScheme: soft
 fullBioImage: '/images/photo-book/SON05945 1.jpg'
 fullBioImageAlt: Sol Risé portrait
+fullBioImagePhotography: Diego Israelit
 fullBioImagePosition: right
 ---
 

@@ -84,7 +84,9 @@ const home = defineCollection({
     organizationsStripSlideIn: z.boolean().default(true),
     mediaEyebrow: z.string(),
     mediaTitle: z.string(),
+    /** @deprecated Home shows the 8 most recent past events automatically. */
     lastEventsItems: z.array(z.string()).max(24).optional(),
+    mediaLinkText: z.string().optional(),
     mediaGridColorScheme: sectionColorSchemeSchema.default('soft'),
     mediaGridSlideIn: z.boolean().default(true),
     featuredEventsLayout: z.enum(['splitGrid', 'scheduleCards']).default('splitGrid'),
