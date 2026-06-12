@@ -18,7 +18,7 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   const site = allHomes[0]
-  const mediaItems = homeLastEvents(allScheduleEvents, site?.lastEventsItems)
+  const lastEvents = homeLastEvents(allScheduleEvents, site?.lastEventsItems)
   const publishedOrganizations = publishedContentSorted(allOrganizations)
   const organizationsBySlug = new Map(publishedOrganizations.map((org) => [org._meta.path, org]))
   const featuredOrganizations =
@@ -109,7 +109,7 @@ function HomePage() {
           colorScheme: site.mediaGridColorScheme,
           slideIn: site.mediaGridSlideIn,
         }}
-        mediaItems={mediaItems}
+        events={lastEvents}
         filter={filter}
         onFilterChange={setFilter}
       />

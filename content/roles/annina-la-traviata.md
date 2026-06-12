@@ -3,8 +3,8 @@ characterName: Annina
 operaTitle: La Traviata
 composer: Giuseppe Verdi
 category: supporting
-heroImage: images/general/placeholder-portrait.svg
-featureImage: images/general/placeholder-landscape.svg
+heroImage: images/la-traviata/la-traviata-annina-01.JPG
+featureImage: images/la-traviata/la-traviata-annina-02.JPG
 summary: >-
   Violetta's loyal maid — performed in Buenos Aires.
 order: 8

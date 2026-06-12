@@ -9,8 +9,8 @@ venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: celebrarte-musica
 roleSlug: contessa-di-ceprano-rigoletto
-image: images/general/placeholder-portrait.svg
-imageAlt: Rigoletto performance placeholder
+image: images/rigoletto/rigoletto.webp
+imageAlt: Rigoletto performance with Celebrarte Música
 status: past
 year: '2022'
 order: 42

@@ -8,8 +8,8 @@ composer: Various composers
 venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
-image: images/general/placeholder-portrait.svg
-imageAlt: Anniversary gala performance placeholder
+image: images/juventus-lyrica/juventus-25th-01.JPG
+imageAlt: Anniversary gala performance with Juventus Lyrica
 gallerySlug: juventus-lyrica-25th-gala-2024
 status: past
 year: '2024'

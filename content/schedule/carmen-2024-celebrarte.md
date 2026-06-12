@@ -7,8 +7,9 @@ composer: Georges Bizet
 venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: celebrarte-musica
-image: images/general/placeholder-portrait.svg
-imageAlt: Carmen performance placeholder
+image: images/carmen/carmen-comodoro-rivadavia-banner.jpg
+imageAlt: Carmen performance with Celebrarte Música
+gallerySlug: carmen-2024-celebrarte
 status: past
 year: '2024'
 order: 26

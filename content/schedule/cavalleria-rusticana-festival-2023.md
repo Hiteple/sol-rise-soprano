@@ -8,8 +8,8 @@ composer: Pietro Mascagni
 venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: juventus-lyrica
-image: images/general/placeholder-portrait.svg
-imageAlt: Cavalleria Rusticana performance placeholder
+image: images/cavaleria-rusticana/cavaleria-rusticana-01.webp
+imageAlt: Cavalleria Rusticana performance with Juventus Lyrica
 gallerySlug: cavalleria-rusticana-festival-2023
 status: past
 year: '2023'

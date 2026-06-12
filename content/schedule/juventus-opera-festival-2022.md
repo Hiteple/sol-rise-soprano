@@ -7,10 +7,15 @@ composer: Various composers
 venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
-image: images/general/placeholder-portrait.svg
-imageAlt: Opera festival performance placeholder
+image: images/juventus-lyrica/juventus-lyrica-festival-01.jpg
+imageAlt: Opera festival performance with Juventus Lyrica
 gallerySlug: juventus-opera-festival-2022
 status: past
 year: '2022'
-order: 40
+order: 0
 ---
+
+**Editor notes** (not shown on the site)
+
+- Publish with `order: 40` if assets are improved or replaced
+- Assets exist (`juventus-lyrica-festival-01.jpg`, `juventus-lyrica-festival-02.jpg`) but quality is not good enough to show

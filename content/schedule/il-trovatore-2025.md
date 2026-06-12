@@ -8,8 +8,9 @@ composer: Giuseppe Verdi
 venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: valkyria-lirica
-image: images/general/placeholder-portrait.svg
-imageAlt: Il Trovatore performance placeholder
+image: images/il-trovatore/il-trovatore-01.JPG
+imageAlt: Il Trovatore performance with Valkyria Lírica
+gallerySlug: il-trovatore-2025
 status: past
 year: '2025'
 order: 13

@@ -1,0 +1,10 @@
+---
+title: Juventus Lyrica 25th Anniversary Gala
+image: images/juventus-lyrica/juventus-25th-01.JPG
+alt: Sol Risé at Juventus Lyrica's 25th anniversary gala, Teatro Avenida
+category: Performance
+gallerySlug: juventus-lyrica-25th-gala-2024
+order: 29
+---
+
+Juventus Lyrica 25th Anniversary Gala — Teatro Avenida.

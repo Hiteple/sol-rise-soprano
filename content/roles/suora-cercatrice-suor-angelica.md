@@ -3,8 +3,8 @@ characterName: Sister Lay-Sister
 operaTitle: Suor Angelica
 composer: Giacomo Puccini
 category: ensemble
-heroImage: images/general/placeholder-landscape.svg
-featureImage: images/general/placeholder-landscape.svg
+heroImage: images/suor-angelica/suor-angelica-celebrarte-musica-02.JPG
+featureImage: images/suor-angelica/suor-angelica-celebrarte-musica-01.jpeg
 summary: >-
   The Lay-Sister (*Suora Cercatrice*) in Puccini's convent drama — performed
   with Celebrarte Música.

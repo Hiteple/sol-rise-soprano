@@ -888,20 +888,6 @@
   }
 }
 
-/* Home Last Events — same column rhythm as past schedule cards */
-.media-event-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-@media (min-width: 1024px) {
-  .media-event-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-.media-event-card {
-  aspect-ratio: 4 / 5;
-}
 .schedule-event-card {
   position: relative;
   aspect-ratio: 4 / 5;

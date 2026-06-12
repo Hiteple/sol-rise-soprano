@@ -1,6 +1,9 @@
+import { sortByContentOrder } from '@/lib/content-order'
+
 export type GalleryLinkItem = {
   roleSlug?: string
   gallerySlug?: string
+  order?: number
 }
 
 export type ScheduleGallerySource = {
@@ -20,9 +23,11 @@ export function relatedGalleryForScheduleEvent<T extends GalleryLinkItem>(
   const gallerySlug = event.gallerySlug?.trim()
   if (!roleSlug && !gallerySlug) return []
 
-  return galleryItems.filter((item) => {
-    if (roleSlug && item.roleSlug === roleSlug) return true
-    if (gallerySlug && item.gallerySlug === gallerySlug) return true
-    return false
-  })
+  return sortByContentOrder(
+    galleryItems.filter((item) => {
+      if (roleSlug && item.roleSlug === roleSlug) return true
+      if (gallerySlug && item.gallerySlug === gallerySlug) return true
+      return false
+    }),
+  )
 }

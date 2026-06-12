@@ -4,6 +4,8 @@ import { PhotographyVideoTile } from '@/components/PhotographyVideoTile'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
+import { showsPlaceholderImage } from '@/lib/placeholder-image'
+import { sortByContentOrder } from '@/lib/content-order'
 import { roleStats } from '@/lib/role-stats'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
@@ -45,13 +47,16 @@ export function RoleDetailSection({
   const fg = schemeForeground(scheme)
   const stats = roleStats(role.appearances)
   const orgBySlug = new Map(organizations.map((org) => [org._meta.path, org]))
-  const relatedGallery = galleryItems.filter((item) => item.roleSlug === role._meta.path)
+  const relatedGallery = sortByContentOrder(
+    galleryItems.filter((item) => item.roleSlug === role._meta.path),
+  )
   const roleVideos = scheduleVideosForRole(role._meta.path, scheduleEvents)
   const showPhotography = roleVideos.length > 0 || relatedGallery.length > 0
   const bodyHtml = role.content?.trim() ? marked(role.content) : ''
   const { ref, inView } = useInView<HTMLDivElement>()
   const { openGallery } = useGalleryPhotoSwipe()
 
+  const hasFeatureImage = !showsPlaceholderImage(role.featureImage)
   const featureImageCredit = photographerCreditLabel(role.featureImagePhotography)
 
   const lightboxItems = rolePhotographyLightboxItems(
@@ -90,31 +95,33 @@ export function RoleDetailSection({
         >
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_280px] gap-12 lg:gap-16">
             <div>
-              <div
-                className="relative img-zoom media-radius mb-10 overflow-hidden"
-                style={{ aspectRatio: '16/10' }}
-              >
-                <img
-                  {...netlifyImgSet(role.featureImage, 1200, 750)}
-                  alt={`${role.characterName} in ${role.operaTitle}`}
-                  className="w-full h-full object-cover"
-                  data-sb-field-path="featureImage"
-                />
-                {featureImageCredit && (
-                  <div
-                    className="role-feature-image__credit absolute inset-x-0 bottom-0 px-4 pb-3 pointer-events-none"
-                    aria-hidden
-                  >
-                    <p
-                      className="font-body text-xs uppercase tracking-widest text-right"
-                      style={{ color: 'var(--media-caption-text-color)' }}
-                      data-sb-field-path="featureImagePhotography"
+              {hasFeatureImage && (
+                <div
+                  className="relative img-zoom media-radius mb-10 overflow-hidden"
+                  style={{ aspectRatio: '16/10' }}
+                >
+                  <img
+                    {...netlifyImgSet(role.featureImage, 1200, 750)}
+                    alt={`${role.characterName} in ${role.operaTitle}`}
+                    className="w-full h-full object-cover"
+                    data-sb-field-path="featureImage"
+                  />
+                  {featureImageCredit && (
+                    <div
+                      className="role-feature-image__credit absolute inset-x-0 bottom-0 px-4 pb-3 pointer-events-none"
+                      aria-hidden
                     >
-                      {featureImageCredit}
-                    </p>
-                  </div>
-                )}
-              </div>
+                      <p
+                        className="font-body text-xs uppercase tracking-widest text-right"
+                        style={{ color: 'var(--media-caption-text-color)' }}
+                        data-sb-field-path="featureImagePhotography"
+                      >
+                        {featureImageCredit}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {bodyHtml && (
                 <div

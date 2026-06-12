@@ -1,82 +1,35 @@
-import { Link } from '@tanstack/react-router'
-
-import { ExternalLink } from '@/components/ExternalLink'
+import { ScheduleEventCard, scheduleCardScheme, type ScheduleEvent } from '@/components/ScheduleEventGrid'
 import { SlidingTabGroup } from '@/components/SlidingTabGroup'
-import { isInternalHref } from '@/lib/internal-href'
 import { TabGridEmptyState } from '@/components/TabGridEmptyState'
-import { resolveMediaThumbnail } from '@/lib/media-thumbnail'
-import { netlifyImgSet } from '@/lib/netlify-image'
 import { schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { mediaFilterEmptyCopy } from '@/lib/tab-grid-empty-copy'
 import { useInView } from '@/lib/use-in-view'
-import type { HomeMediaSection, MediaFilter, MediaItem } from './types'
+import type { HomeMediaSection, MediaFilter } from './types'
 
 export type MediaGridSectionProps = {
   section: HomeMediaSection
-  mediaItems: MediaItem[]
+  events: ScheduleEvent[]
   filter: MediaFilter
   onFilterChange: (filter: MediaFilter) => void
 }
 
-const cardClassName =
-  'media-event-card relative img-zoom media-radius cursor-pointer group block w-full border-0 p-0 text-left'
-
-function filterLastEvents(items: MediaItem[], filter: MediaFilter): MediaItem[] {
+function filterLastEvents(items: ScheduleEvent[], filter: MediaFilter): ScheduleEvent[] {
   if (filter === 'all') return items
   if (filter === 'opera') return items.filter((item) => Boolean(item.roleSlug?.trim()))
   return items.filter((item) => !item.roleSlug?.trim())
 }
 
-function MediaGridCardContent({ item }: { item: MediaItem }) {
-  const thumbnail = resolveMediaThumbnail({ type: 'image', thumbnail: item.thumbnail })
-
-  return (
-    <>
-      <img
-        {...netlifyImgSet(thumbnail, 800, 500)}
-        alt=""
-        aria-hidden
-        className="w-full h-full object-cover"
-        data-sb-field-path="image#@src"
-      />
-      <div
-        className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to top, color-mix(in srgb, var(--palette-wine) 88%, transparent) 0%, color-mix(in srgb, var(--palette-pine) 32%, transparent) 55%, transparent 100%)',
-        }}
-        aria-hidden
-      />
-      <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 pointer-events-none">
-        <p
-          className="font-display text-base md:text-2xl italic leading-tight line-clamp-2 md:line-clamp-none"
-          style={{ color: 'var(--media-caption-text-color)' }}
-          data-sb-field-path="title"
-        >
-          {item.title}
-        </p>
-        <p
-          className="font-display text-xs md:text-lg italic leading-snug mt-0.5 md:mt-1 line-clamp-1 md:line-clamp-2"
-          style={{ color: 'var(--media-caption-text-muted-color)' }}
-          data-sb-field-path="subtitle"
-        >
-          {item.description}
-        </p>
-      </div>
-    </>
-  )
-}
-
 export function MediaGridSection({
   section,
-  mediaItems,
+  events,
   filter,
   onFilterChange,
 }: MediaGridSectionProps) {
-  const filtered = filterLastEvents(mediaItems, filter)
+  const filtered = filterLastEvents(events, filter)
 
   const scheme = section.colorScheme
   const fg = schemeForeground(scheme)
+  const cardScheme = scheduleCardScheme(scheme)
   const animate = section.slideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
 
@@ -127,49 +80,15 @@ export function MediaGridSection({
             bodyColor={fg.body}
           />
         ) : (
-          <div className="media-event-grid">
-            {filtered.map((item) => {
-              const objectId = `content/schedule/${item._meta.path}.md`
-              const imageHref = item.imageUrl.trim()
-
-              if (!imageHref) {
-                return (
-                  <div
-                    key={item._meta.path}
-                    className={`${cardClassName} cursor-default`}
-                    data-sb-object-id={objectId}
-                  >
-                    <MediaGridCardContent item={item} />
-                  </div>
-                )
-              }
-
-              if (isInternalHref(imageHref)) {
-                return (
-                  <Link
-                    key={item._meta.path}
-                    to={imageHref}
-                    className={cardClassName}
-                    data-sb-object-id={objectId}
-                    aria-label={`View: ${item.title}`}
-                  >
-                    <MediaGridCardContent item={item} />
-                  </Link>
-                )
-              }
-
-              return (
-                <ExternalLink
-                  key={item._meta.path}
-                  href={imageHref}
-                  className={cardClassName}
-                  data-sb-object-id={objectId}
-                  aria-label={`Open external link: ${item.title}`}
-                >
-                  <MediaGridCardContent item={item} />
-                </ExternalLink>
-              )
-            })}
+          <div className="schedule-event-grid">
+            {filtered.map((item) => (
+              <ScheduleEventCard
+                key={item._meta.path}
+                item={item}
+                cardScheme={cardScheme}
+                compact
+              />
+            ))}
           </div>
         )}
       </div>

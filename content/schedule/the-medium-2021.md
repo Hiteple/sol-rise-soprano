@@ -12,5 +12,10 @@ image: images/general/placeholder-portrait.svg
 imageAlt: The Medium performance placeholder
 status: past
 year: '2021'
-order: 50
+order: 0
 ---
+
+**Editor notes** (not shown on the site)
+
+- Publish with `order: 50` when assets are ready
+- Missing: hero image, gallery photos

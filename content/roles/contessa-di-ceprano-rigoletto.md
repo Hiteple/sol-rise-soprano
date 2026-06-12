@@ -3,8 +3,8 @@ characterName: Contessa di Ceprano
 operaTitle: Rigoletto
 composer: Giuseppe Verdi
 category: supporting
-heroImage: images/general/placeholder-landscape.svg
-featureImage: images/general/placeholder-landscape.svg
+heroImage: images/rigoletto/rigoletto.webp
+featureImage: images/rigoletto/rigoletto.webp
 summary: >-
   A court lady in Verdi's tragedy — performed with Celebrarte Música in Buenos
   Aires.

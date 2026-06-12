@@ -8,8 +8,8 @@ composer: Wolfgang Amadeus Mozart
 venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: jovenes-talentos
-image: images/general/placeholder-portrait.svg
-imageAlt: Mozart Requiem concert placeholder
+image: images/requiem-mozart/banner-requiem-mozart-jovenes.JPG
+imageAlt: Mozart Requiem concert with Orquesta Jóvenes Talentos
 gallerySlug: mozart-requiem-2024-jovenes-talentos
 status: past
 year: '2024'

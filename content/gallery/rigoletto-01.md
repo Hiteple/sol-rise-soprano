@@ -1,11 +1,10 @@
 ---
-type: "GalleryItem"
-title: "Rigoletto"
+title: Rigoletto — Celebrarte Música
 image: images/rigoletto/rigoletto.webp
-alt: "Sol Risé performing - Rigoletto"
-category: "Performance"
-order: 21
-featuredImg: false
+alt: Sol Risé as Contessa di Ceprano in Rigoletto with Celebrarte Música
+category: Performance
+roleSlug: contessa-di-ceprano-rigoletto
+order: 45
 ---
 
-Sol Risé performing - Rigoletto
+Rigoletto with Celebrarte Música.

@@ -7,7 +7,7 @@ composer: Giuseppe Verdi
 venue: Buenos Aires
 city: Buenos Aires
 roleSlug: annina-la-traviata
-image: images/general/placeholder-portrait.svg
+image: images/la-traviata/la-traviata-annina-01.JPG
 imageAlt: La Traviata performance placeholder
 status: past
 year: '2022'

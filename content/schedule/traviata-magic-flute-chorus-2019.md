@@ -12,5 +12,10 @@ image: images/general/placeholder-portrait.svg
 imageAlt: Chorus performances placeholder
 status: past
 year: '2019'
-order: 60
+order: 0
 ---
+
+**Editor notes** (not shown on the site)
+
+- Publish with `order: 60` when assets are ready
+- Missing: hero image, gallery photos

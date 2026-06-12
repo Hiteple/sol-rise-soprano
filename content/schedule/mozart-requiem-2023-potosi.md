@@ -7,8 +7,8 @@ plot: >-
 composer: Wolfgang Amadeus Mozart
 venue: Potosí International Culture Festival
 city: Potosí
-image: images/general/placeholder-portrait.svg
-imageAlt: Mozart Requiem concert in Potosí placeholder
+image: images/requiem-mozart/mozart-requiem-potosi-01.JPG
+imageAlt: Mozart Requiem concert in Potosí International Culture Festival
 gallerySlug: mozart-requiem-2023-potosi
 status: past
 year: '2023'

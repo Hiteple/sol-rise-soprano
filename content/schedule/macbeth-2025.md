@@ -9,8 +9,8 @@ venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: juventus-lyrica
 roleSlug: apparitions-macbeth
-image: images/general/placeholder-portrait.svg
-imageAlt: Macbeth performance placeholder
+image: images/macbeth/macbeth-01.JPEG
+imageAlt: Macbeth performance with Juventus Lyrica
 status: past
 year: '2025'
 order: 12

@@ -13,5 +13,10 @@ image: images/general/placeholder-portrait.svg
 imageAlt: The Magic Flute performance placeholder
 status: past
 year: '2024'
-order: 24
+order: 0
 ---
+
+**Editor notes** (not shown on the site)
+
+- Publish with `order: 24` when assets are ready
+- Missing: hero image, gallery photos

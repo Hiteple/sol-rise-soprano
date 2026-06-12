@@ -9,8 +9,8 @@ venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: celebrarte-musica
 roleSlug: first-lady-die-zauberflote
-image: images/general/placeholder-portrait.svg
-imageAlt: The Magic Flute performance placeholder
+image: images/magic-flute/magic-flute-banner-celebrarte-musica.JPG
+imageAlt: The Magic Flute performance banner
 status: past
 year: '2024'
 order: 22

@@ -3,8 +3,8 @@ characterName: Apparition
 operaTitle: Macbeth
 composer: Giuseppe Verdi
 category: ensemble
-heroImage: images/general/placeholder-landscape.svg
-featureImage: images/general/placeholder-landscape.svg
+heroImage: images/macbeth/macbeth-01.JPEG
+featureImage: images/macbeth/macbeth-01.JPEG
 featureImagePhotography: Liliana Morsia
 summary: >-
   Chorus and apparition scenes in Verdi's Shakespearean tragedy — with Juventus

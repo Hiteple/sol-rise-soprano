@@ -7,8 +7,8 @@ plot: >-
 composer: Carl Orff
 venue: Potosí International Culture Festival
 city: Potosí
-image: images/general/placeholder-portrait.svg
-imageAlt: Carmina Burana performance placeholder
+image: images/carmina-burana/carmina-burana-01-processed.webp
+imageAlt: Carmina Burana performance
 gallerySlug: carmina-burana-2025
 status: past
 year: '2025'

@@ -8,8 +8,9 @@ composer: Johannes Brahms
 venue: Teatro Colón
 city: Buenos Aires
 organizationSlug: teatro-colon
-image: images/general/placeholder-portrait.svg
-imageAlt: Brahms choral concert placeholder
+image: images/gesang-der-parzen/gesang-der-parzen-02.jpeg
+imageAlt: Brahms choral concert in Teatro Colón
+gallerySlug: brahms-gesang-der-parzen-2024
 status: past
 year: '2024'
 order: 20

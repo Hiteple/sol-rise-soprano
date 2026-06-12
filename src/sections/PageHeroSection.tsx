@@ -19,7 +19,7 @@ export function PageHeroSection({
   bottomSpacing = 'default',
 }: PageHeroSectionProps) {
   const bottomClass =
-    bottomSpacing === 'compact' ? 'pb-16 lg:pb-20' : 'pb-16 lg:pb-24'
+    bottomSpacing === 'compact' ? 'pb-8 lg:pb-20' : 'pb-8 lg:pb-24'
   const scheme = resolveColorScheme(colorScheme)
   const fg = schemeForeground(scheme)
 

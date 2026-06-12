@@ -3,8 +3,8 @@ characterName: First Lady
 operaTitle: Die Zauberflöte
 composer: Wolfgang Amadeus Mozart
 category: supporting
-heroImage: images/general/placeholder-landscape.svg
-featureImage: images/general/placeholder-landscape.svg
+heroImage: images/magic-flute/magic-flute-celebrarte-musica-01.JPG
+featureImage: images/magic-flute/magic-flute-celebrarte-musica-01.JPG
 summary: >-
   One of the Queen of the Night's attendants — performed in Spanish-language
   productions for children with Celebrarte Música and Jóvenes Talentos.
