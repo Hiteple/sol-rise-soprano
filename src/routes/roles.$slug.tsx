@@ -3,6 +3,7 @@ import { allGalleries, allOrganizations, allRoles, allScheduleEvents } from 'con
 
 import { NotFoundSection } from '@/components/NotFoundSection'
 import { filterPublishedContent, isPublishedContent } from '@/lib/content-order'
+import { pageHead, performanceRoleJsonLd } from '@/lib/seo'
 import { RoleDetailSection } from '@/sections/RoleDetailSection'
 
 export const Route = createFileRoute('/roles/$slug')({
@@ -10,6 +11,30 @@ export const Route = createFileRoute('/roles/$slug')({
     const role = allRoles.find((entry) => entry._meta.path === params.slug)
     if (!role || !isPublishedContent(role.order)) throw notFound()
     return { role }
+  },
+  head: ({ loaderData }) => {
+    const role = loaderData.role
+    const path = `/roles/${role._meta.path}`
+
+    return {
+      ...pageHead({
+        title: `${role.characterName} — ${role.operaTitle}`,
+        description: role.summary,
+        path,
+        imagePath: role.heroImage,
+        type: 'article',
+      }),
+      scripts: [
+        performanceRoleJsonLd({
+          characterName: role.characterName,
+          operaTitle: role.operaTitle,
+          composer: role.composer,
+          summary: role.summary,
+          path,
+          heroImage: role.heroImage,
+        }),
+      ],
+    }
   },
   component: RoleDetailPage,
   notFoundComponent: RoleNotFound,

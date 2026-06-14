@@ -3,6 +3,7 @@ import { allHomes, allOrganizations, allScheduleEvents } from 'content-collectio
 
 import { homeLastEvents } from '@/lib/home-last-events'
 import { publishedContentSorted } from '@/lib/content-order'
+import { DEFAULT_DESCRIPTION, SITE_NAME, personJsonLd, pageHead } from '@/lib/seo'
 import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
 import { MediaGridSection } from '@/sections/MediaGridSection'
@@ -10,6 +11,14 @@ import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
 import { OrganizationsStripSection } from '@/sections/OrganizationsStripSection'
 import { FeaturedEventsSection } from '@/sections/FeaturedEventsSection'
 export const Route = createFileRoute('/')({
+  head: () => ({
+    ...pageHead({
+      title: SITE_NAME,
+      description: DEFAULT_DESCRIPTION,
+      path: '/',
+    }),
+    scripts: [personJsonLd()],
+  }),
   component: HomePage,
 })
 

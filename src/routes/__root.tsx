@@ -3,6 +3,7 @@ import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
 import { NotFoundSection } from '@/components/NotFoundSection'
 import { SkipLink } from '@/components/SkipLink'
+import { DEFAULT_DESCRIPTION, SITE_NAME, googleSiteVerificationMeta } from '@/lib/seo'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -10,12 +11,9 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'Sol Risé — Soprano' },
-      {
-        name: 'description',
-        content:
-          'Official website of Sol Risé.',
-      },
+      { title: SITE_NAME },
+      { name: 'description', content: DEFAULT_DESCRIPTION },
+      ...googleSiteVerificationMeta(),
     ],
     links: [
       { rel: 'icon', type: 'image/png', href: '/images/sol-rise-soprano-logo.png' },

@@ -13,6 +13,7 @@ import {
   isPublishedContent,
   publishedContentSorted,
 } from '@/lib/content-order'
+import { SITE_NAME, musicEventJsonLd, pageHead } from '@/lib/seo'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { ScheduleEventDetailSection } from '@/sections/ScheduleEventDetailSection'
 
@@ -21,6 +22,38 @@ export const Route = createFileRoute('/schedule/$slug')({
     const event = allScheduleEvents.find((entry) => entry._meta.path === params.slug)
     if (!event || !isPublishedContent(event.order)) throw notFound()
     return { event }
+  },
+  head: ({ loaderData }) => {
+    const event = loaderData.event
+    const description =
+      event.plot?.trim() ||
+      event.subtitle?.trim() ||
+      `${event.title} — performance by ${SITE_NAME}.`
+    const path = `/schedule/${event._meta.path}`
+
+    return {
+      ...pageHead({
+        title: event.title,
+        description,
+        path,
+        imagePath: event.image,
+        type: 'article',
+      }),
+      scripts: [
+        musicEventJsonLd({
+          title: event.title,
+          subtitle: event.subtitle,
+          plot: event.plot,
+          composer: event.composer,
+          venue: event.venue,
+          city: event.city,
+          status: event.status,
+          year: event.year,
+          path,
+          image: event.image,
+        }),
+      ],
+    }
   },
   component: ScheduleEventDetailPage,
   notFoundComponent: ScheduleEventNotFound,

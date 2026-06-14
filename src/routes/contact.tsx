@@ -1,10 +1,18 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { allContactPages } from 'content-collections'
 
+import { SITE_NAME, pageHead } from '@/lib/seo'
 import { ContactFormSection } from '@/sections/ContactFormSection'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 
 export const Route = createFileRoute('/contact')({
+  head: () =>
+    pageHead({
+      title: 'Contact',
+      description:
+        `Contact ${SITE_NAME} for artistic engagements, voice lessons and collaborations — email, Instagram, YouTube and Muvac.`,
+      path: '/contact',
+    }),
   component: ContactPage,
 })
 

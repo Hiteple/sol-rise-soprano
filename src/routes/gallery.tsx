@@ -2,11 +2,20 @@ import { createFileRoute } from '@tanstack/react-router'
 import { allGalleries, allGalleryPages, allRoles, allScheduleEvents } from 'content-collections'
 
 import { filterPublishedContent } from '@/lib/content-order'
+import { SITE_NAME, pageHead } from '@/lib/seo'
 import { sortGalleryChronologically } from '@/lib/gallery-sort'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { TabItemsSection } from '@/sections/TabItemsSection'
 
 export const Route = createFileRoute('/gallery')({
+  head: () =>
+    pageHead({
+      title: 'Gallery',
+      description:
+        `Photography from ${SITE_NAME} on stage, backstage and photo book sessions — opera, concert and festival performances.`,
+      path: '/gallery',
+      imagePath: '/images/photo-book/SON05945 1.jpg',
+    }),
   component: GalleryPage,
 })
 

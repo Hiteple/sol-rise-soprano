@@ -3,9 +3,18 @@ import { allOrganizations, allOrganizationsPages } from 'content-collections'
 
 import { OrganizationsIndexSection } from '@/sections/OrganizationsIndexSection'
 import { publishedContentSorted } from '@/lib/content-order'
+import { SITE_NAME, pageHead } from '@/lib/seo'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 
 export const Route = createFileRoute('/organizations')({
+  head: () =>
+    pageHead({
+      title: 'Organizations',
+      description:
+        `Opera houses, festivals and companies where ${SITE_NAME} has performed — Teatro Colón, Juventus Lyrica, Teatro Avenida and more.`,
+      path: '/organizations',
+      imagePath: '/images/teatro-colon/theater-colon-01.webp',
+    }),
   component: OrganizationsPage,
 })
 

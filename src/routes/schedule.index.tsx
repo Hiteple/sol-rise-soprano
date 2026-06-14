@@ -2,10 +2,18 @@ import { createFileRoute } from '@tanstack/react-router'
 import { allScheduleEvents, allSchedulePages } from 'content-collections'
 
 import { publishedContentSorted } from '@/lib/content-order'
+import { pageHead } from '@/lib/seo'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { SchedulePageSection } from '@/sections/SchedulePageSection'
 
 export const Route = createFileRoute('/schedule/')({
+  head: () =>
+    pageHead({
+      title: 'Schedule',
+      description:
+        'Upcoming performances and past appearances of Sol Risé Soprano — opera, concert and festival dates, venues and details.',
+      path: '/schedule',
+    }),
   component: SchedulePage,
 })
 
