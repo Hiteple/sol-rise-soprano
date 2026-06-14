@@ -9,7 +9,7 @@ venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: jovenes-talentos
 image: images/requiem-mozart/banner-requiem-mozart-jovenes.JPG
-imageAlt: Mozart Requiem concert with Orquesta Jóvenes Talentos
+imageAlt: Sol Risé as soloist in Mozart's Requiem with Orquesta Jóvenes Talentos, Buenos Aires
 gallerySlug: mozart-requiem-2024-jovenes-talentos
 status: past
 year: '2024'

@@ -624,15 +624,26 @@ export default defineStackbitConfig({
             },
             {
               name: 'productionCredits',
-              type: 'object',
-              label: 'This production',
-              fields: [
-                { name: 'conductor', type: 'string', label: 'Conductor' },
-                { name: 'production', type: 'string', label: 'Production (stage director)' },
-                { name: 'setDesigner', type: 'string', label: 'Set designer' },
-                { name: 'costumes', type: 'string', label: 'Costumes' },
-                { name: 'lighting', type: 'string', label: 'Lighting' },
-              ],
+              type: 'list',
+              label: 'Production credits',
+              items: {
+                type: 'object',
+                fields: [
+                  {
+                    name: 'position',
+                    type: 'enum',
+                    label: 'Position',
+                    options: [
+                      { label: 'Production (stage director)', value: 'production' },
+                      { label: 'Conductor', value: 'conductor' },
+                      { label: 'Set designer', value: 'setDesigner' },
+                      { label: 'Costumes', value: 'costumes' },
+                      { label: 'Lighting', value: 'lighting' },
+                    ],
+                  },
+                  { name: 'name', type: 'string', label: 'Name' },
+                ],
+              },
             },
             fieldWithDescription(
               {

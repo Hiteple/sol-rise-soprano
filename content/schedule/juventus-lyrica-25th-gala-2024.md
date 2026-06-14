@@ -9,7 +9,7 @@ venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
 image: images/juventus-lyrica/juventus-25th-01.JPG
-imageAlt: Anniversary gala performance with Juventus Lyrica
+imageAlt: Sol Risé as soloist at Juventus Lyrica 25th anniversary gala, Teatro Avenida
 gallerySlug: juventus-lyrica-25th-gala-2024
 status: past
 year: '2024'

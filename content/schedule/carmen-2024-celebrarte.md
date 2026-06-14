@@ -8,7 +8,7 @@ venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: celebrarte-musica
 image: images/carmen/carmen-comodoro-rivadavia-banner.jpg
-imageAlt: Carmen performance with Celebrarte Música
+imageAlt: Sol Risé in Carmen choral reinforcement with Celebrarte Música, Comodoro Rivadavia
 gallerySlug: carmen-2024-celebrarte
 status: past
 year: '2024'

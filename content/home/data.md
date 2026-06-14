@@ -19,7 +19,7 @@ heroTitle: Sol Risé
 heroSubtitle: Soprano
 heroTagline: ''
 heroImage: /images/don-giovanni/IMG_1371.jpg
-heroImageAlt: Sol Rise soprano professional website
+heroImageAlt: Sol Risé as Zerlina in Don Giovanni at Teatro Avenida
 primaryCtaLabel: ''
 primaryCtaHref: ''
 secondaryCtaLabel: ''
@@ -32,7 +32,7 @@ aboutText: |
 
   She has performed with established companies and festivals in Argentina and Bolivia, combining stage experience with ongoing vocal and interpretive training. Her artistic path reflects consistency, versatility, and a strong focus on musical expression.
 aboutImage: /images/plaza-belgica/IMG_9816.jpeg
-aboutImageAlt: image placeholder pending
+aboutImageAlt: Sol Risé portrait at Plaza Bélgica, Buenos Aires
 aboutLinkText: View Career Highlights
 aboutHref: /career
 organizationsStripEyebrow: Collaborations
@@ -50,13 +50,6 @@ mediaTitle: Last Events
 mediaLinkText: View all past appearances
 featuredEventsLayout: scheduleCards
 splitGridItems:
-  - title: Madama Butterfly
-    href: /schedule/madama-butterfly-2026
-    image: images/schedule-images/madama-butterfly.jpg
-    badges:
-      - June 12th
-      - June 13th
-    subtitle: Buenos Aires - Teatro Avenida
   - title: Suor Angelica
     href: /schedule/suor-angelica-2026
     image: images/schedule-images/suor-angelica.jpeg

@@ -10,7 +10,7 @@ city: Buenos Aires
 organizationSlug: celebrarte-musica
 roleSlug: contessa-di-ceprano-rigoletto
 image: images/rigoletto/rigoletto.webp
-imageAlt: Rigoletto performance with Celebrarte Música
+imageAlt: Sol Risé as Contessa di Ceprano in Rigoletto with Celebrarte Música, Buenos Aires
 status: past
 year: '2022'
 order: 42

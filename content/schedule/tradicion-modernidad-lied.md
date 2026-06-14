@@ -12,6 +12,7 @@ venue: Teatro Colón
 city: Buenos Aires
 organizationSlug: teatro-colon
 image: images/salon-dorado/tradicion-modernidad-lied.webp
+imageAlt: Sol Risé in Tradición y Modernidad del Lied recital at Salón Dorado, Teatro Colón
 status: past
 year: '2026'
 externalUrl: https://teatrocolon.org.ar/produccion/tradicion-y-modernidad-dellied/

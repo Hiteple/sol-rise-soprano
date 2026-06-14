@@ -100,7 +100,7 @@ export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesInde
                     <RoleCardImage
                       characterName={role.characterName}
                       heroImage={role.heroImage}
-                      alt={`${role.characterName} in ${role.operaTitle}`}
+                      alt={`Sol Risé as ${role.characterName} in ${role.operaTitle}`}
                       eyebrowColor={fg.eyebrow}
                     />
                   </Link>

@@ -10,7 +10,7 @@ city: Buenos Aires
 organizationSlug: celebrarte-musica
 roleSlug: suora-cercatrice-suor-angelica
 image: images/suor-angelica/suor-angelica-celebrarte-musica-02.JPG
-imageAlt: Suor Angelica performance with Celebrarte Música
+imageAlt: Sol Risé as Suora Cercatrice in Suor Angelica with Celebrarte Música, Buenos Aires
 status: past
 year: '2024'
 order: 25

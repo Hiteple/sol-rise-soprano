@@ -373,6 +373,29 @@
   background: var(--gold-link-hover-underline, var(--palette-wine));
 }
 
+/* Display-size links — same underline animation, keeps serif/italic typography */
+.gold-link-display {
+  position: relative;
+  text-decoration: none;
+}
+.gold-link-display::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold-link-underline, var(--accent-ink-color));
+  transition: width 0.3s ease;
+}
+.gold-link-display:hover {
+  color: var(--gold-link-hover-color, var(--palette-wine));
+}
+.gold-link-display:hover::after {
+  width: 100%;
+  background: var(--gold-link-hover-underline, var(--palette-wine));
+}
+
 /* Nav over home hero (desktop, before scroll) — floating links; typographic halo only (no bar/scrim) */
 .nav-hero .gold-link {
   color: var(--accent-pale-color);

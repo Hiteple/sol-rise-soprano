@@ -8,7 +8,7 @@ venue: Buenos Aires
 city: Buenos Aires
 roleSlug: annina-la-traviata
 image: images/la-traviata/la-traviata-annina-01.JPG
-imageAlt: La Traviata performance placeholder
+imageAlt: Sol Risé as Annina in La Traviata, Buenos Aires
 status: past
 year: '2022'
 order: 43

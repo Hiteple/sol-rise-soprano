@@ -5,14 +5,36 @@ export const scheduleCastMemberSchema = z.object({
   performer: z.string(),
 })
 
-/** Stage director, design, and musical leadership for this specific run. */
-export const scheduleProductionCreditsSchema = z.object({
-  conductor: z.string().optional(),
-  production: z.string().optional(),
-  setDesigner: z.string().optional(),
-  costumes: z.string().optional(),
-  lighting: z.string().optional(),
+export const scheduleProductionCreditPositionSchema = z.enum([
+  'conductor',
+  'production',
+  'setDesigner',
+  'costumes',
+  'lighting',
+])
+
+export const scheduleProductionCreditSchema = z.object({
+  position: scheduleProductionCreditPositionSchema,
+  name: z.string(),
 })
+
+/** Ordered credits — array order is display order. Object map in YAML is converted in key order. */
+export const scheduleProductionCreditsSchema = z.preprocess((val) => {
+  if (!val || typeof val !== 'object') return val
+  if (Array.isArray(val)) {
+    return val.map((entry) => {
+      if (!entry || typeof entry !== 'object') return entry
+      const record = entry as { position?: string; role?: string; name?: string }
+      return {
+        position: record.position ?? record.role,
+        name: record.name,
+      }
+    })
+  }
+  return Object.entries(val as Record<string, unknown>)
+    .filter(([, name]) => typeof name === 'string' && name.trim())
+    .map(([position, name]) => ({ position, name: (name as string).trim() }))
+}, z.array(scheduleProductionCreditSchema).optional())
 
 export const scheduleEventSchema = z.object({
   title: z.string(),
@@ -43,4 +65,5 @@ export const scheduleEventSchema = z.object({
   content: z.string().optional().default(''),
 })
 
+export type ScheduleProductionCredit = z.infer<typeof scheduleProductionCreditSchema>
 export type ScheduleProductionCredits = z.infer<typeof scheduleProductionCreditsSchema>

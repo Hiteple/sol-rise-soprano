@@ -12,11 +12,10 @@ import {
   resolveColorScheme,
   schemeForeground,
   schemeGoldLinkStyle,
-  schemePageBandBackground,
   schemeSolidBackground,
 } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
-import type { ScheduleProductionCredits } from '../../schemas/schedule-event'
+import type { ScheduleProductionCredit } from '../../schemas/schedule-event'
 import type { ScheduleEvent } from '@/sections/SchedulePageSection'
 
 type GalleryItem = {
@@ -53,7 +52,7 @@ export type ScheduleEventDetailSectionProps = {
     ticketHref?: string
     externalUrl?: string
     cast?: { character: string; performer: string }[]
-    productionCredits?: ScheduleProductionCredits
+    productionCredits?: ScheduleProductionCredit[]
     plot?: string
   }
   organizations: OrganizationItem[]
@@ -61,13 +60,29 @@ export type ScheduleEventDetailSectionProps = {
   galleryItems: GalleryItem[]
 }
 
-const PRODUCTION_CREDIT_ROWS: { key: keyof ScheduleProductionCredits; label: string }[] = [
-  { key: 'conductor', label: 'Conductor' },
-  { key: 'production', label: 'Production' },
-  { key: 'setDesigner', label: 'Set designer' },
-  { key: 'costumes', label: 'Costumes' },
-  { key: 'lighting', label: 'Lighting' },
-]
+const PRODUCTION_CREDIT_LABELS: Record<ScheduleProductionCredit['position'], string> = {
+  conductor: 'Conductor',
+  production: 'Production',
+  setDesigner: 'Set designer',
+  costumes: 'Costumes',
+  lighting: 'Lighting',
+}
+
+function productionCreditEntries(credits: ScheduleProductionCredit[] | undefined): {
+  key: ScheduleProductionCredit['position']
+  label: string
+  value: string
+}[] {
+  if (!credits?.length) return []
+
+  return credits
+    .filter((entry) => Boolean(entry.name?.trim()) && entry.position in PRODUCTION_CREDIT_LABELS)
+    .map((entry) => ({
+      key: entry.position,
+      label: PRODUCTION_CREDIT_LABELS[entry.position],
+      value: entry.name.trim(),
+    }))
+}
 
 function EventDetailImage({
   title,
@@ -140,8 +155,6 @@ export function ScheduleEventDetailSection({
   const workFg = schemeForeground(workScheme)
   const bodyScheme = resolveColorScheme('soft')
   const bodyFg = schemeForeground(bodyScheme)
-  const creditsScheme = resolveColorScheme('wine')
-  const creditsFg = schemeForeground(creditsScheme)
 
   const org = event.organizationSlug
     ? organizations.find((entry) => entry._meta.path === event.organizationSlug)
@@ -155,9 +168,7 @@ export function ScheduleEventDetailSection({
   const plot = event.plot?.trim() ?? ''
   const ticketHref = event.ticketHref?.trim() ?? ''
   const externalUrl = event.externalUrl?.trim() ?? ''
-  const credits = event.productionCredits ?? {}
-  const creditEntries = PRODUCTION_CREDIT_ROWS.filter((row) => (credits[row.key]?.trim().length ?? 0) > 0)
-  const hasCredits = creditEntries.length > 0
+  const creditEntries = productionCreditEntries(event.productionCredits)
 
   const { ref: workRef, inView: workInView } = useInView<HTMLDivElement>()
   const { ref: bodyRef, inView: bodyInView } = useInView<HTMLDivElement>()
@@ -174,6 +185,12 @@ export function ScheduleEventDetailSection({
   )
 
   const locationParts = [event.venue, event.city ?? org?.city, org?.country].filter(Boolean)
+
+  const roleLinkStyle: ReturnType<typeof schemeGoldLinkStyle> = {
+    ...schemeGoldLinkStyle('bright'),
+    color: workFg.heading,
+    '--gold-link-underline': workFg.heading,
+  }
 
   return (
     <>
@@ -226,16 +243,16 @@ export function ScheduleEventDetailSection({
                 </p>
               )}
 
-              {locationParts.length > 0 && (
-                <div className="mb-5">
+              {creditEntries.map((row) => (
+                <div key={row.key} className="mb-5">
                   <p className="font-body text-xs uppercase tracking-[0.28em] mb-2" style={{ color: workFg.eyebrow }}>
-                    Venue
+                    {row.label}
                   </p>
-                  <p className="font-body text-sm leading-relaxed" style={{ color: workFg.body }}>
-                    {locationParts.join(' · ')}
+                  <p className="font-display text-lg italic leading-snug" style={{ color: workFg.heading }}>
+                    {row.value}
                   </p>
                 </div>
-              )}
+              ))}
 
               {role && (
                 <div className="mb-5">
@@ -245,10 +262,22 @@ export function ScheduleEventDetailSection({
                   <Link
                     to="/roles/$slug"
                     params={{ slug: role._meta.path }}
-                    className="gold-link font-display text-lg italic"
+                    className="gold-link-display font-display text-lg italic leading-snug"
+                    style={roleLinkStyle}
                   >
                     {role.characterName}
                   </Link>
+                </div>
+              )}
+
+              {locationParts.length > 0 && (
+                <div className="mb-5">
+                  <p className="font-body text-xs uppercase tracking-[0.28em] mb-2" style={{ color: workFg.eyebrow }}>
+                    Venue
+                  </p>
+                  <p className="font-body text-sm leading-relaxed" style={{ color: workFg.body }}>
+                    {locationParts.join(' · ')}
+                  </p>
                 </div>
               )}
 
@@ -291,41 +320,6 @@ export function ScheduleEventDetailSection({
           </div>
         </div>
       </section>
-
-      {/* This production — creative team */}
-      {hasCredits && (
-        <section
-          className="section-vertical-padding border-t"
-          style={{
-            background: schemePageBandBackground(creditsScheme),
-            borderColor: 'color-mix(in srgb, var(--media-caption-text-color) 12%, transparent)',
-          }}
-        >
-          <div className="max-w-site mx-auto px-4 lg:px-12">
-            <h2
-              className="font-display text-3xl lg:text-4xl italic mb-10"
-              style={{ color: creditsFg.heading }}
-            >
-              This production
-            </h2>
-            <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
-              {creditEntries.map((row) => (
-                <div key={row.key}>
-                  <dt
-                    className="font-body text-xs uppercase tracking-[0.32em] mb-2 font-semibold"
-                    style={{ color: creditsFg.eyebrow }}
-                  >
-                    {row.label}
-                  </dt>
-                  <dd className="font-display text-xl italic" style={{ color: creditsFg.heading }}>
-                    {credits[row.key]}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-      )}
 
       {/* Cast; gallery only for past events (photos from this run / role) */}
       {((event.cast?.length ?? 0) > 0 || showPhotography) && (

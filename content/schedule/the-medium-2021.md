@@ -9,7 +9,7 @@ city: Buenos Aires
 organizationSlug: jovenes-talentos
 roleSlug: mrs-gobineau-the-medium
 image: images/general/placeholder-portrait.svg
-imageAlt: The Medium performance placeholder
+imageAlt: Sol Risé as Mrs. Gobineau in The Medium with Orquesta Jóvenes Talentos, Buenos Aires
 status: past
 year: '2021'
 order: 0

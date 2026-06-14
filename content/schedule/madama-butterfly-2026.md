@@ -8,10 +8,13 @@ city: Buenos Aires
 organizationSlug: juventus-lyrica
 roleSlug: madama-butterfly-aunt
 image: images/schedule-images/madama-butterfly.jpg
-ticketHref: https://juventuslyrica.ar/madama-butterfly-2026/
-badges:
-  - June 12th
-  - June 13th
-status: upcoming
+imageAlt: Sol Risé as Aunt of Cio-Cio-San in Madama Butterfly with Juventus Lyrica at Teatro Avenida
+productionCredits:
+  - position: production
+    name: Ana D'Anna
+  - position: conductor
+    name: André Dos Santos
+status: past
+year: '2026'
 order: 1
 ---

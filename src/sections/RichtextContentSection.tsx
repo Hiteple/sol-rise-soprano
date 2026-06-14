@@ -1,4 +1,4 @@
-import { marked } from 'marked'
+import { renderMarkdown } from '@/lib/markdown'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
@@ -53,7 +53,7 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
                 }
               : undefined
           }
-          dangerouslySetInnerHTML={{ __html: String(marked(para.content)) }}
+          dangerouslySetInnerHTML={{ __html: renderMarkdown(para.content) }}
         />
       ))}
     </div>

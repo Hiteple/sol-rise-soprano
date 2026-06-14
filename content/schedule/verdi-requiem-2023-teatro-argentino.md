@@ -9,7 +9,7 @@ venue: Teatro Argentino de La Plata
 city: La Plata
 organizationSlug: teatro-argentino-la-plata
 image: images/requiem-verdi/verdi-requiem-01.jpeg
-imageAlt: Verdi Requiem performance in Teatro Argentino de La Plata
+imageAlt: Sol Risé in Verdi's Requiem at Teatro Argentino de La Plata, La Plata
 gallerySlug: verdi-requiem-2023-teatro-argentino
 status: past
 year: '2023'

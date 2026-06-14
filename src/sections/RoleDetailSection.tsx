@@ -102,7 +102,7 @@ export function RoleDetailSection({
                 >
                   <img
                     {...netlifyImgSet(role.featureImage, 1200, 750)}
-                    alt={`${role.characterName} in ${role.operaTitle}`}
+                    alt={`Sol Risé as ${role.characterName} in ${role.operaTitle}`}
                     className="w-full h-full object-cover"
                     data-sb-field-path="featureImage"
                   />

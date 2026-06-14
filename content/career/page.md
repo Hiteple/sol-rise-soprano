@@ -6,19 +6,19 @@ heroTitleAccent: Artistic
 heroTitleLine2: Path
 heroIntro: "Born in Buenos Aires, Argentina, Sol Risé discovered her voice at the age of nine. What began as a childhood fascination evolved into a lifelong calling — shaping an artistic path\_focused on the operatic repertoire."
 heroImage: images/salon-dorado/IMG_5954.webp
-heroImageAlt: Sol Risé portrait
+heroImageAlt: Sol Risé in the Salón Dorado of Teatro Colón
 heroQuote: '"Singing is not what I do — it is who I am."'
 heroQuoteAttribution: — Sol Risé
 statsSurface: wine
 highlights:
-  - number: 6+
+  - number: 7+
     label: Years on Stage
-  - number: '9'
-    label: Roles
-  - number: '3'
+  - number: '20+'
+    label: Performances
+  - number: '2'
+    label: Lead Roles
+  - number: '2'
     label: Opera Houses
-  - number: '1'
-    label: Continents
 timelineSectionEyebrow: Career Milestones
 timelineSectionTitle: A Growing Journey
 timeline:

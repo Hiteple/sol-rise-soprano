@@ -10,7 +10,7 @@ city: Buenos Aires
 organizationSlug: celebrarte-musica
 roleSlug: first-lady-die-zauberflote
 image: images/magic-flute/magic-flute-banner-celebrarte-musica.JPG
-imageAlt: The Magic Flute performance banner
+imageAlt: Sol Risé as First Lady in Die Zauberflöte with Celebrarte Música, Buenos Aires
 status: past
 year: '2024'
 order: 22

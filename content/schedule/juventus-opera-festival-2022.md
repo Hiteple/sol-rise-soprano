@@ -8,7 +8,7 @@ venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
 image: images/juventus-lyrica/juventus-lyrica-festival-01.jpg
-imageAlt: Opera festival performance with Juventus Lyrica
+imageAlt: Sol Risé as scholarship soloist at Juventus Lyrica Opera Festival, Teatro Avenida
 gallerySlug: juventus-opera-festival-2022
 status: past
 year: '2022'

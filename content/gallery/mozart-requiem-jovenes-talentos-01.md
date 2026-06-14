@@ -1,7 +1,7 @@
 ---
 title: Mozart Requiem — Orquesta Jóvenes Talentos
 image: images/requiem-mozart/banner-requiem-mozart-jovenes.JPG
-alt: Sol Risé in Mozart's Requiem with Orquesta Jóvenes Talentos, Buenos Aires
+alt: "Sol Risé in Mozart's Requiem with Orquesta Jóvenes Talentos, Buenos Aires"
 category: Stage
 gallerySlug: mozart-requiem-2024-jovenes-talentos
 order: 0

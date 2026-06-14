@@ -10,7 +10,7 @@ city: Buenos Aires
 organizationSlug: british-arts-center
 roleSlug: pamina-die-zauberflote
 image: images/general/placeholder-portrait.svg
-imageAlt: The Magic Flute performance placeholder
+imageAlt: Sol Risé as Pamina in Die Zauberflöte at British Arts Centre, Buenos Aires
 status: past
 year: '2025'
 order: 0

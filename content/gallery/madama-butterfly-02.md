@@ -2,11 +2,11 @@
 type: "GalleryItem"
 title: "Madama Butterfly"
 image: images/madama-butterfly/30-processed.webp
-alt: "Zia of Cio-Cio-San Portrait 1 - Madama Butterfly"
+alt: "Sol Risé as Aunt of Cio-Cio-San — backstage portrait, Madama Butterfly at Teatro Avenida"
 category: Backstage
 photographer: "Liliana Morsia"
 roleSlug: madama-butterfly-aunt
-order: 3
+order: 7
 featuredImg: false
 ---
 

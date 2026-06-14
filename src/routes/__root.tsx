@@ -18,6 +18,7 @@ export const Route = createRootRoute({
       },
     ],
     links: [
+      { rel: 'icon', type: 'image/png', href: '/images/sol-rise-soprano-logo.png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       {
         rel: 'preconnect',

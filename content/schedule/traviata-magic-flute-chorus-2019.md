@@ -9,7 +9,7 @@ venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
 image: images/general/placeholder-portrait.svg
-imageAlt: Chorus performances placeholder
+imageAlt: Sol Risé in La Traviata and The Magic Flute chorus with Juventus Lyrica at Teatro Avenida
 status: past
 year: '2019'
 order: 0

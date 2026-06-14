@@ -9,7 +9,7 @@ venue: Teatro Colón
 city: Buenos Aires
 organizationSlug: teatro-colon
 image: images/gesang-der-parzen/gesang-der-parzen-02.jpeg
-imageAlt: Brahms choral concert in Teatro Colón
+imageAlt: Sol Risé in Brahms Gesang der Parzen at Teatro Colón, Buenos Aires
 gallerySlug: brahms-gesang-der-parzen-2024
 status: past
 year: '2024'

@@ -22,13 +22,7 @@ export type ScheduleEvent = {
   imageAlt?: string
   badges?: string[]
   cast?: { character: string; performer: string }[]
-  productionCredits?: {
-    conductor?: string
-    production?: string
-    setDesigner?: string
-    costumes?: string
-    lighting?: string
-  }
+  productionCredits?: { position: string; name: string }[]
   status: 'upcoming' | 'past'
   year?: string
 }

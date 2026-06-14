@@ -7,6 +7,7 @@ venue: La Redonda de Belgrano
 city: Buenos Aires
 roleSlug: sister-genovieffa-suor-angelica
 image: images/schedule-images/suor-angelica.jpeg
+imageAlt: Sol Risé as Sister Genovieffa in Suor Angelica at La Redonda de Belgrano, Buenos Aires
 ticketHref: /contact
 badges:
   - June 28th

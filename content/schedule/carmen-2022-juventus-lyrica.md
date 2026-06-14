@@ -8,7 +8,7 @@ venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
 image: images/carmen/carmen-juventus-01-processed.webp
-imageAlt: Carmen performance with Juventus Lyrica
+imageAlt: Sol Risé in Carmen chorus with Juventus Lyrica at Teatro Avenida
 gallerySlug: carmen-2022-juventus-lyrica
 status: past
 year: '2022'

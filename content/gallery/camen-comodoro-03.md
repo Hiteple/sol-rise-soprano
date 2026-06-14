@@ -1,7 +1,7 @@
 ---
 title: Carmen — Comodoro Rivadavia
 image: images/carmen/carmen-comodoro-rivadavia-banner.jpg
-alt: Carmen performance with Celebrarte Música in Comodoro Rivadavia
+alt: "Carmen production banner with Celebrarte Música, Comodoro Rivadavia"
 category: Stage
 gallerySlug: carmen-2024-celebrarte
 order: 0

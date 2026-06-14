@@ -8,7 +8,7 @@ composer: Carl Orff
 venue: Potosí International Culture Festival
 city: Potosí
 image: images/carmina-burana/carmina-burana-01-processed.webp
-imageAlt: Carmina Burana performance
+imageAlt: Sol Risé as soloist in Carmina Burana in Potosí and Sucre, Bolivia
 gallerySlug: carmina-burana-2025
 status: past
 year: '2025'

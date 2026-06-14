@@ -10,7 +10,7 @@ city: Buenos Aires
 organizationSlug: juventus-lyrica
 roleSlug: apparitions-macbeth
 image: images/macbeth/macbeth-01.JPEG
-imageAlt: Macbeth performance with Juventus Lyrica
+imageAlt: Sol Risé in Macbeth apparitions and chorus with Juventus Lyrica, Buenos Aires
 status: past
 year: '2025'
 order: 12

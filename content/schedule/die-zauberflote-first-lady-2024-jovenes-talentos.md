@@ -10,7 +10,7 @@ city: Buenos Aires
 organizationSlug: jovenes-talentos
 roleSlug: first-lady-die-zauberflote
 image: images/general/placeholder-portrait.svg
-imageAlt: The Magic Flute performance placeholder
+imageAlt: Sol Risé as First Lady in Die Zauberflöte with Orquesta Jóvenes Talentos, Buenos Aires
 status: past
 year: '2024'
 order: 0

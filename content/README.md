@@ -53,7 +53,7 @@ Use the same slug when linking collections (e.g. `roleSlug`, `organizationSlug`,
 | `ticketHref` | no | Detail CTA | URL or `/contact` |
 | `externalUrl` | no | Detail CTA (new tab) | Program page, press, venue site |
 | `cast` | no | Past detail table | `{ character, performer }` list |
-| `productionCredits` | no | Past detail | conductor, production, setDesigner, costumes, lighting |
+| `productionCredits` | no | Event detail | Ordered list: `position` (conductor, production, setDesigner, costumes, lighting) + `name` |
 | Body markdown | no | *(not shown on site today)* | Optional notes for editors |
 
 **Opera vs concert**

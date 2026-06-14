@@ -19,28 +19,27 @@ fullBioParagraphs:
       Her current formal training includes:
 
 
-      *   Advanced studies in lyric singing at the **Instituto Superior de Arte
-      del Teatro Colón**, where she is currently completing the final year of
-      the program.
+      *   Advanced studies in lyric singing at the [**Instituto Superior de Arte
+      del Teatro Colón**](https://teatrocolon.org.ar/instituto-superior-de-arte/),
+      where she is currently completing the final year of the program.
 
 
       *   Developing the roles of 'Violetta Valéry' (*La Traviata*) and 'Adina'
-      (*L'elisir d'amore*) at **Vincerò Academy**.
+      (*L'elisir d'amore*) at [**Vincerò Academy**](https://vinceroacademy.com/).
 
     addBorderBottom: true
   - content: >+
       She has expanded her technique through:
 
 
-      *   Masterclasses with mezzo-soprano **Daniela Barcelona** at **Instituto
-      Superior de Arte del Teatro Colón**.
+      *   Masterclasses with mezzo-soprano **Daniela Barcelona**.
 
 
       *   Online masterclasses with **Lisette Oropesa**, **Jennifer Rowley**,
       and **Michael Fabiano.**
 
 
-      *   Scholarship programs with **Juventus Lyrica**.
+      *   Scholarship programs with [**Juventus Lyrica**](https://juventuslyrica.ar/).
 
 
       *   Vocal technique studies with **Gustavo López Manzitti** and **Marina
@@ -57,7 +56,7 @@ fullBioParagraphs:
     addBorderBottom: false
 fullBioColorScheme: soft
 fullBioImage: '/images/photo-book/SON05945 1.jpg'
-fullBioImageAlt: Sol Risé portrait
+fullBioImageAlt: Sol Risé — Photo Book portrait, hands cupping face in navy sequined top
 fullBioImagePhotography: Diego Israelit
 fullBioImagePosition: right
 ---

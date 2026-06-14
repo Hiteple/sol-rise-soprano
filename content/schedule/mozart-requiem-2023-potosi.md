@@ -8,7 +8,7 @@ composer: Wolfgang Amadeus Mozart
 venue: Potosí International Culture Festival
 city: Potosí
 image: images/requiem-mozart/mozart-requiem-potosi-01.JPG
-imageAlt: Mozart Requiem concert in Potosí International Culture Festival
+imageAlt: Sol Risé as soloist in Mozart's Requiem at Potosí International Culture Festival, Bolivia
 gallerySlug: mozart-requiem-2023-potosi
 status: past
 year: '2023'

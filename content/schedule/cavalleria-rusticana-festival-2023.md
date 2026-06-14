@@ -9,7 +9,7 @@ venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: juventus-lyrica
 image: images/cavaleria-rusticana/cavaleria-rusticana-01.webp
-imageAlt: Cavalleria Rusticana performance with Juventus Lyrica
+imageAlt: Sol Risé in Cavalleria Rusticana chorus and Italian canzonette at Juventus Lyrica festival
 gallerySlug: cavalleria-rusticana-festival-2023
 status: past
 year: '2023'

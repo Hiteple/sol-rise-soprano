@@ -9,7 +9,7 @@ venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: valkyria-lirica
 image: images/il-trovatore/il-trovatore-01.JPG
-imageAlt: Il Trovatore performance with Valkyria Lírica
+imageAlt: Sol Risé in Il Trovatore chorus with Valkyria Lírica, Buenos Aires
 gallerySlug: il-trovatore-2025
 status: past
 year: '2025'
