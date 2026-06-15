@@ -51,6 +51,15 @@ splitGridItems:
     badges:
       - 28. Juni
     subtitle: Buenos Aires - La Redonda de Belgrano
+  - title: Cuentos Líricos
+    href: /schedule/cuentos-liricos-2026
+    image: images/cuentos-liricos/cuentos-liricos-2026.webp
+    badges:
+      - 19. Juli
+      - 21. Juli
+      - 22. Juli
+      - 23. Juli
+    subtitle: Sopransolistin — Teatro Colón
 splitGridColorScheme: wine
 splitGridTitle: Kommende Termine
 splitGridDescription: Wo Sie Sol Risé als Nächstes erleben können — Termine, Spielorte und Details.
@@ -59,7 +68,6 @@ quoteImage: /images/general/liana-unsplash.webp
 quoteImageAlt: Nahaufnahme einer Partitur mit unscharfem Hintergrund
 footerBrandLine1: Sol Risé
 footerBrandLine2: Soprano
-footerBrandTagline: Sopran · Bühnenkünstlerin
 footerNavLinks:
   - label: Home
     href: /

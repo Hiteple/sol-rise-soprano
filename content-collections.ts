@@ -137,7 +137,6 @@ const home = defineCollection({
     footerBrandLine2: z.string().default('Soprano'),
     /** Optional image under public/ — replaces footer text brand when set. */
     footerBrandLogo: z.string().optional(),
-    footerBrandTagline: z.string().default('Soprano · Stage Artist\nVoice of Passion'),
     footerNavLinks: z
       .array(
         z.union([

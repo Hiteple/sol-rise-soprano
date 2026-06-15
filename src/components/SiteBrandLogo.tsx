@@ -12,8 +12,8 @@ type SiteBrandLogoProps = {
 export function SiteBrandLogo({ src, alt = DEFAULT_BRAND_LOGO_ALT, variant, fieldPath }: SiteBrandLogoProps) {
   const sizeClass =
     variant === 'header'
-      ? 'h-10 sm:h-11 w-auto max-w-[min(48vw,10.5rem)]'
-      : 'h-12 sm:h-14 w-auto max-w-[12rem]'
+      ? 'h-16 w-auto max-w-[min(56vw,14rem)]'
+      : 'h-20 sm:h-24 w-auto max-w-[min(100%,18rem)]'
 
   return (
     <img

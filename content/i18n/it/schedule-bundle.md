@@ -25,6 +25,17 @@ items:
     subtitle: Coro e solista in evidenza — Juventus Lyrica
     plot: Coro in *Cavalleria Rusticana* e solista in evidenza nelle canzonette italiane al Festival della Canzonetta Italiana con Juventus Lyrica.
     imageAlt: Sol Risé nel coro de Cavalleria Rusticana e nelle canzonette italiane al festival Juventus Lyrica
+  cuentos-liricos-2026:
+    subtitle: Soprano solista — Teatro Colón
+    plot: Due micro-opere per bambini, ispirate all'immaginario di scrittori argentini.
+    imageAlt: Sol Risé come soprano solista in Cuentos Líricos al Teatro Colón, Buenos Aires
+    badges:
+      - 19 luglio
+      - 21 luglio
+      - 22 luglio
+      - 23 luglio
+      - 24 luglio
+      - 25 luglio
   die-zauberflote-first-lady-2024-celebrarte:
     subtitle: Prima Dama — Celebrarte Música
     plot: L'opera di Mozart in un adattamento in spagnolo per bambini — ruolo della Prima Dama con Celebrarte Música.

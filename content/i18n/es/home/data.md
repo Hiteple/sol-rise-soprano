@@ -56,6 +56,15 @@ splitGridItems:
     badges:
       - 28 de junio
     subtitle: Buenos Aires - La Redonda de Belgrano
+  - title: Cuentos Líricos
+    href: /schedule/cuentos-liricos-2026
+    image: images/cuentos-liricos/cuentos-liricos-2026.webp
+    badges:
+      - 19 de julio
+      - 21 de julio
+      - 22 de julio
+      - 23 de julio
+    subtitle: Soprano solista — Teatro Colón
 splitGridColorScheme: wine
 splitGridTitle: Próximos eventos
 splitGridDescription: Dónde ver a Sol Risé — fechas, sedes y detalles de cada producción.
@@ -68,7 +77,6 @@ quoteImageCredit:
   sourceUrl: https://unsplash.com/es/fotos/primer-plano-de-partitura-con-fondo-difuminado-BoG8tpchiis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 footerBrandLine1: Sol Risé
 footerBrandLine2: Soprano
-footerBrandTagline: Soprano · Artista escénica
 footerNavLinks:
   - label: Home
     href: /

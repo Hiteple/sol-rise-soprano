@@ -3,12 +3,11 @@ export type SplitGridBadgeSource = {
   decorativeEyebrow?: string | null
 }
 
-/** Up to 4 non-empty badge labels; falls back to legacy `decorativeEyebrow`. */
+/** Non-empty badge labels; falls back to legacy `decorativeEyebrow`. */
 export function splitGridBadges(item: SplitGridBadgeSource): string[] {
   const fromArray = (item.badges ?? [])
     .map((badge) => badge.trim())
     .filter((badge) => badge.length > 0)
-    .slice(0, 4)
 
   if (fromArray.length > 0) return fromArray
 

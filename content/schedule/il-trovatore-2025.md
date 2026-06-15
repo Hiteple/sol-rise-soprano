@@ -8,6 +8,7 @@ composer: Giuseppe Verdi
 venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: valkyria-lirica
+roleSlug: chorus-il-trovatore
 image: images/il-trovatore/il-trovatore-01.JPG
 imageAlt: Sol Risé in Il Trovatore chorus with Valkyria Lírica, Buenos Aires
 gallerySlug: il-trovatore-2025

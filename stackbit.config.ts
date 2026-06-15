@@ -241,7 +241,6 @@ export default defineStackbitConfig({
               label: 'Footer - Logo (optional)',
               description: 'Replaces the two-line text brand when set.',
             },
-            { name: 'footerBrandTagline', type: 'text', label: 'Footer - Tagline' },
             {
               name: 'footerNavLinks',
               type: 'list',

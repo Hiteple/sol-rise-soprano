@@ -62,6 +62,15 @@ export function Nav() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [menuOpen])
+
   const mobileMenuId = 'site-mobile-menu'
   const homeHref = localizePath('/', locale)
   const headerBrandLogo = site?.headerBrandLogo?.trim()
@@ -74,7 +83,7 @@ export function Nav() {
       }`}
       data-sb-object-id="content/home/data.md"
     >
-      <div className="max-w-site mx-auto px-4 lg:px-12">
+      <div className="relative z-[46] max-w-site mx-auto px-4 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <a
             href={homeHref}
@@ -171,26 +180,33 @@ export function Nav() {
         </div>
       </div>
 
+      <button
+        type="button"
+        tabIndex={menuOpen ? 0 : -1}
+        className={cn(
+          'md:hidden fixed top-20 left-0 right-0 bottom-0 z-40 bg-black/45 transition-opacity duration-300 ease-out motion-reduce:transition-none',
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+        )}
+        aria-label="Close menu"
+        aria-hidden={!menuOpen}
+        onClick={() => setMenuOpen(false)}
+      />
+
       <div
         id={mobileMenuId}
         className={cn(
-          'md:hidden overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none',
-          menuOpen ? 'max-h-[42rem]' : 'max-h-0',
+          'nav-mobile-drawer md:hidden fixed top-20 left-0 bottom-0 z-[45] flex w-[min(18rem,85vw)] flex-col overflow-y-auto border-r px-4 pb-8 pt-4 transition-transform duration-300 ease-out motion-reduce:transition-none',
+          menuOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none',
         )}
         aria-hidden={!menuOpen}
+        style={{
+          background: useChrome
+            ? 'color-mix(in srgb, var(--chrome-bg) 96%, black)'
+            : 'color-mix(in srgb, var(--section-background-color) 97%, white)',
+          borderColor: useChrome ? 'var(--chrome-border)' : 'color-mix(in srgb, var(--accent-ink-color) 15%, transparent)',
+        }}
       >
-        <div
-          className={cn(
-            'border-t px-4 pb-8 pt-4 flex flex-col gap-6 transition-transform duration-300 ease-out motion-reduce:transition-none',
-            menuOpen ? 'translate-y-0 pointer-events-auto' : '-translate-y-full pointer-events-none',
-          )}
-          style={{
-            background: useChrome
-              ? 'color-mix(in srgb, var(--chrome-bg) 96%, black)'
-              : 'color-mix(in srgb, var(--section-background-color) 97%, white)',
-            borderColor: useChrome ? 'var(--chrome-border)' : 'color-mix(in srgb, var(--accent-ink-color) 15%, transparent)',
-          }}
-        >
+        <div className="flex flex-col gap-2">
           {navLinks.map((link, idx) => {
             const active = pathnameMatchesNavHref(link.href, pathname, locale)
             const href = localizeNavHref(link.href, locale)
@@ -208,7 +224,7 @@ export function Nav() {
               <a
                 key={`${link.label}-${link.href}-mobile`}
                 href={href}
-                className="nav-mobile-link font-display text-2xl italic"
+                className="nav-mobile-link font-display italic"
                 aria-current={active ? 'page' : undefined}
                 data-sb-field-path={`headerNavLinks.${idx}.label`}
                 onClick={() => setMenuOpen(false)}

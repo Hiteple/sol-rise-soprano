@@ -12,5 +12,5 @@ ticketHref: /contact
 badges:
   - June 28th
 status: upcoming
-order: 2
+order: 1
 ---

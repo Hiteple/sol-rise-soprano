@@ -30,7 +30,7 @@ export function HeroSection({ section }: HeroSectionProps) {
           <img
             {...netlifyImgSet(section.heroImage, 1920, 1080)}
             alt={section.heroImageAlt}
-            className="w-full h-full object-cover"
+            className="hero-banner-image w-full h-full object-cover"
             data-sb-field-path="heroImage#@src"
           />
           <div

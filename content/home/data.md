@@ -2,6 +2,7 @@
 type: HomePage
 headerBrandLine1: Sol Risé
 headerBrandLine2: Soprano
+headerBrandLogo: images/sol-rise-soprano-optimized.png
 headerNavLinks:
   - label: Home
     href: /
@@ -56,6 +57,15 @@ splitGridItems:
     badges:
       - June 28th
     subtitle: Buenos Aires - La Redonda de Belgrano
+  - title: Cuentos Líricos
+    href: /schedule/cuentos-liricos-2026
+    image: images/cuentos-liricos/cuentos-liricos-2026.webp
+    badges:
+      - July 19th
+      - July 21st
+      - July 22nd
+      - July 23rd
+    subtitle: Soloist soprano — Teatro Colón
 splitGridColorScheme: wine
 splitGridTitle: Upcoming Events
 splitGridDescription: Where to see Sol Risé next — dates, venues, and full details for each production.
@@ -68,7 +78,7 @@ quoteImageCredit:
   sourceUrl: https://unsplash.com/es/fotos/primer-plano-de-partitura-con-fondo-difuminado-BoG8tpchiis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 footerBrandLine1: Sol Risé
 footerBrandLine2: Soprano
-footerBrandTagline: Opera Singer
+footerBrandLogo: images/sol-rise-soprano-optimized.png
 footerNavLinks:
   - label: Home
     href: /

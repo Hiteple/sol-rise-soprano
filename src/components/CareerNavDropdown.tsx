@@ -43,10 +43,10 @@ export function CareerNavDropdown({
 
   if (variant === 'mobile') {
     return (
-      <div className={cn('flex flex-col', open && 'gap-3')}>
+      <div className={cn('flex flex-col', open && 'gap-1')}>
         <button
           type="button"
-          className="nav-mobile-link flex items-center justify-between font-display text-2xl italic text-left"
+          className="nav-mobile-link flex items-center justify-between font-display italic text-left"
           style={
             active
               ? { color: useChrome ? 'var(--chrome-accent)' : 'var(--accent-soft-color)' }
@@ -76,7 +76,7 @@ export function CareerNavDropdown({
           }}
           aria-hidden={!open}
         >
-          <ul className="flex flex-col gap-4 py-2">
+          <ul className="flex flex-col gap-1.5 py-1">
             {items.map((item) => {
               const itemActive = isCareerSubNavActive(item.href, pathname)
               const href = localizePath(item.href, locale)
@@ -94,7 +94,7 @@ export function CareerNavDropdown({
                     tabIndex={open ? undefined : -1}
                   >
                     <span
-                      className="font-display text-xl italic"
+                      className="nav-mobile-link font-display italic"
                       style={{
                         color: itemActive
                           ? useChrome

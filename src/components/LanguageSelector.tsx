@@ -59,6 +59,7 @@ export function LanguageSelector({ variant = 'desktop', useChrome = true, onNavi
                 key={code}
                 type="button"
                 lang={code}
+                tabIndex={isActive ? -1 : undefined}
                 onClick={() => switchTo(code)}
                 className={cn(
                   'locale-pill locale-pill-with-flag font-body text-sm px-3 py-1.5 rounded-full border transition-colors duration-200 inline-flex items-center gap-2',
@@ -89,18 +90,19 @@ export function LanguageSelector({ variant = 'desktop', useChrome = true, onNavi
       {LOCALES.map((code) => {
         const isActive = locale === code
         return (
-          <button
-            key={code}
-            type="button"
-            lang={code}
-            onClick={() => switchTo(code)}
-            className={cn(
-              'locale-pill locale-pill-with-flag font-body text-xs tracking-wider px-2 py-1 rounded-full transition-all duration-200 inline-flex items-center gap-1.5',
-              isActive && 'locale-pill-active',
-            )}
-            aria-label={localeButtonLabel(code, isActive)}
-            aria-current={isActive ? 'true' : undefined}
-          >
+              <button
+                key={code}
+                type="button"
+                lang={code}
+                tabIndex={isActive ? -1 : undefined}
+                onClick={() => switchTo(code)}
+                className={cn(
+                  'locale-pill locale-pill-with-flag font-body text-xs tracking-wider px-2 py-1 rounded-full transition-all duration-200 inline-flex items-center gap-1.5',
+                  isActive && 'locale-pill-active',
+                )}
+                aria-label={localeButtonLabel(code, isActive)}
+                aria-current={isActive ? 'true' : undefined}
+              >
             <LocaleFlagIcon locale={code} size={flagSize} decorative className="locale-flag-icon" />
             <span aria-hidden="true">{LOCALE_SHORT[code]}</span>
           </button>

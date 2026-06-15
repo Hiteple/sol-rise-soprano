@@ -32,7 +32,6 @@ export function Footer() {
   const footerBrandLine1 = site?.footerBrandLine1 ?? 'Sol Risé'
   const footerBrandLine2 = site?.footerBrandLine2 ?? 'Soprano'
   const footerBrandLogo = site?.footerBrandLogo?.trim()
-  const footerTagline = site?.footerBrandTagline ?? 'Soprano · Stage Artist\nVoice of Passion'
   const instagramUrl = site?.instagramUrl ?? 'https://www.instagram.com/solrisesoprano/'
   const youtubeUrl =
     contact?.youtubeUrl ??
@@ -56,7 +55,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           <div>
             {footerBrandLogo ? (
-              <div className="mb-3">
+              <div>
                 <SiteBrandLogo variant="footer" src={footerBrandLogo} fieldPath="footerBrandLogo" />
               </div>
             ) : (
@@ -76,13 +75,6 @@ export function Footer() {
                 </span>
               </div>
             )}
-            <p
-              className="text-sm leading-relaxed mt-4"
-              style={{ color: 'var(--chrome-text-muted)', whiteSpace: 'pre-line' }}
-              data-sb-field-path="footerBrandTagline"
-            >
-              {footerTagline}
-            </p>
           </div>
 
           <div>

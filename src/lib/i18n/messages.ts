@@ -51,6 +51,7 @@ export type UiMessages = {
     presentedBy: string
     venue: string
     performanceDates: string
+    moreDates: string
     solRise: string
     inquire: string
     getTickets: string
@@ -189,6 +190,7 @@ const EN: UiMessages = {
     presentedBy: 'Presented by',
     venue: 'Venue',
     performanceDates: 'Performance dates',
+    moreDates: '+{count} more',
     solRise: 'Sol Risé',
     inquire: 'Inquire →',
     getTickets: 'Get tickets →',
@@ -321,6 +323,7 @@ const ES: UiMessages = {
     presentedBy: 'Presentado por',
     venue: 'Lugar',
     performanceDates: 'Fechas de función',
+    moreDates: '+{count} más',
     solRise: 'Sol Risé',
     inquire: 'Consultar →',
     getTickets: 'Entradas →',
@@ -453,6 +456,7 @@ const DE: UiMessages = {
     presentedBy: 'Präsentiert von',
     venue: 'Spielort',
     performanceDates: 'Aufführungstermine',
+    moreDates: '+{count} weitere',
     solRise: 'Sol Risé',
     inquire: 'Anfragen →',
     getTickets: 'Tickets →',
@@ -585,6 +589,7 @@ const IT: UiMessages = {
     presentedBy: 'Presentato da',
     venue: 'Luogo',
     performanceDates: 'Date di rappresentazione',
+    moreDates: '+{count} altre',
     solRise: 'Sol Risé',
     inquire: 'Richiedi →',
     getTickets: 'Biglietti →',

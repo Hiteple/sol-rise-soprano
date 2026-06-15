@@ -2,7 +2,7 @@
 title: Verdi Requiem — Teatro Argentino
 image: images/requiem-verdi/verdi-requiem-01.jpeg
 alt: "Sol Risé in Verdi's Requiem at Teatro Argentino de La Plata, La Plata"
-category: Stage
+category: Backstage
 gallerySlug: verdi-requiem-2023-teatro-argentino
 order: 37
 ---

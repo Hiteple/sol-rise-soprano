@@ -24,6 +24,32 @@ items:
     characterName: Gräfin von Ceprano
     summary: Eine Hofdame in Verdis Tragödie — gesungen mit Celebrarte Música in Buenos Aires.
     content: Die Gräfin von Ceprano erscheint in der Eröffnungsszene am Hof von Verdis *Rigoletto*. Sol Risé sang die Rolle mit Celebrarte Música.
+  chorus-carmen:
+    summary: Chor und Chorverstärkung in Bizets Oper — mit Juventus Lyrica und Celebrarte Música in Buenos Aires.
+    tags:
+      - Bizet
+      - Chor
+    content: Sol Risé sang im Chor von Bizets *Carmen* mit Juventus Lyrica am Teatro Avenida und als Chorverstärkung mit Celebrarte Música.
+    appearances:
+      - notes: Chormitglied
+      - notes: Chorverstärkung
+  chorus-cavalleria-rusticana:
+    characterName: Chor & featured Solistin
+    summary: Chor in *Cavalleria Rusticana* und featured Solistin bei italienischen Canzonetten beim Festival della Canzonetta Italiana — mit Juventus Lyrica.
+    tags:
+      - Mascagni
+      - Chor
+    content: Sol Risé sang im Chor von Mascagnis *Cavalleria Rusticana* und trat als featured Solistin bei italienischen Canzonetten beim Festival della Canzonetta Italiana mit Juventus Lyrica auf.
+    appearances:
+      - notes: Chormitglied und featured Solistin bei italienischen Canzonetten
+  chorus-il-trovatore:
+    summary: Chormitglied in Verdis leidenschaftlichem Drama — mit Valkyria Lírica in Buenos Aires.
+    tags:
+      - Verdi
+      - Chor
+    content: Sol Risé sang im Chor von Verdis *Il Trovatore* mit Valkyria Lírica — Musik, die dramatische Intensität und Ensemblepräzision verlangt.
+    appearances:
+      - notes: Chormitglied
   first-lady-die-zauberflote:
     characterName: Erste Dame
     summary: Eine der Damen der Königin der Nacht — aufgeführt in spanischsprachigen Kinderproduktionen mit Celebrarte Música und Jóvenes Talentos.

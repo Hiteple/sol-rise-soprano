@@ -23,6 +23,32 @@ items:
   contessa-di-ceprano-rigoletto:
     summary: Una dama di corte nella tragedia di Verdi — interpretata con Celebrarte Música a Buenos Aires.
     content: La Contessa di Ceprano compare nella scena d'apertura di corte de *Rigoletto* di Verdi. Sol Risé ha interpretato il ruolo con Celebrarte Música.
+  chorus-carmen:
+    summary: Coro e rinforzo del coro nell'opera di Bizet — con Juventus Lyrica e Celebrarte Música a Buenos Aires.
+    tags:
+      - Bizet
+      - Coro
+    content: Sol Risé ha partecipato al coro de *Carmen* di Bizet con Juventus Lyrica al Teatro Avenida e come rinforzo del coro con Celebrarte Música.
+    appearances:
+      - notes: Membro del coro
+      - notes: Rinforzo del coro
+  chorus-cavalleria-rusticana:
+    characterName: Coro e solista in evidenza
+    summary: Coro in *Cavalleria Rusticana* e solista in evidenza nelle canzonette italiane al Festival della Canzonetta Italiana — con Juventus Lyrica.
+    tags:
+      - Mascagni
+      - Coro
+    content: Sol Risé ha cantato nel coro de *Cavalleria Rusticana* di Mascagni ed è apparsa come solista in evidenza nelle canzonette italiane al Festival della Canzonetta Italiana con Juventus Lyrica.
+    appearances:
+      - notes: Membro del coro e solista in evidenza nelle canzonette italiane
+  chorus-il-trovatore:
+    summary: Membro del coro nel dramma appassionato di Verdi — con Valkyria Lírica a Buenos Aires.
+    tags:
+      - Verdi
+      - Coro
+    content: Sol Risé ha cantato nel coro de *Il Trovatore* di Verdi con Valkyria Lírica — musica che richiede intensità drammatica e precisione d'ensemble.
+    appearances:
+      - notes: Membro del coro
   first-lady-die-zauberflote:
     characterName: Prima Dama
     summary: Una delle dame della Regina della Notte — interpretata in produzioni in spagnolo per bambini con Celebrarte Música e Jóvenes Talentos.

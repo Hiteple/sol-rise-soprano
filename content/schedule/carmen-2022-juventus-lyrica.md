@@ -7,6 +7,7 @@ composer: Georges Bizet
 venue: Teatro Avenida
 city: Buenos Aires
 organizationSlug: juventus-lyrica
+roleSlug: chorus-carmen
 image: images/carmen/carmen-juventus-01-processed.webp
 imageAlt: Sol Risé in Carmen chorus with Juventus Lyrica at Teatro Avenida
 gallerySlug: carmen-2022-juventus-lyrica

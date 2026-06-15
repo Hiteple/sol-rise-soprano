@@ -8,6 +8,7 @@ composer: Pietro Mascagni
 venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: juventus-lyrica
+roleSlug: chorus-cavalleria-rusticana
 image: images/cavaleria-rusticana/cavaleria-rusticana-01.webp
 imageAlt: Sol Risé in Cavalleria Rusticana chorus and Italian canzonette at Juventus Lyrica festival
 gallerySlug: cavalleria-rusticana-festival-2023

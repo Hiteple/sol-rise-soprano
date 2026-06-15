@@ -1,8 +1,8 @@
 ---
 title: Carmen — Comodoro Rivadavia
 image: images/carmen/carmen-comodoro-rivadavia-02-processed.jpg
-alt: "Sol Risé in Carmen with Celebrarte Música — performance portrait, Comodoro Rivadavia"
-category: Stage
+alt: "Sol Risé in Carmen with Celebrarte Música on backstage, Comodoro Rivadavia"
+category: Backstage
 gallerySlug: carmen-2024-celebrarte
 order: 19
 ---

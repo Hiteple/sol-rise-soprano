@@ -103,12 +103,10 @@ function EventDetailImage({
 }) {
   if (image?.trim()) {
     return (
-      <div className="img-zoom media-radius order-1 lg:order-2 relative">
+      <div className="schedule-event-detail-image img-zoom media-radius order-1 lg:order-2 relative">
         <img
-          {...netlifyImgSet(image, 900, 1100)}
+          {...netlifyImgSet(image, 650)}
           alt={imageAlt?.trim() || title}
-          className="w-full object-cover"
-          style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
         />
       </div>
     )
@@ -116,8 +114,7 @@ function EventDetailImage({
 
   return (
     <div
-      className="media-radius order-1 lg:order-2 schedule-event-placeholder flex items-center justify-center px-8 text-center"
-      style={{ aspectRatio: '4/5' }}
+      className="media-radius order-1 lg:order-2 schedule-event-placeholder flex items-center justify-center px-8 text-center min-h-64 lg:min-h-0 lg:aspect-[5/4] lg:w-full"
       aria-hidden
     >
       <span className="font-display text-3xl lg:text-4xl italic leading-snug opacity-55">{title}</span>
@@ -225,7 +222,7 @@ export function ScheduleEventDetailSection({
         <div className="max-w-site mx-auto px-4 lg:px-12">
           <div
             ref={workRef}
-            className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start reveal ${workInView ? 'is-visible' : ''}`}
+            className={`schedule-event-detail-hero grid grid-cols-1 gap-12 lg:gap-16 items-start reveal ${workInView ? 'is-visible' : ''}`}
           >
             <div className="order-2 lg:order-1">
               {event.composer && (

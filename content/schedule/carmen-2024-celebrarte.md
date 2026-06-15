@@ -7,6 +7,7 @@ composer: Georges Bizet
 venue: Buenos Aires
 city: Buenos Aires
 organizationSlug: celebrarte-musica
+roleSlug: chorus-carmen
 image: images/carmen/carmen-comodoro-rivadavia-banner.jpg
 imageAlt: Sol Risé in Carmen choral reinforcement with Celebrarte Música, Comodoro Rivadavia
 gallerySlug: carmen-2024-celebrarte

@@ -64,6 +64,10 @@
   --sections-vertical-padding-lg: 5rem; /* matches lg:py-20 */
   /** Main layout column (Nav, sections, footer). Was Tailwind 7xl (80rem). */
   --site-container-max: 90rem;
+  /** Schedule event detail hero — image column width on desktop (text column fills the rest). */
+  --schedule-detail-image-max: 650px;
+  /** Cap hero height on desktop so portrait assets do not dominate the layout. */
+  --schedule-detail-image-max-height: 525px;
   /** Shared corner radius for section media (images/videos). 0 disables it. */
   --media-radius: 0.875rem; /* 14px */
   /** Nested radius for controls inside p-1 (4px) pill tracks; keeps corners concentric. */
@@ -295,6 +299,10 @@
 }
 
 /* Hero text animation */
+.hero-banner-image {
+  filter: brightness(0.8);
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -457,7 +465,11 @@
 }
 
 /* Mobile nav links */
+.nav-mobile-drawer {
+  box-shadow: 4px 0 24px color-mix(in srgb, var(--palette-wine) 12%, transparent);
+}
 .nav-mobile-link {
+  font-size: 1rem;
   transition: color 0.2s ease;
   color: var(--body-color);
 }
@@ -773,6 +785,41 @@
   background: color-mix(in srgb, var(--palette-wine) 14%, var(--page-background-color));
   border: 1px solid color-mix(in srgb, var(--accent-ink-color) 14%, transparent);
   color: var(--accent-ink-color);
+}
+
+@media (min-width: 1024px) {
+  .schedule-event-detail-hero {
+    grid-template-columns: minmax(0, 1fr) var(--schedule-detail-image-max);
+  }
+}
+
+.schedule-event-detail-image {
+  width: 100%;
+  max-width: 100%;
+  align-self: start;
+}
+
+.schedule-event-detail-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top center;
+  border-radius: var(--media-radius);
+}
+
+@media (min-width: 1024px) {
+  .schedule-event-detail-image {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .schedule-event-detail-image img {
+    width: auto;
+    max-width: 100%;
+    max-height: var(--schedule-detail-image-max-height);
+  }
 }
 
 /* Role detail — feature image photo credit */
@@ -1200,6 +1247,10 @@
   --past-badge-angle: 135deg;
 }
 
+.split-grid-link--overflow {
+  border-style: dashed;
+}
+
 @media (min-width: 768px) {
   .split-grid,
   .split-grid-item {
@@ -1274,6 +1325,13 @@
   color: var(--chrome-bg);
   background: var(--chrome-accent);
   border-color: var(--chrome-accent);
+  cursor: default;
+  pointer-events: none;
+}
+.locale-pill-active:hover {
+  color: var(--chrome-bg);
+  background: var(--chrome-accent);
+  border-color: var(--chrome-accent);
 }
 .locale-pill-with-flag:focus-visible {
   outline: 2px solid var(--chrome-accent);
@@ -1289,6 +1347,11 @@
   color: var(--nav-overlay-text-color);
 }
 .nav-hero .locale-pill-active {
+  color: var(--palette-pine);
+  background: var(--accent-pale-color);
+  border-color: var(--accent-pale-color);
+}
+.nav-hero .locale-pill-active:hover {
   color: var(--palette-pine);
   background: var(--accent-pale-color);
   border-color: var(--accent-pale-color);

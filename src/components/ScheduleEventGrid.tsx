@@ -5,6 +5,7 @@ import { useLocale } from '@/components/LocaleContext'
 import { documentSlug } from '@/lib/i18n/content'
 import { localeRouteParams } from '@/lib/i18n/paths'
 import { resolvePublicPath } from '@/lib/public-path'
+import { SCHEDULE_DATE_BADGE_CARD_LIMIT } from '@/lib/schedule-badge-display'
 import { splitGridBadges } from '@/lib/split-grid-badges'
 import { resolveColorScheme } from '@/lib/section-color-scheme'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -94,6 +95,7 @@ export function ScheduleEventCard({
           badges={badges}
           eventRef={slug}
           markPastBadges={item.status === 'upcoming'}
+          collapseAfter={SCHEDULE_DATE_BADGE_CARD_LIMIT}
         />
         <h3
           className={`font-display italic leading-tight ${
