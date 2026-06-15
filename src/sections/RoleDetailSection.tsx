@@ -1,6 +1,9 @@
 import { marked } from 'marked'
 
 import { PhotographyVideoTile } from '@/components/PhotographyVideoTile'
+import { PhotographyGalleryTile } from '@/components/PhotographyGalleryTile'
+import { useLocale } from '@/components/LocaleContext'
+import { documentSlug } from '@/lib/i18n/content'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
@@ -43,14 +46,17 @@ export function RoleDetailSection({
   organizations,
   scheduleEvents,
 }: RoleDetailSectionProps) {
+  const { messages } = useLocale()
+  const roleMsg = messages.role
+  const roleSlug = documentSlug(role)
   const scheme = resolveColorScheme('soft')
   const fg = schemeForeground(scheme)
   const stats = roleStats(role.appearances)
-  const orgBySlug = new Map(organizations.map((org) => [org._meta.path, org]))
+  const orgBySlug = new Map(organizations.map((org) => [documentSlug(org), org]))
   const relatedGallery = sortByContentOrder(
-    galleryItems.filter((item) => item.roleSlug === role._meta.path),
+    galleryItems.filter((item) => item.roleSlug === roleSlug),
   )
-  const roleVideos = scheduleVideosForRole(role._meta.path, scheduleEvents)
+  const roleVideos = scheduleVideosForRole(roleSlug, scheduleEvents)
   const showPhotography = roleVideos.length > 0 || relatedGallery.length > 0
   const bodyHtml = role.content?.trim() ? marked(role.content) : ''
   const { ref, inView } = useInView<HTMLDivElement>()
@@ -93,7 +99,7 @@ export function RoleDetailSection({
           ref={ref}
           className={`max-w-site mx-auto px-4 lg:px-12 reveal ${inView ? 'is-visible' : ''}`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_280px] gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(320px,24rem)] gap-12 lg:gap-16">
             <div>
               {hasFeatureImage && (
                 <div
@@ -102,7 +108,9 @@ export function RoleDetailSection({
                 >
                   <img
                     {...netlifyImgSet(role.featureImage, 1200, 750)}
-                    alt={`Sol Risé as ${role.characterName} in ${role.operaTitle}`}
+                    alt={roleMsg.featureImageAlt
+                      .replace('{character}', role.characterName)
+                      .replace('{opera}', role.operaTitle)}
                     className="w-full h-full object-cover"
                     data-sb-field-path="featureImage"
                   />
@@ -134,7 +142,7 @@ export function RoleDetailSection({
               {role.appearances.length > 0 && (
                 <div className="mt-12">
                   <h2 className="font-display text-2xl italic mb-6" style={{ color: fg.heading }}>
-                    Appearances
+                    {roleMsg.appearances}
                   </h2>
                   <ul className="space-y-4">
                     {role.appearances.map((appearance, index) => {
@@ -170,36 +178,38 @@ export function RoleDetailSection({
             </div>
 
             <aside
-              className="h-fit p-6 rounded-[var(--media-radius)] border"
+              className="h-fit min-w-0 p-6 rounded-[var(--media-radius)] border"
               style={{
                 background: schemePageBandBackground('wine'),
                 borderColor: 'color-mix(in srgb, var(--media-caption-text-color) 22%, transparent)',
                 color: 'var(--media-caption-text-color)',
               }}
             >
-              <h2 className="font-body text-xs uppercase tracking-[0.32em] mb-5 font-semibold">Performance Information</h2>
+              <h2 className="font-body text-xs uppercase tracking-[0.32em] mb-5 font-semibold leading-snug break-words">
+                {roleMsg.performanceInfo}
+              </h2>
               <dl className="space-y-4 font-body text-sm">
                 <div>
-                  <dt className="uppercase tracking-widest text-xs opacity-75">Composer</dt>
+                  <dt className="uppercase tracking-widest text-xs opacity-75 break-words">{roleMsg.composer}</dt>
                   <dd className="mt-1">{role.composer}</dd>
                 </div>
                 <div>
-                  <dt className="uppercase tracking-widest text-xs opacity-75">Opera</dt>
+                  <dt className="uppercase tracking-widest text-xs opacity-75 break-words">{roleMsg.opera}</dt>
                   <dd className="mt-1">{role.operaTitle}</dd>
                 </div>
                 <div>
-                  <dt className="uppercase tracking-widest text-xs opacity-75">Appearances</dt>
+                  <dt className="uppercase tracking-widest text-xs opacity-75 break-words">{roleMsg.appearances}</dt>
                   <dd className="mt-1">{stats.performanceCount}</dd>
                 </div>
                 {stats.venueCount > 0 && (
                   <div>
-                    <dt className="uppercase tracking-widest text-xs opacity-75">Venues</dt>
+                    <dt className="uppercase tracking-widest text-xs opacity-75 break-words">{roleMsg.venues}</dt>
                     <dd className="mt-1">{stats.venueCount}</dd>
                   </div>
                 )}
                 {stats.yearRange && (
                   <div>
-                    <dt className="uppercase tracking-widest text-xs opacity-75">Years</dt>
+                    <dt className="uppercase tracking-widest text-xs opacity-75 break-words">{roleMsg.years}</dt>
                     <dd className="mt-1">{stats.yearRange}</dd>
                   </div>
                 )}
@@ -210,9 +220,9 @@ export function RoleDetailSection({
           {showPhotography && (
             <div className="mt-16">
               <h2 className="font-display text-2xl italic mb-6" style={{ color: fg.heading }}>
-                Media
+                {roleMsg.media}
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 {roleVideos.map((video, index) => (
                   <PhotographyVideoTile
                     key={video.scheduleSlug ?? `${video.videoUrl}-${index}`}
@@ -225,20 +235,15 @@ export function RoleDetailSection({
                   />
                 ))}
                 {relatedGallery.map((item, index) => (
-                  <button
+                  <PhotographyGalleryTile
                     key={item._meta.path}
-                    type="button"
-                    className="img-zoom block media-radius border-0 p-0 text-left cursor-pointer w-full"
-                    style={{ aspectRatio: '4/5' }}
-                    aria-label={`View larger image: ${item.title}`}
+                    title={item.title}
+                    image={item.image}
+                    alt={item.alt}
+                    photographer={item.photographer}
+                    stackbitObjectId={`content/gallery/${item._meta.path}.md`}
                     onClick={() => openGallery(lightboxItems, roleVideos.length + index)}
-                  >
-                    <img
-                      {...netlifyImgSet(item.image, 480, 600)}
-                      alt={item.alt}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
+                  />
                 ))}
               </div>
             </div>

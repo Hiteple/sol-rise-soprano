@@ -1,9 +1,13 @@
+import { useEffect } from 'react'
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { Footer } from '@/components/Footer'
+import { LanguageSuggestBanner } from '@/components/LanguageSuggestBanner'
+import { LocaleProvider, useLocaleFromPathname } from '@/components/LocaleContext'
 import { Nav } from '@/components/Nav'
 import { NotFoundSection } from '@/components/NotFoundSection'
 import { SkipLink } from '@/components/SkipLink'
 import { DEFAULT_DESCRIPTION, SITE_NAME, googleSiteVerificationMeta } from '@/lib/seo'
+import { DEFAULT_LOCALE, getSavedLocale, getUiMessages } from '@/lib/i18n'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -40,27 +44,50 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="grain">
-        <SkipLink />
-        <Nav />
-        <main id="main-content" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
+        <AppShell>{children}</AppShell>
         <Scripts />
       </body>
     </html>
   )
 }
 
+function AppShell({ children }: { children: React.ReactNode }) {
+  const locale = useLocaleFromPathname()
+
+  useEffect(() => {
+    const path = window.location.pathname
+    if (path !== '/') return
+    const saved = getSavedLocale()
+    if (saved && saved !== DEFAULT_LOCALE) {
+      window.location.replace(`/${saved}`)
+    }
+  }, [])
+
+  return (
+    <LocaleProvider locale={locale}>
+      <SkipLink />
+      <Nav />
+      <main id="main-content" tabIndex={-1}>
+        {children}
+      </main>
+      <Footer />
+      <LanguageSuggestBanner />
+    </LocaleProvider>
+  )
+}
+
 function NotFoundPage() {
+  const locale = useLocaleFromPathname()
+  const messages = getUiMessages(locale)
+
   return (
     <NotFoundSection
-      eyebrow="Lost in the wings"
-      title="Page not found"
-      description="The page you are looking for does not exist, may have moved, or is not yet published."
-      backHref="/"
-      backLabel="Return home"
-      homeLabel="Return home"
+      eyebrow={messages.notFound.eyebrow}
+      title={messages.notFound.title}
+      description={messages.notFound.description}
+      backHref={locale === DEFAULT_LOCALE ? '/' : `/${locale}`}
+      backLabel={messages.notFound.backLabel}
+      homeLabel={messages.notFound.backLabel}
     />
   )
 }

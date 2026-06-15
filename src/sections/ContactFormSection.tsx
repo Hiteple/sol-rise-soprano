@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Send, Check } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 
 import {
   FacebookIcon,
@@ -16,6 +17,8 @@ import {
   schemePageBandBackground,
 } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
+import { useLocale } from '@/components/LocaleContext'
+import { localeRouteParams } from '@/lib/i18n/paths'
 import type { ContactPage } from '../../schemas/site-pages'
 
 export type ContactFormSectionProps = {
@@ -23,6 +26,7 @@ export type ContactFormSectionProps = {
 }
 
 export function ContactFormSection({ page }: ContactFormSectionProps) {
+  const { locale, messages } = useLocale()
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const subjectOptions = page?.formSubjectOptions?.length
@@ -256,12 +260,17 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                 </p>
 
                 {[
-                  { id: 'name', label: 'Your Name', type: 'text', placeholder: 'Isabella Rossi' },
+                  {
+                    id: 'name',
+                    label: page?.formNameLabel ?? 'Your Name',
+                    type: 'text',
+                    placeholder: page?.formNamePlaceholder ?? 'Your name',
+                  },
                   {
                     id: 'email',
-                    label: 'Email Address',
+                    label: page?.formEmailLabel ?? 'Email Address',
                     type: 'email',
-                    placeholder: 'you@example.com',
+                    placeholder: page?.formEmailPlaceholder ?? 'you@example.com',
                   },
                 ].map((field) => (
                   <div key={field.id}>
@@ -299,14 +308,14 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     className="block font-body text-xs uppercase tracking-widest font-semibold mb-2"
                     style={{ color: isWine ? fg.body : 'var(--subtle-text-color)' }}
                   >
-                    Subject
+                    {page?.formSubjectLabel ?? 'Subject'}
                   </label>
                   <select
                     id="subject"
                     name="subject"
                     required
                     defaultValue=""
-                    className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border-b bg-transparent"
+                    className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border-b bg-transparent cursor-pointer"
                     style={{
                       borderColor: inputBorderRest,
                       color: isWine ? fg.heading : 'var(--body-color)',
@@ -319,7 +328,7 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     }}
                   >
                     <option value="" disabled>
-                      Select a subject
+                      {page?.formSubjectPlaceholder ?? 'Select a subject'}
                     </option>
                     {subjectOptions.map((option, idx) => (
                       <option key={`${option}-${idx}`} value={option}>
@@ -335,14 +344,16 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                     className="block font-body text-xs uppercase tracking-widest font-semibold mb-2"
                     style={{ color: isWine ? fg.body : 'var(--subtle-text-color)' }}
                   >
-                    Message
+                    {page?.formMessageLabel ?? 'Message'}
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     required
                     rows={6}
-                    placeholder="Please share the details of your enquiry..."
+                    placeholder={
+                      page?.formMessagePlaceholder ?? 'Please share the details of your enquiry...'
+                    }
                     className="w-full px-4 py-3 font-body text-sm outline-none transition-all duration-300 border resize-none bg-transparent rounded-[var(--media-radius)]"
                     style={{
                       borderColor: inputBorderRest,
@@ -357,6 +368,19 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                   />
                 </div>
 
+                <p className="font-body text-xs leading-relaxed" style={{ color: fg.body }}>
+                  {messages.contact.formPrivacyNotice}{' '}
+                  <Link
+                    to="/{-$locale}/privacy"
+                    params={localeRouteParams(locale)}
+                    className="underline underline-offset-2 transition-opacity hover:opacity-80"
+                    style={{ color: fg.heading }}
+                  >
+                    {messages.footer.privacyLink}
+                  </Link>
+                  .
+                </p>
+
                 <button
                   type="submit"
                   disabled={loading}
@@ -368,7 +392,9 @@ export function ContactFormSection({ page }: ContactFormSectionProps) {
                   }}
                 >
                   <Send size={14} aria-hidden />
-                  {loading ? 'Sending...' : 'Send Message'}
+                  {loading
+                    ? (page?.formSubmitLoadingLabel ?? 'Sending...')
+                    : (page?.formSubmitLabel ?? 'Send Message')}
                 </button>
               </form>
             )}

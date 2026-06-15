@@ -26,6 +26,16 @@ formSubjectOptions:
 successTitle: Message Sent
 successMessage: Thank you for reaching out.
 successResetLabel: Send Another Message →
+formNameLabel: Your Name
+formNamePlaceholder: Your name
+formEmailLabel: Email Address
+formEmailPlaceholder: you@example.com
+formSubjectLabel: Subject
+formSubjectPlaceholder: Select a subject
+formMessageLabel: Message
+formMessagePlaceholder: Please share the details of your enquiry...
+formSubmitLabel: Send Message
+formSubmitLoadingLabel: Sending...
 contactFormColorScheme: bright
 pageHeroColorScheme: bright
 ---

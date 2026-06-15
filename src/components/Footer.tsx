@@ -1,4 +1,5 @@
 import { Mail } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 
 import {
   FacebookIcon,
@@ -7,7 +8,10 @@ import {
   YoutubeIcon,
 } from '@/components/brand-icons'
 import { ExternalLink } from '@/components/ExternalLink'
-import { allContactPages, allHomes } from 'content-collections'
+import { SiteBrandLogo } from '@/components/SiteBrandLogo'
+import { useLocale } from '@/components/LocaleContext'
+import { getContactPage, getHomePage } from '@/lib/i18n/content'
+import { localizeNavHref, translateNavLabel, localeRouteParams } from '@/lib/i18n'
 
 import { parseSiteNavLinks } from '@/lib/nav-links'
 
@@ -21,11 +25,13 @@ const fallbackFooterLinks = [
 ]
 
 export function Footer() {
-  const site = allHomes[0]
-  const contact = allContactPages[0]
+  const { locale, messages } = useLocale()
+  const site = getHomePage(locale)
+  const contact = getContactPage(locale)
   const footerLinks = parseSiteNavLinks(site?.footerNavLinks, fallbackFooterLinks)
   const footerBrandLine1 = site?.footerBrandLine1 ?? 'Sol Risé'
   const footerBrandLine2 = site?.footerBrandLine2 ?? 'Soprano'
+  const footerBrandLogo = site?.footerBrandLogo?.trim()
   const footerTagline = site?.footerBrandTagline ?? 'Soprano · Stage Artist\nVoice of Passion'
   const instagramUrl = site?.instagramUrl ?? 'https://www.instagram.com/solrisesoprano/'
   const youtubeUrl =
@@ -49,17 +55,27 @@ export function Footer() {
       <div className="max-w-site mx-auto px-4 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           <div>
-            <div
-              className="font-display text-3xl mb-3"
-              style={{ color: 'var(--chrome-accent)' }}
-              data-sb-field-path="footerBrandLine1"
-            >
-              {footerBrandLine1}
-              <br />
-              <span className="italic" style={{ color: 'var(--chrome-text)' }} data-sb-field-path="footerBrandLine2">
-                {footerBrandLine2}
-              </span>
-            </div>
+            {footerBrandLogo ? (
+              <div className="mb-3">
+                <SiteBrandLogo variant="footer" src={footerBrandLogo} fieldPath="footerBrandLogo" />
+              </div>
+            ) : (
+              <div
+                className="font-display text-3xl mb-3"
+                style={{ color: 'var(--chrome-accent)' }}
+                data-sb-field-path="footerBrandLine1"
+              >
+                {footerBrandLine1}
+                <br />
+                <span
+                  className="italic"
+                  style={{ color: 'var(--chrome-text)' }}
+                  data-sb-field-path="footerBrandLine2"
+                >
+                  {footerBrandLine2}
+                </span>
+              </div>
+            )}
             <p
               className="text-sm leading-relaxed mt-4"
               style={{ color: 'var(--chrome-text-muted)', whiteSpace: 'pre-line' }}
@@ -74,13 +90,13 @@ export function Footer() {
               className="text-xs uppercase tracking-widest mb-6 font-body font-semibold"
               style={{ color: 'var(--chrome-accent)' }}
             >
-              Navigate
+              {messages.footer.navigate}
             </h4>
             <nav className="flex flex-col gap-3" aria-label="Footer navigation">
               {footerLinks.map((link, idx) => (
                 <a
                   key={`${link.label}-${link.href}`}
-                  href={link.href}
+                  href={localizeNavHref(link.href, locale)}
                   className="text-sm transition-colors duration-200 font-body"
                   data-sb-field-path={`footerNavLinks.${idx}.label`}
                   style={{ color: 'var(--chrome-text-muted)' }}
@@ -91,7 +107,7 @@ export function Footer() {
                     (e.currentTarget.style.color = 'var(--chrome-text-muted)')
                   }
                 >
-                  {link.label}
+                  {translateNavLabel(link.label, locale)}
                 </a>
               ))}
             </nav>
@@ -102,7 +118,7 @@ export function Footer() {
               className="text-xs uppercase tracking-widest mb-6 font-body font-semibold"
               style={{ color: 'var(--chrome-accent)' }}
             >
-              Connect
+              {messages.footer.connect}
             </h4>
             <a
               href={`mailto:${email}`}
@@ -199,9 +215,25 @@ export function Footer() {
           className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4"
           style={{ borderColor: 'var(--chrome-border)' }}
         >
-          <p className="text-xs" style={{ color: 'var(--chrome-text-muted)' }}>
-            © {new Date().getFullYear()} Sol Risé Soprano. All rights reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+            <p className="text-xs" style={{ color: 'var(--chrome-text-muted)' }}>
+              © {new Date().getFullYear()} Sol Risé Soprano. {messages.footer.rights}
+            </p>
+            <Link
+              to="/{-$locale}/privacy"
+              params={localeRouteParams(locale)}
+              className="text-xs transition-colors duration-200 font-body underline underline-offset-2"
+              style={{ color: 'var(--chrome-text-muted)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--chrome-text)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--chrome-text-muted)'
+              }}
+            >
+              {messages.footer.privacyLink}
+            </Link>
+          </div>
           <p
             className="text-xs font-display italic"
             style={{ color: 'color-mix(in srgb, var(--chrome-accent) 85%, var(--chrome-text) 15%)' }}

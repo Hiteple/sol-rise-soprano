@@ -57,6 +57,7 @@ export const aboutPageSchema = z.object({
   timelineColorScheme: sectionColorSchemeSchema.default('soft'),
   timelineSlideIn: z.boolean().default(true),
   timeline: z.array(timelineItemSchema),
+  timelineClosureMessage: z.string().default('The journey continues…'),
   ctaTitleLine1: z.string(),
   ctaTitleLine2: z.string(),
   ctaPrimaryLabel: z.string(),
@@ -111,6 +112,16 @@ export const contactPageSchema = z.object({
   successTitle: z.string(),
   successMessage: z.string(),
   successResetLabel: z.string(),
+  formNameLabel: z.string().optional(),
+  formNamePlaceholder: z.string().optional(),
+  formEmailLabel: z.string().optional(),
+  formEmailPlaceholder: z.string().optional(),
+  formSubjectLabel: z.string().optional(),
+  formSubjectPlaceholder: z.string().optional(),
+  formMessageLabel: z.string().optional(),
+  formMessagePlaceholder: z.string().optional(),
+  formSubmitLabel: z.string().optional(),
+  formSubmitLoadingLabel: z.string().optional(),
   content: z.string(),
 })
 
@@ -173,4 +184,23 @@ export type ContactPage = z.infer<typeof contactPageSchema>
 export type RolesPage = z.infer<typeof rolesPageSchema>
 export type OrganizationsPage = z.infer<typeof organizationsPageSchema>
 export type SchedulePage = z.infer<typeof schedulePageSchema>
+const privacySectionSchema = z.object({
+  heading: z.string(),
+  body: z.string(),
+})
+
+export const privacyPageSchema = z.object({
+  type: z.literal('PrivacyPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
+  heroEyebrow: z.string(),
+  heroTitle: z.string(),
+  heroDescription: z.string().optional(),
+  bodyColorScheme: sectionColorSchemeSchema.default('soft'),
+  bodySlideIn: z.boolean().default(false),
+  lastUpdated: z.string(),
+  sections: z.array(privacySectionSchema),
+  content: z.string(),
+})
+
 export type BioPage = z.infer<typeof bioPageSchema>
+export type PrivacyPage = z.infer<typeof privacyPageSchema>

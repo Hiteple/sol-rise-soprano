@@ -130,8 +130,11 @@ export function TimelineSection({ page }: TimelineSectionProps) {
             <div className="quote-banner-ornament timeline-closure__ornament font-body mb-6" aria-hidden>
               <span className="quote-banner-ornament__glyph">✦</span>
             </div>
-            <p className="timeline-closure__message font-display italic">
-              The journey continues…
+            <p
+              className="timeline-closure__message font-display italic"
+              data-sb-field-path="timelineClosureMessage"
+            >
+              {page.timelineClosureMessage}
             </p>
             <Link
               to={ctaHref}

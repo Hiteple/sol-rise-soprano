@@ -4,16 +4,16 @@ import { Link } from '@tanstack/react-router'
 import { RoleCardImage } from '@/components/RoleCardImage'
 import { SlidingTabGroup } from '@/components/SlidingTabGroup'
 import { TabGridEmptyState } from '@/components/TabGridEmptyState'
+import { useLocale } from '@/components/LocaleContext'
+import { contentMarkdownPath, documentSlug } from '@/lib/i18n/content'
+import { localeRouteParams } from '@/lib/i18n/paths'
+import { roleAppearanceCountLabel, roleCategoryLabel } from '@/lib/i18n/messages'
 import { filterRolesByCategory, roleFilterEmptyCopy } from '@/lib/role-category'
 import { roleStats } from '@/lib/role-stats'
 import { resolveColorScheme, schemeForeground, schemeGoldLinkStyle } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
-import {
-  ROLE_CATEGORY_LABEL,
-  type RoleCategory,
-  type RoleCategoryFilter,
-} from '../../schemas/role-category'
+import type { RoleCategory, RoleCategoryFilter } from '../../schemas/role-category'
 
 export type RoleCard = {
   _meta: { path: string }
@@ -40,6 +40,8 @@ export type RolesIndexSectionProps = {
 }
 
 export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesIndexSectionProps) {
+  const { locale, messages } = useLocale()
+  const index = messages.role.index
   const [filter, setFilter] = useState<RoleCategoryFilter>('all')
   const scheme = resolveColorScheme(listColorScheme)
   const fg = schemeForeground(scheme)
@@ -56,16 +58,16 @@ export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesInde
       >
         <div className="mb-8">
           <SlidingTabGroup
-            ariaLabel="Filter performances by category"
+            ariaLabel={index.filterAriaLabel}
             value={filter}
             onChange={setFilter}
             inactiveTextColor={scheme === 'wine' ? fg.body : 'var(--subtle-text-color)'}
             activeTextColor="var(--on-accent-text-color)"
             options={[
-              { value: 'all', label: 'All' },
-              { value: 'lead', label: 'Lead' },
-              { value: 'supporting', label: 'Supporting' },
-              { value: 'ensemble', label: 'Ensemble' },
+              { value: 'all', label: index.filterAll },
+              { value: 'lead', label: index.categories.lead },
+              { value: 'supporting', label: index.categories.supporting },
+              { value: 'ensemble', label: index.categories.ensemble },
             ]}
           />
         </div>
@@ -80,7 +82,7 @@ export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesInde
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filtered.map((role) => {
               const stats = roleStats(role.appearances)
-              const slug = role._meta.path
+              const slug = documentSlug(role)
 
               return (
                 <article
@@ -90,11 +92,11 @@ export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesInde
                     borderColor: 'color-mix(in srgb, var(--accent-ink-color) 16%, transparent)',
                     background: 'var(--section-surface-bright)',
                   }}
-                  data-sb-object-id={`content/roles/${slug}.md`}
+                  data-sb-object-id={contentMarkdownPath(role)}
                 >
                   <Link
-                    to="/roles/$slug"
-                    params={{ slug }}
+                    to="/{-$locale}/roles/$slug"
+                    params={{ ...localeRouteParams(locale), slug }}
                     className="img-zoom block sm:min-h-[180px] bg-[color-mix(in_srgb,var(--palette-wine)_12%,transparent)]"
                   >
                     <RoleCardImage
@@ -123,7 +125,7 @@ export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesInde
                         }}
                         data-sb-field-path="category"
                       >
-                        {ROLE_CATEGORY_LABEL[role.category]}
+                        {roleCategoryLabel(role.category, locale)}
                       </span>
                     </div>
 
@@ -153,18 +155,19 @@ export function RolesIndexSection({ roles, listColorScheme, slideIn }: RolesInde
 
                     {stats.yearRange && (
                       <p className="font-body text-xs uppercase tracking-widest mb-5" style={{ color: fg.eyebrow }}>
-                        {stats.performanceCount} {stats.performanceCount === 1 ? 'appearance' : 'appearances'}
+                        {stats.performanceCount}{' '}
+                        {roleAppearanceCountLabel(stats.performanceCount, locale)}
                         {` · ${stats.yearRange}`}
                       </p>
                     )}
 
                     <Link
-                      to="/roles/$slug"
-                      params={{ slug }}
+                      to="/{-$locale}/roles/$slug"
+                      params={{ ...localeRouteParams(locale), slug }}
                       className="gold-link font-body text-xs uppercase tracking-[0.28em] self-start"
                       style={linkStyle}
                     >
-                      View Details →
+                      {index.viewDetails} →
                     </Link>
                   </div>
                 </article>

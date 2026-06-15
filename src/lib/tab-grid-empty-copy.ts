@@ -21,26 +21,3 @@ export function mediaFilterEmptyCopy(filter: MediaFilter): {
     description: 'Past performances will be added here soon.',
   }
 }
-
-export function galleryCategoryEmptyCopy(category: string): {
-  title: string
-  description: string
-} {
-  if (category === 'All') {
-    return {
-      title: 'Gallery coming soon',
-      description:
-        'Photography from stage and backstage will be added here shortly!',
-    }
-  }
-  if (category === 'Photobook') {
-    return {
-      title: 'Photobook coming soon',
-      description: 'Portrait and editorial photography will be added here soon.',
-    }
-  }
-  return {
-    title: `Nothing in ${category} yet`,
-    description: 'New images in this category will be added here soon!',
-  }
-}

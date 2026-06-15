@@ -1,6 +1,10 @@
 import { Link } from '@tanstack/react-router'
 
 import { SplitGridBadges } from '@/components/SplitGridBadges'
+import { useLocale } from '@/components/LocaleContext'
+import { documentSlug } from '@/lib/i18n/content'
+import { localeRouteParams } from '@/lib/i18n/paths'
+import { resolvePublicPath } from '@/lib/public-path'
 import { splitGridBadges } from '@/lib/split-grid-badges'
 import { resolveColorScheme } from '@/lib/section-color-scheme'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -76,8 +80,11 @@ export function ScheduleEventCard({
   /** Smaller title/subtitle for past event grids */
   compact?: boolean
 }) {
+  const { locale } = useLocale()
   const badges = eventCardBadges(item)
-  const hasImage = Boolean(item.image?.trim())
+  const imagePath = item.image?.trim() ?? ''
+  const hasImage = Boolean(imagePath)
+  const slug = documentSlug(item)
 
   const panelContent = (
     <>
@@ -85,7 +92,7 @@ export function ScheduleEventCard({
       <div className="split-grid-content">
         <SplitGridBadges
           badges={badges}
-          eventRef={item._meta.path}
+          eventRef={slug}
           markPastBadges={item.status === 'upcoming'}
         />
         <h3
@@ -109,7 +116,7 @@ export function ScheduleEventCard({
   )
 
   const style = {
-    backgroundImage: hasImage ? `url(${item.image})` : undefined,
+    backgroundImage: hasImage ? `url(${resolvePublicPath(imagePath)})` : undefined,
     '--split-grid-hover-content-bg': cardScheme.hoverContentBackground,
     '--split-grid-hover-content-text': cardScheme.hoverContentTextColor,
     '--split-grid-eyebrow-bg': cardScheme.eyebrowBackground,
@@ -118,8 +125,8 @@ export function ScheduleEventCard({
 
   return (
     <Link
-      to="/schedule/$slug"
-      params={{ slug: item._meta.path }}
+      to="/{-$locale}/schedule/$slug"
+      params={{ ...localeRouteParams(locale), slug }}
       className={`schedule-event-card${compact ? ' schedule-event-card--compact' : ''}${hasImage ? '' : ' schedule-event-card--placeholder'}`}
       style={style}
     >
@@ -154,7 +161,7 @@ export function ScheduleEventGrid({
     >
       <div className="schedule-event-grid schedule-event-grid--upcoming">
         {events.map((item) => (
-          <ScheduleEventCard key={item._meta.path} item={item} cardScheme={cardScheme} />
+          <ScheduleEventCard key={documentSlug(item)} item={item} cardScheme={cardScheme} />
         ))}
       </div>
     </div>

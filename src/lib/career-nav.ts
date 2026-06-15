@@ -1,3 +1,7 @@
+import { getUiMessages } from '@/lib/i18n/messages'
+import type { Locale } from '@/lib/i18n/locales'
+import { stripLocaleFromPathname } from '@/lib/i18n/paths'
+
 export type CareerNavItem = {
   label: string
   description: string
@@ -24,9 +28,19 @@ export const careerNavItems: CareerNavItem[] = [
 
 const careerPrefixes = ['/career', '/roles', '/organizations']
 
+export function getCareerNavItems(locale: Locale): CareerNavItem[] {
+  const items = getUiMessages(locale).careerNav
+  return [
+    { label: items.overview, description: items.overviewDesc, href: '/career' },
+    { label: items.performances, description: items.performancesDesc, href: '/roles' },
+    { label: items.organizations, description: items.organizationsDesc, href: '/organizations' },
+  ]
+}
+
 export function isCareerPath(pathname: string): boolean {
+  const current = stripLocaleFromPathname(pathname)
   return careerPrefixes.some(
-    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+    (prefix) => current === prefix || current.startsWith(`${prefix}/`),
   )
 }
 

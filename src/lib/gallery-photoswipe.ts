@@ -4,6 +4,7 @@ import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin'
 import type { SlideData } from 'photoswipe'
 
 import { isNetlifyTransformableUrl, netlifyImg } from '@/lib/netlify-image'
+import { resolvePublicPath } from '@/lib/public-path'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { youtubeIframeSrc } from '@/lib/utils'
 
@@ -34,12 +35,6 @@ const PHOTOSWIPE_UI_ICONS = {
   zoomSVG: lucidePswpIcon(
     '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/>',
   ),
-}
-
-function resolvePublicPath(path: string): string {
-  const trimmed = path.trim()
-  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed
-  return trimmed.startsWith('/') ? trimmed : `/${trimmed}`
 }
 
 function lightboxImageSrc(path: string): string {

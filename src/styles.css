@@ -45,6 +45,8 @@
   --pill-track-background-color: color-mix(in srgb, var(--palette-pink) 58%, white 42%);
   /** Selected tab pill (rose bg) — wine label meets contrast vs --accent-color */
   --media-filter-tab-active-text-color: var(--on-accent-text-color);
+  /** Inactive tab hover (desktop) — lighter pill hint than the active indicator */
+  --sliding-tab-hover-background: color-mix(in srgb, var(--accent-color) 26%, transparent);
 
   --border-color: color-mix(in srgb, var(--palette-rose) 22%, var(--palette-pink) 78%);
   --input-border-color: color-mix(in srgb, var(--palette-rose) 32%, var(--palette-pink) 68%);
@@ -486,7 +488,45 @@
   transform: scale(1.05);
 }
 
+/* Gallery tiles: caption visible by default (touch); hover-reveal on fine-pointer devices */
+.gallery-tile-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  opacity: 1;
+  transition: opacity 0.3s;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--palette-wine) 78%, transparent) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+@media (min-width: 1024px) {
+  .gallery-tile-caption {
+    padding: 1.25rem;
+  }
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .group .gallery-tile-caption {
+    opacity: 0;
+  }
+  .group:hover .gallery-tile-caption,
+  .group:focus-visible .gallery-tile-caption {
+    opacity: 1;
+  }
+}
+
 /* Sliding pill tab indicator */
+.sliding-tab-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.sliding-tab-scroll::-webkit-scrollbar {
+  display: none;
+}
 .sliding-tab-indicator {
   position: absolute;
   top: 0.25rem;
@@ -498,6 +538,19 @@
   transition:
     left 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     width 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sliding-tab-button {
+  background: transparent;
+  transition:
+    color 0.3s ease,
+    background-color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .sliding-tab-button:not([aria-pressed='true']):hover {
+    background: var(--sliding-tab-hover-background);
+  }
 }
 
 /* Play button circle */
@@ -1205,5 +1258,157 @@
   .split-grid-link {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Language switcher & suggestion banner */
+.locale-pill {
+  color: var(--chrome-text-muted);
+  border-color: transparent;
+  background: transparent;
+}
+.locale-pill:hover {
+  color: var(--chrome-text);
+}
+.locale-pill-active {
+  color: var(--chrome-bg);
+  background: var(--chrome-accent);
+  border-color: var(--chrome-accent);
+}
+.locale-pill-with-flag:focus-visible {
+  outline: 2px solid var(--chrome-accent);
+  outline-offset: 2px;
+}
+.locale-flag-icon {
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--palette-wine) 18%, transparent);
+}
+.nav-hero .locale-pill {
+  color: var(--nav-overlay-text-muted-color);
+}
+.nav-hero .locale-pill:hover {
+  color: var(--nav-overlay-text-color);
+}
+.nav-hero .locale-pill-active {
+  color: var(--palette-pine);
+  background: var(--accent-pale-color);
+  border-color: var(--accent-pale-color);
+}
+
+.locale-suggest {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 60;
+  transform: translateY(100%);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.locale-suggest-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.locale-suggest-bar {
+  border-top: 1px solid color-mix(in srgb, var(--chrome-accent) 35%, var(--chrome-border) 65%);
+  background: color-mix(in srgb, var(--chrome-bg) 94%, var(--palette-wine) 6%);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -8px 32px color-mix(in srgb, var(--palette-wine) 18%, transparent);
+}
+.locale-suggest-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'main close'
+    'actions actions';
+  gap: 0.75rem 0.5rem;
+  align-items: center;
+  padding-block: 0.875rem;
+}
+.locale-suggest-main {
+  grid-area: main;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-width: 0;
+}
+.locale-suggest-actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.625rem;
+}
+.locale-suggest-close {
+  grid-area: close;
+  align-self: start;
+  color: var(--chrome-text-muted);
+}
+.locale-suggest-close:hover {
+  color: var(--chrome-text);
+  background: color-mix(in srgb, var(--chrome-border) 40%, transparent);
+}
+.locale-suggest-flag {
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--palette-wine) 22%, transparent);
+}
+.locale-suggest-title {
+  color: var(--chrome-text);
+  font-size: 16px;
+}
+.locale-suggest-body {
+  color: var(--chrome-text-muted);
+  font-size: 12px;
+}
+.locale-suggest-accept {
+  background: var(--chrome-accent);
+  color: var(--chrome-bg);
+  font-size: 12px;
+}
+.locale-suggest-accept:hover {
+  filter: brightness(1.05);
+}
+.locale-suggest-stay {
+  border-color: var(--chrome-border);
+  color: var(--chrome-text);
+  background: transparent;
+  font-size: 12px;
+}
+.locale-suggest-stay:hover {
+  border-color: var(--chrome-accent);
+  color: var(--chrome-accent);
+}
+.locale-suggest-dismiss {
+  color: color-mix(in srgb, var(--chrome-text-muted) 85%, transparent);
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .locale-suggest-title {
+    font-size: 18px;
+  }
+  .locale-suggest-body {
+    font-size: 14px;
+  }
+  .locale-suggest-accept,
+  .locale-suggest-stay {
+    font-size: 14px;
+  }
+  .locale-suggest-inner {
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas: 'main actions close';
+    gap: 1rem 1.25rem;
+    padding-block: 0.75rem 0.875rem;
+  }
+  .locale-suggest-actions {
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locale-suggest {
+    transition: none;
   }
 }

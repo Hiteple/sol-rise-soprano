@@ -1,5 +1,7 @@
 import { ExternalLink } from '@/components/ExternalLink'
 import { OrganizationImage } from '@/components/OrganizationImage'
+import { useLocale } from '@/components/LocaleContext'
+import { contentMarkdownPath, documentSlug } from '@/lib/i18n/content'
 import { resolveColorScheme, schemeForeground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
@@ -25,6 +27,7 @@ export function OrganizationsIndexSection({
   listColorScheme,
   slideIn,
 }: OrganizationsIndexSectionProps) {
+  const { locale, messages } = useLocale()
   const scheme = resolveColorScheme(listColorScheme)
   const fg = schemeForeground(scheme)
   const animate = slideIn !== false
@@ -37,15 +40,18 @@ export function OrganizationsIndexSection({
         className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {organizations.map((org) => (
+          {organizations.map((org) => {
+            const slug = documentSlug(org)
+
+            return (
             <article
-              key={org._meta.path}
+              key={slug}
               className="grid grid-cols-1 sm:grid-cols-[180px_minmax(0,1fr)] gap-0 overflow-hidden rounded-[var(--media-radius)] border"
               style={{
                 borderColor: 'color-mix(in srgb, var(--accent-ink-color) 16%, transparent)',
                 background: 'var(--section-surface-bright)',
               }}
-              data-sb-object-id={`content/organizations/${org._meta.path}.md`}
+              data-sb-object-id={contentMarkdownPath(org)}
             >
               <div className="sm:min-h-[180px] bg-[color-mix(in_srgb,var(--palette-wine)_12%,transparent)]">
                 <OrganizationImage
@@ -83,17 +89,18 @@ export function OrganizationsIndexSection({
                 {org.website && (
                   <ExternalLink
                     href={org.website}
-                    aria-label={`Visit ${org.name} website`}
+                    aria-label={`${messages.organizations.visitWebsite} — ${org.name}`}
                     className="font-body text-xs uppercase tracking-[0.28em] self-start border-b pb-1 transition-opacity hover:opacity-75"
                     style={{ color: fg.heading, borderColor: fg.divider }}
                     data-sb-field-path="website"
                   >
-                    Visit website
+                    {messages.organizations.visitWebsite}
                   </ExternalLink>
                 )}
               </div>
             </article>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

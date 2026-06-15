@@ -93,6 +93,13 @@ export default defineStackbitConfig({
             { name: 'headerBrandLine1', type: 'string', label: 'Header - Brand line 1' },
             { name: 'headerBrandLine2', type: 'string', label: 'Header - Brand line 2' },
             {
+              name: 'headerBrandLogo',
+              type: 'image',
+              label: 'Header - Logo (optional)',
+              description:
+                'Replaces the two-line text brand when set. Prefer a light/white logo for the transparent home hero.',
+            },
+            {
               name: 'headerNavLinks',
               type: 'list',
               label: 'Header - Navigation Links',
@@ -228,6 +235,12 @@ export default defineStackbitConfig({
             },
             { name: 'footerBrandLine1', type: 'string', label: 'Footer - Brand line 1' },
             { name: 'footerBrandLine2', type: 'string', label: 'Footer - Brand line 2' },
+            {
+              name: 'footerBrandLogo',
+              type: 'image',
+              label: 'Footer - Logo (optional)',
+              description: 'Replaces the two-line text brand when set.',
+            },
             { name: 'footerBrandTagline', type: 'text', label: 'Footer - Tagline' },
             {
               name: 'footerNavLinks',
@@ -330,6 +343,7 @@ export default defineStackbitConfig({
             { name: 'timelineSectionEyebrow', type: 'string', label: 'Eyebrow', group: 'timeline' },
             { name: 'timelineSectionTitle', type: 'string', label: 'Heading', group: 'timeline' },
             { name: 'timeline', type: 'list', label: 'Milestones', items: { type: 'object', fields: [{ name: 'year', type: 'string', label: 'Year' }, { name: 'title', type: 'string', label: 'Title' }, { name: 'description', type: 'markdown', label: 'Body (Markdown)' }] }, group: 'timeline' },
+            { name: 'timelineClosureMessage', type: 'string', label: 'Timeline closing line', description: 'Italic line below the milestone track (e.g. “The journey continues…”).', group: 'timeline' },
             colorSchemeEnumField('ctaColorScheme', 'textButtons'),
             slideInField('ctaSlideIn', 'textButtons'),
             { name: 'ctaTitleLine1', type: 'string', label: 'Title line 1', group: 'textButtons' },

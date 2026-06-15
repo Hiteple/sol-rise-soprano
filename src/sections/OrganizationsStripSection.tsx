@@ -2,6 +2,8 @@ import { Link } from '@tanstack/react-router'
 
 import { ExternalLink } from '@/components/ExternalLink'
 import { OrganizationImage } from '@/components/OrganizationImage'
+import { useLocale } from '@/components/LocaleContext'
+import { localeRouteParams } from '@/lib/i18n/paths'
 import {
   resolveColorScheme,
   schemeForeground,
@@ -39,6 +41,7 @@ export function OrganizationsStripSection({
   colorScheme,
   slideIn,
 }: OrganizationsStripSectionProps) {
+  const { locale } = useLocale()
   const scheme = resolveColorScheme(colorScheme)
   const fg = schemeForeground(scheme)
   const animate = slideIn !== false
@@ -157,7 +160,8 @@ export function OrganizationsStripSection({
 
         <div className="mt-10 lg:mt-12">
           <Link
-            to="/organizations"
+            to="/{-$locale}/organizations"
+            params={localeRouteParams(locale)}
             className="gold-link font-body text-xs uppercase tracking-[0.28em]"
             style={schemeGoldLinkStyle(scheme)}
             data-sb-field-path="organizationsStripLinkText"

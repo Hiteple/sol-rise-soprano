@@ -1,8 +1,11 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { Link, useRouterState } from '@tanstack/react-router'
+import { useRouterState } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
-import { careerNavItems, isCareerPath } from '@/lib/career-nav'
+import { useLocale } from '@/components/LocaleContext'
+import { getCareerNavItems, isCareerPath } from '@/lib/career-nav'
+import { localizePath } from '@/lib/i18n'
+import { getUiMessages } from '@/lib/i18n/messages'
 import { isCareerSubNavActive } from '@/lib/nav-active'
 import { cn } from '@/lib/utils'
 
@@ -19,10 +22,14 @@ export function CareerNavDropdown({
   onNavigate,
   variant,
 }: CareerNavDropdownProps) {
+  const { locale } = useLocale()
+  const items = getCareerNavItems(locale)
+  const label = getUiMessages(locale).careerNav.label
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
   const active = isCareerPath(pathname)
+  const careerHref = localizePath('/career', locale)
 
   useEffect(() => {
     if (variant !== 'desktop' || !open) return
@@ -49,7 +56,7 @@ export function CareerNavDropdown({
           aria-controls={menuId}
           onClick={() => setOpen((value) => !value)}
         >
-          Career
+          {label}
           <ChevronDown
             size={20}
             aria-hidden
@@ -70,44 +77,46 @@ export function CareerNavDropdown({
           aria-hidden={!open}
         >
           <ul className="flex flex-col gap-4 py-2">
-            {careerNavItems.map((item) => {
+            {items.map((item) => {
               const itemActive = isCareerSubNavActive(item.href, pathname)
+              const href = localizePath(item.href, locale)
 
               return (
-              <li key={item.href}>
-                <Link
-                  to={item.href}
-                  className="block"
-                  aria-current={itemActive ? 'page' : undefined}
-                  onClick={() => {
-                    setOpen(false)
-                    onNavigate?.()
-                  }}
-                  tabIndex={open ? undefined : -1}
-                >
-                  <span
-                    className="font-display text-xl italic"
-                    style={{
-                      color: itemActive
-                        ? useChrome
-                          ? 'var(--chrome-accent)'
-                          : 'var(--accent-soft-color)'
-                        : useChrome
-                          ? 'var(--chrome-text)'
-                          : 'var(--body-color)',
+                <li key={item.href}>
+                  <a
+                    href={href}
+                    className="block"
+                    aria-current={itemActive ? 'page' : undefined}
+                    onClick={() => {
+                      setOpen(false)
+                      onNavigate?.()
                     }}
+                    tabIndex={open ? undefined : -1}
                   >
-                    {item.label}
-                  </span>
-                  <span
-                    className="block font-body text-sm mt-1"
-                    style={{ color: useChrome ? 'var(--chrome-text-muted)' : 'var(--muted-text-color)' }}
-                  >
-                    {item.description}
-                  </span>
-                </Link>
-              </li>
-            )})}
+                    <span
+                      className="font-display text-xl italic"
+                      style={{
+                        color: itemActive
+                          ? useChrome
+                            ? 'var(--chrome-accent)'
+                            : 'var(--accent-soft-color)'
+                          : useChrome
+                            ? 'var(--chrome-text)'
+                            : 'var(--body-color)',
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    <span
+                      className="block font-body text-sm mt-1"
+                      style={{ color: useChrome ? 'var(--chrome-text-muted)' : 'var(--muted-text-color)' }}
+                    >
+                      {item.description}
+                    </span>
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </div>
@@ -125,8 +134,8 @@ export function CareerNavDropdown({
         if (!rootRef.current?.contains(event.relatedTarget as Node)) setOpen(false)
       }}
     >
-      <Link
-        to="/career"
+      <a
+        href={careerHref}
         className="gold-link inline-flex items-center gap-1.5"
         aria-current={active ? 'page' : undefined}
         aria-haspopup="true"
@@ -137,11 +146,10 @@ export function CareerNavDropdown({
           onNavigate?.()
         }}
       >
-        Career
+        {label}
         <ChevronDown size={14} aria-hidden className={cn('transition-transform', open && 'rotate-180')} />
-      </Link>
+      </a>
 
-      {/* pt-3 bridges the gap so mouseenter stays active while moving into the panel */}
       <div
         className={cn(
           'absolute left-1/2 top-full z-50 w-[min(18rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 transition-all duration-200',
@@ -151,26 +159,28 @@ export function CareerNavDropdown({
       >
         <div id={menuId} className="career-nav-dropdown" role="menu">
           <ul className="p-2">
-            {careerNavItems.map((item) => {
+            {items.map((item) => {
               const itemActive = isCareerSubNavActive(item.href, pathname)
+              const href = localizePath(item.href, locale)
 
               return (
-              <li key={item.href} role="none">
-                <Link
-                  to={item.href}
-                  role="menuitem"
-                  className="career-nav-dropdown__item block rounded-[var(--media-radius)] px-4 py-3 transition-colors"
-                  aria-current={itemActive ? 'page' : undefined}
-                  onClick={() => {
-                    setOpen(false)
-                    onNavigate?.()
-                  }}
-                >
-                  <span className="font-display text-lg italic">{item.label}</span>
-                  <span className="block font-body text-xs mt-1 leading-snug opacity-80">{item.description}</span>
-                </Link>
-              </li>
-            )})}
+                <li key={item.href} role="none">
+                  <a
+                    href={href}
+                    role="menuitem"
+                    className="career-nav-dropdown__item block rounded-[var(--media-radius)] px-4 py-3 transition-colors"
+                    aria-current={itemActive ? 'page' : undefined}
+                    onClick={() => {
+                      setOpen(false)
+                      onNavigate?.()
+                    }}
+                  >
+                    <span className="font-display text-lg italic">{item.label}</span>
+                    <span className="block font-body text-xs mt-1 leading-snug opacity-80">{item.description}</span>
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </div>

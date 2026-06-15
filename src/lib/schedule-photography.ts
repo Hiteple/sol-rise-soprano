@@ -1,5 +1,6 @@
 import type { GalleryLightboxItem } from '@/lib/gallery-photoswipe'
 import { filterPublishedContent } from '@/lib/content-order'
+import { documentSlug } from '@/lib/i18n/content'
 import { youtubeThumbnailCandidates } from '@/lib/utils'
 
 export type GalleryPhoto = {
@@ -52,7 +53,7 @@ export function scheduleVideosForRole(
       title: event.title,
       videoUrl: event.videoUrl!.trim(),
       image: event.image,
-      scheduleSlug: event._meta.path,
+      scheduleSlug: documentSlug(event),
     }))
 }
 

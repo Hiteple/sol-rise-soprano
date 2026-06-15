@@ -89,9 +89,11 @@ export function useInView<T extends HTMLElement = HTMLElement>(
     const onSync = () => sync()
     window.addEventListener('resize', onSync, { passive: true })
     window.addEventListener('scroll', onSync, { passive: true })
+    window.addEventListener('load', onSync, { passive: true, once: true })
     removeSyncListeners = () => {
       window.removeEventListener('resize', onSync)
       window.removeEventListener('scroll', onSync)
+      window.removeEventListener('load', onSync)
     }
 
     const resizeObserver =

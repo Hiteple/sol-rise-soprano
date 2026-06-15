@@ -2,8 +2,13 @@ import { Link } from '@tanstack/react-router'
 
 import { ExternalLink } from '@/components/ExternalLink'
 import { PhotographyVideoTile } from '@/components/PhotographyVideoTile'
+import { PhotographyGalleryTile } from '@/components/PhotographyGalleryTile'
 import { SchedulePerformanceDateBadges } from '@/components/SchedulePerformanceDateBadges'
+import { useLocale } from '@/components/LocaleContext'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
+import { localizePath } from '@/lib/i18n'
+import { documentSlug } from '@/lib/i18n/content'
+import { localeRouteParams } from '@/lib/i18n/paths'
 import { isInternalHref } from '@/lib/internal-href'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { relatedGalleryForScheduleEvent } from '@/lib/schedule-gallery'
@@ -60,15 +65,18 @@ export type ScheduleEventDetailSectionProps = {
   galleryItems: GalleryItem[]
 }
 
-const PRODUCTION_CREDIT_LABELS: Record<ScheduleProductionCredit['position'], string> = {
-  conductor: 'Conductor',
-  production: 'Production',
-  setDesigner: 'Set designer',
-  costumes: 'Costumes',
-  lighting: 'Lighting',
-}
+const PRODUCTION_CREDIT_KEYS: ScheduleProductionCredit['position'][] = [
+  'conductor',
+  'production',
+  'setDesigner',
+  'costumes',
+  'lighting',
+]
 
-function productionCreditEntries(credits: ScheduleProductionCredit[] | undefined): {
+function productionCreditEntries(
+  credits: ScheduleProductionCredit[] | undefined,
+  labels: Record<ScheduleProductionCredit['position'], string>,
+): {
   key: ScheduleProductionCredit['position']
   label: string
   value: string
@@ -76,10 +84,10 @@ function productionCreditEntries(credits: ScheduleProductionCredit[] | undefined
   if (!credits?.length) return []
 
   return credits
-    .filter((entry) => Boolean(entry.name?.trim()) && entry.position in PRODUCTION_CREDIT_LABELS)
+    .filter((entry) => Boolean(entry.name?.trim()) && PRODUCTION_CREDIT_KEYS.includes(entry.position))
     .map((entry) => ({
       key: entry.position,
-      label: PRODUCTION_CREDIT_LABELS[entry.position],
+      label: labels[entry.position],
       value: entry.name.trim(),
     }))
 }
@@ -117,18 +125,29 @@ function EventDetailImage({
   )
 }
 
-function TicketLink({ href, eventTitle }: { href: string; eventTitle: string }) {
+function TicketLink({
+  href,
+  eventTitle,
+  inquireLabel,
+  getTicketsLabel,
+}: {
+  href: string
+  eventTitle: string
+  inquireLabel: string
+  getTicketsLabel: string
+}) {
+  const { locale } = useLocale()
   const style = schemeGoldLinkStyle('soft')
 
   if (isInternalHref(href)) {
     return (
       <Link
-        to={href}
+        to={localizePath(href, locale)}
         className="gold-link font-body text-xs uppercase tracking-[0.28em]"
         style={style}
         aria-label={`Inquire about ${eventTitle}`}
       >
-        Inquire →
+        {inquireLabel}
       </Link>
     )
   }
@@ -140,7 +159,7 @@ function TicketLink({ href, eventTitle }: { href: string; eventTitle: string }) 
       className="gold-link font-body text-xs uppercase tracking-[0.28em]"
       style={style}
     >
-      Get tickets →
+      {getTicketsLabel}
     </ExternalLink>
   )
 }
@@ -151,15 +170,19 @@ export function ScheduleEventDetailSection({
   roles,
   galleryItems,
 }: ScheduleEventDetailSectionProps) {
+  const { messages, locale } = useLocale()
+  const schedule = messages.schedule
   const workScheme = resolveColorScheme('bright')
   const workFg = schemeForeground(workScheme)
   const bodyScheme = resolveColorScheme('soft')
   const bodyFg = schemeForeground(bodyScheme)
 
   const org = event.organizationSlug
-    ? organizations.find((entry) => entry._meta.path === event.organizationSlug)
+    ? organizations.find((entry) => documentSlug(entry) === event.organizationSlug)
     : undefined
-  const role = event.roleSlug ? roles.find((entry) => entry._meta.path === event.roleSlug) : undefined
+  const role = event.roleSlug
+    ? roles.find((entry) => documentSlug(entry) === event.roleSlug)
+    : undefined
   const relatedGallery = relatedGalleryForScheduleEvent(event, galleryItems)
   const videoUrl = event.videoUrl?.trim() ?? ''
   const hasVideo = Boolean(videoUrl)
@@ -168,7 +191,7 @@ export function ScheduleEventDetailSection({
   const plot = event.plot?.trim() ?? ''
   const ticketHref = event.ticketHref?.trim() ?? ''
   const externalUrl = event.externalUrl?.trim() ?? ''
-  const creditEntries = productionCreditEntries(event.productionCredits)
+  const creditEntries = productionCreditEntries(event.productionCredits, schedule.credits)
 
   const { ref: workRef, inView: workInView } = useInView<HTMLDivElement>()
   const { ref: bodyRef, inView: bodyInView } = useInView<HTMLDivElement>()
@@ -211,7 +234,7 @@ export function ScheduleEventDetailSection({
                     className="font-body text-xs uppercase tracking-[0.3em] font-semibold mb-6"
                     style={{ color: workFg.eyebrow }}
                   >
-                    Music by
+                    {schedule.musicBy}
                   </p>
                   <p
                     className="font-display text-4xl lg:text-5xl italic leading-tight mb-8"
@@ -229,7 +252,7 @@ export function ScheduleEventDetailSection({
                     className="font-body text-xs uppercase tracking-[0.3em] font-semibold mb-3"
                     style={{ color: workFg.eyebrow }}
                   >
-                    Presented by
+                    {schedule.presentedBy}
                   </p>
                   <p className="font-display text-2xl lg:text-3xl italic leading-tight" style={{ color: workFg.heading }}>
                     {org.name}
@@ -257,11 +280,11 @@ export function ScheduleEventDetailSection({
               {role && (
                 <div className="mb-5">
                   <p className="font-body text-xs uppercase tracking-[0.28em] mb-2" style={{ color: workFg.eyebrow }}>
-                    Sol Risé
+                    {schedule.solRise}
                   </p>
                   <Link
-                    to="/roles/$slug"
-                    params={{ slug: role._meta.path }}
+                    to="/{-$locale}/roles/$slug"
+                    params={{ ...localeRouteParams(locale), slug: documentSlug(role) }}
                     className="gold-link-display font-display text-lg italic leading-snug"
                     style={roleLinkStyle}
                   >
@@ -273,7 +296,7 @@ export function ScheduleEventDetailSection({
               {locationParts.length > 0 && (
                 <div className="mb-5">
                   <p className="font-body text-xs uppercase tracking-[0.28em] mb-2" style={{ color: workFg.eyebrow }}>
-                    Venue
+                    {schedule.venue}
                   </p>
                   <p className="font-body text-sm leading-relaxed" style={{ color: workFg.body }}>
                     {locationParts.join(' · ')}
@@ -284,18 +307,25 @@ export function ScheduleEventDetailSection({
               {(event.badges?.length ?? 0) > 0 && (
                 <div className="mb-8">
                   <p className="font-body text-xs uppercase tracking-[0.28em] mb-3" style={{ color: workFg.eyebrow }}>
-                    Performance dates
+                    {schedule.performanceDates}
                   </p>
                   <SchedulePerformanceDateBadges
                     badges={event.badges!}
-                    eventRef={event._meta.path}
+                    eventRef={documentSlug(event)}
                     markPastBadges={event.status === 'upcoming'}
                   />
                 </div>
               )}
 
               <div className="flex flex-col items-start gap-4">
-                {ticketHref ? <TicketLink href={ticketHref} eventTitle={event.title} /> : null}
+                {ticketHref ? (
+                  <TicketLink
+                    href={ticketHref}
+                    eventTitle={event.title}
+                    inquireLabel={schedule.inquire}
+                    getTicketsLabel={schedule.getTickets}
+                  />
+                ) : null}
                 {externalUrl ? (
                   <ExternalLink
                     href={externalUrl}
@@ -303,15 +333,16 @@ export function ScheduleEventDetailSection({
                     className="gold-link font-body text-xs uppercase tracking-[0.28em]"
                     style={schemeGoldLinkStyle('soft')}
                   >
-                    View program →
+                    {schedule.viewProgram}
                   </ExternalLink>
                 ) : null}
                 <Link
-                  to="/schedule"
+                  to="/{-$locale}/schedule"
+                  params={localeRouteParams(locale)}
                   className="font-body text-xs uppercase tracking-[0.24em] opacity-70 hover:opacity-100 transition-opacity"
                   style={{ color: workFg.body }}
                 >
-                  ← All events
+                  {schedule.allEvents}
                 </Link>
               </div>
             </div>
@@ -331,7 +362,7 @@ export function ScheduleEventDetailSection({
           {(event.cast?.length ?? 0) > 0 && (
             <div className="mb-14 overflow-x-auto">
               <h2 className="font-display text-2xl lg:text-3xl italic mb-6" style={{ color: bodyFg.heading }}>
-                Cast
+                {schedule.cast}
               </h2>
               <table className="w-full max-w-3xl font-body text-sm border-collapse">
                 <tbody>
@@ -357,9 +388,9 @@ export function ScheduleEventDetailSection({
           {showPhotography && (
             <div>
               <h2 className="font-display text-2xl lg:text-3xl italic mb-6" style={{ color: bodyFg.heading }}>
-                Media
+                {schedule.photography}
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 {hasVideo && (
                   <PhotographyVideoTile
                     video={{ title: event.title, videoUrl, image: event.image }}
@@ -368,20 +399,15 @@ export function ScheduleEventDetailSection({
                   />
                 )}
                 {relatedGallery.map((item, index) => (
-                  <button
+                  <PhotographyGalleryTile
                     key={item._meta.path}
-                    type="button"
-                    className="img-zoom block media-radius border-0 p-0 text-left cursor-pointer w-full"
-                    style={{ aspectRatio: '4/5' }}
-                    aria-label={`View larger image: ${item.title}`}
+                    title={item.title}
+                    image={item.image}
+                    alt={item.alt}
+                    photographer={item.photographer}
+                    stackbitObjectId={`content/gallery/${item._meta.path}.md`}
                     onClick={() => openGallery(lightboxItems, hasVideo ? index + 1 : index)}
-                  >
-                    <img
-                      {...netlifyImgSet(item.image, 480, 600)}
-                      alt={item.alt}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
+                  />
                 ))}
               </div>
             </div>

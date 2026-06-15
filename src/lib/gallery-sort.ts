@@ -1,4 +1,5 @@
 import { roleLatestYear, type RoleAppearance } from '@/lib/role-stats'
+import { documentSlug } from '@/lib/i18n/content'
 
 export type GallerySortItem = {
   order?: number
@@ -43,7 +44,7 @@ function buildRoleSlugYears(roles: RoleYearSource[]): Map<string, number> {
   const years = new Map<string, number>()
   for (const role of roles) {
     const year = roleLatestYear(role.appearances)
-    if (year !== null) years.set(role._meta.path, year)
+    if (year !== null) years.set(documentSlug(role), year)
   }
   return years
 }

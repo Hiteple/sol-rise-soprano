@@ -91,6 +91,7 @@ timeline:
        <li>Aunt and chorus member in <em>Madama Butterfly</em> with Juventus Lyrica</li>
       </ul></div>
 
+timelineClosureMessage: The journey continues…
 ctaTitleLine1: Inquiries & Contact
 ctaTitleLine2: ''
 ctaPrimaryLabel: Get in Touch

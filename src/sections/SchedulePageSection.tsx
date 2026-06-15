@@ -8,6 +8,8 @@ import {
 } from '@/components/ScheduleEventGrid'
 import { SlidingTabGroup } from '@/components/SlidingTabGroup'
 import { TabGridEmptyState } from '@/components/TabGridEmptyState'
+import { useLocale } from '@/components/LocaleContext'
+import { documentSlug } from '@/lib/i18n/content'
 import { filterScheduleEventsByMedia, sortPastScheduleEvents } from '@/lib/schedule-event-filter'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { mediaFilterEmptyCopy } from '@/lib/tab-grid-empty-copy'
@@ -32,6 +34,8 @@ export function SchedulePageSection({
   upcomingSlideIn,
   pastSlideIn,
 }: SchedulePageSectionProps) {
+  const { messages } = useLocale()
+  const schedule = messages.schedule
   const [pastFilter, setPastFilter] = useState<MediaFilter>('all')
 
   const upcoming = events.filter((event) => event.status === 'upcoming')
@@ -58,7 +62,7 @@ export function SchedulePageSection({
         >
           <div className="max-w-site mx-auto w-full px-4 lg:px-12 pb-8">
             <h2 className="font-display text-4xl lg:text-5xl italic" style={{ color: upcomingFg.heading }}>
-              Upcoming
+              {schedule.upcoming}
             </h2>
           </div>
           <ScheduleEventGrid
@@ -84,16 +88,16 @@ export function SchedulePageSection({
               className={`flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8${animatePast ? ` reveal${pastInView ? ' is-visible' : ''}` : ''}`}
             >
               <h2 className="font-display text-4xl lg:text-5xl italic" style={{ color: pastFg.heading }}>
-                Last Appearances
+                {schedule.lastAppearances}
               </h2>
               <SlidingTabGroup
-                ariaLabel="Filter past appearances"
+                ariaLabel={schedule.filterAriaLabel}
                 value={pastFilter}
                 onChange={setPastFilter}
                 options={[
-                  { value: 'all', label: 'All' },
-                  { value: 'opera', label: 'Opera' },
-                  { value: 'concert', label: 'Concerts' },
+                  { value: 'all', label: schedule.filterAll },
+                  { value: 'opera', label: schedule.filterOpera },
+                  { value: 'concert', label: schedule.filterConcert },
                 ]}
               />
             </div>
@@ -108,7 +112,7 @@ export function SchedulePageSection({
               <div className={`schedule-event-grid${animatePast ? ` reveal${pastInView ? ' is-visible' : ''}` : ''}`}>
                 {filteredPast.map((item) => (
                   <ScheduleEventCard
-                    key={item._meta.path}
+                    key={documentSlug(item)}
                     item={item}
                     cardScheme={scheduleCardScheme(pastColorScheme)}
                     compact

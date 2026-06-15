@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Link, useRouterState } from '@tanstack/react-router'
+import { useRouterState } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
-import { allHomes } from 'content-collections'
 
 import { CareerNavDropdown } from '@/components/CareerNavDropdown'
+import { LanguageSelector, pathnameMatchesNavHref } from '@/components/LanguageSelector'
+import { SiteBrandLogo } from '@/components/SiteBrandLogo'
+import { useLocale } from '@/components/LocaleContext'
+import { getHomePage } from '@/lib/i18n/content'
+import { localizeNavHref, localizePath, translateNavLabel } from '@/lib/i18n'
 import { isCareerNavHref } from '@/lib/career-nav'
-import { isNavLinkActive } from '@/lib/nav-active'
 import { parseSiteNavLinks } from '@/lib/nav-links'
 import { cn } from '@/lib/utils'
 
@@ -18,8 +21,13 @@ const fallbackNavLinks = [
   { to: '/contact' as const, label: 'Contact' },
 ]
 
+function isHomePathname(pathname: string): boolean {
+  return pathname === '/' || /^\/(es|de|it)$/.test(pathname)
+}
+
 export function Nav() {
-  const site = allHomes[0]
+  const { locale } = useLocale()
+  const site = getHomePage(locale)
   const [scrolled, setScrolled] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -28,10 +36,8 @@ export function Nav() {
     site?.headerNavLinks,
     fallbackNavLinks.map((link) => ({ label: link.label, href: link.to })),
   )
-  /** Transparent overlay only applies on the desktop home hero before scroll. */
-  const onHeroHome = isDesktop && pathname === '/' && !scrolled
-  /** Wine bar everywhere except over the desktop home hero before scroll. */
-  const useChrome = !isDesktop || scrolled || pathname !== '/'
+  const onHeroHome = isDesktop && isHomePathname(pathname) && !scrolled
+  const useChrome = !isDesktop || scrolled || !isHomePathname(pathname)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
@@ -57,6 +63,8 @@ export function Nav() {
   }, [menuOpen])
 
   const mobileMenuId = 'site-mobile-menu'
+  const homeHref = localizePath('/', locale)
+  const headerBrandLogo = site?.headerBrandLogo?.trim()
 
   return (
     <nav
@@ -68,45 +76,55 @@ export function Nav() {
     >
       <div className="max-w-site mx-auto px-4 lg:px-12">
         <div className="flex items-center justify-between h-20">
-          {/* Logo / Name */}
-          <Link to="/" className="flex flex-col leading-none" aria-label="Sol Risé Soprano, home">
-            <span
-              className="font-display text-xl tracking-widest"
-              style={{
-                color: useChrome
-                  ? 'var(--chrome-accent)'
-                  : onHeroHome
-                    ? 'var(--accent-pale-color)'
-                    : 'var(--accent-ink-color)',
-                letterSpacing: '0.2em',
-                textShadow: onHeroHome
-                  ? '0 1px 18px rgba(16, 43, 31, 0.5)'
-                  : undefined,
-              }}
-              data-sb-field-path="headerBrandLine1"
-            >
-              {site?.headerBrandLine1 ?? 'Sol Risé'}
-            </span>
-            <span
-              className="font-display text-xs tracking-[0.35em] uppercase"
-              style={{
-                color: useChrome
-                  ? 'var(--chrome-text-muted)'
-                  : onHeroHome
-                    ? 'var(--nav-overlay-text-muted-color)'
-                    : 'var(--muted-text-color)',
-                textShadow: onHeroHome ? '0 1px 14px rgba(16, 43, 31, 0.45)' : undefined,
-              }}
-              data-sb-field-path="headerBrandLine2"
-            >
-              {site?.headerBrandLine2 ?? 'Soprano'}
-            </span>
-          </Link>
+          <a
+            href={homeHref}
+            className={headerBrandLogo ? 'flex items-center shrink-0' : 'flex flex-col leading-none'}
+            aria-label="Sol Risé Soprano, home"
+          >
+            {headerBrandLogo ? (
+              <SiteBrandLogo variant="header" src={headerBrandLogo} fieldPath="headerBrandLogo" />
+            ) : (
+              <>
+                <span
+                  className="font-display text-xl tracking-widest"
+                  style={{
+                    color: useChrome
+                      ? 'var(--chrome-accent)'
+                      : onHeroHome
+                        ? 'var(--accent-pale-color)'
+                        : 'var(--accent-ink-color)',
+                    letterSpacing: '0.2em',
+                    textShadow: onHeroHome
+                      ? '0 1px 18px rgba(16, 43, 31, 0.5)'
+                      : undefined,
+                  }}
+                  data-sb-field-path="headerBrandLine1"
+                >
+                  {site?.headerBrandLine1 ?? 'Sol Risé'}
+                </span>
+                <span
+                  className="font-display text-xs tracking-[0.35em] uppercase"
+                  style={{
+                    color: useChrome
+                      ? 'var(--chrome-text-muted)'
+                      : onHeroHome
+                        ? 'var(--nav-overlay-text-muted-color)'
+                        : 'var(--muted-text-color)',
+                    textShadow: onHeroHome ? '0 1px 14px rgba(16, 43, 31, 0.45)' : undefined,
+                  }}
+                  data-sb-field-path="headerBrandLine2"
+                >
+                  {site?.headerBrandLine2 ?? 'Soprano'}
+                </span>
+              </>
+            )}
+          </a>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link, idx) => {
-              const active = isNavLinkActive(link.href, pathname)
+              const active = pathnameMatchesNavHref(link.href, pathname, locale)
+              const href = localizeNavHref(link.href, locale)
+              const label = translateNavLabel(link.label, locale)
 
               return isCareerNavHref(link.href) ? (
                 <CareerNavDropdown
@@ -118,19 +136,19 @@ export function Nav() {
               ) : (
                 <a
                   key={`${link.label}-${link.href}`}
-                  href={link.href}
+                  href={href}
                   className="gold-link"
                   aria-current={active ? 'page' : undefined}
                   data-sb-field-path={`headerNavLinks.${idx}.label`}
                   onClick={() => setMenuOpen(false)}
                 >
-                  {link.label}
+                  {label}
                 </a>
               )
             })}
+            <LanguageSelector variant="desktop" useChrome={useChrome} />
           </div>
 
-          {/* Mobile Toggle */}
           <button
             className="md:hidden p-2"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -153,12 +171,11 @@ export function Nav() {
         </div>
       </div>
 
-      {/* Mobile Menu — slides down on open, up on close */}
       <div
         id={mobileMenuId}
         className={cn(
           'md:hidden overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none',
-          menuOpen ? 'max-h-[36rem]' : 'max-h-0',
+          menuOpen ? 'max-h-[42rem]' : 'max-h-0',
         )}
         aria-hidden={!menuOpen}
       >
@@ -175,7 +192,9 @@ export function Nav() {
           }}
         >
           {navLinks.map((link, idx) => {
-            const active = isNavLinkActive(link.href, pathname)
+            const active = pathnameMatchesNavHref(link.href, pathname, locale)
+            const href = localizeNavHref(link.href, locale)
+            const label = translateNavLabel(link.label, locale)
 
             return isCareerNavHref(link.href) ? (
               <CareerNavDropdown
@@ -188,17 +207,22 @@ export function Nav() {
             ) : (
               <a
                 key={`${link.label}-${link.href}-mobile`}
-                href={link.href}
+                href={href}
                 className="nav-mobile-link font-display text-2xl italic"
                 aria-current={active ? 'page' : undefined}
                 data-sb-field-path={`headerNavLinks.${idx}.label`}
                 onClick={() => setMenuOpen(false)}
                 tabIndex={menuOpen ? undefined : -1}
               >
-                {link.label}
+                {label}
               </a>
             )
           })}
+          <LanguageSelector
+            variant="mobile"
+            useChrome={useChrome}
+            onNavigate={() => setMenuOpen(false)}
+          />
         </div>
       </div>
     </nav>

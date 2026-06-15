@@ -31,59 +31,63 @@ Use the same slug when linking collections (e.g. `roleSlug`, `organizationSlug`,
 
 ## `content/schedule/` — performances & events
 
-**File:** one event per `.md`. **URL:** `/schedule/{slug}`
+**File:** one event per `.md` (canonical English). **URL:** `/schedule/{slug}`
 
 | Field | Required | Where it shows | Notes |
 |-------|----------|----------------|-------|
 | `title` | yes | Card, hero, detail | Event or work name |
-| `subtitle` | no | Card, detail | Role, venue line, or one-liner |
-| `status` | yes | Index sections | `upcoming` or `past` |
-| `year` | past only | Card badge if no `badges` | e.g. `'2023'` |
+| `subtitle` | no | Card, detail | English default; override per locale in bundle |
+| `status` | yes | Index sections | `upcoming` or `past` — shared |
+| `year` | past only | Card badge if no `badges` | Shared |
 | `order` | no | Sort order | `0` = hidden |
-| `image` | no | Card background, detail hero | 4:5 for cards |
-| `imageAlt` | no | Accessibility | |
-| `venue` | no | Detail | |
-| `city` | no | Detail | |
+| `image` | no | Card background, detail hero | Shared |
+| `imageAlt` | no | Accessibility | Override per locale in bundle |
+| `venue` | no | Detail | Usually shared |
+| `city` | no | Detail | Usually shared |
 | `organizationSlug` | no | Detail “Presented by” | Slug from `content/organizations/` |
-| `composer` | no | Detail “Music by” | Single composer; omit or `Various composers` for mixed programs |
-| `plot` | no | Detail paragraph | Opera synopsis **or** short concert description |
-| `badges` | no | Upcoming cards | Date labels, e.g. `June 12th` |
-| `roleSlug` | no | Detail link to role | Operatic roles only; slug from `content/roles/` |
-| `gallerySlug` | no | Past detail photography | For concerts without a role; match `gallerySlug` on photos |
-| `ticketHref` | no | Detail CTA | URL or `/contact` |
-| `externalUrl` | no | Detail CTA (new tab) | Program page, press, venue site |
-| `cast` | no | Past detail table | `{ character, performer }` list |
-| `productionCredits` | no | Event detail | Ordered list: `position` (conductor, production, setDesigner, costumes, lighting) + `name` |
-| Body markdown | no | *(not shown on site today)* | Optional notes for editors |
+| `composer` | no | Detail “Music by” | Override in bundle if needed |
+| `plot` | no | Detail paragraph | Override per locale in bundle |
+| `badges` | no | Upcoming cards | Override per locale in bundle (e.g. date labels) |
+| `roleSlug` | no | Detail link to role | Shared |
+| `gallerySlug` | no | Past detail photography | Shared |
+| `ticketHref` | no | Detail CTA | Shared |
+| `externalUrl` | no | Detail CTA (new tab) | Shared |
+| `cast` | no | Past detail table | Override per locale in bundle if used |
+| `productionCredits` | no | Event detail | Usually shared; override in bundle if needed |
+| Body markdown | no | *(not shown on site today)* | Optional editor notes |
+
+**Translations (ES / DE / IT):** one bundle per locale — `content/i18n/{es,de,it}/schedule-bundle.md`. Each file overlays translatable fields keyed by event slug. Missing keys fall back to English.
 
 **Opera vs concert**
 
 - **Opera:** `composer`, `plot`, `roleSlug` usually set.
 - **Concert / Lied / mixed:** omit `composer` or use `Various composers`; use `plot` as event description; use `gallerySlug` instead of `roleSlug` for photos.
 
-**Landing:** `content/schedule-landing/page.md` — hero text and section colors.
+**Landing:** `content/schedule-landing/page.md` (English). Hero copy for other locales is in the same bundle under `page:`.
 
 ---
 
 ## `content/roles/` — operatic roles
 
-**File:** one role per `.md`. **URL:** `/roles/{slug}`
+**File:** one role per `.md` (canonical English). **URL:** `/roles/{slug}`
 
 | Field | Required | Where it shows | Notes |
 |-------|----------|----------------|-------|
-| `characterName` | yes | Index, detail | e.g. Zerlina |
-| `operaTitle` | yes | Index, detail | e.g. Don Giovanni |
-| `composer` | yes | Index, detail | |
-| `heroImage` | yes | Detail hero | 16:10 landscape |
-| `summary` | yes | Index card | Short blurb |
+| `characterName` | yes | Index, detail | English default; override per locale in bundle |
+| `operaTitle` | yes | Index, detail | Usually shared; override in bundle if needed |
+| `composer` | yes | Index, detail | Shared across locales |
+| `heroImage` | yes | Detail hero | Shared across locales |
+| `summary` | yes | Index card | English default; override per locale in bundle |
 | `order` | no | Index sort | `0` = hidden |
-| `tags` | no | *(reserved)* | |
-| `appearances` | no | Detail list | `year`, `venue`, `organizationSlug`, `city`, `notes` |
-| Body markdown | yes | Detail | Longer role text (markdown) |
+| `tags` | no | *(reserved)* | Override per locale in bundle |
+| `appearances` | no | Detail list | `year`, `venue`, `organizationSlug`, `city` shared; `notes` per locale in bundle |
+| Body markdown | yes | Detail | English default; override per locale in bundle |
+
+**Translations (ES / DE / IT):** one bundle per locale — `content/i18n/{es,de,it}/roles-bundle.md`. Each file overlays translatable fields keyed by role slug. Missing keys fall back to English.
 
 **Photos on role page:** add gallery items with `roleSlug` matching this file’s slug.
 
-**Landing:** `content/roles-landing/page.md`
+**Landing:** `content/roles-landing/page.md` (English). Hero copy for other locales is in the same bundle under `page:`.
 
 ---
 
@@ -110,22 +114,22 @@ Use the same slug when linking collections (e.g. `roleSlug`, `organizationSlug`,
 
 ## `content/organizations/` — opera houses & companies
 
-**File:** one org per `.md`. **URL:** `/organizations` (index only)
+**File:** one org per `.md` (canonical English). **URL:** `/organizations` (index only)
 
 | Field | Required | Where it shows | Notes |
 |-------|----------|----------------|-------|
-| `name` | yes | Index, home strip | |
-| `city` | yes | Index, home strip | |
-| `country` | no | Index | |
-| `summary` | yes | Index card | |
-| `image` | no | Index, home strip | |
+| `name` | yes | Index, home strip | Shared across locales |
+| `city` | yes | Index, home strip | Shared across locales |
+| `country` | no | Index | Shared across locales |
+| `summary` | yes | Index card | English default; override per locale in bundle |
+| `image` | no | Index, home strip | Shared across locales |
 | `website` | no | Index link | External URL |
 | `order` | no | Sort | `0` = hidden |
-| Body markdown | no | *(not shown)* | |
+| Body markdown | no | *(not shown)* | Optional notes |
 
-Referenced by `organizationSlug` in roles and schedule.
+**Translations (ES / DE / IT):** one bundle per locale — `content/i18n/{es,de,it}/organizations-bundle.md`. Each file overlays `summary` (and optional body) keyed by org slug. Missing keys fall back to English.
 
-**Landing:** `content/organizations-landing/page.md`
+**Landing:** `content/organizations-landing/page.md` (English). Hero copy for other locales is in the same bundle under `page:`.
 
 **Home strip:** slugs listed in `content/home/data.md` → `organizationsStripItems`
 

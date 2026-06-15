@@ -1,14 +1,30 @@
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { z } from 'zod'
 
+const I18N_LOCALES = ['es', 'de', 'it'] as const
+
+/** Mirror content/ paths under content/i18n/{es,de,it}/ for optional translations. */
+function localizedIncludes(relativePath: string): string[] {
+  return [relativePath, ...I18N_LOCALES.map((loc) => `i18n/${loc}/${relativePath}`)]
+}
+
+/** All markdown files in a subfolder plus optional locale mirrors (roles, schedule, …). */
+function localizedGlob(subpath: string): string[] {
+  return [`${subpath}/**/*.md`, ...I18N_LOCALES.map((loc) => `i18n/${loc}/${subpath}/**/*.md`)]
+}
+
 import { sectionColorSchemeSchema } from './schemas/color-scheme'
 import { imageCreditFieldsSchema } from './schemas/image-credit'
+import { organizationLocaleBundleSchema } from './schemas/organization-locale-bundle'
+import { roleLocaleBundleSchema } from './schemas/role-locale-bundle'
+import { scheduleLocaleBundleSchema } from './schemas/schedule-locale-bundle'
 import { roleCategorySchema } from './schemas/role-category'
 import { scheduleEventSchema } from './schemas/schedule-event'
 import {
   aboutPageSchema,
   bioPageSchema,
   contactPageSchema,
+  privacyPageSchema,
   galleryPageSchema,
   organizationsPageSchema,
   rolesPageSchema,
@@ -33,12 +49,14 @@ const homeHeroColorSchemeSchema = z.preprocess((val) => {
 
 const home = defineCollection({
   name: 'home',
-  directory: 'content/home',
-  include: 'data.md',
+  directory: 'content',
+  include: localizedIncludes('home/data.md'),
   schema: z.object({
     type: z.literal('HomePage'),
     headerBrandLine1: z.string().default('Sol Risé'),
     headerBrandLine2: z.string().default('Soprano'),
+    /** Optional image under public/ — replaces header text brand when set. */
+    headerBrandLogo: z.string().optional(),
     headerNavLinks: z
       .array(
         z.union([
@@ -117,6 +135,8 @@ const home = defineCollection({
     quoteImageCredit: imageCreditFieldsSchema.optional(),
     footerBrandLine1: z.string().default('Sol Risé'),
     footerBrandLine2: z.string().default('Soprano'),
+    /** Optional image under public/ — replaces footer text brand when set. */
+    footerBrandLogo: z.string().optional(),
     footerBrandTagline: z.string().default('Soprano · Stage Artist\nVoice of Passion'),
     footerNavLinks: z
       .array(
@@ -165,10 +185,17 @@ const gallery = defineCollection({
   }),
 })
 
+const roleLocaleBundles = defineCollection({
+  name: 'roleLocaleBundles',
+  directory: 'content',
+  include: I18N_LOCALES.map((loc) => `i18n/${loc}/roles-bundle.md`),
+  schema: roleLocaleBundleSchema,
+})
+
 const roles = defineCollection({
   name: 'roles',
-  directory: 'content/roles',
-  include: '**/*.md',
+  directory: 'content',
+  include: 'roles/**/*.md',
   schema: z.object({
     characterName: z.string(),
     operaTitle: z.string(),
@@ -185,10 +212,17 @@ const roles = defineCollection({
   }),
 })
 
+const organizationLocaleBundles = defineCollection({
+  name: 'organizationLocaleBundles',
+  directory: 'content',
+  include: I18N_LOCALES.map((loc) => `i18n/${loc}/organizations-bundle.md`),
+  schema: organizationLocaleBundleSchema,
+})
+
 const organizations = defineCollection({
   name: 'organizations',
-  directory: 'content/organizations',
-  include: '**/*.md',
+  directory: 'content',
+  include: 'organizations/**/*.md',
   schema: z.object({
     name: z.string(),
     city: z.string(),
@@ -201,72 +235,90 @@ const organizations = defineCollection({
   }),
 })
 
+const scheduleLocaleBundles = defineCollection({
+  name: 'scheduleLocaleBundles',
+  directory: 'content',
+  include: I18N_LOCALES.map((loc) => `i18n/${loc}/schedule-bundle.md`),
+  schema: scheduleLocaleBundleSchema,
+})
+
 const scheduleEvents = defineCollection({
   name: 'scheduleEvents',
-  directory: 'content/schedule',
-  include: '**/*.md',
+  directory: 'content',
+  include: 'schedule/**/*.md',
   schema: scheduleEventSchema,
 })
 
 const careerPage = defineCollection({
   name: 'careerPage',
-  directory: 'content/career',
-  include: 'page.md',
+  directory: 'content',
+  include: localizedIncludes('career/page.md'),
   schema: aboutPageSchema,
 })
 
 const galleryPage = defineCollection({
   name: 'galleryPage',
-  directory: 'content/gallery-landing',
-  include: 'page.md',
+  directory: 'content',
+  include: localizedIncludes('gallery-landing/page.md'),
   schema: galleryPageSchema,
 })
 
 const contactPage = defineCollection({
   name: 'contactPage',
-  directory: 'content/contact',
-  include: 'page.md',
+  directory: 'content',
+  include: localizedIncludes('contact/page.md'),
   schema: contactPageSchema,
 })
 
 const rolesPage = defineCollection({
   name: 'rolesPage',
-  directory: 'content/roles-landing',
-  include: 'page.md',
+  directory: 'content',
+  include: 'roles-landing/page.md',
   schema: rolesPageSchema,
 })
 
 const organizationsPage = defineCollection({
   name: 'organizationsPage',
-  directory: 'content/organizations-landing',
-  include: 'page.md',
+  directory: 'content',
+  include: 'organizations-landing/page.md',
   schema: organizationsPageSchema,
 })
 
 const schedulePage = defineCollection({
   name: 'schedulePage',
-  directory: 'content/schedule-landing',
-  include: 'page.md',
+  directory: 'content',
+  include: 'schedule-landing/page.md',
   schema: schedulePageSchema,
 })
 
 const bioPage = defineCollection({
   name: 'bioPage',
-  directory: 'content/bio',
-  include: 'page.md',
+  directory: 'content',
+  include: localizedIncludes('bio/page.md'),
   schema: bioPageSchema,
+})
+
+const privacyPage = defineCollection({
+  name: 'privacyPage',
+  directory: 'content',
+  include: localizedIncludes('privacy/page.md'),
+  schema: privacyPageSchema,
 })
 
 export default defineConfig({
   collections: [
     home,
     gallery,
+    roleLocaleBundles,
     roles,
+    organizationLocaleBundles,
     organizations,
+    scheduleLocaleBundles,
     scheduleEvents,
     careerPage,
     galleryPage,
     bioPage,
+    privacyPage,
     contactPage,
     rolesPage,
     organizationsPage,

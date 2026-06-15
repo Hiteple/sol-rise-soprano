@@ -1,7 +1,9 @@
+import { stripLocaleFromPathname } from '@/lib/i18n/paths'
+
 export function normalizeNavPath(path: string): string {
   const trimmed = path.trim()
   if (!trimmed || trimmed === '/') return '/'
-  return trimmed.replace(/\/+$/, '')
+  return stripLocaleFromPathname(trimmed.replace(/\/+$/, '') || '/')
 }
 
 /** Whether a top-level nav href matches the current route (incl. detail pages). */

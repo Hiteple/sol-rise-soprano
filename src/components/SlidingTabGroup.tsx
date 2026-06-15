@@ -39,80 +39,107 @@ export function SlidingTabGroup<T extends string>({
   className = '',
   tabClassName = 'px-3 py-1.5 md:px-5 md:py-2',
 }: SlidingTabGroupProps<T>) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
   const tabRefs = useRef(new Map<T, HTMLButtonElement>())
   const [indicator, setIndicator] = useState<IndicatorStyle>({ left: 0, width: 0 })
 
   const updateIndicator = useCallback(() => {
     const activeEl = tabRefs.current.get(value)
-    const container = containerRef.current
-    if (!activeEl || !container) return
+    const track = trackRef.current
+    if (!activeEl || !track) return
 
-    const containerRect = container.getBoundingClientRect()
-    const tabRect = activeEl.getBoundingClientRect()
     setIndicator({
-      left: tabRect.left - containerRect.left,
-      width: tabRect.width,
+      left: activeEl.offsetLeft,
+      width: activeEl.offsetWidth,
     })
+  }, [value])
+
+  const scrollActiveTabIntoView = useCallback(() => {
+    const activeEl = tabRefs.current.get(value)
+    const scroller = scrollRef.current
+    if (!activeEl || !scroller) return
+
+    const pad = 4
+    const tabLeft = activeEl.offsetLeft
+    const tabRight = tabLeft + activeEl.offsetWidth
+    const viewLeft = scroller.scrollLeft
+    const viewRight = viewLeft + scroller.clientWidth
+
+    if (tabLeft < viewLeft + pad) {
+      scroller.scrollTo({ left: Math.max(0, tabLeft - pad), behavior: 'smooth' })
+    } else if (tabRight > viewRight - pad) {
+      scroller.scrollTo({
+        left: tabRight - scroller.clientWidth + pad,
+        behavior: 'smooth',
+      })
+    }
   }, [value])
 
   useLayoutEffect(() => {
     updateIndicator()
-  }, [updateIndicator, options])
+    scrollActiveTabIntoView()
+  }, [updateIndicator, scrollActiveTabIntoView, options])
 
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
+    const track = trackRef.current
+    if (!track) return
 
     const observer = new ResizeObserver(updateIndicator)
-    observer.observe(container)
+    observer.observe(track)
+    for (const button of tabRefs.current.values()) observer.observe(button)
+
     window.addEventListener('resize', updateIndicator)
 
     return () => {
       observer.disconnect()
       window.removeEventListener('resize', updateIndicator)
     }
-  }, [updateIndicator])
+  }, [updateIndicator, options])
 
   return (
     <div
-      ref={containerRef}
-      className={`relative flex w-fit max-w-full self-start gap-1 p-1 rounded-[var(--media-radius)] overflow-x-auto ${className}`.trim()}
-      style={{ background: 'var(--pill-track-background-color)' }}
+      ref={scrollRef}
+      className="sliding-tab-scroll max-w-full self-start overflow-x-auto"
       role="group"
       aria-label={ariaLabel}
     >
-      <span
-        className="sliding-tab-indicator"
-        style={{
-          left: indicator.left,
-          width: indicator.width,
-        }}
-        aria-hidden
-      />
-      {options.map((option) => {
-        const isActive = value === option.value
-        return (
-          <button
-            key={option.value}
-            ref={(el) => {
-              if (el) tabRefs.current.set(option.value, el)
-              else tabRefs.current.delete(option.value)
-            }}
-            type="button"
-            onClick={() => onChange(option.value)}
-            aria-pressed={isActive}
-            className={`relative z-[1] shrink-0 whitespace-nowrap ${tabClassName} text-xs uppercase tracking-wide md:tracking-widest font-body font-semibold transition-colors duration-300 rounded-[var(--media-radius-inner)]`}
-            style={{
-              color: isActive ? activeTextColor : inactiveTextColor,
-              background: 'transparent',
-            }}
-            data-sb-field-path={option.fieldPath}
-          >
-            {option.label}
-          </button>
-        )
-      })}
+      <div
+        ref={trackRef}
+        className={`relative inline-flex w-max max-w-none gap-1 p-1 rounded-[var(--media-radius)] ${className}`.trim()}
+        style={{ background: 'var(--pill-track-background-color)' }}
+      >
+        <span
+          className="sliding-tab-indicator"
+          style={{
+            left: indicator.left,
+            width: indicator.width,
+          }}
+          aria-hidden
+        />
+        {options.map((option) => {
+          const isActive = value === option.value
+          return (
+            <button
+              key={option.value}
+              ref={(el) => {
+                if (el) tabRefs.current.set(option.value, el)
+                else tabRefs.current.delete(option.value)
+              }}
+              type="button"
+              onClick={() => onChange(option.value)}
+              aria-pressed={isActive}
+              className={`sliding-tab-button relative z-[1] shrink-0 whitespace-nowrap ${tabClassName} text-xs uppercase tracking-wide md:tracking-widest font-body font-semibold rounded-[var(--media-radius-inner)]`}
+              style={{
+                color: isActive ? activeTextColor : inactiveTextColor,
+              }}
+              data-sb-field-path={option.fieldPath}
+            >
+              {option.label}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }

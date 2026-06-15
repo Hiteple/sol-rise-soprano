@@ -1,6 +1,9 @@
 import { Link } from '@tanstack/react-router'
 
 import { ScheduleEventCard, scheduleCardScheme, type ScheduleEvent } from '@/components/ScheduleEventGrid'
+import { useLocale } from '@/components/LocaleContext'
+import { documentSlug } from '@/lib/i18n/content'
+import { localeRouteParams } from '@/lib/i18n/paths'
 import { schemeForeground, schemeGoldLinkStyle, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { HomeMediaSection } from './types'
@@ -16,6 +19,7 @@ export function MediaGridSection({
   events,
   linkText = 'View all past appearances',
 }: MediaGridSectionProps) {
+  const { locale } = useLocale()
   const scheme = section.colorScheme
   const fg = schemeForeground(scheme)
   const cardScheme = scheduleCardScheme(scheme)
@@ -51,14 +55,15 @@ export function MediaGridSection({
 
         <div className="schedule-event-grid">
           {events.map((item) => (
-            <ScheduleEventCard key={item._meta.path} item={item} cardScheme={cardScheme} compact />
+            <ScheduleEventCard key={documentSlug(item)} item={item} cardScheme={cardScheme} compact />
           ))}
         </div>
 
         {events.length > 0 && (
           <div className="mt-12 lg:mt-14 flex justify-center">
             <Link
-              to="/schedule"
+              to="/{-$locale}/schedule"
+              params={localeRouteParams(locale)}
               hash="last-appearances"
               className="gold-link font-body text-xs uppercase tracking-[0.28em]"
               style={schemeGoldLinkStyle(scheme)}
