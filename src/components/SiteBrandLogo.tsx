@@ -20,6 +20,8 @@ export function SiteBrandLogo({ src, alt = DEFAULT_BRAND_LOGO_ALT, variant, fiel
       src={resolvePublicPath(src)}
       alt={alt}
       className={`${sizeClass} object-contain object-left`}
+      fetchPriority={variant === 'header' ? 'high' : undefined}
+      loading={variant === 'header' ? 'eager' : 'lazy'}
       decoding="async"
       data-sb-field-path={fieldPath}
     />

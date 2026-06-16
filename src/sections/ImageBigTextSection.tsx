@@ -69,6 +69,9 @@ export function ImageBigTextSection({ page }: ImageBigTextSectionProps) {
               alt={page.heroImageAlt}
               className="w-full object-cover"
               style={{ maxHeight: 680 }}
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
               data-sb-field-path="heroImage"
             />
             <div

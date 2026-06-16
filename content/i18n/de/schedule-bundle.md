@@ -104,9 +104,9 @@ items:
     plot: Verdis Tragödie des buckligen Hofnarren — Rolle der Gräfin von Ceprano mit Celebrarte Música.
     imageAlt: Sol Risé als Gräfin von Ceprano in Rigoletto mit Celebrarte Música, Buenos Aires
   suor-angelica-2024-celebrarte:
-    subtitle: Laienschwester — Celebrarte Música
-    plot: Puccinis Einakt-Klostertragödie — Rolle der Laienschwester mit Celebrarte Música.
-    imageAlt: Sol Risé als Laienschwester in Suor Angelica mit Celebrarte Música, Buenos Aires
+    subtitle: Almosenschwester — Celebrarte Música
+    plot: Puccinis Einakt-Klostertragödie — Rolle der Almosenschwester mit Celebrarte Música.
+    imageAlt: Sol Risé als Almosenschwester in Suor Angelica mit Celebrarte Música, Buenos Aires
   suor-angelica-2026:
     plot: In einem toskanischen Kloster spielt Puccinis Einakter — die Schwestern leben unter strenger Regel, und Glaube, Erinnerung und unausgesprochenes Sehnen prägen leise ihren Alltag.
     imageAlt: Sol Risé als Schwester Genovieffa in Suor Angelica in La Redonda de Belgrano, Buenos Aires

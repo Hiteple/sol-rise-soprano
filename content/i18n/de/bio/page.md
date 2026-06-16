@@ -11,11 +11,11 @@ fullBioParagraphs:
       eine Karriere in Opernproduktionen, Liedabenden und Konzertbühnen aufgebaut.
     addBorderBottom: false
   - content: >-
-      Ihre Arbeit verbindet Gesangstechnik, dramatische Interpretation und ein
-      tiefes Engagement für Erzählkunst in jeder Aufführung.
+      Gesangstechnik, dramatische Interpretation und ein tiefes Engagement für
+      Erzählkunst prägen ihr Schaffen in jeder Aufführung.
     addBorderBottom: true
   - content: >+
-      Ihre aktuelle Ausbildung umfasst:
+      Die aktuelle Ausbildung umfasst:
 
 
       *   Fortgeschrittene Studien im lyrischen Gesang am [**Instituto Superior de
@@ -28,10 +28,11 @@ fullBioParagraphs:
 
     addBorderBottom: true
   - content: >+
-      Sie hat ihre Technik erweitert durch:
+      Zudem hat sie ihre Technik erweitert durch:
 
 
-      *   Meisterkurse mit der Mezzosopranistin **Daniela Barcelona**.
+      *   Meisterkurse mit der Mezzosopranistin **Daniela Barcelona** (Teil des
+      ISATC-Programms).
 
 
       *   Online-Meisterkurse mit **Lisette Oropesa**, **Jennifer Rowley** und
@@ -41,8 +42,8 @@ fullBioParagraphs:
       *   Stipendienprogramme bei [**Juventus Lyrica**](https://juventuslyrica.ar/).
 
 
-      *   Gesangstechnikstudien mit **Gustavo López Manzitti** und **Marina Silva**,
-      Seminar «La Voz en Movimiento» (*Sol Lírica*).
+      *   Gesangstechnikstudien mit **Gustavo López Manzitti** und **Alejandra
+      Malvino**, Seminar «La Voz en Movimiento» (*Sol Lírica*).
 
 
       *   Musical-Theater-Ausbildung an der **Fundación Julio Bocca** und im
@@ -50,8 +51,9 @@ fullBioParagraphs:
 
     addBorderBottom: true
   - content: >-
-      Ihre Sprachen und Diktion umfassen Spanisch als Muttersprache, fortgeschrittenes
-      Englisch und Opernphonetik auf Italienisch, Deutsch und Französisch.
+      Zu ihren Sprachen und ihrer Diktion zählen Spanisch als Muttersprache,
+      fortgeschrittenes Englisch und Opernphonetik auf Italisch, Deutsch und
+      Französisch.
     addBorderBottom: false
 fullBioColorScheme: soft
 fullBioImage: '/images/photo-book/SON05945 1.jpg'

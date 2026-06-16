@@ -42,6 +42,8 @@ export function PhotographyGalleryTile({
         alt={alt}
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
         data-sb-field-path={imageFieldPath}
       />
       <div className="gallery-tile-caption" aria-hidden>

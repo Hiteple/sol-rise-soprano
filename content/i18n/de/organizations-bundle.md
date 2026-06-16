@@ -9,50 +9,51 @@ page:
 items:
   british-arts-center:
     summary: >-
-      Kulturzentrum in Buenos Aires — inszenierte Mozart-Opern und zeitgenössisches
-      Repertoire in intimen Räumen.
+      Kulturzentrum in Buenos Aires — intime Konzerte, Theater und inszenierte Oper
+      in einem historischen institutionellen Rahmen.
     content: >-
       Das British Arts Centre präsentierte Sol Risé in inszenierter Oper, darunter
       *Die Zauberflöte* und *Der kleine Prinz*.
   celebrarte-musica:
     summary: >-
-      Opernkompanie in Buenos Aires — Bühnenrollen und Chorarbeit, unter anderem
-      *Suor Angelica*, *Carmen* und *Die Zauberflöte* für junges Publikum.
+      Liedkompanie in Buenos Aires mit Schwerpunkt Vermittlung — Produktionen, die
+      klassisches Repertoire jungen und neuen Publikum näherbringen.
   jovenes-talentos:
     summary: >-
-      Jugendorchesterprogramm — Konzert- und Bühnenarbeit mit Mozart- und
-      Menotti-Repertoire.
+      Jugendorchesterprogramm in Buenos Aires — Ausbildungs- und Konzertplattform für
+      junge Orchestermusiker in Konzert und Oper.
   juventus-lyrica:
     summary: >-
-      Führende junge Opernkompanie in Buenos Aires — Heimat vieler Bühnenrollen und
-      Chorbesetzungen von Sol Risé im Teatro Avenida.
+      Eine der bedeutendsten unabhängigen Opernkompanien Buenos Aires' — ganze
+      Inszenierungen, Konzerte und Förderung aufstrebender Sänger und Musiker.
     content: >-
       Juventus Lyrica gehört zum Kern von Sol Risés operatischer Entwicklung, mit
       Produktionen von *Don Giovanni* und *Madama Butterfly* bis hin zu Konzert- und
       Festivalprogrammen.
   teatro-argentino-la-plata:
     summary: >-
-      Bedeutendes Provinz-Opernhaus — Chorbänderung für symphonisch-opernhaftes
-      Repertoire.
+      Führendes Opernhaus von La Plata — bedeutendes Provinz-Lyrisches Theater mit
+      Oper-, Ballett- und Sinfonik-Programm.
   teatro-avenida:
     summary: >-
-      Historisches Theater in Buenos Aires und häufiger Spielort der Juventus
-      Lyrica-Produktionen.
+      Historisches Theater in Buenos Aires und wichtige Bühne für Oper und
+      Musiktheater — häufiger Spielort der Juventus Lyrica.
     content: >-
       Das Teatro Avenida beherbergte mehrere Bühneneinsätze von Sol Risé, darunter
       Aufführungen von *Don Giovanni* und *Madama Butterfly*.
   teatro-colon:
     summary: >-
-      Historisches Opernhaus Argentiniens — Chorbänderung und Cover-Arbeit in großen
-      symphonisch-opernhaften Produktionen.
+      Historisches argentinisches Opernhaus und eines der bedeutendsten Lyrischen
+      Theater der Welt — Heimat von Oper, Ballett und Sinfonik in Buenos Aires seit
+      1908.
     content: >-
       Sol Risé trat am Teatro Colón als Chorbänderung in Werken wie *Jeanne d'Arc au
       bûcher*, *Carmen* und Brahms' Chorsinfonien auf und wirkte als Cover-Sopran im
       *Mozart-Requiem* mit.
   valkyria-lirica:
     summary: >-
-      Argentinische Liedkompanie — Chor- und Konzertkooperationen in der Opernszene
-      Buenos Aires'.
+      Argentinische lyrische Kompanie — Opern- und Konzertproduktionen in Buenos
+      Aires und auf der argentinischen Bühne.
 ---
 
 German organization translations (overlay on canonical `content/organizations/*.md`).

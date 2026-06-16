@@ -31,6 +31,9 @@ export function HeroSection({ section }: HeroSectionProps) {
             {...netlifyImgSet(section.heroImage, 1920, 1080)}
             alt={section.heroImageAlt}
             className="hero-banner-image w-full h-full object-cover"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
             data-sb-field-path="heroImage#@src"
           />
           <div

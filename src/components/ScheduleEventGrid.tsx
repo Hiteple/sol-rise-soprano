@@ -1,10 +1,10 @@
 import { Link } from '@tanstack/react-router'
 
 import { SplitGridBadges } from '@/components/SplitGridBadges'
+import { SplitGridPanelImage } from '@/components/SplitGridPanelImage'
 import { useLocale } from '@/components/LocaleContext'
 import { documentSlug } from '@/lib/i18n/content'
 import { localeRouteParams } from '@/lib/i18n/paths'
-import { resolvePublicPath } from '@/lib/public-path'
 import { SCHEDULE_DATE_BADGE_CARD_LIMIT } from '@/lib/schedule-badge-display'
 import { splitGridBadges } from '@/lib/split-grid-badges'
 import { resolveColorScheme } from '@/lib/section-color-scheme'
@@ -75,11 +75,13 @@ export function ScheduleEventCard({
   item,
   cardScheme,
   compact = false,
+  imageLoading = 'lazy',
 }: {
   item: ScheduleEvent
   cardScheme: ScheduleCardScheme
   /** Smaller title/subtitle for past event grids */
   compact?: boolean
+  imageLoading?: 'lazy' | 'eager'
 }) {
   const { locale } = useLocale()
   const badges = eventCardBadges(item)
@@ -89,6 +91,7 @@ export function ScheduleEventCard({
 
   const panelContent = (
     <>
+      {hasImage && <SplitGridPanelImage image={imagePath} loading={imageLoading} />}
       <div className="split-grid-overlay" />
       <div className="split-grid-content">
         <SplitGridBadges
@@ -118,7 +121,6 @@ export function ScheduleEventCard({
   )
 
   const style = {
-    backgroundImage: hasImage ? `url(${resolvePublicPath(imagePath)})` : undefined,
     '--split-grid-hover-content-bg': cardScheme.hoverContentBackground,
     '--split-grid-hover-content-text': cardScheme.hoverContentTextColor,
     '--split-grid-eyebrow-bg': cardScheme.eyebrowBackground,
@@ -162,8 +164,13 @@ export function ScheduleEventGrid({
       className={`max-w-site mx-auto w-full px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''} ${className}`.trim()}
     >
       <div className="schedule-event-grid schedule-event-grid--upcoming">
-        {events.map((item) => (
-          <ScheduleEventCard key={documentSlug(item)} item={item} cardScheme={cardScheme} />
+        {events.map((item, index) => (
+          <ScheduleEventCard
+            key={documentSlug(item)}
+            item={item}
+            cardScheme={cardScheme}
+            imageLoading={index < 3 ? 'eager' : 'lazy'}
+          />
         ))}
       </div>
     </div>

@@ -103,9 +103,9 @@ items:
     plot: La tragedia del buffone gobbo di Verdi — ruolo della Contessa di Ceprano con Celebrarte Música.
     imageAlt: Sol Risé come Contessa di Ceprano nel Rigoletto con Celebrarte Música, Buenos Aires
   suor-angelica-2024-celebrarte:
-    subtitle: Suora Laica — Celebrarte Música
-    plot: La tragedia conventuale in un atto di Puccini — ruolo della Suora Laica con Celebrarte Música.
-    imageAlt: Sol Risé come Suora Laica in Suor Angelica con Celebrarte Música, Buenos Aires
+    subtitle: Sorella Cercatrice — Celebrarte Música
+    plot: La tragedia conventuale in un atto di Puccini — ruolo della Sorella Cercatrice con Celebrarte Música.
+    imageAlt: Sol Risé come Sorella Cercatrice in Suor Angelica con Celebrarte Música, Buenos Aires
   suor-angelica-2026:
     plot: Ambientata in un convento toscano, l'opera in un atto di Puccini segue le suore sotto una regola rigorosa — dove fede, memoria e un desiderio non detto modellano silenziosamente le loro giornate.
     imageAlt: Sol Risé come Suor Genovieffa in Suor Angelica a La Redonda de Belgrano, Buenos Aires

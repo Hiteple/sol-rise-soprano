@@ -18,6 +18,8 @@ export function RoleCardImage({ characterName, heroImage, alt, eyebrowColor }: R
         alt={alt}
         className="w-full h-full min-h-[180px] object-cover"
         style={{ objectPosition: 'top center' }}
+        loading="lazy"
+        decoding="async"
         data-sb-field-path="heroImage"
       />
     )

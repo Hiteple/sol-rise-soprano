@@ -17,7 +17,7 @@ highlights:
     label: Presentaciones
   - number: '2'
     label: Roles principales
-  - number: '2'
+  - number: '3'
     label: Teatros de ópera
 timelineSectionEyebrow: Hitos de carrera
 timelineSectionTitle: Un recorrido en crecimiento
@@ -62,7 +62,7 @@ timeline:
     title: Celebrarte Música, Jóvenes Talentos, Juventus Lyrica y Teatro Colón
     description: |+
       <div style="text-align: left"><ul>
-       <li>Interpretó el rol de la Hermana Genovieffa en <em>Suor Angelica</em> con Celebrarte Música (mayo)</li>
+       <li>Interpretó el rol de Hermana limosnera en <em>Suor Angelica</em> con Celebrarte Música (mayo)</li>
        <li>Refuerzo de coro en <em>Carmen</em> con Celebrarte Música (mayo)</li>
        <li>Interpretó el rol de la Primera Dama en <em>La flauta mágica</em> de Mozart (adaptación en español para niños) con Celebrarte Música (julio)</li>
        <li>Solista en el <em>Réquiem de Mozart</em> y Primera Dama en <em>La flauta mágica</em> (adaptación en español para niños) con la Orquesta Jóvenes Talentos (julio)</li>
@@ -89,6 +89,7 @@ timeline:
        <li>Interpretó el rol de La Rosa en <em>El principito</em> en el British Arts Centre</li>
        <li>Cobertura de la solista soprano en el <em>Réquiem de Mozart</em> con la Orquesta Académica del Instituto Superior de Arte del Teatro Colón</li>
        <li>Tía e integrante del coro en <em>Madama Butterfly</em> con Juventus Lyrica</li>
+       <li>Hermana Genovieffa en <em>Suor Angelica</em> en La Redonda de Belgrano, Buenos Aires</li>
       </ul></div>
 
 timelineClosureMessage: El camino continúa…

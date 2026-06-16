@@ -92,9 +92,9 @@ items:
     appearances:
       - notes: Bevorstehende Aufführung
   suora-cercatrice-suor-angelica:
-    characterName: Laienschwester
-    summary: Die Laienschwester (*Suora Cercatrice*) in Puccinis Klosterdrama — gesungen mit Celebrarte Música.
-    content: Die Laienschwester gehört zur Gemeinschaft im Zentrum von Puccinis *Suor Angelica*. Sol Risé sang die Rolle mit Celebrarte Música in Buenos Aires.
+    characterName: Almosenschwester
+    summary: Die Almosenschwester in Puccinis Klosterdrama — gesungen mit Celebrarte Música.
+    content: Die Almosenschwester gehört zur Gemeinschaft im Zentrum von Puccinis *Suor Angelica*. Sol Risé sang die Rolle mit Celebrarte Música in Buenos Aires.
   zerlina-don-giovanni:
     summary: Eine lebhafte Bauernbraut zwischen Treue und Verführung — Sol Risé debütierte in dieser Rolle mit Juventus Lyrica am Teatro Avenida im Jahr 2023.
     tags:

@@ -32,7 +32,7 @@ aboutText: |
   Sol Risé is an Argentine soprano with a career developed across opera, concert repertoire, and choral performance. Her work includes roles such as Pamina (*The Magic Flute*) and Zerlina (*Don Giovanni*), as well as choral work in productions of *La Traviata*, *Carmen*, and *Macbeth*.
 
   She has performed with established companies and festivals in Argentina and Bolivia, combining stage experience with ongoing vocal and interpretive training. Her artistic path reflects consistency, versatility, and a strong focus on musical expression.
-aboutImage: /images/plaza-belgica/IMG_9816.jpeg
+aboutImage: /images/plaza-belgica/IMG_9817.jpg
 aboutImageAlt: Sol Risé portrait at Plaza Bélgica, Buenos Aires
 aboutLinkText: View Career Highlights
 aboutHref: /career

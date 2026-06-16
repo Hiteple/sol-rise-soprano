@@ -103,9 +103,9 @@ items:
     plot: La tragedia del bufón jorobado de Verdi — rol de la Contessa di Ceprano con Celebrarte Música.
     imageAlt: Sol Risé como Contessa di Ceprano en Rigoletto con Celebrarte Música, Buenos Aires
   suor-angelica-2024-celebrarte:
-    subtitle: Hermana Laica — Celebrarte Música
-    plot: La tragedia conventual en un acto de Puccini — rol de la Hermana Laica con Celebrarte Música.
-    imageAlt: Sol Risé como Suora Cercatrice en Suor Angelica con Celebrarte Música, Buenos Aires
+    subtitle: Hermana limosnera — Celebrarte Música
+    plot: La tragedia conventual en un acto de Puccini — rol de la Hermana limosnera con Celebrarte Música.
+    imageAlt: Sol Risé como Hermana limosnera en Suor Angelica con Celebrarte Música, Buenos Aires
   suor-angelica-2026:
     plot: Ambientada en un convento toscano, la ópera en un acto de Puccini sigue a las hermanas bajo una regla estricta — donde la fe, la memoria y un anhelo no dicho moldean silenciosamente sus días.
     imageAlt: Sol Risé como Hermana Genovieffa en Suor Angelica en La Redonda de Belgrano, Buenos Aires

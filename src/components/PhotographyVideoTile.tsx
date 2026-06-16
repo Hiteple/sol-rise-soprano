@@ -44,6 +44,8 @@ export function PhotographyVideoTile({
         alt=""
         aria-hidden
         className="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
         onError={() => {
           if (candidateIndex < candidates.length - 1) {
             setCandidateIndex((index) => index + 1)

@@ -18,6 +18,37 @@ function parseMarginBottomPx(rootMargin: string, viewportHeight: number): number
   return 0
 }
 
+type ViewportSyncFn = () => void
+
+const viewportSyncCallbacks = new Set<ViewportSyncFn>()
+let historyListenersBound = false
+
+function flushViewportSync() {
+  viewportSyncCallbacks.forEach((cb) => cb())
+}
+
+/** Re-check all reveal elements after history navigation restores scroll asynchronously. */
+function scheduleViewportSyncFlush() {
+  flushViewportSync()
+  requestAnimationFrame(() => {
+    flushViewportSync()
+    requestAnimationFrame(flushViewportSync)
+  })
+  window.setTimeout(flushViewportSync, 50)
+  window.setTimeout(flushViewportSync, 200)
+}
+
+function bindHistoryViewportSync() {
+  if (historyListenersBound || typeof window === 'undefined') return
+  historyListenersBound = true
+
+  window.addEventListener('popstate', scheduleViewportSyncFlush)
+  window.addEventListener('pageshow', (event) => {
+    scheduleViewportSyncFlush()
+    if (event.persisted) window.setTimeout(flushViewportSync, 100)
+  })
+}
+
 /** Mirrors IntersectionObserver math for a one-off sync check. */
 function isInViewport(el: HTMLElement, threshold: number, rootMargin: string): boolean {
   const rect = el.getBoundingClientRect()
@@ -59,9 +90,14 @@ export function useInView<T extends HTMLElement = HTMLElement>(
       if (isInViewport(el, threshold, rootMargin)) markVisible()
     }
 
+    bindHistoryViewportSync()
+    viewportSyncCallbacks.add(sync)
+
     if (typeof IntersectionObserver === 'undefined') {
       markVisible()
-      return
+      return () => {
+        viewportSyncCallbacks.delete(sync)
+      }
     }
 
     const observer = new IntersectionObserver(
@@ -86,6 +122,9 @@ export function useInView<T extends HTMLElement = HTMLElement>(
       requestAnimationFrame(sync)
     })
 
+    // Scroll restoration after back/forward often completes after mount.
+    const mountSyncTimers = [0, 50, 200].map((ms) => window.setTimeout(sync, ms))
+
     const onSync = () => sync()
     window.addEventListener('resize', onSync, { passive: true })
     window.addEventListener('scroll', onSync, { passive: true })
@@ -103,6 +142,8 @@ export function useInView<T extends HTMLElement = HTMLElement>(
     resizeObserver?.observe(el)
 
     return () => {
+      viewportSyncCallbacks.delete(sync)
+      mountSyncTimers.forEach((id) => window.clearTimeout(id))
       observer.disconnect()
       resizeObserver?.disconnect()
       removeSyncListeners?.()

@@ -4,8 +4,8 @@ city: Buenos Aires
 country: Argentina
 image: images/juventus-lyrica/juventus-lyrica.webp
 summary: >-
-  A leading young opera company in Buenos Aires — home to many of Sol Risé's
-  staged roles and chorus work at Teatro Avenida.
+  One of Buenos Aires' leading independent opera companies — full stagings,
+  concerts, and training for emerging singers and orchestral musicians.
 website: https://juventuslyrica.ar/
 order: 3
 ---

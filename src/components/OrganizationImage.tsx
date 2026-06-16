@@ -27,6 +27,8 @@ export function OrganizationImage({
           {...netlifyImgSet(image!, 360, 450)}
           alt={name}
           className="w-full h-full object-cover min-h-[180px]"
+          loading="lazy"
+          decoding="async"
           data-sb-field-path={imageFieldPath}
         />
       )
@@ -38,6 +40,8 @@ export function OrganizationImage({
         alt=""
         aria-hidden
         className="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
         data-sb-field-path={imageFieldPath}
       />
     )

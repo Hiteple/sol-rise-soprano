@@ -107,6 +107,9 @@ function EventDetailImage({
         <img
           {...netlifyImgSet(image, 650)}
           alt={imageAlt?.trim() || title}
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
       </div>
     )

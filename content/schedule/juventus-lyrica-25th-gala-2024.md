@@ -10,6 +10,11 @@ city: Buenos Aires
 organizationSlug: juventus-lyrica
 image: images/juventus-lyrica/juventus-25th-01.JPG
 imageAlt: Sol Risé as soloist at Juventus Lyrica 25th anniversary gala, Teatro Avenida
+productionCredits:
+  - position: production
+    name: Ana D'Anna · Maria Jaunarena
+  - position: conductor
+    name: Hernan Sanchez Arteaga
 gallerySlug: juventus-lyrica-25th-gala-2024
 status: past
 year: '2024'

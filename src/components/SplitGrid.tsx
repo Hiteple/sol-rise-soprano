@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router'
 
 import { ExternalLink } from '@/components/ExternalLink'
 import { SplitGridBadges } from '@/components/SplitGridBadges'
-import { resolvePublicPath } from '@/lib/public-path'
+import { SplitGridPanelImage } from '@/components/SplitGridPanelImage'
 import { splitGridBadges } from '@/lib/split-grid-badges'
 import type { RefObject } from 'react'
 
@@ -44,9 +44,9 @@ export function SplitGrid({
         {visibleItems.map((item) => {
           const href = item.href?.trim() ?? ''
           const badges = splitGridBadges(item)
-          const bgStyle = { backgroundImage: `url(${resolvePublicPath(item.image)})` }
           const panelContent = (
             <>
+              <SplitGridPanelImage image={item.image} loading="lazy" />
               <div className="split-grid-overlay" />
               <div className="split-grid-content">
                 <SplitGridBadges
@@ -68,7 +68,6 @@ export function SplitGrid({
               <div
                 key={`${item.title}-panel`}
                 className="split-grid-item"
-                style={bgStyle}
               >
                 {panelContent}
               </div>
@@ -83,7 +82,6 @@ export function SplitGrid({
                 key={`${item.title}-${href}`}
                 to={href}
                 className="split-grid-item"
-                style={bgStyle}
               >
                 {panelContent}
               </Link>
@@ -100,7 +98,6 @@ export function SplitGrid({
               href={href}
               aria-label={externalLabel}
               className="split-grid-item"
-              style={bgStyle}
             >
               {panelContent}
             </ExternalLink>

@@ -88,9 +88,9 @@ items:
     appearances:
       - notes: Prossima esecuzione
   suora-cercatrice-suor-angelica:
-    characterName: Suora Laica
-    summary: La Suora Laica (*Suora Cercatrice*) nel dramma conventuale di Puccini — interpretata con Celebrarte Música.
-    content: La Suora Laica fa parte della comunità al centro de *Suor Angelica* di Puccini. Sol Risé ha interpretato il ruolo con Celebrarte Música a Buenos Aires.
+    characterName: Sorella Cercatrice
+    summary: La Sorella Cercatrice nel dramma conventuale di Puccini — interpretata con Celebrarte Música.
+    content: La Sorella Cercatrice fa parte della comunità al centro de *Suor Angelica* di Puccini. Sol Risé ha interpretato il ruolo con Celebrarte Música a Buenos Aires.
   zerlina-don-giovanni:
     summary: Una sposa contadina vivace, tra fedeltà e seduzione — Sol Risé ha debuttato in questo ruolo con Juventus Lyrica al Teatro Avenida nel 2023.
     content: Sol Risé ha interpretato Zerlina nel *Don Giovanni* di Mozart con Juventus Lyrica al Teatro Avenida — un ruolo che unisce fascino lirico e tensione drammatica nella scena nuziale e nella celebre aria *Batti, batti, o bel Masetto*.

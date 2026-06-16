@@ -3,8 +3,8 @@ name: British Arts Centre
 city: Buenos Aires
 country: Argentina
 summary: >-
-  Cultural centre in Buenos Aires — staged Mozart and contemporary opera in
-  intimate settings.
+  Cultural centre in Buenos Aires — intimate concerts, theatre, and staged
+  opera in a historic institutional setting.
 website: https://www.aaci.org.ar/bac/
 order: 4
 ---

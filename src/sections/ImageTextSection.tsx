@@ -88,6 +88,8 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
               alt={section.imageAlt}
               className="w-full object-cover"
               style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
+              loading="lazy"
+              decoding="async"
               data-sb-field-path={paths.image}
             />
           </div>

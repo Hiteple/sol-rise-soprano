@@ -17,7 +17,7 @@ highlights:
     label: Performances
   - number: '2'
     label: Lead Roles
-  - number: '2'
+  - number: '3'
     label: Opera Houses
 timelineSectionEyebrow: Career Milestones
 timelineSectionTitle: A Growing Journey
@@ -62,7 +62,7 @@ timeline:
     title: Celebrarte Música, Jóvenes Talentos, Juventus Lyrica & Teatro Colón
     description: |+
       <div style="text-align: left"><ul>
-       <li>Performed the role of Sister Genovieffa in <em>Suor Angelica</em> with Celebrarte Música (May)</li>
+       <li>Performed the role of Alms Sister in <em>Suor Angelica</em> with Celebrarte Música (May)</li>
        <li>Chorus reinforcement in <em>Carmen</em> with Celebrarte Música (May)</li>
        <li>Performed the role of First Lady in Mozart's <em>The Magic Flute</em> (Spanish adaptation for children) with Celebrarte Música (July)</li>
        <li>Soloist in <em>Mozart's Requiem</em> and First Lady in <em>The Magic Flute</em> (Spanish adaptation for children) with the Jóvenes Talentos Orchestra (July)</li>
@@ -89,6 +89,7 @@ timeline:
        <li>Performed the role of The Rose in <em>The Little Prince</em> at the British Arts Centre</li>
        <li>Cover for the soprano soloist in <em>Mozart's Requiem</em> with the Academic Orchestra of the Higher Institute of Art of the Teatro Colón</li>
        <li>Aunt and chorus member in <em>Madama Butterfly</em> with Juventus Lyrica</li>
+       <li>Sister Genovieffa in <em>Suor Angelica</em> at La Redonda de Belgrano, Buenos Aires</li>
       </ul></div>
 
 timelineClosureMessage: The journey continues…

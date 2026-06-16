@@ -4,8 +4,8 @@ city: Buenos Aires
 country: Argentina
 image: images/teatro-avenida/avenida-theater.webp
 summary: >-
-  A historic Buenos Aires theatre and frequent venue for Juventus Lyrica
-  productions.
+  Historic Buenos Aires theatre and a mainstage for opera and musical theatre
+  — frequent home of Juventus Lyrica productions.
 website: https://teatroavenida.com/
 order: 2
 ---

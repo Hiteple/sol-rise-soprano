@@ -17,7 +17,7 @@ highlights:
     label: Aufführungen
   - number: '2'
     label: Hauptrollen
-  - number: '2'
+  - number: '3'
     label: Opernhäuser
 timelineSectionEyebrow: Karriere-Meilensteine
 timelineSectionTitle: Eine wachsende Reise
@@ -52,7 +52,7 @@ timeline:
     description: |+
       <div style="text-align: left"><ul>
        <li>Chormitglied in <em>Cavalleria Rusticana</em> und beim Festival della Canzonetta Italiana, mit Solistenauftritt italienischer Canzonette mit Juventus Lyrica (Juni)</li>
-       <li>Chorverstärkung in <em>Joan of Arc at the Stake</em> am Teatro Colón unter Maestro Charles Dutoit (August)</li>
+       <li>Chorverstärkung in <em>Joan of Arc at the Stake</em> am Teatro Colón unter der Leitung von Maestro Charles Dutoit (August)</li>
        <li>Solistin in <em>Mozarts Requiem</em> beim Festival Internacional de la Cultura in Potosí, Bolivien, mit der Orquesta San Rafael (Oktober)</li>
        <li>Rolle der Zerlina in <em>Don Giovanni</em> am Teatro Avenida mit Juventus Lyrica (Oktober)</li>
        <li>Zusätzliche Chorverstärkung am Teatro Argentino de La Plata für <em>Verdis Requiem</em> (November)</li>
@@ -62,7 +62,7 @@ timeline:
     title: Celebrarte Música, Jóvenes Talentos, Juventus Lyrica & Teatro Colón
     description: |+
       <div style="text-align: left"><ul>
-       <li>Rolle der Schwester Genovieffa in <em>Suor Angelica</em> mit Celebrarte Música (Mai)</li>
+       <li>Rolle der Almosenschwester in <em>Suor Angelica</em> mit Celebrarte Música (Mai)</li>
        <li>Chorverstärkung in <em>Carmen</em> mit Celebrarte Música (Mai)</li>
        <li>Rolle der Ersten Dame in Mozarts <em>Die Zauberflöte</em> (spanische Kinderfassung) mit Celebrarte Música (Juli)</li>
        <li>Solistin in <em>Mozarts Requiem</em> und Erste Dame in <em>Die Zauberflöte</em> (spanische Kinderfassung) mit der Jóvenes Talentos Orchestra (Juli)</li>
@@ -89,6 +89,7 @@ timeline:
        <li>Rolle der Rose in <em>Der kleine Prinz</em> im British Arts Centre</li>
        <li>Cover für die Sopran-Solistin in <em>Mozarts Requiem</em> mit dem Akademischen Orchester des Instituto Superior de Arte des Teatro Colón</li>
        <li>Tante und Chormitglied in <em>Madama Butterfly</em> mit Juventus Lyrica</li>
+       <li>Schwester Genovieffa in <em>Suor Angelica</em> in La Redonda de Belgrano, Buenos Aires</li>
       </ul></div>
 
 timelineClosureMessage: Die Reise geht weiter…

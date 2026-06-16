@@ -17,7 +17,7 @@ highlights:
     label: Esibizioni
   - number: '2'
     label: Ruoli principali
-  - number: '2'
+  - number: '3'
     label: Teatri d'opera
 timelineSectionEyebrow: Tappe della carriera
 timelineSectionTitle: Un percorso in crescita
@@ -62,7 +62,7 @@ timeline:
     title: Celebrarte Música, Jóvenes Talentos, Juventus Lyrica e Teatro Colón
     description: |+
       <div style="text-align: left"><ul>
-       <li>Ruolo di Suor Genovieffa in <em>Suor Angelica</em> con Celebrarte Música (maggio)</li>
+       <li>Ruolo di Sorella Cercatrice in <em>Suor Angelica</em> con Celebrarte Música (maggio)</li>
        <li>Rinforzo corale in <em>Carmen</em> con Celebrarte Música (maggio)</li>
        <li>Ruolo della Prima Dama nel <em>Flauto magico</em> di Mozart (adattamento in spagnolo per bambini) con Celebrarte Música (luglio)</li>
        <li>Solista nel <em>Requiem di Mozart</em> e Prima Dama nel <em>Flauto magico</em> (adattamento in spagnolo per bambini) con l'Orquesta Jóvenes Talentos (luglio)</li>
@@ -89,6 +89,7 @@ timeline:
        <li>Ruolo della Rosa in <em>Il piccolo principe</em> al British Arts Centre</li>
        <li>Cover per la solista soprano nel <em>Requiem di Mozart</em> con l'Orchestra Accademica dell'Instituto Superior de Arte del Teatro Colón</li>
        <li>Zia e membro del coro in <em>Madama Butterfly</em> con Juventus Lyrica</li>
+       <li>Suor Genovieffa in <em>Suor Angelica</em> a La Redonda de Belgrano, Buenos Aires</li>
       </ul></div>
 
 timelineClosureMessage: Il viaggio continua…

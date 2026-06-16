@@ -151,7 +151,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garant', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
   }
 
   a:focus-visible,
@@ -223,7 +223,7 @@
 }
 
 .font-display {
-  font-family: 'Cormorant Garant', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
 .font-body {
@@ -982,6 +982,18 @@
   }
 }
 
+/* Split-grid & schedule card cover images (replaces CSS background-image) */
+.split-grid-panel-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* Schedule index — event cards (split-grid look, no grow hover) */
 .schedule-event-grid {
   display: grid;
@@ -1014,8 +1026,6 @@
 .schedule-event-card {
   position: relative;
   aspect-ratio: 4 / 5;
-  background-size: cover;
-  background-position: center;
   overflow: hidden;
   border-radius: var(--media-radius);
   display: block;
@@ -1117,8 +1127,6 @@
   position: relative;
   flex: 1 1 0%;
   min-height: 26rem;
-  background-size: cover;
-  background-position: center;
   overflow: hidden;
   border-radius: var(--media-radius);
   transition: flex-grow 0.45s ease;

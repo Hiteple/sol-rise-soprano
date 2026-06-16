@@ -112,6 +112,9 @@ export function RoleDetailSection({
                       .replace('{character}', role.characterName)
                       .replace('{opera}', role.operaTitle)}
                     className="w-full h-full object-cover"
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
                     data-sb-field-path="featureImage"
                   />
                   {featureImageCredit && (

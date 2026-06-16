@@ -32,7 +32,8 @@ fullBioParagraphs:
       Ha ampliato la tecnica attraverso:
 
 
-      *   Masterclass con la mezzosoprano **Daniela Barcelona**.
+      *   Masterclass con la mezzosoprano **Daniela Barcelona** (nell'ambito del
+      programma ISATC).
 
 
       *   Masterclass online con **Lisette Oropesa**, **Jennifer Rowley** e
@@ -42,8 +43,8 @@ fullBioParagraphs:
       *   Programmi di borse di studio con [**Juventus Lyrica**](https://juventuslyrica.ar/).
 
 
-      *   Studi di tecnica vocale con **Gustavo López Manzitti** e **Marina Silva**,
-      seminario «La Voz en Movimiento» (*Sol Lírica*).
+      *   Studi di tecnica vocale con **Gustavo López Manzitti** e **Alejandra
+      Malvino**, seminario «La Voz en Movimiento» (*Sol Lírica*).
 
 
       *   Formazione in musical theatre presso la **Fundación Julio Bocca** e il

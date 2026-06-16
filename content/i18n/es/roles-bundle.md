@@ -94,12 +94,12 @@ items:
     appearances:
       - notes: Próxima función
   suora-cercatrice-suor-angelica:
-    characterName: Hermana Laica
-    summary: La Hermana Laica (*Suora Cercatrice*) en el drama conventual de Puccini — interpretada con Celebrarte Música.
+    characterName: Hermana limosnera
+    summary: La Hermana limosnera en el drama conventual de Puccini — interpretada con Celebrarte Música.
     tags:
       - Puccini
       - Conjunto
-    content: La Hermana Laica forma parte de la comunidad de hermanas en el corazón de *Suor Angelica* de Puccini. Sol Risé interpretó el rol con Celebrarte Música en Buenos Aires.
+    content: La Hermana limosnera forma parte de la comunidad de hermanas en el corazón de *Suor Angelica* de Puccini. Sol Risé interpretó el rol con Celebrarte Música en Buenos Aires.
   zerlina-don-giovanni:
     summary: Una campesina novia llena de espíritu, atrapada entre la fidelidad y la seducción — Sol Risé debutó en este rol con Juventus Lyrica en el Teatro Avenida en 2023.
     content: Sol Risé interpretó a Zerlina en *Don Giovanni* de Mozart con Juventus Lyrica en el Teatro Avenida — un rol que combina encanto lírico con tensión dramática en la escena nupcial y la célebre aria *Batti, batti, o bel Masetto*.

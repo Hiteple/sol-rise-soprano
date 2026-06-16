@@ -27,6 +27,8 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
             {...netlifyImgSet(section.quoteImage, 1920, 900)}
             alt={quoteAlt}
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
             data-sb-field-path="quoteImage#@src"
           />
           <div
