@@ -20,7 +20,7 @@ export const Route = createRootRoute({
       ...googleSiteVerificationMeta(),
     ],
     links: [
-      { rel: 'icon', type: 'image/png', href: '/images/sol-rise-soprano-optimized.png' },
+      { rel: 'icon', type: 'image/png', href: '/images/sol-rise-soprano-favicon-optimized.png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       {
         rel: 'preconnect',
