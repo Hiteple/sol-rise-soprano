@@ -95,11 +95,12 @@ export function RoleDetailSection({
       </section>
 
       <section className="section-vertical-padding" style={{ background: 'var(--page-background-color)' }}>
-        <div
-          ref={ref}
-          className={`max-w-site mx-auto px-4 lg:px-12 reveal ${inView ? 'is-visible' : ''}`}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(320px,24rem)] gap-12 lg:gap-16">
+        <div className="max-w-site mx-auto px-4 lg:px-12">
+          <div
+            ref={ref}
+            className={`reveal ${inView ? 'is-visible' : ''}`}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(320px,24rem)] gap-12 lg:gap-16">
             <div>
               {hasFeatureImage && (
                 <div
@@ -218,6 +219,7 @@ export function RoleDetailSection({
                 )}
               </dl>
             </aside>
+          </div>
           </div>
 
           {showPhotography && (

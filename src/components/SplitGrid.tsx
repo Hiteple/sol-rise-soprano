@@ -4,7 +4,6 @@ import { ExternalLink } from '@/components/ExternalLink'
 import { SplitGridBadges } from '@/components/SplitGridBadges'
 import { SplitGridPanelImage } from '@/components/SplitGridPanelImage'
 import { splitGridBadges } from '@/lib/split-grid-badges'
-import type { RefObject } from 'react'
 
 export type SplitGridItem = {
   title: string
@@ -18,35 +17,26 @@ export type SplitGridItem = {
 
 export type SplitGridProps = {
   items: SplitGridItem[]
-  animate?: boolean
-  inView?: boolean
-  gridRef?: RefObject<HTMLDivElement | null>
   maxItems?: number
   className?: string
 }
 
 export function SplitGrid({
   items,
-  animate = false,
-  inView = false,
-  gridRef,
   maxItems = 3,
   className = '',
 }: SplitGridProps) {
   const visibleItems = items.slice(0, maxItems)
 
   return (
-    <div
-      ref={gridRef}
-      className={`max-w-site mx-auto w-full px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''} ${className}`.trim()}
-    >
+    <div className={`max-w-site mx-auto w-full px-4 lg:px-12 ${className}`.trim()}>
       <div className="split-grid">
         {visibleItems.map((item) => {
           const href = item.href?.trim() ?? ''
           const badges = splitGridBadges(item)
           const panelContent = (
             <>
-              <SplitGridPanelImage image={item.image} loading="lazy" />
+              <SplitGridPanelImage image={item.image} loading="eager" />
               <div className="split-grid-overlay" />
               <div className="split-grid-content">
                 <SplitGridBadges

@@ -15,6 +15,8 @@ export function SplitGridPanelImage({ image, loading = 'lazy' }: SplitGridPanelI
       {...netlifyImgSet(imagePath, 600, 750)}
       alt=""
       aria-hidden
+      width={600}
+      height={750}
       loading={loading}
       decoding="async"
       className="split-grid-panel-image"

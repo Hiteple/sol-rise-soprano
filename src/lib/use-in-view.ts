@@ -76,14 +76,10 @@ export function useInView<T extends HTMLElement = HTMLElement>(
 
     let visible = false
 
-    let removeSyncListeners: (() => void) | null = null
-
     const markVisible = () => {
       if (visible) return
       visible = true
       setInView(true)
-      removeSyncListeners?.()
-      removeSyncListeners = null
     }
 
     const sync = () => {
@@ -125,28 +121,10 @@ export function useInView<T extends HTMLElement = HTMLElement>(
     // Scroll restoration after back/forward often completes after mount.
     const mountSyncTimers = [0, 50, 200].map((ms) => window.setTimeout(sync, ms))
 
-    const onSync = () => sync()
-    window.addEventListener('resize', onSync, { passive: true })
-    window.addEventListener('scroll', onSync, { passive: true })
-    window.addEventListener('load', onSync, { passive: true, once: true })
-    removeSyncListeners = () => {
-      window.removeEventListener('resize', onSync)
-      window.removeEventListener('scroll', onSync)
-      window.removeEventListener('load', onSync)
-    }
-
-    const resizeObserver =
-      typeof ResizeObserver !== 'undefined'
-        ? new ResizeObserver(() => sync())
-        : undefined
-    resizeObserver?.observe(el)
-
     return () => {
       viewportSyncCallbacks.delete(sync)
       mountSyncTimers.forEach((id) => window.clearTimeout(id))
       observer.disconnect()
-      resizeObserver?.disconnect()
-      removeSyncListeners?.()
     }
   }, [threshold, rootMargin, once])
 

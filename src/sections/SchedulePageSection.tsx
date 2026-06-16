@@ -13,7 +13,6 @@ import { documentSlug } from '@/lib/i18n/content'
 import { filterScheduleEventsByMedia, sortPastScheduleEvents } from '@/lib/schedule-event-filter'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { mediaFilterEmptyCopy } from '@/lib/tab-grid-empty-copy'
-import { useInView } from '@/lib/use-in-view'
 import type { MediaFilter } from '@/sections/types'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
@@ -31,8 +30,6 @@ export function SchedulePageSection({
   events,
   upcomingColorScheme,
   pastColorScheme,
-  upcomingSlideIn,
-  pastSlideIn,
 }: SchedulePageSectionProps) {
   const { messages } = useLocale()
   const schedule = messages.schedule
@@ -47,11 +44,6 @@ export function SchedulePageSection({
   const upcomingFg = schemeForeground(upcomingScheme)
   const pastFg = schemeForeground(pastScheme)
 
-  const animateUpcoming = upcomingSlideIn !== false
-  const animatePast = pastSlideIn !== false
-  const { ref: upcomingRef, inView: upcomingInView } = useInView<HTMLDivElement>()
-  const { ref: pastRef, inView: pastInView } = useInView<HTMLDivElement>()
-
   return (
     <>
       {upcoming.length > 0 && (
@@ -65,13 +57,7 @@ export function SchedulePageSection({
               {schedule.upcoming}
             </h2>
           </div>
-          <ScheduleEventGrid
-            events={upcoming}
-            colorScheme={upcomingColorScheme}
-            animate={animateUpcoming}
-            inView={upcomingInView}
-            gridRef={upcomingRef}
-          />
+          <ScheduleEventGrid events={upcoming} colorScheme={upcomingColorScheme} />
         </section>
       )}
 
@@ -83,10 +69,7 @@ export function SchedulePageSection({
           style={{ background: schemePageBandBackground(pastScheme) }}
         >
           <div className="max-w-site mx-auto w-full px-4 lg:px-12">
-            <div
-              ref={pastRef}
-              className={`flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8${animatePast ? ` reveal${pastInView ? ' is-visible' : ''}` : ''}`}
-            >
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8">
               <h2 className="font-display text-4xl lg:text-5xl italic" style={{ color: pastFg.heading }}>
                 {schedule.lastAppearances}
               </h2>
@@ -109,13 +92,14 @@ export function SchedulePageSection({
                 bodyColor={pastFg.body}
               />
             ) : (
-              <div className={`schedule-event-grid${animatePast ? ` reveal${pastInView ? ' is-visible' : ''}` : ''}`}>
-                {filteredPast.map((item) => (
+              <div className="schedule-event-grid">
+                {filteredPast.map((item, index) => (
                   <ScheduleEventCard
                     key={documentSlug(item)}
                     item={item}
                     cardScheme={scheduleCardScheme(pastColorScheme)}
                     compact
+                    tileIndex={index}
                   />
                 ))}
               </div>

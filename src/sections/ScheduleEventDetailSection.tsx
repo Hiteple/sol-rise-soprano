@@ -355,12 +355,12 @@ export function ScheduleEventDetailSection({
       {/* Cast; gallery only for past events (photos from this run / role) */}
       {((event.cast?.length ?? 0) > 0 || showPhotography) && (
       <section className="section-vertical-padding" style={{ background: 'var(--page-background-color)' }}>
-        <div
-          ref={bodyRef}
-          className={`max-w-site mx-auto px-4 lg:px-12 reveal ${bodyInView ? 'is-visible' : ''}`}
-        >
+        <div className="max-w-site mx-auto px-4 lg:px-12">
           {(event.cast?.length ?? 0) > 0 && (
-            <div className="mb-14 overflow-x-auto">
+            <div
+              ref={bodyRef}
+              className={`mb-14 overflow-x-auto reveal ${bodyInView ? 'is-visible' : ''}`}
+            >
               <h2 className="font-display text-2xl lg:text-3xl italic mb-6" style={{ color: bodyFg.heading }}>
                 {schedule.cast}
               </h2>

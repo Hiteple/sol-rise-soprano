@@ -27,4 +27,4 @@
 #
 # After changing that one line, run a new Netlify deploy.
 [context.production]
-  command = "vite build && printf '/* /coming-soon.html 302!\\n' > dist/client/_redirects"
+  command = "vite build"

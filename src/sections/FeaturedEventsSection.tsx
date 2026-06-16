@@ -6,7 +6,6 @@ import {
   type FeaturedEventsLayout,
 } from '@/lib/featured-events'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
-import { useInView } from '@/lib/use-in-view'
 import type { SectionColorScheme } from '@/lib/section-color-scheme'
 import type { CSSProperties } from 'react'
 
@@ -47,7 +46,6 @@ export function FeaturedEventsSection({
   items,
   layout,
   colorScheme,
-  slideIn,
   title,
   description,
 }: FeaturedEventsSectionProps) {
@@ -56,8 +54,6 @@ export function FeaturedEventsSection({
   const fg = schemeForeground(scheme)
   const hasTitle = (title?.trim().length ?? 0) > 0
   const hasDescription = (description?.trim().length ?? 0) > 0
-  const animate = slideIn !== false
-  const { ref, inView } = useInView<HTMLDivElement>()
   const visibleItems = items.slice(0, 3)
 
   if (visibleItems.length === 0) return null
@@ -102,12 +98,9 @@ export function FeaturedEventsSection({
         <ScheduleEventGrid
           events={splitGridItemsToScheduleEvents(visibleItems)}
           colorScheme={scheme}
-          animate={animate}
-          inView={inView}
-          gridRef={ref}
         />
       ) : (
-        <SplitGrid items={visibleItems} animate={animate} inView={inView} gridRef={ref} />
+        <SplitGrid items={visibleItems} />
       )}
     </section>
   )

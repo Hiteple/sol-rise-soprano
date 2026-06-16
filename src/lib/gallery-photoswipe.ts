@@ -3,7 +3,7 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin'
 import type { SlideData } from 'photoswipe'
 
-import { isNetlifyTransformableUrl, netlifyImg } from '@/lib/netlify-image'
+import { netlifyImgSrc } from '@/lib/netlify-image'
 import { resolvePublicPath } from '@/lib/public-path'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { youtubeIframeSrc } from '@/lib/utils'
@@ -38,11 +38,7 @@ const PHOTOSWIPE_UI_ICONS = {
 }
 
 function lightboxImageSrc(path: string): string {
-  const publicPath = resolvePublicPath(path)
-  if (isNetlifyTransformableUrl(publicPath)) {
-    return netlifyImg(publicPath, 2400, undefined, 'contain')
-  }
-  return publicPath
+  return netlifyImgSrc(path, 2400, undefined, 'contain')
 }
 
 function escapeHtml(text: string): string {

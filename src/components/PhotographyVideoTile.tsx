@@ -43,6 +43,8 @@ export function PhotographyVideoTile({
         {...netlifyImgSet(poster, 480, 600)}
         alt=""
         aria-hidden
+        width={480}
+        height={600}
         className="w-full h-full object-cover"
         loading="lazy"
         decoding="async"

@@ -32,11 +32,11 @@ export function MediaGridSection({
       style={{ background: schemePageBandBackground(scheme) }}
       data-sb-field-path="mediaGridColorScheme"
     >
-      <div
-        ref={ref}
-        className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
-      >
-        <div className="mb-14">
+      <div className="max-w-site mx-auto px-4 lg:px-12">
+        <div
+          ref={ref}
+          className={`mb-14 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
+        >
           <p
             className="text-xs uppercase tracking-[0.3em] font-body font-semibold mb-4"
             style={{ color: fg.eyebrow }}
@@ -54,8 +54,14 @@ export function MediaGridSection({
         </div>
 
         <div className="schedule-event-grid">
-          {events.map((item) => (
-            <ScheduleEventCard key={documentSlug(item)} item={item} cardScheme={cardScheme} compact />
+          {events.map((item, index) => (
+            <ScheduleEventCard
+              key={documentSlug(item)}
+              item={item}
+              cardScheme={cardScheme}
+              compact
+              tileIndex={index}
+            />
           ))}
         </div>
 

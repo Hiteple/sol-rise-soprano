@@ -1,3 +1,5 @@
+import { resolvePublicPath } from '@/lib/public-path'
+
 /** Site paths and relative assets — safe to run through Netlify Image CDN. */
 export function isNetlifyTransformableUrl(url: string): boolean {
   const trimmed = url.trim()
@@ -19,6 +21,24 @@ export function netlifyImg(url: string, w: number, h?: number, fit = 'cover') {
   return `/.netlify/images?${params.toString()}`
 }
 
+/** Netlify Image CDN runs on deploy only — not in vite dev/preview. */
+function useNetlifyImageCdn(): boolean {
+  return import.meta.env.VITE_NETLIFY_IMAGE_CDN === 'true'
+}
+
+/** Single image URL — CDN on Netlify deploy, otherwise the public asset path. */
+export function netlifyImgSrc(url: string, w: number, h?: number, fit = 'cover'): string {
+  if (!isNetlifyTransformableUrl(url)) {
+    return url.trim()
+  }
+
+  if (!useNetlifyImageCdn()) {
+    return resolvePublicPath(url)
+  }
+
+  return netlifyImg(url, w, h, fit)
+}
+
 /**
  * Same as netlifyImg, but also returns a 2x `srcSet` so the image stays crisp
  * on high-DPI (Retina) displays. Spread the result onto an <img>:
@@ -32,6 +52,10 @@ export function netlifyImg(url: string, w: number, h?: number, fit = 'cover') {
 export function netlifyImgSet(url: string, w: number, h?: number, fit = 'cover') {
   if (!isNetlifyTransformableUrl(url)) {
     return { src: url.trim() }
+  }
+
+  if (!useNetlifyImageCdn()) {
+    return { src: resolvePublicPath(url) }
   }
 
   const src = netlifyImg(url, w, h, fit)

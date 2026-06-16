@@ -9,7 +9,7 @@ import { SCHEDULE_DATE_BADGE_CARD_LIMIT } from '@/lib/schedule-badge-display'
 import { splitGridBadges } from '@/lib/split-grid-badges'
 import { resolveColorScheme } from '@/lib/section-color-scheme'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
-import type { CSSProperties, RefObject } from 'react'
+import type { CSSProperties } from 'react'
 
 export type ScheduleEvent = {
   _meta: { path: string }
@@ -75,19 +75,20 @@ export function ScheduleEventCard({
   item,
   cardScheme,
   compact = false,
-  imageLoading = 'lazy',
+  tileIndex = 0,
 }: {
   item: ScheduleEvent
   cardScheme: ScheduleCardScheme
   /** Smaller title/subtitle for past event grids */
   compact?: boolean
-  imageLoading?: 'lazy' | 'eager'
+  tileIndex?: number
 }) {
   const { locale } = useLocale()
   const badges = eventCardBadges(item)
   const imagePath = item.image?.trim() ?? ''
   const hasImage = Boolean(imagePath)
   const slug = documentSlug(item)
+  const imageLoading = tileIndex < 3 ? 'eager' : 'lazy'
 
   const panelContent = (
     <>
@@ -142,34 +143,25 @@ export function ScheduleEventCard({
 export type ScheduleEventGridProps = {
   events: ScheduleEvent[]
   colorScheme?: SectionColorScheme
-  animate?: boolean
-  inView?: boolean
-  gridRef?: RefObject<HTMLDivElement | null>
   className?: string
 }
 
 export function ScheduleEventGrid({
   events,
   colorScheme,
-  animate = false,
-  inView = false,
-  gridRef,
   className = '',
 }: ScheduleEventGridProps) {
   const cardScheme = scheduleCardScheme(colorScheme)
 
   return (
-    <div
-      ref={gridRef}
-      className={`max-w-site mx-auto w-full px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''} ${className}`.trim()}
-    >
+    <div className={`max-w-site mx-auto w-full px-4 lg:px-12 ${className}`.trim()}>
       <div className="schedule-event-grid schedule-event-grid--upcoming">
         {events.map((item, index) => (
           <ScheduleEventCard
             key={documentSlug(item)}
             item={item}
             cardScheme={cardScheme}
-            imageLoading={index < 3 ? 'eager' : 'lazy'}
+            tileIndex={index}
           />
         ))}
       </div>
