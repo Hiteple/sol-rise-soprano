@@ -29,8 +29,12 @@ export function netlifyImg(
   fit = 'cover',
   options: NetlifyImgOptions = CDN_FORMAT,
 ) {
-  const params = new URLSearchParams({ url, w: String(w), fit })
-  if (h) params.set('h', String(h))
+  const params = new URLSearchParams({ url, w: String(w) })
+  // `cover` needs a target box — without height, Netlify stretches to full source height.
+  if (h != null) {
+    params.set('h', String(h))
+    params.set('fit', fit)
+  }
   if (options.fm) params.set('fm', options.fm)
   if (options.q != null) params.set('q', String(options.q))
   return `/.netlify/images?${params.toString()}`

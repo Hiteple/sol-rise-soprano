@@ -10,6 +10,7 @@ import { localizePath } from '@/lib/i18n'
 import { documentSlug } from '@/lib/i18n/content'
 import { localeRouteParams } from '@/lib/i18n/paths'
 import { isInternalHref } from '@/lib/internal-href'
+import { resolvePublicPath } from '@/lib/public-path'
 import { netlifyImgSet } from '@/lib/netlify-image'
 import { relatedGalleryForScheduleEvent } from '@/lib/schedule-gallery'
 import { schedulePhotographyLightboxItems } from '@/lib/schedule-photography'
@@ -105,7 +106,13 @@ function EventDetailImage({
     return (
       <div className="schedule-event-detail-image img-zoom media-radius order-1 lg:order-2 relative">
         <img
-          {...netlifyImgSet(image, 650)}
+          {...netlifyImgSet(
+            resolvePublicPath(image),
+            650,
+            undefined,
+            'cover',
+            '(max-width: 1024px) 100vw, 650px',
+          )}
           alt={imageAlt?.trim() || title}
           fetchPriority="high"
           loading="eager"
