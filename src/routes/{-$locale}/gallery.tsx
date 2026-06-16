@@ -4,22 +4,50 @@ import { allGalleries, allRoles, allScheduleEvents } from 'content-collections'
 import { useLocale } from '@/components/LocaleContext'
 import { filterPublishedContent } from '@/lib/content-order'
 import { GALLERY_CATEGORIES } from '@/lib/gallery-categories'
+import { galleryTilePreloadHref } from '@/lib/gallery-image'
+import { packGalleryGrid } from '@/lib/gallery-grid-pack'
 import { sortGalleryChronologically } from '@/lib/gallery-sort'
 import { getGalleryPage } from '@/lib/i18n/content'
 import { SITE_NAME, pageHead, seoLocaleFromParams } from '@/lib/seo'
 import { PageHeroSection } from '@/sections/PageHeroSection'
 import { TabItemsSection } from '@/sections/TabItemsSection'
 
+function firstGalleryLcpHref(): string | null {
+  const items = sortGalleryChronologically(
+    filterPublishedContent(allGalleries),
+    allScheduleEvents,
+    allRoles,
+  )
+  const first = packGalleryGrid(items)[0]
+  if (!first?.image) return null
+  return galleryTilePreloadHref(first.image, Boolean(first.featuredImg))
+}
+
 export const Route = createFileRoute('/{-$locale}/gallery')({
-  head: ({ params }) =>
-    pageHead({
+  head: ({ params }) => {
+    const seo = pageHead({
       title: 'Gallery',
       description:
         `Photography from ${SITE_NAME} on stage, backstage and photo book sessions — opera, concert and festival performances.`,
       path: '/gallery',
       imagePath: '/images/photo-book/SON05945 1.jpg',
       locale: seoLocaleFromParams(params),
-    }),
+    })
+    const lcpHref = firstGalleryLcpHref()
+    const lcpPreload = lcpHref
+      ? {
+          rel: 'preload' as const,
+          href: lcpHref,
+          as: 'image' as const,
+          fetchPriority: 'high' as const,
+        }
+      : null
+
+    return {
+      ...seo,
+      links: [...(lcpPreload ? [lcpPreload] : []), ...seo.links],
+    }
+  },
   component: GalleryPage,
 })
 

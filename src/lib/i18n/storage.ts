@@ -1,18 +1,19 @@
 import type { Locale } from './locales'
 import { DEFAULT_LOCALE, isLocale } from './locales'
 
-const LOCALE_KEY = 'solrise-locale'
+/** Explicit user choice (banner accept or language selector) — not set when merely browsing a locale URL. */
+const LOCALE_PREFERENCE_KEY = 'solrise-locale-preference'
 const SUGGEST_DISMISSED_KEY = 'solrise-locale-suggest-dismissed'
 
 export function getSavedLocale(): Locale | null {
   if (typeof window === 'undefined') return null
-  const value = window.localStorage.getItem(LOCALE_KEY)
+  const value = window.localStorage.getItem(LOCALE_PREFERENCE_KEY)
   return value && isLocale(value) ? value : null
 }
 
 export function saveLocale(locale: Locale): void {
   if (typeof window === 'undefined') return
-  window.localStorage.setItem(LOCALE_KEY, locale)
+  window.localStorage.setItem(LOCALE_PREFERENCE_KEY, locale)
 }
 
 export function isSuggestDismissed(): boolean {
@@ -31,7 +32,7 @@ export function clearSuggestDismissed(): void {
 }
 
 /**
- * Language-suggestion banner persistence (`solrise-locale`, `solrise-locale-suggest-dismissed`).
+ * Language-suggestion banner persistence (`solrise-locale-preference`, `solrise-locale-suggest-dismissed`).
  *
  * ## Testing the bottom bar locally (no VPN)
  *

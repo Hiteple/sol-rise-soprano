@@ -8,6 +8,7 @@ import {
   LOCALES,
   localizePath,
   pathnameMatchesNavHref,
+  saveLocale,
   stripLocaleFromPathname,
   type Locale,
 } from '@/lib/i18n'
@@ -30,6 +31,7 @@ export function LanguageSelector({ variant = 'desktop', useChrome = true, onNavi
 
   const switchTo = (next: Locale) => {
     if (next === locale) return
+    saveLocale(next)
     const href = localizePath(basePath === '/' ? '/' : basePath, next)
     onNavigate?.()
     window.location.assign(href)

@@ -55,7 +55,11 @@ export function SlidingTabGroup<T extends string>({
     })
   }, [value])
 
-  const scrollActiveTabIntoView = useCallback(() => {
+  useLayoutEffect(() => {
+    updateIndicator()
+  }, [updateIndicator, options])
+
+  useEffect(() => {
     const activeEl = tabRefs.current.get(value)
     const scroller = scrollRef.current
     if (!activeEl || !scroller) return
@@ -74,12 +78,7 @@ export function SlidingTabGroup<T extends string>({
         behavior: 'smooth',
       })
     }
-  }, [value])
-
-  useLayoutEffect(() => {
-    updateIndicator()
-    scrollActiveTabIntoView()
-  }, [updateIndicator, scrollActiveTabIntoView, options])
+  }, [value, options])
 
   useEffect(() => {
     const track = trackRef.current

@@ -5,7 +5,6 @@ import {
   DEFAULT_LOCALE,
   getUiMessages,
   localeFromPathname,
-  saveLocale,
   type Locale,
   type UiMessages,
 } from '@/lib/i18n'
@@ -22,7 +21,6 @@ const LocaleContext = createContext<LocaleContextValue>({
 
 export function LocaleProvider({ locale, children }: { locale: Locale; children: ReactNode }) {
   useEffect(() => {
-    saveLocale(locale)
     document.documentElement.lang = locale === 'en' ? 'en' : locale
   }, [locale])
 

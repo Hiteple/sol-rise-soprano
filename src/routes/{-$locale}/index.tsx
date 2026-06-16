@@ -3,7 +3,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useLocale } from '@/components/LocaleContext'
 import { homeLastEvents } from '@/lib/home-last-events'
 import { getAllScheduleEvents, getAllOrganizations, getHomePage, getOrganization } from '@/lib/i18n/content'
-import { localizePath } from '@/lib/i18n'
+import { DEFAULT_LOCALE, localizePath } from '@/lib/i18n'
+import { netlifyImgSrc } from '@/lib/netlify-image'
 import { DEFAULT_DESCRIPTION, SITE_NAME, personJsonLd, pageHead, seoLocaleFromParams } from '@/lib/seo'
 import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
@@ -12,15 +13,29 @@ import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
 import { OrganizationsStripSection } from '@/sections/OrganizationsStripSection'
 import { FeaturedEventsSection } from '@/sections/FeaturedEventsSection'
 export const Route = createFileRoute('/{-$locale}/')({
-  head: ({ params }) => ({
-    ...pageHead({
+  head: ({ params }) => {
+    const seo = pageHead({
       title: SITE_NAME,
       description: DEFAULT_DESCRIPTION,
       path: '/',
       locale: seoLocaleFromParams(params),
-    }),
-    scripts: [personJsonLd()],
-  }),
+    })
+    const heroImage = getHomePage(DEFAULT_LOCALE)?.heroImage
+    const heroPreload = heroImage
+      ? {
+          rel: 'preload' as const,
+          href: netlifyImgSrc(heroImage, 1920, 1080),
+          as: 'image' as const,
+          fetchPriority: 'high' as const,
+        }
+      : null
+
+    return {
+      ...seo,
+      links: [...(heroPreload ? [heroPreload] : []), ...seo.links],
+      scripts: [personJsonLd()],
+    }
+  },
   component: HomePage,
 })
 

@@ -5,10 +5,9 @@ import { TabGridEmptyState } from '@/components/TabGridEmptyState'
 import { useLocale } from '@/components/LocaleContext'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
 import { galleryCategoryEmptyMessages, galleryCategoryLabel } from '@/lib/i18n/messages'
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { galleryTileImgProps } from '@/lib/gallery-image'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
-import { resolvePublicPath } from '@/lib/public-path'
 import { packGalleryGrid } from '@/lib/gallery-grid-pack'
 import type { SectionColorScheme } from '../../schemas/color-scheme'
 
@@ -89,12 +88,7 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
             {gridItems.map((item, index) => {
               const isFeatured = Boolean(item.featuredImg)
               const photographerCredit = photographerCreditLabel(item.photographer)
-              const imagePath = resolvePublicPath(item.image)
-              const imgProps = netlifyImgSet(
-                imagePath,
-                isFeatured ? 1200 : 600,
-                isFeatured ? 675 : 750,
-              )
+              const imgProps = galleryTileImgProps(item.image, isFeatured)
 
               return (
                 <button
@@ -125,7 +119,9 @@ export function TabItemsSection({ categories, items, tabItemsColorScheme }: TabI
                     aria-hidden
                     className="absolute inset-0 h-full w-full object-cover"
                     data-sb-field-path="image"
-                    loading={index < 4 ? 'eager' : 'lazy'}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={index === 0 ? 'high' : undefined}
+                    decoding="async"
                   />
                   <div className="gallery-tile-caption" aria-hidden>
                     <div>

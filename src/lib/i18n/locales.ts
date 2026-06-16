@@ -41,3 +41,13 @@ export function localeFromBrowserLanguage(language: string | undefined): NonDefa
   const base = language.trim().toLowerCase().split('-')[0] ?? ''
   return BROWSER_LOCALE_MAP[base] ?? null
 }
+
+/** Prefer the first supported locale from the browser's language list (Safari/iOS). */
+export function localeFromBrowserLanguages(languages: readonly string[] | undefined): NonDefaultLocale | null {
+  if (!languages?.length) return null
+  for (const language of languages) {
+    const match = localeFromBrowserLanguage(language)
+    if (match) return match
+  }
+  return null
+}
