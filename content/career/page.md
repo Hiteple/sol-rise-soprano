@@ -93,15 +93,10 @@ timeline:
       </ul></div>
 
 timelineClosureMessage: The journey continues…
-ctaTitleLine1: Inquiries & Contact
-ctaTitleLine2: ''
 ctaPrimaryLabel: Get in Touch
 ctaPrimaryHref: /contact
-ctaSecondaryLabel: ''
-ctaSecondaryHref: ''
 heroColorScheme: soft
 timelineColorScheme: soft
-ctaColorScheme: soft
 ---
 
 Career page body (optional). Hero image uses the home `about_teaser` image when `heroImage` is not set here.

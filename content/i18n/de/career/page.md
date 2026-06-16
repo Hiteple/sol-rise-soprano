@@ -93,13 +93,8 @@ timeline:
       </ul></div>
 
 timelineClosureMessage: Die Reise geht weiter…
-ctaTitleLine1: Anfragen & Kontakt
-ctaTitleLine2: ''
 ctaPrimaryLabel: Kontakt aufnehmen
 ctaPrimaryHref: /contact
-ctaSecondaryLabel: ''
-ctaSecondaryHref: ''
 heroColorScheme: soft
 timelineColorScheme: soft
-ctaColorScheme: soft
 ---

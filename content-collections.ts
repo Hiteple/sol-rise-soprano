@@ -8,11 +8,6 @@ function localizedIncludes(relativePath: string): string[] {
   return [relativePath, ...I18N_LOCALES.map((loc) => `i18n/${loc}/${relativePath}`)]
 }
 
-/** All markdown files in a subfolder plus optional locale mirrors (roles, schedule, …). */
-function localizedGlob(subpath: string): string[] {
-  return [`${subpath}/**/*.md`, ...I18N_LOCALES.map((loc) => `i18n/${loc}/${subpath}/**/*.md`)]
-}
-
 import { sectionColorSchemeSchema } from './schemas/color-scheme'
 import { imageCreditFieldsSchema } from './schemas/image-credit'
 import { organizationLocaleBundleSchema } from './schemas/organization-locale-bundle'

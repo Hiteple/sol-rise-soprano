@@ -25,7 +25,7 @@ type GallerySlideData = SlideData & {
 
 const dimensionCache = new Map<string, { width: number; height: number }>()
 
-/** Thin stroke icons aligned with Lucide `X` / zoom used in Modal. */
+/** Thin stroke icons aligned with Lucide `X` / zoom controls. */
 function lucidePswpIcon(paths: string): string {
   return `<svg aria-hidden="true" class="pswp__icn pswp__icn--lucide" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`
 }

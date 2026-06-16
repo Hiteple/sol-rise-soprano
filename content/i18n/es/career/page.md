@@ -93,13 +93,8 @@ timeline:
       </ul></div>
 
 timelineClosureMessage: El camino continúa…
-ctaTitleLine1: Consultas y contacto
-ctaTitleLine2: ''
 ctaPrimaryLabel: Escríbenos
 ctaPrimaryHref: /contact
-ctaSecondaryLabel: ''
-ctaSecondaryHref: ''
 heroColorScheme: soft
 timelineColorScheme: soft
-ctaColorScheme: soft
 ---

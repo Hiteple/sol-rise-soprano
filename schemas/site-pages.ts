@@ -58,14 +58,9 @@ export const aboutPageSchema = z.object({
   timelineSlideIn: z.boolean().default(true),
   timeline: z.array(timelineItemSchema),
   timelineClosureMessage: z.string().default('The journey continues…'),
-  ctaTitleLine1: z.string(),
-  ctaTitleLine2: z.string(),
-  ctaPrimaryLabel: z.string(),
-  ctaPrimaryHref: z.string(),
-  ctaSecondaryLabel: z.string(),
-  ctaSecondaryHref: z.string(),
-  ctaColorScheme: sectionColorSchemeSchema.default('soft'),
-  ctaSlideIn: z.boolean().default(true),
+  /** Label for the contact link below the timeline closure message. */
+  ctaPrimaryLabel: z.string().default('Get in Touch'),
+  ctaPrimaryHref: z.string().default('/contact'),
   content: z.string(),
 })
 
