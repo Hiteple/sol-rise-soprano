@@ -240,7 +240,17 @@ function applySchedulePageOverlay(page: SchedulePage, locale: Locale): ScheduleP
 }
 
 export function getHomePage(locale: Locale) {
-  return pickByLocale(allHomes, locale) ?? allHomes[0]
+  const page = pickByLocale(allHomes, locale) ?? allHomes[0]
+  if (!page) return page
+
+  const base = pickByLocale(allHomes, DEFAULT_LOCALE) ?? allHomes[0]
+  if (!base || page === base) return page
+
+  return {
+    ...page,
+    headerBrandLogo: page.headerBrandLogo ?? base.headerBrandLogo,
+    footerBrandLogo: page.footerBrandLogo ?? base.footerBrandLogo,
+  }
 }
 
 export function getBioPage(locale: Locale) {
