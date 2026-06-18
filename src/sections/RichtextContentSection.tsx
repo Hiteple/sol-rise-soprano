@@ -1,5 +1,5 @@
 import { renderMarkdown } from '@/lib/markdown'
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { halfColumnImageProps } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
@@ -75,9 +75,11 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
               className={`relative img-zoom media-radius overflow-hidden ${imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}`}
             >
               <img
-                {...netlifyImgSet(page.fullBioImage as string, 900, 1100)}
+                {...halfColumnImageProps(page.fullBioImage as string)}
                 alt={page.fullBioImageAlt ?? ''}
                 className="w-full object-cover"
+                width={900}
+                height={1125}
                 style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
                 loading="lazy"
                 decoding="async"

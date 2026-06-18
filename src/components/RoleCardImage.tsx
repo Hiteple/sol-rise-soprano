@@ -1,4 +1,4 @@
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { thumbnailColumnImageProps } from '@/lib/netlify-image'
 import { initialLetter, showsPlaceholderImage } from '@/lib/placeholder-image'
 
 type RoleCardImageProps = {
@@ -14,9 +14,11 @@ export function RoleCardImage({ characterName, heroImage, alt, eyebrowColor }: R
   if (!showsPlaceholderImage(heroImage)) {
     return (
       <img
-        {...netlifyImgSet(heroImage, 360, 450)}
+        {...thumbnailColumnImageProps(heroImage)}
         alt={alt}
         className="w-full h-full min-h-[180px] object-cover"
+        width={360}
+        height={450}
         style={{ objectPosition: 'top center' }}
         loading="lazy"
         decoding="async"

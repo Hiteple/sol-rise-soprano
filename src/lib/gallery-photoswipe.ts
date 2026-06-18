@@ -1,3 +1,4 @@
+import '@/lib/gallery-photoswipe.css'
 import { useCallback, useEffect, useRef } from 'react'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin'

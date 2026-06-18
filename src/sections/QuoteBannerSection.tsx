@@ -1,5 +1,5 @@
 import { ImageCredit } from '@/components/ImageCredit'
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { quoteBannerImageProps } from '@/lib/netlify-image'
 import { schemeForeground, schemeQuoteOverlay } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import { resolveImageCredit } from '../../schemas/image-credit'
@@ -24,9 +24,11 @@ export function QuoteBannerSection({ section }: QuoteBannerSectionProps) {
     >
         <div className="absolute inset-0">
           <img
-            {...netlifyImgSet(section.quoteImage, 1920, 900)}
+            {...quoteBannerImageProps(section.quoteImage)}
             alt={quoteAlt}
             className="w-full h-full object-cover"
+            width={1920}
+            height={900}
             loading="lazy"
             decoding="async"
             data-sb-field-path="quoteImage#@src"

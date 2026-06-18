@@ -36,7 +36,7 @@ export function SplitGrid({
           const badges = splitGridBadges(item)
           const panelContent = (
             <>
-              <SplitGridPanelImage image={item.image} loading="eager" />
+              <SplitGridPanelImage image={item.image} loading="eager" layout="featured" />
               <div className="split-grid-overlay" />
               <div className="split-grid-content">
                 <SplitGridBadges

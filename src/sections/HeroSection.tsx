@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react'
 
 import { SKIP_PAST_HERO_ATTR } from '@/lib/skip-to-content'
 import { schemeHeroImageOverlay } from '@/lib/section-color-scheme'
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { heroImageProps } from '@/lib/netlify-image'
 import type { HomeHeroSection } from './types'
 
 export type HeroSectionProps = {
@@ -28,9 +28,11 @@ export function HeroSection({ section }: HeroSectionProps) {
     >
         <div className="absolute inset-0">
           <img
-            {...netlifyImgSet(section.heroImage, 1920, 1080)}
+            {...heroImageProps(section.heroImage)}
             alt={section.heroImageAlt}
             className="hero-banner-image w-full h-full object-cover"
+            width={1920}
+            height={1080}
             fetchPriority="high"
             loading="eager"
             decoding="async"

@@ -1,4 +1,7 @@
-import { netlifyImgSet } from '@/lib/netlify-image'
+import {
+  organizationStripImageProps,
+  thumbnailColumnImageProps,
+} from '@/lib/netlify-image'
 import { initialLetter, showsPlaceholderImage } from '@/lib/placeholder-image'
 
 type OrganizationImageProps = {
@@ -24,9 +27,11 @@ export function OrganizationImage({
     if (variant === 'index') {
       return (
         <img
-          {...netlifyImgSet(image!, 360, 450)}
+          {...thumbnailColumnImageProps(image!)}
           alt={name}
           className="w-full h-full object-cover min-h-[180px]"
+          width={360}
+          height={450}
           loading="lazy"
           decoding="async"
           data-sb-field-path={imageFieldPath}
@@ -36,9 +41,11 @@ export function OrganizationImage({
 
     return (
       <img
-        {...netlifyImgSet(image!, 480, 360)}
+        {...organizationStripImageProps(image!)}
         alt=""
         aria-hidden
+        width={480}
+        height={360}
         className="w-full h-full object-cover"
         loading="lazy"
         decoding="async"

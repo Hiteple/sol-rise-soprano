@@ -13,6 +13,23 @@
 [images]
   remote_images = ["https://picsum\\.photos/.*"]
 
+# Long-lived cache for fingerprinted build assets and fonts.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Source images — weekly cache; transforms are cached separately on the CDN edge.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
 # ==========================================
 # Maintenance mode toggle (PRODUCTION ONLY)
 # ==========================================

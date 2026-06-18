@@ -4,7 +4,7 @@ import { useLocale } from '@/components/LocaleContext'
 import { homeLastEvents } from '@/lib/home-last-events'
 import { getAllScheduleEvents, getAllOrganizations, getHomePage, getOrganization } from '@/lib/i18n/content'
 import { DEFAULT_LOCALE, localizePath } from '@/lib/i18n'
-import { netlifyImgSrc } from '@/lib/netlify-image'
+import { heroImagePreloadLink } from '@/lib/netlify-image'
 import { DEFAULT_DESCRIPTION, SITE_NAME, personJsonLd, pageHead, seoLocaleFromParams } from '@/lib/seo'
 import { HeroSection } from '@/sections/HeroSection'
 import { ImageTextSection } from '@/sections/ImageTextSection'
@@ -21,14 +21,7 @@ export const Route = createFileRoute('/{-$locale}/')({
       locale: seoLocaleFromParams(params),
     })
     const heroImage = getHomePage(DEFAULT_LOCALE)?.heroImage
-    const heroPreload = heroImage
-      ? {
-          rel: 'preload' as const,
-          href: netlifyImgSrc(heroImage, 1920, 1080),
-          as: 'image' as const,
-          fetchPriority: 'high' as const,
-        }
-      : null
+    const heroPreload = heroImage ? heroImagePreloadLink(heroImage) : null
 
     return {
       ...seo,

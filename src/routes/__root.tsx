@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { Footer } from '@/components/Footer'
 import { LanguageSuggestBanner } from '@/components/LanguageSuggestBanner'
@@ -6,8 +5,9 @@ import { LocaleProvider, useLocaleFromPathname } from '@/components/LocaleContex
 import { Nav } from '@/components/Nav'
 import { NotFoundSection } from '@/components/NotFoundSection'
 import { SkipLink } from '@/components/SkipLink'
+import { DEFAULT_LOCALE, getUiMessages } from '@/lib/i18n'
+import { LOCALE_BOOTSTRAP_SCRIPT } from '@/lib/i18n/locale-bootstrap'
 import { DEFAULT_DESCRIPTION, SITE_NAME, googleSiteVerificationMeta } from '@/lib/seo'
-import { DEFAULT_LOCALE, getSavedLocale, getUiMessages } from '@/lib/i18n'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -36,14 +36,22 @@ export const Route = createRootRoute({
         crossOrigin: 'anonymous',
       },
     ],
+    scripts: [
+      {
+        type: 'text/javascript',
+        children: LOCALE_BOOTSTRAP_SCRIPT,
+      },
+    ],
   }),
   shellComponent: RootDocument,
   notFoundComponent: NotFoundPage,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const locale = useLocaleFromPathname()
+
   return (
-    <html lang="en">
+    <html lang={locale === DEFAULT_LOCALE ? 'en' : locale}>
       <head>
         <HeadContent />
       </head>
@@ -57,15 +65,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function AppShell({ children }: { children: React.ReactNode }) {
   const locale = useLocaleFromPathname()
-
-  useEffect(() => {
-    const path = window.location.pathname
-    if (path !== '/') return
-    const saved = getSavedLocale()
-    if (saved && saved !== DEFAULT_LOCALE) {
-      window.location.replace(`/${saved}`)
-    }
-  }, [])
 
   return (
     <LocaleProvider locale={locale}>

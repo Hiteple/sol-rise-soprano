@@ -92,7 +92,9 @@ export function ScheduleEventCard({
 
   const panelContent = (
     <>
-      {hasImage && <SplitGridPanelImage image={imagePath} loading={imageLoading} />}
+      {hasImage && (
+        <SplitGridPanelImage image={imagePath} loading={imageLoading} layout={compact ? 'schedule' : 'featured'} />
+      )}
       <div className="split-grid-overlay" />
       <div className="split-grid-content">
         <SplitGridBadges
@@ -102,8 +104,8 @@ export function ScheduleEventCard({
           collapseAfter={SCHEDULE_DATE_BADGE_CARD_LIMIT}
         />
         <h3
-          className={`font-display italic leading-tight ${
-            compact ? 'text-base md:text-2xl line-clamp-3 md:line-clamp-none' : 'text-3xl'
+          className={`split-grid-card-title font-display italic leading-tight ${
+            compact ? 'split-grid-card-title--compact' : 'text-3xl'
           }`}
         >
           {item.title}
@@ -111,7 +113,9 @@ export function ScheduleEventCard({
         {(item.subtitle?.trim().length ?? 0) > 0 && (
           <h4
             className={`font-display italic leading-snug mt-1 md:mt-2 ${
-              compact ? 'text-xs md:text-lg line-clamp-2 md:line-clamp-none' : 'text-xl'
+              compact
+                ? 'split-grid-card-subtitle--compact line-clamp-2 md:line-clamp-none'
+                : 'text-xl'
             }`}
           >
             {item.subtitle}

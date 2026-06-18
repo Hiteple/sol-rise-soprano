@@ -1,9 +1,14 @@
 import type { Locale } from './locales'
 import { DEFAULT_LOCALE, isLocale } from './locales'
 
-/** Explicit user choice (banner accept or language selector) — not set when merely browsing a locale URL. */
-const LOCALE_PREFERENCE_KEY = 'solrise-locale-preference'
+/** Explicit user choice (banner accept or language selector) — mirrored in a cookie for early redirects. */
+export const LOCALE_PREFERENCE_KEY = 'solrise-locale-preference'
 const SUGGEST_DISMISSED_KEY = 'solrise-locale-suggest-dismissed'
+const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365
+
+function writeLocaleCookie(locale: Locale): void {
+  document.cookie = `${LOCALE_PREFERENCE_KEY}=${encodeURIComponent(locale)}; Path=/; Max-Age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax`
+}
 
 export function getSavedLocale(): Locale | null {
   if (typeof window === 'undefined') return null
@@ -14,6 +19,7 @@ export function getSavedLocale(): Locale | null {
 export function saveLocale(locale: Locale): void {
   if (typeof window === 'undefined') return
   window.localStorage.setItem(LOCALE_PREFERENCE_KEY, locale)
+  writeLocaleCookie(locale)
 }
 
 export function isSuggestDismissed(): boolean {

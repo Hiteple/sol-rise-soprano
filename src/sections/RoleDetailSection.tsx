@@ -5,7 +5,7 @@ import { PhotographyGalleryTile } from '@/components/PhotographyGalleryTile'
 import { useLocale } from '@/components/LocaleContext'
 import { documentSlug } from '@/lib/i18n/content'
 import { useGalleryPhotoSwipe } from '@/lib/gallery-photoswipe'
-import { netlifyImgSet } from '@/lib/netlify-image'
+import { roleFeatureImageProps } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { showsPlaceholderImage } from '@/lib/placeholder-image'
 import { sortByContentOrder } from '@/lib/content-order'
@@ -108,11 +108,13 @@ export function RoleDetailSection({
                   style={{ aspectRatio: '16/10' }}
                 >
                   <img
-                    {...netlifyImgSet(role.featureImage, 1200, 750)}
+                    {...roleFeatureImageProps(role.featureImage)}
                     alt={roleMsg.featureImageAlt
                       .replace('{character}', role.characterName)
                       .replace('{opera}', role.operaTitle)}
                     className="w-full h-full object-cover"
+                    width={900}
+                    height={563}
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"
