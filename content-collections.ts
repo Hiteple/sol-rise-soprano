@@ -96,6 +96,7 @@ const home = defineCollection({
     organizationsStripColorScheme: sectionColorSchemeSchema.default('bright'),
     organizationsStripSlideIn: z.boolean().default(true),
     /** Schedule slug (e.g. don-giovanni-2023). Falls back to newest past event with videoUrl. */
+    featuredVideoEnabled: z.boolean().default(false),
     featuredVideoScheduleSlug: z.string().optional(),
     featuredVideoEyebrow: z.string().optional(),
     featuredVideoTitle: z.string().optional(),

@@ -166,6 +166,16 @@ export default defineStackbitConfig({
             },
             fieldWithDescription(
               {
+                name: 'featuredVideoEnabled',
+                type: 'boolean',
+                label: 'Show featured video section',
+                group: 'featuredVideo',
+                default: false,
+              },
+              'Off hides the home video block while keeping copy and schedule slug for a later publish.',
+            ),
+            fieldWithDescription(
+              {
                 name: 'featuredVideoScheduleSlug',
                 type: 'string',
                 label: 'Schedule event slug',

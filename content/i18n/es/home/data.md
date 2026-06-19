@@ -45,6 +45,7 @@ organizationsStripItems:
   - juventus-lyrica
   - british-arts-center
 organizationsStripColorScheme: bright
+featuredVideoEnabled: false
 featuredVideoScheduleSlug: don-giovanni-2023
 featuredVideoEyebrow: Grabación
 featuredVideoTitle: En escena

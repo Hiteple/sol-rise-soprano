@@ -127,7 +127,7 @@ function HomePage() {
           slideIn={site.organizationsStripSlideIn}
         />
       )}
-      {featuredVideo && site.featuredVideoTitle?.trim() && (
+      {featuredVideo && site.featuredVideoEnabled && site.featuredVideoTitle?.trim() && (
         <FeaturedVideoSection
           video={featuredVideo}
           section={{
