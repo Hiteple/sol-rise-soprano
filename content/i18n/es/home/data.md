@@ -45,6 +45,13 @@ organizationsStripItems:
   - juventus-lyrica
   - british-arts-center
 organizationsStripColorScheme: bright
+featuredVideoScheduleSlug: don-giovanni-2023
+featuredVideoEyebrow: Grabación
+featuredVideoTitle: En escena
+featuredVideoDescription: >-
+  Un extracto de la producción de Don Giovanni de Mozart con Juventus Lyrica — Sol Risé como Zerlina en el Teatro Avenida, Buenos Aires.
+featuredVideoLinkText: Ver detalles de la función
+featuredVideoColorScheme: soft
 mediaEyebrow: En escena y en pantalla
 mediaTitle: Últimas presentaciones
 mediaLinkText: Ver todas las apariciones

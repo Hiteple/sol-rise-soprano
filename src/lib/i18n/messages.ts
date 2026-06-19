@@ -59,6 +59,7 @@ export type UiMessages = {
     allEvents: string
     cast: string
     photography: string
+    media: string
     notFound: {
       eyebrow: string
       title: string
@@ -198,6 +199,7 @@ const EN: UiMessages = {
     allEvents: '← All events',
     cast: 'Cast',
     photography: 'Photography',
+    media: 'Media',
     notFound: {
       eyebrow: 'Schedule',
       title: 'Event not found',
@@ -331,6 +333,7 @@ const ES: UiMessages = {
     allEvents: '← Todos los eventos',
     cast: 'Elenco',
     photography: 'Fotografía',
+    media: 'Medios',
     notFound: {
       eyebrow: 'Calendario',
       title: 'Evento no encontrado',
@@ -464,6 +467,7 @@ const DE: UiMessages = {
     allEvents: '← Alle Termine',
     cast: 'Besetzung',
     photography: 'Fotografie',
+    media: 'Medien',
     notFound: {
       eyebrow: 'Termine',
       title: 'Termin nicht gefunden',
@@ -597,6 +601,7 @@ const IT: UiMessages = {
     allEvents: '← Tutti gli eventi',
     cast: 'Cast',
     photography: 'Fotografia',
+    media: 'Media',
     notFound: {
       eyebrow: 'Calendario',
       title: 'Evento non trovato',

@@ -40,6 +40,13 @@ organizationsStripItems:
   - juventus-lyrica
   - british-arts-center
 organizationsStripColorScheme: bright
+featuredVideoScheduleSlug: don-giovanni-2023
+featuredVideoEyebrow: Aufnahme
+featuredVideoTitle: In Aufführung
+featuredVideoDescription: >-
+  Ein Auszug aus Juventus Lyricas Produktion von Mozarts Don Giovanni — Sol Risé als Zerlina im Teatro Avenida, Buenos Aires.
+featuredVideoLinkText: Details zur Aufführung
+featuredVideoColorScheme: soft
 mediaEyebrow: Auf der Bühne
 mediaTitle: Letzte Auftritte
 mediaLinkText: Alle Auftritte ansehen

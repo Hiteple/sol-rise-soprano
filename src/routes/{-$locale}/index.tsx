@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { useLocale } from '@/components/LocaleContext'
 import { homeLastEvents } from '@/lib/home-last-events'
+import { resolveFeaturedPerformanceVideo } from '@/lib/featured-performance-video'
 import { getAllScheduleEvents, getAllOrganizations, getHomePage, getOrganization } from '@/lib/i18n/content'
 import { DEFAULT_LOCALE, localizePath } from '@/lib/i18n'
 import { heroImagePreloadLink } from '@/lib/netlify-image'
@@ -12,6 +13,7 @@ import { MediaGridSection } from '@/sections/MediaGridSection'
 import { QuoteBannerSection } from '@/sections/QuoteBannerSection'
 import { OrganizationsStripSection } from '@/sections/OrganizationsStripSection'
 import { FeaturedEventsSection } from '@/sections/FeaturedEventsSection'
+import { FeaturedVideoSection } from '@/sections/FeaturedVideoSection'
 export const Route = createFileRoute('/{-$locale}/')({
   head: ({ params }) => {
     const seo = pageHead({
@@ -39,7 +41,13 @@ function normalizeOrganizationSlug(slug: string): string {
 function HomePage() {
   const { locale } = useLocale()
   const site = getHomePage(locale)
-  const lastEvents = homeLastEvents(getAllScheduleEvents(locale))
+  const scheduleEvents = getAllScheduleEvents(locale)
+  const lastEvents = homeLastEvents(scheduleEvents)
+  const featuredVideo = resolveFeaturedPerformanceVideo(
+    site?.featuredVideoScheduleSlug,
+    scheduleEvents,
+    locale,
+  )
   const stripSlugs = site?.organizationsStripItems?.map(normalizeOrganizationSlug) ?? []
   const organizationsStripItems =
     stripSlugs.length > 0
@@ -117,6 +125,19 @@ function HomePage() {
           organizations={organizationsStripItems}
           colorScheme={site.organizationsStripColorScheme}
           slideIn={site.organizationsStripSlideIn}
+        />
+      )}
+      {featuredVideo && site.featuredVideoTitle?.trim() && (
+        <FeaturedVideoSection
+          video={featuredVideo}
+          section={{
+            eyebrow: site.featuredVideoEyebrow,
+            title: site.featuredVideoTitle,
+            description: site.featuredVideoDescription,
+            linkText: site.featuredVideoLinkText,
+            colorScheme: site.featuredVideoColorScheme,
+            slideIn: site.featuredVideoSlideIn,
+          }}
         />
       )}
       <FeaturedEventsSection

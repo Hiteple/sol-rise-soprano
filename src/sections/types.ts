@@ -37,6 +37,15 @@ export type HomeMediaSection = {
   slideIn?: boolean
 }
 
+export type HomeFeaturedVideoSection = {
+  eyebrow?: string
+  title: string
+  description?: string
+  linkText?: string
+  colorScheme: SectionColorScheme
+  slideIn?: boolean
+}
+
 export type HomeQuoteSection = {
   quoteText: string
   quoteAuthor?: string

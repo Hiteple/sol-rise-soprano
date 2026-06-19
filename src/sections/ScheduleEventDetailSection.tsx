@@ -395,7 +395,7 @@ export function ScheduleEventDetailSection({
           {showPhotography && (
             <div>
               <h2 className="font-display text-2xl lg:text-3xl italic mb-6" style={{ color: bodyFg.heading }}>
-                {schedule.photography}
+                {hasVideo ? schedule.media : schedule.photography}
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 {hasVideo && (

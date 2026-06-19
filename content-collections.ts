@@ -95,6 +95,14 @@ const home = defineCollection({
     organizationsStripItems: z.array(z.string()).max(8).optional(),
     organizationsStripColorScheme: sectionColorSchemeSchema.default('bright'),
     organizationsStripSlideIn: z.boolean().default(true),
+    /** Schedule slug (e.g. don-giovanni-2023). Falls back to newest past event with videoUrl. */
+    featuredVideoScheduleSlug: z.string().optional(),
+    featuredVideoEyebrow: z.string().optional(),
+    featuredVideoTitle: z.string().optional(),
+    featuredVideoDescription: z.string().optional(),
+    featuredVideoLinkText: z.string().optional(),
+    featuredVideoColorScheme: sectionColorSchemeSchema.default('soft'),
+    featuredVideoSlideIn: z.boolean().default(true),
     mediaEyebrow: z.string(),
     mediaTitle: z.string(),
     /** @deprecated Home shows the 8 most recent past events automatically. */

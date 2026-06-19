@@ -48,6 +48,7 @@ export function RoleDetailSection({
 }: RoleDetailSectionProps) {
   const { messages } = useLocale()
   const roleMsg = messages.role
+  const scheduleMsg = messages.schedule
   const roleSlug = documentSlug(role)
   const scheme = resolveColorScheme('soft')
   const fg = schemeForeground(scheme)
@@ -227,7 +228,7 @@ export function RoleDetailSection({
           {showPhotography && (
             <div className="mt-16">
               <h2 className="font-display text-2xl italic mb-6" style={{ color: fg.heading }}>
-                {roleMsg.media}
+                {roleVideos.length > 0 ? scheduleMsg.media : scheduleMsg.photography}
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 {roleVideos.map((video, index) => (
