@@ -1,5 +1,7 @@
 import { createFileRoute, Navigate } from '@tanstack/react-router'
 
+import { useLocale } from '@/components/LocaleContext'
+import { localizePath } from '@/lib/i18n'
 import { SITE_NAME, pageHead, seoLocaleFromParams } from '@/lib/seo'
 
 export const Route = createFileRoute('/{-$locale}/about')({
@@ -15,5 +17,7 @@ export const Route = createFileRoute('/{-$locale}/about')({
 })
 
 function AboutRedirect() {
-  return <Navigate to="/career" replace />
+  const { locale } = useLocale()
+
+  return <Navigate to={localizePath('/career', locale)} replace />
 }

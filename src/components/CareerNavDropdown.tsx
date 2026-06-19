@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { useRouterState } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
 import { useLocale } from '@/components/LocaleContext'
@@ -83,8 +83,8 @@ export function CareerNavDropdown({
 
               return (
                 <li key={item.href}>
-                  <a
-                    href={href}
+                  <Link
+                    to={href}
                     className="block"
                     aria-current={itemActive ? 'page' : undefined}
                     onClick={() => {
@@ -113,7 +113,7 @@ export function CareerNavDropdown({
                     >
                       {item.description}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               )
             })}
@@ -134,8 +134,8 @@ export function CareerNavDropdown({
         if (!rootRef.current?.contains(event.relatedTarget as Node)) setOpen(false)
       }}
     >
-      <a
-        href={careerHref}
+      <Link
+        to={careerHref}
         className="gold-link inline-flex items-center gap-1.5"
         aria-current={active ? 'page' : undefined}
         aria-haspopup="true"
@@ -148,7 +148,7 @@ export function CareerNavDropdown({
       >
         {label}
         <ChevronDown size={14} aria-hidden className={cn('transition-transform', open && 'rotate-180')} />
-      </a>
+      </Link>
 
       <div
         className={cn(
@@ -165,8 +165,8 @@ export function CareerNavDropdown({
 
               return (
                 <li key={item.href} role="none">
-                  <a
-                    href={href}
+                  <Link
+                    to={href}
                     role="menuitem"
                     className="career-nav-dropdown__item block rounded-[var(--media-radius)] px-4 py-3 transition-colors"
                     aria-current={itemActive ? 'page' : undefined}
@@ -177,7 +177,7 @@ export function CareerNavDropdown({
                   >
                     <span className="font-display text-lg italic">{item.label}</span>
                     <span className="block font-body text-xs mt-1 leading-snug opacity-80">{item.description}</span>
-                  </a>
+                  </Link>
                 </li>
               )
             })}

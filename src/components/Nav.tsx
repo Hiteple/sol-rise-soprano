@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useRouterState } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
 
 import { CareerNavDropdown } from '@/components/CareerNavDropdown'
@@ -85,10 +85,11 @@ export function Nav() {
     >
       <div className="relative z-[46] max-w-site mx-auto px-4 lg:px-12">
         <div className="flex items-center justify-between h-20">
-          <a
-            href={homeHref}
+          <Link
+            to={homeHref}
             className={headerBrandLogo ? 'flex items-center shrink-0' : 'flex flex-col leading-none'}
             aria-label="Sol Risé Soprano, home"
+            onClick={() => setMenuOpen(false)}
           >
             {headerBrandLogo ? (
               <SiteBrandLogo variant="header" src={headerBrandLogo} fieldPath="headerBrandLogo" />
@@ -127,7 +128,7 @@ export function Nav() {
                 </span>
               </>
             )}
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link, idx) => {
@@ -143,16 +144,16 @@ export function Nav() {
                   pathname={pathname}
                 />
               ) : (
-                <a
+                <Link
                   key={`${link.label}-${link.href}`}
-                  href={href}
+                  to={href}
                   className="gold-link"
                   aria-current={active ? 'page' : undefined}
                   data-sb-field-path={`headerNavLinks.${idx}.label`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {label}
-                </a>
+                </Link>
               )
             })}
             <LanguageSelector variant="desktop" useChrome={useChrome} />
@@ -221,9 +222,9 @@ export function Nav() {
                 onNavigate={() => setMenuOpen(false)}
               />
             ) : (
-              <a
+              <Link
                 key={`${link.label}-${link.href}-mobile`}
-                href={href}
+                to={href}
                 className="nav-mobile-link font-display italic"
                 aria-current={active ? 'page' : undefined}
                 data-sb-field-path={`headerNavLinks.${idx}.label`}
@@ -231,7 +232,7 @@ export function Nav() {
                 tabIndex={menuOpen ? undefined : -1}
               >
                 {label}
-              </a>
+              </Link>
             )
           })}
           <LanguageSelector

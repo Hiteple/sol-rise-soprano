@@ -86,9 +86,9 @@ export function Footer() {
             </h4>
             <nav className="flex flex-col gap-3" aria-label="Footer navigation">
               {footerLinks.map((link, idx) => (
-                <a
+                <Link
                   key={`${link.label}-${link.href}`}
-                  href={localizeNavHref(link.href, locale)}
+                  to={localizeNavHref(link.href, locale)}
                   className="text-sm transition-colors duration-200 font-body"
                   data-sb-field-path={`footerNavLinks.${idx}.label`}
                   style={{ color: 'var(--chrome-text-muted)' }}
@@ -100,7 +100,7 @@ export function Footer() {
                   }
                 >
                   {translateNavLabel(link.label, locale)}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
