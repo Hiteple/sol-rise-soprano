@@ -43,6 +43,7 @@ function PrivacyPage() {
         heroEyebrow={page.heroEyebrow}
         heroTitle={page.heroTitle}
         heroDescription={page.heroDescription}
+        heroTitleMobileSize="compact"
       />
       <PrivacyContentSection page={page} lastUpdatedLabel={messages.privacy.lastUpdated} />
     </div>

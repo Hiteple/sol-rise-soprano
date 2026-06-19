@@ -9,6 +9,8 @@ export type PageHeroSectionProps = {
   colorScheme?: SectionColorScheme
   /** Gallery hero uses slightly tighter bottom padding on large screens */
   bottomSpacing?: 'default' | 'compact'
+  /** `compact` = 32px min title on mobile (long compound words, e.g. DE privacy). */
+  heroTitleMobileSize?: 'default' | 'compact'
 }
 
 export function PageHeroSection({
@@ -17,11 +19,14 @@ export function PageHeroSection({
   heroDescription,
   colorScheme,
   bottomSpacing = 'default',
+  heroTitleMobileSize = 'default',
 }: PageHeroSectionProps) {
   const bottomClass =
     bottomSpacing === 'compact' ? 'pb-8 lg:pb-20' : 'pb-8 lg:pb-24'
   const scheme = resolveColorScheme(colorScheme)
   const fg = schemeForeground(scheme)
+  const titleSize =
+    heroTitleMobileSize === 'compact' ? 'clamp(2rem, 8vw, 6rem)' : 'clamp(3rem, 8vw, 6rem)'
 
   return (
     <section
@@ -39,9 +44,9 @@ export function PageHeroSection({
           {heroEyebrow}
         </p>
         <h1
-          className={`font-display italic leading-none ${heroDescription ? 'mb-8' : ''}`}
+          className={`page-hero-title font-display italic leading-none ${heroDescription ? 'mb-8' : ''}`}
           style={{
-            fontSize: 'clamp(3rem, 8vw, 6rem)',
+            fontSize: titleSize,
             color: fg.heading,
           }}
           data-sb-field-path="heroTitle"

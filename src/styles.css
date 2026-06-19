@@ -266,6 +266,12 @@
   }
 }
 
+/* Inner page heroes — allow long words (e.g. DE compounds) to wrap without horizontal scroll */
+.page-hero-title {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
 /* Quote banner — ornamental divider above the citation */
 .quote-banner-ornament {
   display: flex;
