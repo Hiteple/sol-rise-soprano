@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
-import { marked } from 'marked'
 import { useRef, type CSSProperties } from 'react'
+
+import { MarkdownBlock } from '@/components/MarkdownBlock'
 
 import { resolveColorScheme, schemeForeground, schemeSolidBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
@@ -105,7 +106,8 @@ export function TimelineSection({ page }: TimelineSectionProps) {
                       >
                         {item.title}
                       </h3>
-                      <div
+                      <MarkdownBlock
+                        content={item.description}
                         className={`timeline-markdown max-w-none font-body text-sm leading-relaxed [&_a]:underline ${
                           scheme === 'wine'
                             ? '[&_a]:text-[color:var(--media-caption-text-color)]'
@@ -113,9 +115,6 @@ export function TimelineSection({ page }: TimelineSectionProps) {
                         }`}
                         style={{ color: fg.body }}
                         data-sb-field-path={`timeline.${idx}.description`}
-                        dangerouslySetInnerHTML={{
-                          __html: String(marked(item.description)),
-                        }}
                       />
                     </div>
                   </div>

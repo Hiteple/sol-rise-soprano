@@ -1,4 +1,4 @@
-import { renderMarkdown } from '@/lib/markdown'
+import { MarkdownBlock } from '@/components/MarkdownBlock'
 import { halfColumnImageProps } from '@/lib/netlify-image'
 import { photographerCreditLabel } from '@/lib/photographer-credit'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
@@ -41,8 +41,9 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
   const paragraphs = (
     <div className="font-body text-base leading-relaxed space-y-6" style={{ color: fg.body }}>
       {page.fullBioParagraphs.map((para, i) => (
-        <div
+        <MarkdownBlock
           key={i}
+          content={para.content}
           className="timeline-markdown"
           data-sb-field-path={`fullBioParagraphs.${i}.content`}
           style={
@@ -53,7 +54,6 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
                 }
               : undefined
           }
-          dangerouslySetInnerHTML={{ __html: renderMarkdown(para.content) }}
         />
       ))}
     </div>
@@ -78,8 +78,8 @@ export function RichtextContentSection({ page }: RichtextContentSectionProps) {
                 {...halfColumnImageProps(page.fullBioImage as string)}
                 alt={page.fullBioImageAlt ?? ''}
                 className="w-full object-cover"
-                width={900}
-                height={1125}
+                width={800}
+                height={1000}
                 style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
                 loading="lazy"
                 decoding="async"

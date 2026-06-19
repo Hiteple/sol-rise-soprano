@@ -1,4 +1,4 @@
-import { renderMarkdown } from '@/lib/markdown'
+import { MarkdownBlock } from '@/components/MarkdownBlock'
 import { resolveColorScheme, schemeForeground, schemePageBandBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
 import type { PrivacyPage } from '../../schemas/site-pages'
@@ -45,11 +45,11 @@ export function PrivacyContentSection({ page, lastUpdatedLabel }: PrivacyContent
               >
                 {section.heading}
               </h2>
-              <div
+              <MarkdownBlock
+                content={section.body}
                 className="font-body text-base leading-relaxed timeline-markdown privacy-markdown"
                 style={{ color: fg.body }}
                 data-sb-field-path={`sections.${i}.body`}
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(section.body) }}
               />
             </article>
           ))}

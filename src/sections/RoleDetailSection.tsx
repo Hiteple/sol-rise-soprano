@@ -1,5 +1,4 @@
-import { marked } from 'marked'
-
+import { MarkdownBlock } from '@/components/MarkdownBlock'
 import { PhotographyVideoTile } from '@/components/PhotographyVideoTile'
 import { PhotographyGalleryTile } from '@/components/PhotographyGalleryTile'
 import { useLocale } from '@/components/LocaleContext'
@@ -59,7 +58,6 @@ export function RoleDetailSection({
   )
   const roleVideos = scheduleVideosForRole(roleSlug, scheduleEvents)
   const showPhotography = roleVideos.length > 0 || relatedGallery.length > 0
-  const bodyHtml = role.content?.trim() ? marked(role.content) : ''
   const { ref, inView } = useInView<HTMLDivElement>()
   const { openGallery } = useGalleryPhotoSwipe()
 
@@ -138,13 +136,13 @@ export function RoleDetailSection({
                 </div>
               )}
 
-              {bodyHtml && (
-                <div
+              {role.content?.trim() ? (
+                <MarkdownBlock
+                  content={role.content}
                   className="role-markdown font-body text-base leading-relaxed space-y-4"
                   style={{ color: fg.body }}
-                  dangerouslySetInnerHTML={{ __html: bodyHtml }}
                 />
-              )}
+              ) : null}
 
               {role.appearances.length > 0 && (
                 <div className="mt-12">

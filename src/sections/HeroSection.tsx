@@ -31,8 +31,8 @@ export function HeroSection({ section }: HeroSectionProps) {
             {...heroImageProps(section.heroImage)}
             alt={section.heroImageAlt}
             className="hero-banner-image w-full h-full object-cover"
-            width={1920}
-            height={1080}
+            width={960}
+            height={540}
             fetchPriority="high"
             loading="eager"
             decoding="async"

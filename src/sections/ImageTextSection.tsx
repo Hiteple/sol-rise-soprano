@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
-import { marked } from 'marked'
 
+import { MarkdownBlock } from '@/components/MarkdownBlock'
 import { halfColumnImageProps } from '@/lib/netlify-image'
 import { schemeForeground, schemeGoldLinkStyle, schemeSolidBackground } from '@/lib/section-color-scheme'
 import { useInView } from '@/lib/use-in-view'
@@ -21,7 +21,6 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
   const linkStyle = schemeGoldLinkStyle(scheme)
   const animate = section.slideIn !== false
   const { ref, inView } = useInView<HTMLDivElement>()
-  const textHtml = section.text?.trim() ? marked(section.text.trim()) : ''
 
   const paths = {
     eyebrow: 'aboutEyebrow',
@@ -62,12 +61,12 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
               className="w-12 h-px mb-8"
               style={{ background: fg.divider }}
             />
-            {textHtml ? (
-              <div
+            {section.text?.trim() ? (
+              <MarkdownBlock
+                content={section.text}
                 className="image-text-markdown font-body text-base leading-relaxed mb-10 space-y-4"
                 style={{ color: fg.body }}
                 data-sb-field-path={paths.text}
-                dangerouslySetInnerHTML={{ __html: textHtml }}
               />
             ) : null}
             <Link
@@ -87,8 +86,8 @@ export function ImageTextSection({ section }: ImageTextSectionProps) {
               {...halfColumnImageProps(section.image)}
               alt={section.imageAlt}
               className="w-full object-cover"
-              width={900}
-              height={1125}
+              width={800}
+              height={1000}
               style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
               loading="lazy"
               decoding="async"

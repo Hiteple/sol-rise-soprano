@@ -36,7 +36,12 @@ export const IMAGE_SIZES = {
   brandLogoFooter: 'min(100%, 18rem)',
 } as const
 
-export const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const
+export const HERO_IMAGE_WIDTHS = [640, 960, 1280] as const
+export const HERO_DEFAULT_WIDTH = 960
+export const HERO_DEFAULT_HEIGHT = 540
+export const HALF_COLUMN_DEFAULT_WIDTH = 800
+export const HALF_COLUMN_DEFAULT_HEIGHT = 1000
+export const HALF_COLUMN_WIDTHS = [480, 640, 800] as const
 export const QUOTE_BANNER_WIDTHS = [640, 960, 1280, 1920] as const
 
 /** Width candidates up to `maxWidth` (no automatic 2× jump). */
@@ -125,8 +130,8 @@ export function netlifyImgSet(
 export function heroImageProps(url: string) {
   return netlifyImgSet(
     url,
-    1280,
-    720,
+    HERO_DEFAULT_WIDTH,
+    HERO_DEFAULT_HEIGHT,
     'cover',
     IMAGE_SIZES.fullViewport,
     [...HERO_IMAGE_WIDTHS],
@@ -135,10 +140,14 @@ export function heroImageProps(url: string) {
 
 /** `<link rel="preload">` for home hero with responsive candidates. */
 export function heroImagePreloadLink(url: string) {
-  const { src, srcSet, sizes } = heroImageProps(url)
+  const { srcSet, sizes } = heroImageProps(url)
+  const href = useNetlifyImageCdn()
+    ? netlifyImg(url, 640, 360, 'cover')
+    : resolvePublicPath(url)
+
   return {
     rel: 'preload' as const,
-    href: src,
+    href,
     as: 'image' as const,
     fetchPriority: 'high' as const,
     imageSrcSet: srcSet,
@@ -147,14 +156,18 @@ export function heroImagePreloadLink(url: string) {
 }
 
 /** About / half-column portrait blocks on home and career pages. */
-export function halfColumnImageProps(url: string, w = 900, h = 1100) {
+export function halfColumnImageProps(
+  url: string,
+  w = HALF_COLUMN_DEFAULT_WIDTH,
+  h = HALF_COLUMN_DEFAULT_HEIGHT,
+) {
   return netlifyImgSet(
     url,
     w,
     h,
     'cover',
     IMAGE_SIZES.halfColumn,
-    responsiveWidthsUpTo(w, [600, 800]),
+    [...HALF_COLUMN_WIDTHS],
   )
 }
 
