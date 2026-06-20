@@ -30,6 +30,11 @@
   [headers.values]
     Cache-Control = "public, max-age=604800, must-revalidate"
 
+[[headers]]
+  for = "/press/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
 # ==========================================
 # Maintenance mode toggle (PRODUCTION ONLY)
 # ==========================================

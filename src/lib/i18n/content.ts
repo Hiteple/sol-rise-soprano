@@ -3,6 +3,7 @@ import {
   allCareerPages,
   allContactPages,
   allPrivacyPages,
+  allPressKitPages,
   allGalleryPages,
   allHomes,
   allOrganizationLocaleBundles,
@@ -271,6 +272,21 @@ export function getPrivacyPage(locale: Locale) {
 
 export function getGalleryPage(locale: Locale) {
   return pickByLocale(allGalleryPages, locale) ?? allGalleryPages[0]
+}
+
+export function getPressKitPage(locale: Locale) {
+  const page = pickByLocale(allPressKitPages, locale) ?? allPressKitPages[0]
+  if (!page) return page
+
+  const base = pickByLocale(allPressKitPages, DEFAULT_LOCALE) ?? allPressKitPages[0]
+  if (!base || page === base) return page
+
+  return {
+    ...base,
+    ...page,
+    assets: page.assets?.length ? page.assets : base.assets,
+    muvacUrl: page.muvacUrl ?? base.muvacUrl,
+  }
 }
 
 export function getRolesPage(locale: Locale) {

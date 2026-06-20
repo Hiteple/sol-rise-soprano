@@ -6,7 +6,8 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "preview": "vite preview --port 4173 --strictPort",
-    "preview:build": "npm run build && vite preview --port 4173 --strictPort"
+    "preview:build": "npm run build && vite preview --port 4173 --strictPort",
+    "press-kit:generate": "node scripts/generate-press-kit-pdfs.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -36,6 +37,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
+    "pdfkit": "^0.17.2",
     "typescript": "^5.7.2",
     "vite": "^7.1.7"
   }

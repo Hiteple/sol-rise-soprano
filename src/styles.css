@@ -842,7 +842,14 @@
   );
 }
 
-/* About timeline: markdown from `marked` (lists, emphasis, links) */
+.press-kit-card:focus-visible {
+  outline: 2px solid var(--accent-ink-color);
+  outline-offset: 3px;
+}
+
+.press-kit-card:hover .press-kit-card__icon {
+  background: color-mix(in srgb, var(--palette-wine) 18%, var(--palette-pink) 82%);
+}
 .timeline-markdown :is(p, ul, ol) {
   margin: 0.35rem 0;
 }

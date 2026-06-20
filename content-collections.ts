@@ -19,6 +19,7 @@ import {
   aboutPageSchema,
   bioPageSchema,
   contactPageSchema,
+  pressKitPageSchema,
   privacyPageSchema,
   galleryPageSchema,
   organizationsPageSchema,
@@ -67,6 +68,7 @@ const home = defineCollection({
         { label: 'Bio', href: '/bio' },
         { label: 'Career', href: '/career' },
         { label: 'Gallery', href: '/gallery' },
+        { label: 'Press Kit', href: '/press-kit' },
         { label: 'Contact', href: '/contact' },
       ]),
     heroTitle: z.string(),
@@ -156,6 +158,7 @@ const home = defineCollection({
         { label: 'Bio', href: '/bio' },
         { label: 'Career', href: '/career' },
         { label: 'Gallery', href: '/gallery' },
+        { label: 'Press Kit', href: '/press-kit' },
         { label: 'Contact', href: '/contact' },
       ]),
     instagramUrl: z.string(),
@@ -301,6 +304,13 @@ const bioPage = defineCollection({
   schema: bioPageSchema,
 })
 
+const pressKitPage = defineCollection({
+  name: 'pressKitPage',
+  directory: 'content',
+  include: localizedIncludes('press-kit/page.md'),
+  schema: pressKitPageSchema,
+})
+
 const privacyPage = defineCollection({
   name: 'privacyPage',
   directory: 'content',
@@ -321,6 +331,7 @@ export default defineConfig({
     careerPage,
     galleryPage,
     bioPage,
+    pressKitPage,
     privacyPage,
     contactPage,
     rolesPage,

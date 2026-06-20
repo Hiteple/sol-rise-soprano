@@ -18,3 +18,4 @@ dist
 .content-collections
 .stackbit/cache
 src/routeTree.gen.ts
+public/press/.image-cache

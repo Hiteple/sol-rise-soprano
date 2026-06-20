@@ -14,6 +14,8 @@ headerNavLinks:
     href: /schedule
   - label: Gallery
     href: /gallery
+  - label: Press Kit
+    href: /press-kit
   - label: Contact
     href: /contact
 heroTitle: Sol Risé
@@ -98,6 +100,8 @@ footerNavLinks:
     href: /schedule
   - label: Gallery
     href: /gallery
+  - label: Press Kit
+    href: /press-kit
   - label: Contact
     href: /contact
 instagramUrl: https://instagram.com/solrisesoprano/

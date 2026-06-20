@@ -12,12 +12,16 @@ import { isCareerNavHref } from '@/lib/career-nav'
 import { parseSiteNavLinks } from '@/lib/nav-links'
 import { cn } from '@/lib/utils'
 
+/** Horizontal nav from 1061px; drawer at 1060px and below. */
+const NAV_DESKTOP_MIN_WIDTH_PX = 1061
+
 const fallbackNavLinks = [
   { to: '/' as const, label: 'Home' },
   { to: '/bio' as const, label: 'Bio' },
   { to: '/career' as const, label: 'Career' },
   { to: '/schedule' as const, label: 'Schedule' },
   { to: '/gallery' as const, label: 'Gallery' },
+  { to: '/press-kit' as const, label: 'Press Kit' },
   { to: '/contact' as const, label: 'Contact' },
 ]
 
@@ -46,7 +50,7 @@ export function Nav() {
   }, [])
 
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px)')
+    const mq = window.matchMedia(`(min-width: ${NAV_DESKTOP_MIN_WIDTH_PX}px)`)
     const update = () => setIsDesktop(mq.matches)
     update()
     mq.addEventListener('change', update)
@@ -130,7 +134,7 @@ export function Nav() {
             )}
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden min-[1061px]:flex items-center gap-8">
             {navLinks.map((link, idx) => {
               const active = pathnameMatchesNavHref(link.href, pathname, locale)
               const href = localizeNavHref(link.href, locale)
@@ -160,7 +164,7 @@ export function Nav() {
           </div>
 
           <button
-            className="md:hidden p-2"
+            className="min-[1061px]:hidden p-2"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
@@ -185,7 +189,7 @@ export function Nav() {
         type="button"
         tabIndex={menuOpen ? 0 : -1}
         className={cn(
-          'md:hidden fixed top-20 left-0 right-0 bottom-0 z-40 bg-black/45 transition-opacity duration-300 ease-out motion-reduce:transition-none',
+          'min-[1061px]:hidden fixed top-20 left-0 right-0 bottom-0 z-40 bg-black/45 transition-opacity duration-300 ease-out motion-reduce:transition-none',
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
         )}
         aria-label="Close menu"
@@ -196,7 +200,7 @@ export function Nav() {
       <div
         id={mobileMenuId}
         className={cn(
-          'nav-mobile-drawer md:hidden fixed top-20 left-0 bottom-0 z-[45] flex w-[min(18rem,85vw)] flex-col overflow-y-auto border-r px-4 pb-8 pt-4 transition-transform duration-300 ease-out motion-reduce:transition-none',
+          'nav-mobile-drawer min-[1061px]:hidden fixed top-20 left-0 bottom-0 z-[45] flex w-[min(18rem,85vw)] flex-col overflow-y-auto border-r px-4 pb-8 pt-4 transition-transform duration-300 ease-out motion-reduce:transition-none',
           menuOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none',
         )}
         aria-hidden={!menuOpen}

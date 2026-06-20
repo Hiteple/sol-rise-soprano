@@ -197,5 +197,35 @@ export const privacyPageSchema = z.object({
   content: z.string(),
 })
 
+const pressKitAssetSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  href: z.string(),
+  fileType: z.enum(['pdf', 'jpg', 'zip']),
+  category: z.enum(['documents', 'photos']),
+  /** Optional badge, e.g. EN or ES */
+  language: z.string().optional(),
+})
+
+export const pressKitPageSchema = z.object({
+  type: z.literal('PressKitPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('wine'),
+  heroEyebrow: z.string(),
+  heroTitle: z.string(),
+  heroDescription: z.string().optional(),
+  introHeading: z.string(),
+  introBody: z.string(),
+  documentsSectionTitle: z.string(),
+  photosSectionTitle: z.string(),
+  downloadLabel: z.string().default('Download'),
+  muvacNote: z.string().optional(),
+  muvacUrl: z.string().optional(),
+  sectionColorScheme: sectionColorSchemeSchema.default('bright'),
+  sectionSlideIn: z.boolean().default(true),
+  assets: z.array(pressKitAssetSchema),
+  content: z.string(),
+})
+
 export type BioPage = z.infer<typeof bioPageSchema>
 export type PrivacyPage = z.infer<typeof privacyPageSchema>
+export type PressKitPage = z.infer<typeof pressKitPageSchema>
