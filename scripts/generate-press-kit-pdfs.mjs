@@ -311,6 +311,7 @@ function generatePressPhotos(doc) {
   drawCoverPage(doc, {
     documentTitle: 'Press Photos',
     documentSubtitle: `${totalImages} images for press & programmes`,
+    lastUpdated: formatLastUpdated('en'),
   })
 
   if (totalImages === 0) {

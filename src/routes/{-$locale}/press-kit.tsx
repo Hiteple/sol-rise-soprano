@@ -13,7 +13,7 @@ export const Route = createFileRoute('/{-$locale}/press-kit')({
       description:
         `Download press materials for ${SITE_NAME} — bios, CVs and high-resolution photography for programmes and media.`,
       path: '/press-kit',
-      imagePath: '/images/photo-book/SON05945 1.jpg',
+      imagePath: '/images/photo-book/SON06220 1.jpg',
       locale: seoLocaleFromParams(params),
     }),
   component: PressKitPage,
@@ -30,6 +30,8 @@ function PressKitPage() {
         heroEyebrow={page?.heroEyebrow ?? 'Press & Media'}
         heroTitle={page?.heroTitle ?? 'Press Kit'}
         heroDescription={page?.heroDescription}
+        heroImage={page?.heroImage}
+        heroImageAlt={page?.heroImageAlt}
         bottomSpacing="compact"
       />
       <PressKitSection page={page} />

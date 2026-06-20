@@ -6,6 +6,8 @@ heroTitle: Press Kit
 heroDescription: >-
   Herunterladbare Biografien, Lebensläufe und Pressefotos für Programme,
   Ankündigungen und Medienberichte.
+heroImage: images/photo-book/SON06220 1.jpg
+heroImageAlt: Sol Risé — Photo-Book-Porträt in rotem Satin-Top mit Chiaroscuro-Beleuchtung
 introHeading: Material für Presse & Veranstalter
 introBody: >-
   Materialien in hoher Auflösung für Konzertprogramme, Theaterankündigungen und

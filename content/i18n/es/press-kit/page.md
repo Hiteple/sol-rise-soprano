@@ -6,6 +6,8 @@ heroTitle: Press Kit
 heroDescription: >-
   Biografías, CVs y fotografía de prensa descargables para programas,
   anuncios y cobertura mediática.
+heroImage: images/photo-book/SON06220 1.jpg
+heroImageAlt: Sol Risé — Retrato del Photo Book con top de satén rojo e iluminación claroscuro
 introHeading: Recursos para Prensa y Programadores
 introBody: >-
   Materiales en alta resolución para programas de mano, anuncios de teatros y

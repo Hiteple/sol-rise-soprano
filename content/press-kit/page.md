@@ -6,6 +6,8 @@ heroTitle: Press Kit
 heroDescription: >-
   Downloadable bios, CVs and press photography for programmes, announcements
   and media coverage.
+heroImage: images/photo-book/SON06220 1.jpg
+heroImageAlt: Sol Risé — Photo Book portrait in red satin top with chiaroscuro lighting
 introHeading: Resources for Press & Programmers
 introBody: >-
   High-resolution materials for concert programmes, theatre announcements and

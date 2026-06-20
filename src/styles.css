@@ -396,6 +396,12 @@
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
 }
+button.gold-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
 .gold-link::after {
   content: '';
   position: absolute;

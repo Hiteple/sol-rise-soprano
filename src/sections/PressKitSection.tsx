@@ -3,8 +3,11 @@ import type { CSSProperties } from 'react'
 import { Link } from '@tanstack/react-router'
 
 import { ExternalLink } from '@/components/ExternalLink'
+import { LocaleFlagIcon } from '@/components/LocaleFlagIcon'
 import { useLocale } from '@/components/LocaleContext'
 import { localizePath } from '@/lib/i18n'
+import type { Locale } from '@/lib/i18n/locales'
+import { halfColumnImageProps } from '@/lib/netlify-image'
 import {
   resolveColorScheme,
   schemeForeground,
@@ -16,6 +19,12 @@ import type { PressKitPage } from '../../schemas/site-pages'
 
 export type PressKitSectionProps = {
   page: PressKitPage | undefined
+}
+
+function languageBadgeLocale(language: string): Locale | null {
+  const code = language.trim().toLowerCase()
+  if (code === 'en' || code === 'es' || code === 'de' || code === 'it') return code
+  return null
 }
 
 function fileIcon(asset: PressKitPage['assets'][number]): LucideIcon {
@@ -145,17 +154,23 @@ function PressKitAssetCard({
           >
             {fileLabel}
           </span>
-          {asset.language ? (
-            <span
-              className="font-body text-[0.62rem] uppercase tracking-[0.28em] px-2.5 py-1 rounded-full border"
-              style={{
-                borderColor: 'color-mix(in srgb, var(--accent-ink-color) 22%, transparent)',
-                color: 'var(--muted-text-color)',
-              }}
-            >
-              {asset.language}
-            </span>
-          ) : null}
+          {asset.language ? (() => {
+            const badgeLocale = languageBadgeLocale(asset.language)
+            return (
+              <span
+                className="font-body text-[0.62rem] uppercase tracking-[0.28em] px-2.5 py-1 rounded-full border inline-flex items-center gap-1.5"
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--accent-ink-color) 22%, transparent)',
+                  color: 'var(--muted-text-color)',
+                }}
+              >
+                {badgeLocale ? (
+                  <LocaleFlagIcon locale={badgeLocale} size={14} decorative className="press-kit-lang-flag" />
+                ) : null}
+                {asset.language}
+              </span>
+            )
+          })() : null}
         </div>
       </div>
 
@@ -196,6 +211,31 @@ export function PressKitSection({ page }: PressKitSectionProps) {
 
   const documents = page?.assets.filter((asset) => asset.category === 'documents') ?? []
   const photos = page?.assets.filter((asset) => asset.category === 'photos') ?? []
+  const introImage = page?.introImage?.trim()
+  const introImageAlt = page?.introImageAlt?.trim()
+
+  const introContent = (
+    <>
+      <h2
+        className="font-display text-3xl lg:text-4xl italic mb-5"
+        style={{ color: fg.heading }}
+        data-sb-field-path="introHeading"
+      >
+        {page?.introHeading}
+      </h2>
+      <p
+        className="font-body text-base leading-relaxed"
+        style={{ color: fg.body }}
+        data-sb-field-path="introBody"
+      >
+        <IntroBodyText
+          body={page?.introBody ?? ''}
+          contactHref={contactHref}
+          goldLinkStyle={goldLinkStyle}
+        />
+      </p>
+    </>
+  )
 
   return (
     <section
@@ -207,26 +247,26 @@ export function PressKitSection({ page }: PressKitSectionProps) {
         ref={ref}
         className={`max-w-site mx-auto px-4 lg:px-12 ${animate ? `reveal ${inView ? 'is-visible' : ''}` : ''}`}
       >
-        <div className="max-w-3xl mb-14 lg:mb-16">
-          <h2
-            className="font-display text-3xl lg:text-4xl italic mb-5"
-            style={{ color: fg.heading }}
-            data-sb-field-path="introHeading"
-          >
-            {page?.introHeading}
-          </h2>
-          <p
-            className="font-body text-base leading-relaxed"
-            style={{ color: fg.body }}
-            data-sb-field-path="introBody"
-          >
-            <IntroBodyText
-              body={page?.introBody ?? ''}
-              contactHref={contactHref}
-              goldLinkStyle={goldLinkStyle}
-            />
-          </p>
-        </div>
+        {introImage ? (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-14 lg:mb-16">
+            <div>{introContent}</div>
+            <div className="img-zoom media-radius relative order-first lg:order-last">
+              <img
+                {...halfColumnImageProps(introImage)}
+                alt={introImageAlt ?? ''}
+                className="w-full object-cover"
+                width={800}
+                height={1000}
+                style={{ aspectRatio: '4/5', objectPosition: 'top center' }}
+                loading="lazy"
+                decoding="async"
+                data-sb-field-path="introImage"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="max-w-3xl mb-14 lg:mb-16">{introContent}</div>
+        )}
 
         {documents.length > 0 ? (
           <div className="mb-14 lg:mb-16">

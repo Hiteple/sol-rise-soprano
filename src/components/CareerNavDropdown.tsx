@@ -7,6 +7,7 @@ import { getCareerNavItems, isCareerPath } from '@/lib/career-nav'
 import { localizePath } from '@/lib/i18n'
 import { getUiMessages } from '@/lib/i18n/messages'
 import { isCareerSubNavActive } from '@/lib/nav-active'
+import { usePrefersHover } from '@/lib/use-prefers-hover'
 import { cn } from '@/lib/utils'
 
 type CareerNavDropdownProps = {
@@ -28,25 +29,27 @@ export function CareerNavDropdown({
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
+  const prefersHover = usePrefersHover()
   const active = isCareerPath(pathname)
   const careerHref = localizePath('/career', locale)
+  const useTapToggle = variant === 'mobile' || !prefersHover
 
   useEffect(() => {
-    if (variant !== 'desktop' || !open) return
+    if (!useTapToggle || !open) return
 
     const onPointerDown = (event: MouseEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false)
     }
     document.addEventListener('mousedown', onPointerDown)
     return () => document.removeEventListener('mousedown', onPointerDown)
-  }, [open, variant])
+  }, [open, useTapToggle])
 
   if (variant === 'mobile') {
     return (
-      <div className={cn('flex flex-col', open && 'gap-1')}>
+      <div ref={rootRef} className={cn('flex flex-col', open && 'gap-1')}>
         <button
           type="button"
-          className="nav-mobile-link flex items-center justify-between font-display italic text-left"
+          className="nav-mobile-link flex w-full items-center justify-between font-display italic text-left"
           style={
             active
               ? { color: useChrome ? 'var(--chrome-accent)' : 'var(--accent-soft-color)' }
@@ -67,7 +70,7 @@ export function CareerNavDropdown({
           id={menuId}
           className={cn(
             'overflow-hidden transition-[max-height] duration-300 ease-out pl-4 border-l',
-            open ? 'max-h-64' : 'max-h-0',
+            open ? 'max-h-64 pointer-events-auto' : 'max-h-0 pointer-events-none',
           )}
           style={{
             borderColor: useChrome
@@ -123,32 +126,50 @@ export function CareerNavDropdown({
     )
   }
 
+  const triggerClassName = 'gold-link inline-flex items-center gap-1.5'
+  const triggerAria = {
+    'aria-haspopup': 'true' as const,
+    'aria-expanded': open,
+    'aria-controls': menuId,
+  }
+
   return (
     <div
       ref={rootRef}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
+      onMouseEnter={() => prefersHover && setOpen(true)}
+      onMouseLeave={() => prefersHover && setOpen(false)}
+      onFocus={() => prefersHover && setOpen(true)}
       onBlur={(event) => {
-        if (!rootRef.current?.contains(event.relatedTarget as Node)) setOpen(false)
+        if (prefersHover && !rootRef.current?.contains(event.relatedTarget as Node)) setOpen(false)
       }}
     >
-      <Link
-        to={careerHref}
-        className="gold-link inline-flex items-center gap-1.5"
-        aria-current={active ? 'page' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open}
-        aria-controls={menuId}
-        onClick={() => {
-          setOpen(false)
-          onNavigate?.()
-        }}
-      >
-        {label}
-        <ChevronDown size={14} aria-hidden className={cn('transition-transform', open && 'rotate-180')} />
-      </Link>
+      {useTapToggle ? (
+        <button
+          type="button"
+          className={triggerClassName}
+          aria-current={active ? 'page' : undefined}
+          {...triggerAria}
+          onClick={() => setOpen((value) => !value)}
+        >
+          {label}
+          <ChevronDown size={14} aria-hidden className={cn('transition-transform', open && 'rotate-180')} />
+        </button>
+      ) : (
+        <Link
+          to={careerHref}
+          className={triggerClassName}
+          aria-current={active ? 'page' : undefined}
+          {...triggerAria}
+          onClick={() => {
+            setOpen(false)
+            onNavigate?.()
+          }}
+        >
+          {label}
+          <ChevronDown size={14} aria-hidden className={cn('transition-transform', open && 'rotate-180')} />
+        </Link>
+      )}
 
       <div
         className={cn(
