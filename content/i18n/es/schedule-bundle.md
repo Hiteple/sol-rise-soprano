@@ -26,16 +26,16 @@ items:
     plot: Coro en *Cavalleria Rusticana* y solista destacada en canzonette italianas en el Festival della Canzonetta Italiana con Juventus Lyrica.
     imageAlt: Sol Risé en el coro de Cavalleria Rusticana y canzonette italiane al festival Juventus Lyrica
   cuentos-liricos-2026:
+    title: ¿Sabías que el mar tiene corazón?
     subtitle: Soprano solista — Teatro Colón
     plot: Dos micro-óperas para niños, inspiradas en el imaginario de escritores argentinos.
-    imageAlt: Sol Risé como soprano solista en Cuentos Líricos en el Teatro Colón, Buenos Aires
+    imageAlt: Sol Risé como soprano solista en ¿Sabías que el mar tiene corazón? en el Teatro Colón, Buenos Aires
     badges:
-      - 19 de julio
       - 21 de julio
-      - 22 de julio
-      - 23 de julio
       - 24 de julio
       - 25 de julio
+      - 28 de julio
+      - 30 de julio
   die-zauberflote-first-lady-2024-celebrarte:
     subtitle: Primera Dama — Celebrarte Música
     plot: La ópera de Mozart en una adaptación en español para niños — rol de la Primera Dama con Celebrarte Música.

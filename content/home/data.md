@@ -61,20 +61,15 @@ mediaTitle: Last Events
 mediaLinkText: View all past appearances
 featuredEventsLayout: scheduleCards
 splitGridItems:
-  - title: Suor Angelica
-    href: /schedule/suor-angelica-2026
-    image: images/schedule-images/suor-angelica.jpeg
-    badges:
-      - June 28th
-    subtitle: Buenos Aires - La Redonda de Belgrano
-  - title: Cuentos Líricos
+  - title: ¿Sabías que el mar tiene corazón?
     href: /schedule/cuentos-liricos-2026
-    image: images/cuentos-liricos/cuentos-liricos-2026.webp
+    image: images/cuentos-liricos/cuentos-liricos-2.jpg
     badges:
-      - July 19th
       - July 21st
-      - July 22nd
-      - July 23rd
+      - July 24th
+      - July 25th
+      - July 28th
+      - July 30th
     subtitle: Soloist soprano — Teatro Colón
 splitGridColorScheme: wine
 splitGridTitle: Upcoming Events

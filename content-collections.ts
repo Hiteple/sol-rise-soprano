@@ -122,7 +122,7 @@ const home = defineCollection({
           title: z.string(),
           href: z.string(),
           image: z.string(),
-          badges: z.array(z.string()).max(4).optional(),
+          badges: z.array(z.string()).max(8).optional(),
           /** @deprecated Use `badges` — kept for existing content. */
           decorativeEyebrow: z.string().optional(),
           subtitle: z.string().optional(),

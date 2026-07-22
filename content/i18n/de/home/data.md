@@ -55,20 +55,15 @@ mediaTitle: Letzte Auftritte
 mediaLinkText: Alle Auftritte ansehen
 featuredEventsLayout: scheduleCards
 splitGridItems:
-  - title: Suor Angelica
-    href: /schedule/suor-angelica-2026
-    image: images/schedule-images/suor-angelica.jpeg
-    badges:
-      - 28. Juni
-    subtitle: Buenos Aires - La Redonda de Belgrano
-  - title: Cuentos Líricos
+  - title: ¿Sabías que el mar tiene corazón?
     href: /schedule/cuentos-liricos-2026
-    image: images/cuentos-liricos/cuentos-liricos-2026.webp
+    image: images/cuentos-liricos/cuentos-liricos-2.jpg
     badges:
-      - 19. Juli
       - 21. Juli
-      - 22. Juli
-      - 23. Juli
+      - 24. Juli
+      - 25. Juli
+      - 28. Juli
+      - 30. Juli
     subtitle: Sopransolistin — Teatro Colón
 splitGridColorScheme: wine
 splitGridTitle: Kommende Termine
