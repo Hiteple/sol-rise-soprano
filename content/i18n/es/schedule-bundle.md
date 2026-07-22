@@ -109,8 +109,6 @@ items:
   suor-angelica-2026:
     plot: Ambientada en un convento toscano, la ópera en un acto de Puccini sigue a las hermanas bajo una regla estricta — donde la fe, la memoria y un anhelo no dicho moldean silenciosamente sus días.
     imageAlt: Sol Risé como Hermana Genovieffa en Suor Angelica en La Redonda de Belgrano, Buenos Aires
-    badges:
-      - 28 de junio
   the-medium-2021:
     subtitle: Sra. Gobineau — Orquesta Jóvenes Talentos
     plot: La ópera de cámara de Menotti — rol de la Sra. Gobineau con Orquesta Jóvenes Talentos.

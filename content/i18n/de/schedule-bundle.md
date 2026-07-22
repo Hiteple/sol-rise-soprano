@@ -110,8 +110,6 @@ items:
   suor-angelica-2026:
     plot: In einem toskanischen Kloster spielt Puccinis Einakter — die Schwestern leben unter strenger Regel, und Glaube, Erinnerung und unausgesprochenes Sehnen prägen leise ihren Alltag.
     imageAlt: Sol Risé als Schwester Genovieffa in Suor Angelica in La Redonda de Belgrano, Buenos Aires
-    badges:
-      - 28. Juni
   the-medium-2021:
     subtitle: Frau Gobineau — Orquesta Jóvenes Talentos
     plot: Menottis Kammeroper — Rolle der Frau Gobineau mit Orquesta Jóvenes Talentos.
