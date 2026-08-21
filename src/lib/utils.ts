@@ -61,19 +61,25 @@ export function youtubeThumbnailUrl(
 }
 
 /** YouTube's /watch page cannot be iframed (X-Frame-Options). Use /embed/… for iframe src. */
-export function youtubeIframeSrc(videoUrl: string): string {
+export function youtubeIframeSrc(
+  videoUrl: string,
+  options: { autoplay?: boolean } = { autoplay: true },
+): string {
+  const autoplay = options.autoplay !== false
   const id = youtubeVideoId(videoUrl)
   if (id) {
     const embed = new URL(`https://www.youtube.com/embed/${id}`)
-    embed.searchParams.set('autoplay', '1')
+    if (autoplay) embed.searchParams.set('autoplay', '1')
     return embed.toString()
   }
 
   try {
     const u = new URL(videoUrl.trim())
-    u.searchParams.set('autoplay', '1')
+    if (autoplay) u.searchParams.set('autoplay', '1')
+    else u.searchParams.delete('autoplay')
     return u.toString()
   } catch {
+    if (!autoplay) return videoUrl
     const sep = videoUrl.includes('?') ? '&' : '?'
     return `${videoUrl}${sep}autoplay=1`
   }

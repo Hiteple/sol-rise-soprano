@@ -10,5 +10,5 @@ image: images/schedule-images/suor-angelica.jpeg
 imageAlt: Sol Risé as Sister Genovieffa in Suor Angelica at La Redonda de Belgrano, Buenos Aires
 status: past
 year: '2026'
-order: 1
+order: 2
 ---

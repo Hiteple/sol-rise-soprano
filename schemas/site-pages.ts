@@ -75,6 +75,16 @@ export const galleryPageSchema = z.object({
   content: z.string(),
 })
 
+export const videosPageSchema = z.object({
+  type: z.literal('VideosPage'),
+  pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
+  heroEyebrow: z.string(),
+  heroTitle: z.string(),
+  sectionColorScheme: sectionColorSchemeSchema.default('soft'),
+  sectionSlideIn: z.boolean().default(true),
+  content: z.string(),
+})
+
 export const contactPageSchema = z.object({
   type: z.literal('ContactPage'),
   pageHeroColorScheme: sectionColorSchemeSchema.default('soft'),
@@ -175,6 +185,7 @@ export const bioPageSchema = z.object({
 
 export type AboutPage = z.infer<typeof aboutPageSchema>
 export type GalleryPage = z.infer<typeof galleryPageSchema>
+export type VideosPage = z.infer<typeof videosPageSchema>
 export type ContactPage = z.infer<typeof contactPageSchema>
 export type RolesPage = z.infer<typeof rolesPageSchema>
 export type OrganizationsPage = z.infer<typeof organizationsPageSchema>

@@ -89,10 +89,20 @@ items:
       - notes: Interpretación en concierto
   sister-genovieffa-suor-angelica:
     characterName: Hermana Genovieffa
-    summary: Una de las hermanas en la tragedia en un acto de Puccini — interpretada con Celebrarte Música y próximamente en La Redonda de Belgrano.
+    summary: Una de las hermanas en la tragedia en un acto de Puccini — interpretada con Celebrarte Música y en La Redonda de Belgrano.
     content: La Hermana Genovieffa aparece en el conjunto inicial de *Suor Angelica* de Puccini — un rol que se inscribe en el drama íntimo del convento y exige precisión en el canto de conjunto.
     appearances:
-      - notes: Próxima función
+      - notes: Función en La Redonda de Belgrano
+  musetta-la-boheme:
+    summary: >-
+      La coqueta libre del Barrio Latino de París — Sol Risé interpreta a Musetta en
+      *La Bohème* de Puccini con Ópera de San Telmo en el Teatro Maipú, Banfield.
+    content: >-
+      Musetta es uno de los roles líricos centrales de *La Bohème* de Puccini — carismática,
+      ingeniosa y vocalmente brillante en el célebre vals *Quando m’en vo*. Sol Risé interpreta
+      el rol con Ópera de San Telmo en el Teatro Maipú de Banfield.
+    appearances:
+      - notes: Próximas funciones — 23 y 29 de agosto de 2026
   suora-cercatrice-suor-angelica:
     characterName: Hermana limosnera
     summary: La Hermana limosnera en el drama conventual de Puccini — interpretada con Celebrarte Música.

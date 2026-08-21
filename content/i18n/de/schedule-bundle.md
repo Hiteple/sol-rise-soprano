@@ -30,12 +30,16 @@ items:
     subtitle: Sopransolistin — Teatro Colón
     plot: Zwei Mini-Opern für Kinder, inspiriert von der Fantasie argentinischer Schriftsteller.
     imageAlt: Sol Risé als Sopransolistin in ¿Sabías que el mar tiene corazón? im Teatro Colón, Buenos Aires
+  la-boheme-2026:
+    subtitle: Musetta — Ópera de San Telmo
+    plot: >-
+      In den Mansarden des Pariser Quartier Latin jagen vier junge Bohemien Kunst, Liebe und
+      Überleben — während Musettas Funke und Rodolfos und Mimìs fragile Romanze die kalten
+      Winternächte erhellen.
+    imageAlt: Sol Risé als Musetta in La Bohème im Teatro Maipú, Banfield
     badges:
-      - 21. Juli
-      - 24. Juli
-      - 25. Juli
-      - 28. Juli
-      - 30. Juli
+      - 23. August
+      - 29. August
   die-zauberflote-first-lady-2024-celebrarte:
     subtitle: Erste Dame — Celebrarte Música
     plot: Mozarts Oper in einer spanischsprachigen Adaption für Kinder — Rolle der Ersten Dame mit Celebrarte Música.

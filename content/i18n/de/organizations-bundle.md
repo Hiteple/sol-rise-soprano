@@ -50,6 +50,18 @@ items:
       Sol Risé trat am Teatro Colón als Chorbänderung in Werken wie *Jeanne d'Arc au
       bûcher*, *Carmen* und Brahms' Chorsinfonien auf und wirkte als Cover-Sopran im
       *Mozart-Requiem* mit.
+  teatro-maipu:
+    summary: >-
+      Historisches Theater in Banfield, Provinz Buenos Aires — Oper, Schauspiel und
+      Gemeindeprogramm seit 1926.
+    content: >-
+      Spielort von Puccinis *La Bohème*, präsentiert von Ópera de San Telmo.
+  opera-de-san-telmo:
+    summary: >-
+      Lyrische Kompanie aus Buenos Aires — Opernproduktionen, unter anderem am
+      Teatro Maipú in Banfield.
+    content: >-
+      Sol Risé singt Musetta in Puccinis *La Bohème* mit Ópera de San Telmo.
   valkyria-lirica:
     summary: >-
       Argentinische lyrische Kompanie — Opern- und Konzertproduktionen in Buenos

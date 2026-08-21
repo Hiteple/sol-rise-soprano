@@ -30,12 +30,16 @@ items:
     subtitle: Soprano solista — Teatro Colón
     plot: Dos micro-óperas para niños, inspiradas en el imaginario de escritores argentinos.
     imageAlt: Sol Risé como soprano solista en ¿Sabías que el mar tiene corazón? en el Teatro Colón, Buenos Aires
+  la-boheme-2026:
+    subtitle: Musetta — Ópera de San Telmo
+    plot: >-
+      En las buhardillas del Barrio Latino de París, cuatro jóvenes bohemios persiguen el arte,
+      el amor y la supervivencia — mientras la chispa de Musetta y el frágil romance de Rodolfo
+      y Mimì iluminan las noches de invierno.
+    imageAlt: Sol Risé como Musetta en La Bohème en el Teatro Maipú, Banfield
     badges:
-      - 21 de julio
-      - 24 de julio
-      - 25 de julio
-      - 28 de julio
-      - 30 de julio
+      - 23 de agosto
+      - 29 de agosto
   die-zauberflote-first-lady-2024-celebrarte:
     subtitle: Primera Dama — Celebrarte Música
     plot: La ópera de Mozart en una adaptación en español para niños — rol de la Primera Dama con Celebrarte Música.

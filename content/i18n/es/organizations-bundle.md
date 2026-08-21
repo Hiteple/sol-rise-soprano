@@ -51,6 +51,18 @@ items:
       Sol Risé ha actuado en el Teatro Colón como refuerzo de coro en obras como *Juana
       de Arco en la hoguera*, *Carmen* y sinfonías corales de Brahms, y como soprano de
       cover en el *Réquiem* de Mozart.
+  teatro-maipu:
+    summary: >-
+      Teatro histórico de Banfield, provincia de Buenos Aires — ópera, teatro y
+      programación comunitaria desde 1926.
+    content: >-
+      Escenario de *La Bohème* de Puccini presentada por Ópera de San Telmo.
+  opera-de-san-telmo:
+    summary: >-
+      Compañía lírica de Buenos Aires — producciones de ópera, entre ellas
+      funciones en el Teatro Maipú de Banfield.
+    content: >-
+      Sol Risé interpreta a Musetta en *La Bohème* de Puccini con Ópera de San Telmo.
   valkyria-lirica:
     summary: >-
       Compañía lírica argentina — producciones de ópera y concierto activas en

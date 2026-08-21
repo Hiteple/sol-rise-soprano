@@ -22,6 +22,7 @@ import {
   pressKitPageSchema,
   privacyPageSchema,
   galleryPageSchema,
+  videosPageSchema,
   organizationsPageSchema,
   rolesPageSchema,
   schedulePageSchema,
@@ -67,7 +68,7 @@ const home = defineCollection({
         { label: 'Home', href: '/' },
         { label: 'Bio', href: '/bio' },
         { label: 'Career', href: '/career' },
-        { label: 'Gallery', href: '/gallery' },
+        { label: 'Media', href: '/gallery' },
         { label: 'Press Kit', href: '/press-kit' },
         { label: 'Contact', href: '/contact' },
       ]),
@@ -158,6 +159,7 @@ const home = defineCollection({
         { label: 'Bio', href: '/bio' },
         { label: 'Career', href: '/career' },
         { label: 'Gallery', href: '/gallery' },
+        { label: 'Videos', href: '/videos' },
         { label: 'Press Kit', href: '/press-kit' },
         { label: 'Contact', href: '/contact' },
       ]),
@@ -187,6 +189,18 @@ const gallery = defineCollection({
     roleSlug: z.string().optional(),
     /** Links this image to a past schedule event when there is no operatic role. */
     gallerySlug: z.string().optional(),
+    content: z.string(),
+  }),
+})
+
+const videos = defineCollection({
+  name: 'videos',
+  directory: 'content/videos',
+  include: '**/*.md',
+  schema: z.object({
+    title: z.string(),
+    youtubeUrl: z.string(),
+    order: z.number().optional(),
     content: z.string(),
   }),
 })
@@ -269,6 +283,13 @@ const galleryPage = defineCollection({
   schema: galleryPageSchema,
 })
 
+const videosPage = defineCollection({
+  name: 'videosPage',
+  directory: 'content',
+  include: localizedIncludes('videos-landing/page.md'),
+  schema: videosPageSchema,
+})
+
 const contactPage = defineCollection({
   name: 'contactPage',
   directory: 'content',
@@ -322,6 +343,7 @@ export default defineConfig({
   collections: [
     home,
     gallery,
+    videos,
     roleLocaleBundles,
     roles,
     organizationLocaleBundles,
@@ -330,6 +352,7 @@ export default defineConfig({
     scheduleEvents,
     careerPage,
     galleryPage,
+    videosPage,
     bioPage,
     pressKitPage,
     privacyPage,

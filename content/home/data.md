@@ -12,7 +12,7 @@ headerNavLinks:
     href: /career
   - label: Schedule
     href: /schedule
-  - label: Gallery
+  - label: Media
     href: /gallery
   - label: Press Kit
     href: /press-kit
@@ -61,16 +61,13 @@ mediaTitle: Last Events
 mediaLinkText: View all past appearances
 featuredEventsLayout: scheduleCards
 splitGridItems:
-  - title: ¿Sabías que el mar tiene corazón?
-    href: /schedule/cuentos-liricos-2026
-    image: images/cuentos-liricos/cuentos-liricos-2.jpg
+  - title: La Bohème
+    href: /schedule/la-boheme-2026
+    image: images/boheme/la-boheme-opera-de-san-telmo.png
     badges:
-      - July 21st
-      - July 24th
-      - July 25th
-      - July 28th
-      - July 30th
-    subtitle: Soloist soprano — Teatro Colón
+      - August 23rd
+      - August 29th
+    subtitle: Musetta — Ópera de San Telmo
 splitGridColorScheme: wine
 splitGridTitle: Upcoming Events
 splitGridDescription: Where to see Sol Risé next — dates, venues, and full details for each production.
@@ -95,6 +92,8 @@ footerNavLinks:
     href: /schedule
   - label: Gallery
     href: /gallery
+  - label: Videos
+    href: /videos
   - label: Press Kit
     href: /press-kit
   - label: Contact

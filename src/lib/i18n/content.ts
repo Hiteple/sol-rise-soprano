@@ -5,6 +5,7 @@ import {
   allPrivacyPages,
   allPressKitPages,
   allGalleryPages,
+  allVideosPages,
   allHomes,
   allOrganizationLocaleBundles,
   allOrganizations,
@@ -274,6 +275,10 @@ export function getGalleryPage(locale: Locale) {
   return pickByLocale(allGalleryPages, locale) ?? allGalleryPages[0]
 }
 
+export function getVideosPage(locale: Locale) {
+  return pickByLocale(allVideosPages, locale) ?? allVideosPages[0]
+}
+
 export function getPressKitPage(locale: Locale) {
   const page = pickByLocale(allPressKitPages, locale) ?? allPressKitPages[0]
   if (!page) return page
@@ -319,14 +324,27 @@ export function getScheduleEvent(slug: string, locale: Locale) {
   return applyScheduleOverlay(base, locale)
 }
 
+/**
+ * Content Collections watch can occasionally append stale duplicates.
+ * Keep the first entry per slug (appended copies are usually outdated).
+ */
+function uniqueByDocumentSlug<T extends WithMeta>(items: readonly T[]): T[] {
+  const bySlug = new Map<string, T>()
+  for (const item of items) {
+    const slug = documentSlug(item)
+    if (!bySlug.has(slug)) bySlug.set(slug, item)
+  }
+  return [...bySlug.values()]
+}
+
 export function getAllRoles(locale: Locale) {
-  return allRoles
+  return uniqueByDocumentSlug(allRoles)
     .map((role) => applyRoleOverlay(role, locale))
     .filter((role): role is Role => Boolean(role))
 }
 
 export function getAllScheduleEvents(locale: Locale) {
-  return allScheduleEvents
+  return uniqueByDocumentSlug(allScheduleEvents)
     .map((event) => applyScheduleOverlay(event, locale))
     .filter((event): event is ScheduleEvent => Boolean(event))
 }
@@ -338,7 +356,7 @@ export function getOrganization(slug: string, locale: Locale) {
 }
 
 export function getAllOrganizations(locale: Locale) {
-  return allOrganizations
+  return uniqueByDocumentSlug(allOrganizations)
     .map((org) => applyOrganizationOverlay(org, locale))
     .filter((org): org is Organization => Boolean(org))
 }

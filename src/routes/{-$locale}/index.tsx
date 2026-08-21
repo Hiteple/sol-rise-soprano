@@ -59,32 +59,6 @@ function HomePage() {
     ...item,
     href: localizePath(item.href, locale),
   }))
-  const resolvedSplitGrid =
-    splitGridItems.length > 0
-      ? splitGridItems
-      : [
-    {
-      title: 'Book a Performance',
-      href: localizePath('/contact', locale),
-      image: 'https://picsum.photos/seed/split-performance/1200/1200',
-      badges: [],
-      subtitle: '',
-    },
-    {
-      title: 'Artistic Collaborations',
-      href: localizePath('/contact', locale),
-      image: 'https://picsum.photos/seed/split-collab/1200/1200',
-      badges: [],
-      subtitle: '',
-    },
-    {
-      title: 'Masterclasses & Lessons',
-      href: localizePath('/contact', locale),
-      image: 'https://picsum.photos/seed/split-lessons/1200/1200',
-      badges: [],
-      subtitle: '',
-    },
-  ]
   if (!site) return null
 
   return (
@@ -141,7 +115,7 @@ function HomePage() {
         />
       )}
       <FeaturedEventsSection
-        items={resolvedSplitGrid}
+        items={splitGridItems}
         layout={site.featuredEventsLayout}
         colorScheme={site.splitGridColorScheme}
         slideIn={site.splitGridSlideIn}

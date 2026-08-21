@@ -13,6 +13,13 @@ export type UiMessages = {
     organizations: string
     organizationsDesc: string
   }
+  mediaNav: {
+    label: string
+    gallery: string
+    galleryDesc: string
+    videos: string
+    videosDesc: string
+  }
   footer: {
     navigate: string
     connect: string
@@ -119,6 +126,8 @@ const EN: UiMessages = {
     Career: 'Career',
     Schedule: 'Schedule',
     Gallery: 'Gallery',
+    Media: 'Media',
+    Videos: 'Videos',
     'Press Kit': 'Press Kit',
     Contact: 'Contact',
     Roles: 'Roles',
@@ -132,6 +141,13 @@ const EN: UiMessages = {
     performancesDesc: 'Operatic roles and repertoire',
     organizations: 'Organizations',
     organizationsDesc: 'Opera houses and companies',
+  },
+  mediaNav: {
+    label: 'Media',
+    gallery: 'Gallery',
+    galleryDesc: 'Stage, backstage and photo book',
+    videos: 'Videos',
+    videosDesc: 'Performance clips on YouTube',
   },
   footer: {
     navigate: 'Navigate',
@@ -280,6 +296,8 @@ const ES: UiMessages = {
     Career: 'Trayectoria',
     Schedule: 'Calendario',
     Gallery: 'Galería',
+    Media: 'Media',
+    Videos: 'Videos',
     'Press Kit': 'Press Kit',
     Contact: 'Contacto',
     Roles: 'Roles',
@@ -293,6 +311,13 @@ const ES: UiMessages = {
     performancesDesc: 'Roles operísticos y repertorio',
     organizations: 'Instituciones',
     organizationsDesc: 'Teatros y compañías',
+  },
+  mediaNav: {
+    label: 'Media',
+    gallery: 'Galería',
+    galleryDesc: 'Escenario, bastidores y photo book',
+    videos: 'Videos',
+    videosDesc: 'Fragmentos en YouTube',
   },
   footer: {
     navigate: 'Navegar',
@@ -415,6 +440,8 @@ const DE: UiMessages = {
     Career: 'Werdegang',
     Schedule: 'Termine',
     Gallery: 'Galerie',
+    Media: 'Medien',
+    Videos: 'Videos',
     'Press Kit': 'Press Kit',
     Contact: 'Kontakt',
     Roles: 'Rollen',
@@ -428,6 +455,13 @@ const DE: UiMessages = {
     performancesDesc: 'Opernrollen und Repertoire',
     organizations: 'Institutionen',
     organizationsDesc: 'Opernhäuser und Compagnien',
+  },
+  mediaNav: {
+    label: 'Medien',
+    gallery: 'Galerie',
+    galleryDesc: 'Bühne, Backstage und Fotobuch',
+    videos: 'Videos',
+    videosDesc: 'Aufführungsausschnitte auf YouTube',
   },
   footer: {
     navigate: 'Navigation',
@@ -550,6 +584,8 @@ const IT: UiMessages = {
     Career: 'Percorso',
     Schedule: 'Calendario',
     Gallery: 'Galleria',
+    Media: 'Media',
+    Videos: 'Video',
     'Press Kit': 'Press Kit',
     Contact: 'Contatti',
     Roles: 'Ruoli',
@@ -563,6 +599,13 @@ const IT: UiMessages = {
     performancesDesc: 'Ruoli operistici e repertorio',
     organizations: 'Istituzioni',
     organizationsDesc: 'Teatri e compagnie',
+  },
+  mediaNav: {
+    label: 'Media',
+    gallery: 'Galleria',
+    galleryDesc: 'Palcoscenico, backstage e photo book',
+    videos: 'Video',
+    videosDesc: 'Estratti su YouTube',
   },
   footer: {
     navigate: 'Naviga',

@@ -14,6 +14,8 @@ type PhotographyVideoTileProps = {
   /** Stackbit object id for the schedule event that owns `videoUrl`. */
   stackbitObjectId?: string
   videoFieldPath?: string
+  /** Tile shape. Default portrait matches schedule/role media grids. */
+  aspectRatio?: '4/5' | '16/9'
 }
 
 export function PhotographyVideoTile({
@@ -22,10 +24,14 @@ export function PhotographyVideoTile({
   onClick,
   stackbitObjectId,
   videoFieldPath,
+  aspectRatio = '4/5',
 }: PhotographyVideoTileProps) {
   const candidates = useMemo(() => photographyVideoPosterCandidates(video), [video])
   const [candidateIndex, setCandidateIndex] = useState(0)
   const poster = candidates[candidateIndex]
+  const isLandscape = aspectRatio === '16/9'
+  const imgWidth = isLandscape ? 800 : 480
+  const imgHeight = isLandscape ? 450 : 600
 
   if (!poster) return null
 
@@ -33,18 +39,18 @@ export function PhotographyVideoTile({
     <button
       type="button"
       className="img-zoom relative block media-radius border-0 p-0 text-left cursor-pointer w-full"
-      style={{ aspectRatio: '4/5' }}
+      style={{ aspectRatio }}
       aria-label={ariaLabel ?? `Play video: ${video.title}`}
       {...(stackbitObjectId ? { 'data-sb-object-id': stackbitObjectId } : {})}
       {...(videoFieldPath ? { 'data-sb-field-path': videoFieldPath } : {})}
       onClick={onClick}
     >
       <img
-        {...netlifyImgSet(poster, 480, 600)}
+        {...netlifyImgSet(poster, imgWidth, imgHeight)}
         alt=""
         aria-hidden
-        width={480}
-        height={600}
+        width={imgWidth}
+        height={imgHeight}
         className="w-full h-full object-cover"
         loading="lazy"
         decoding="async"

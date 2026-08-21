@@ -84,13 +84,23 @@ items:
       - notes: Konzertauftritt
   sister-genovieffa-suor-angelica:
     characterName: Schwester Genovieffa
-    summary: Eine der Schwestern in Puccinis Einakt-Tragödie — gesungen mit Celebrarte Música und demnächst in La Redonda de Belgrano.
+    summary: Eine der Schwestern in Puccinis Einakt-Tragödie — gesungen mit Celebrarte Música und in La Redonda de Belgrano.
     tags:
       - Puccini
       - Sopran
     content: Schwester Genovieffa erscheint im Eröffnungsensemble von Puccinis *Suor Angelica* — eine Rolle im intimen Klosterdrama, die präzises Ensemblesingen verlangt.
     appearances:
-      - notes: Bevorstehende Aufführung
+      - notes: Aufführung in La Redonda de Belgrano
+  musetta-la-boheme:
+    summary: >-
+      Die freigeistige Kokette des Pariser Quartier Latin — Sol Risé singt Musetta in
+      Puccinis *La Bohème* mit Ópera de San Telmo am Teatro Maipú, Banfield.
+    content: >-
+      Musetta ist eine der zentralen lyrischen Rollen in Puccinis *La Bohème* — charismatisch,
+      geistreich und vokal brillant im berühmten Walzer *Quando m’en vo*. Sol Risé singt die
+      Rolle mit Ópera de San Telmo am Teatro Maipú in Banfield.
+    appearances:
+      - notes: Bevorstehende Aufführungen — 23. & 29. August 2026
   suora-cercatrice-suor-angelica:
     characterName: Almosenschwester
     summary: Die Almosenschwester in Puccinis Klosterdrama — gesungen mit Celebrarte Música.

@@ -3,12 +3,14 @@ import { Link, useRouterState } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
 
 import { CareerNavDropdown } from '@/components/CareerNavDropdown'
+import { MediaNavDropdown } from '@/components/MediaNavDropdown'
 import { LanguageSelector, pathnameMatchesNavHref } from '@/components/LanguageSelector'
 import { SiteBrandLogo } from '@/components/SiteBrandLogo'
 import { useLocale } from '@/components/LocaleContext'
 import { getHomePage } from '@/lib/i18n/content'
 import { localizeNavHref, localizePath, translateNavLabel } from '@/lib/i18n'
 import { isCareerNavHref } from '@/lib/career-nav'
+import { isMediaNavHref } from '@/lib/media-nav'
 import { parseSiteNavLinks } from '@/lib/nav-links'
 import { cn } from '@/lib/utils'
 
@@ -20,7 +22,7 @@ const fallbackNavLinks = [
   { to: '/bio' as const, label: 'Bio' },
   { to: '/career' as const, label: 'Career' },
   { to: '/schedule' as const, label: 'Schedule' },
-  { to: '/gallery' as const, label: 'Gallery' },
+  { to: '/gallery' as const, label: 'Media' },
   { to: '/press-kit' as const, label: 'Press Kit' },
   { to: '/contact' as const, label: 'Contact' },
 ]
@@ -147,6 +149,13 @@ export function Nav() {
                   useChrome={useChrome}
                   pathname={pathname}
                 />
+              ) : isMediaNavHref(link.href) ? (
+                <MediaNavDropdown
+                  key={`${link.label}-${link.href}`}
+                  variant="desktop"
+                  useChrome={useChrome}
+                  pathname={pathname}
+                />
               ) : (
                 <Link
                   key={`${link.label}-${link.href}`}
@@ -219,6 +228,14 @@ export function Nav() {
 
             return isCareerNavHref(link.href) ? (
               <CareerNavDropdown
+                key={`${link.label}-${link.href}-mobile`}
+                variant="mobile"
+                useChrome={useChrome}
+                pathname={pathname}
+                onNavigate={() => setMenuOpen(false)}
+              />
+            ) : isMediaNavHref(link.href) ? (
+              <MediaNavDropdown
                 key={`${link.label}-${link.href}-mobile`}
                 variant="mobile"
                 useChrome={useChrome}

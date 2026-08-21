@@ -104,6 +104,26 @@ function stopVideoIframes(root: ParentNode | null | undefined) {
   })
 }
 
+function mountActiveVideoIframe(wrap: HTMLElement, data: GallerySlideData) {
+  stopVideoIframes(wrap)
+  wrap.replaceChildren()
+
+  const iframe = document.createElement('iframe')
+  iframe.className = 'pswp__video-iframe'
+  iframe.src = youtubeIframeSrc(data.videoUrl!, { autoplay: true })
+  iframe.title = data.alt || data.title
+  iframe.allow =
+    'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+  iframe.allowFullscreen = true
+  wrap.appendChild(iframe)
+}
+
+function unmountVideoIframe(wrap: HTMLElement | null | undefined) {
+  if (!wrap) return
+  stopVideoIframes(wrap)
+  wrap.replaceChildren()
+}
+
 async function toSlideData(item: GalleryLightboxItem): Promise<GallerySlideData> {
   const videoUrl = item.videoUrl?.trim()
   if (videoUrl) {
@@ -170,20 +190,23 @@ export function useGalleryPhotoSwipe() {
 
       event.preventDefault()
 
+      // Placeholder only — iframe mounts on activate so preloaded neighbors don't autoplay.
       const wrap = document.createElement('div')
       wrap.className = 'pswp__video-wrap'
-
-      const iframe = document.createElement('iframe')
-      iframe.className = 'pswp__video-iframe'
-      iframe.src = youtubeIframeSrc(data.videoUrl!)
-      iframe.title = data.alt || data.title
-      iframe.allow =
-        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-      iframe.allowFullscreen = true
-
-      wrap.appendChild(iframe)
       event.content.element = wrap
       event.content.onLoaded()
+    })
+
+    lightbox.on('contentActivate', ({ content }) => {
+      const data = content.data as GallerySlideData
+      if (!isVideoSlide(data) || !(content.element instanceof HTMLElement)) return
+      mountActiveVideoIframe(content.element, data)
+    })
+
+    lightbox.on('contentDeactivate', ({ content }) => {
+      const data = content.data as GallerySlideData
+      if (!isVideoSlide(data)) return
+      unmountVideoIframe(content.element instanceof HTMLElement ? content.element : null)
     })
 
     lightbox.on('change', () => {

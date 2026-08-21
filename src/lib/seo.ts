@@ -221,7 +221,7 @@ export function performanceRoleJsonLd(role: {
   })
 }
 
-const STATIC_BASE_PATHS = ['/', '/bio', '/career', '/schedule', '/roles', '/organizations', '/gallery', '/press-kit', '/contact'] as const
+const STATIC_BASE_PATHS = ['/', '/bio', '/career', '/schedule', '/roles', '/organizations', '/gallery', '/videos', '/press-kit', '/contact'] as const
 
 export type SitemapEntry = {
   localizedPath: string
